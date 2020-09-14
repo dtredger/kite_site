@@ -1,0 +1,17 @@
+<div class="container">
+
+  <h4><%= @kite_spot.name %></h4>
+
+  <div class="row">
+    <% @kite_spot.monthly_conditions.each do |month| %>
+      <div class="col-1"><%= month %></div>
+
+    <% end %>
+  </div>
+
+  <hr>
+
+  <%= link_to 'Edit', edit_kite_spot_path(@kite_spot) %> |
+  <%= link_to 'Back', kite_spots_path %>
+
+</div>

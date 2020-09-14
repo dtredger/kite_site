@@ -12,6 +12,25 @@ countries = Country.create([
   {name: 'United States', region: 'North America'},
   {name: 'Mexico', region: 'North America'},
   ])
+countries.each do |country|
+  puts "country:" country.name
+end
 
-puts countries
-# kite_spots = 
+KiteSpot.delete_all
+kite_spots = KiteSpot.create([
+  { name: 'Nitnat Lake',
+    country: countries[0],
+    monthly_conditions: 111111000000
+  },
+  { name: 'San Francisco',
+    country: countries[1],
+    monthly_conditions: 000111111000
+  },
+  { name: 'La Ventana',
+    country: countries[2],
+    monthly_conditions: 000000111111
+  }
+])
+kite_spots.each do |spot|
+  puts "spot:" + spot.name
+end

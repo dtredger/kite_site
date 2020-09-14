@@ -1,0 +1,2 @@
+module KiteSpotsHelper
+end
