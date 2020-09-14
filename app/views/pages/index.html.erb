@@ -1,0 +1,8 @@
+<%= render 'partials/background_video' %>
+
+<%= render 'partials/sticky_filter_bar' %>
+
+<!-- end header sticky -->
+<div class="container">
+  <%= render 'partials/main_grid', locals = {resource: Country.all} %>
+</div>

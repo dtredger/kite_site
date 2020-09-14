@@ -5,3 +5,13 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+Country.delete_all
+countries = Country.create([
+  {name: 'Canada', region: 'North America'},
+  {name: 'United States', region: 'North America'},
+  {name: 'Mexico', region: 'North America'},
+  ])
+
+puts countries
+# kite_spots = 
