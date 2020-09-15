@@ -12,7 +12,7 @@
       <% unless el.cover_photo.attachment.nil? %>
         <%= link_to image_tag(el.cover_photo.variant(resize_to_limit: [250, nil])), el %>
       <% else %>
-        <img src="//placehold.it/640x480" class="img-fluid">
+        <%= link_to image_tag("//lorempixel.com/200/160/"), el %>
       <% end %>
 
     </div>

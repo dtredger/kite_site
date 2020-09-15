@@ -3,7 +3,8 @@
 # Table name: kite_spots
 #
 #  id                 :integer          not null, primary key
-#  monthly_conditions :integer
+#  description        :text
+#  monthly_conditions :string
 #  name               :string
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null

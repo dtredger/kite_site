@@ -1,16 +1,46 @@
 <div class="container">
 
   <h4><%= @kite_spot.name %></h4>
-
+  <br>
   <div class="row">
+    <div class="col-4">
+      <h5>Best Months</h5>
+    </div>
     <% @kite_spot.monthly_conditions.each do |month| %>
       <div class="col-1"><%= month %></div>
 
     <% end %>
   </div>
 
-  <hr>
 
+
+  <% if @kite_spot.location_map %>
+    <%= map(@kite_spot.location_map.leaflet_map_details) %>
+  <% else %>
+    <p>No Map!</p>
+  <% end %>
+
+  <div class="row">
+    <div class="col-12">
+      <%= @kite_spot.description %>
+    </div>
+  </div>
+
+  <br>
+  <div class="row">
+    <div class="col-4">
+      <h4>Amenities</h4>
+    </div>
+
+    <% @kite_spot.amenities.each do |amenity| %>
+      <div class="col-1">
+        <%= amenity %>
+      </div>
+    <% end %>
+
+  </div>
+
+  <hr>
   <%= link_to 'Edit', edit_kite_spot_path(@kite_spot) %> |
   <%= link_to 'Back', kite_spots_path %>
 

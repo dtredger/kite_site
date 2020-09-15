@@ -16,7 +16,10 @@
 #  index_countries_on_photos_id      (photos_id)
 #
 class Country < ApplicationRecord
-  validates :name, presence: true
+  validates :name, presence: true, uniqueness: true
 
-  has_one_attached :cover_photo
+  has_one_attached :cover_photo, dependent: :destroy
+
+	has_many :kite_spots
+
 end

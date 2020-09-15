@@ -3,7 +3,8 @@
 # Table name: kite_spots
 #
 #  id                 :integer          not null, primary key
-#  monthly_conditions :integer
+#  description        :text
+#  monthly_conditions :string
 #  name               :string
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null
@@ -16,29 +17,29 @@
 class KiteSpot < ApplicationRecord
   # belongs_to :country
   has_one_attached :cover_photo
+  has_one :location_map, as: :record
+
+  belongs_to :country
 
   validate :acceptable_image
-
-  validates :name, presence: true
+  validates :name, presence: true, uniqueness: true
 
 
 
   def monthly_conditions
-    months = ['Jan', 'Feb', 'Mar', 'Apr',
-              'May', 'Jun', 'Jul', 'Aug',
-              'Sep', 'Oct', 'Nov', 'Dec']
-    str_conditions = self[:monthly_conditions].to_s.split('')
+    months = %w(Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec)
+    split_str = self[:monthly_conditions].split('')
     good_conditions = []
-    str_conditions.each_with_index do |pos, index|
-      if pos == "1"
-        good_conditions.push(months[index])
+    split_str.each_with_index do |letter, ix|
+      if letter == "1"
+        good_conditions.push(months[ix])
       end
     end
-    return good_conditions
+    good_conditions
   end
 
   def amenities
-    return ['beach', 'parking', 'test_amenity']
+	  %w(beach parking test_amenity)
   end
 
 
