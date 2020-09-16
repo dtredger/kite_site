@@ -76,3 +76,11 @@ csv_rows.each do |row|
 
 	puts "#{country_model.name} - #{spot_name} - #{map.latitude}, #{map.longitude}"
 end
+
+## use tags for months going forward
+# KiteSpot.all.each do |kite_spot|
+# 	kite_spot.monthly_conditions.each do |month|
+# 			kite_spot.kiteable_month_list.add(month)
+# 	end
+# 	kite_spot.save
+# end

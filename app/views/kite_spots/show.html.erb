@@ -1,17 +1,29 @@
+<%= render 'partials/sticky_filter_bar' %>
+
+<br>
+
 <div class="container">
 
   <h4><%= @kite_spot.name %></h4>
   <br>
   <div class="row">
-    <div class="col-4">
+    <div class="col-2">
       <h5>Best Months</h5>
     </div>
-    <% @kite_spot.monthly_conditions.each do |month| %>
-      <div class="col-1"><%= month %></div>
 
-    <% end %>
+    <div class="btn-group" role="group" aria-label="Months">
+      <% @kite_spot.all_months.each do |month| %>
+        <% if @kite_spot.kiteable_month_list.include? month %>
+          <div class="btn btn-success"><%= month %></div>
+        <% else  %>
+          <div class="btn btn-secondary"><%= month %></div>
+        <% end %>
+      <% end %>
+    </div>
+
   </div>
 
+  <br><br>
 
   <%= render 'partials/leaflet_map', locals={loc_map: @kite_spot.location_map} %>
 

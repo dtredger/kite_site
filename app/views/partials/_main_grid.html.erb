@@ -12,15 +12,24 @@
 
   <% resource.each do |el| %>
     <div class="col-6 col-md-4 col-lg-3 mb-2">
-      <h5><%= el.name %></h5>
-      <% unless el.cover_photo.attachment.nil? %>
-        <%= link_to image_tag(el.cover_photo.variant(resize_to_limit: [250, nil])), el %>
-      <% else %>
-        <%= link_to image_tag("//lorempixel.com/200/160/"), el %>
-      <% end %>
+
+      <div class="card">
+        <%= link_to el do %>
+          <% unless el.cover_photo.attachment.nil? %>
+            <%= image_tag el.cover_photo.variant(resize_to_limit: [250, nil]), class: 'card-img-top' %>
+          <% else %>
+            <%= image_tag "//lorempixel.com/200/160/", class: 'card-img-top' %>
+          <% end %>
+          <div class="card-body">
+            <h5 class="card-title"><%= el.name %></h5>
+          </div>
+        <% end %>
+      </div>
 
     </div>
   <% end %>
 
 </div>
+
+
 

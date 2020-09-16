@@ -1,26 +1,6 @@
-<p id="notice"><%= notice %></p>
+<%= render 'partials/sticky_filter_bar' %>
 
-<h1>Countries</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @countries.each do |country| %>
-      <tr>
-        <%= country.name %>
-        <td><%= link_to 'Show', country %></td>
-        <td><%= link_to 'Edit', edit_country_path(country) %></td>
-        <td><%= link_to 'Destroy', country, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Country', new_country_path %>
+<!-- end header sticky -->
+<div class="container">
+  <%= render 'partials/main_grid', locals = {resource: @countries} %>
+</div>
