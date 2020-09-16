@@ -30,7 +30,7 @@ class LocationMap < ApplicationRecord
   def leaflet_map_details
     return if self.latitude.nil? || self.longitude.nil?
     {
-      container_id: "location_map",
+      container_id: 'location_map',
       center: {
         latlng: [self.latitude, self.longitude],
         zoom: self.zoom
@@ -43,10 +43,24 @@ class LocationMap < ApplicationRecord
     }
   end
 
-
   def zoom
     self[:zoom] || 10
   end
+
+	def self.all_spots_map
+		all_spots_geo = []
+		LocationMap.all.each do |loc_map|
+			all_spots_geo.push({ latlng: [loc_map['latitude'], loc_map['longitude']],
+			                     popup: loc_map['name'] })
+
+		end
+		{
+			container_id: 'global_location_map',
+	    center: { latlng: [40, 0] },
+	    zoom: '2',
+			markers: all_spots_geo
+		}
+	end
 
 
 end

@@ -21,9 +21,3 @@
 .notice, .alert {
   position: absolute;
 }
-
-
-#location_map {
-  height: 50vh;
-  width: 80%;
-}

@@ -1,8 +1,12 @@
-<!-- locals: {resource} -->
+<!--render 'partials/main_grid', locals={resource: @kite_spots}  -->
 <!-- TODO - resize_to_limit set to actual size -->
 
-<h2><%= pluralize(resource.length, resource.name) %></h2>
-<h5>Full-width (within .container-fluid)</h5>
+<div class="row">
+  <div class="col-12">
+    <h2 class="text-center"><%= pluralize(resource.length, resource.name) %></h2>
+  </div>
+</div>
+
 
 <div class="row">
 
@@ -20,4 +24,3 @@
 
 </div>
 
-<hr>

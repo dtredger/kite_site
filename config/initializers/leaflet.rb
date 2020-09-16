@@ -9,7 +9,7 @@ open_attribution = 'Map data &copy; <a href="https://www.openstreetmap.org/">Ope
 satellite = 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}'
 satellite_attribution = 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
 
-Leaflet.tile_layer = satellite
-Leaflet.attribution = satellite_attribution
+Leaflet.tile_layer = open_street_tiles
+Leaflet.attribution = open_attribution
 
 Leaflet.max_zoom = 18

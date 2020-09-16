@@ -13,12 +13,7 @@
   </div>
 
 
-
-  <% if @kite_spot.location_map %>
-    <%= map(@kite_spot.location_map.leaflet_map_details) %>
-  <% else %>
-    <p>No Map!</p>
-  <% end %>
+  <%= render 'partials/leaflet_map', locals={loc_map: @kite_spot.location_map} %>
 
   <div class="row">
     <div class="col-12">
