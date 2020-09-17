@@ -84,3 +84,53 @@ end
 # 	end
 # 	kite_spot.save
 # end
+
+
+# add maps to countries
+require 'csv'
+csv_path_and_name = "#{Rails.root}/lib/assets/country_locations.csv"
+csv_text = File.read(csv_path_and_name)
+csv_rows = CSV.parse(csv_text, headers: true)
+csv_rows.each do |row|
+	country = Country.find_by(name: row['name'])
+	if country.location_map.nil?
+		country.create_location_map(name: row['name'],
+		                            latitude: row['latitude'],
+		                            longitude: row['longitude'])
+		puts "map for #{country.name}"
+	else
+		puts "map already exists for #{country.name}"
+	end
+end
+
+# add (crude) descr to country
+require 'rubygems'
+require 'nokogiri'
+require 'open-uri'
+require 'json'
+require 'csv'
+
+fails = []
+Country.all.each do |country|
+	country_name = country.name.gsub(" ", "_")
+	page_url = "https://en.wikipedia.org/wiki/#{country_name}"
+
+	begin
+		noko_page = Nokogiri::HTML(open(page_url))
+
+		first_100_words = noko_page.css('.mw-parser-output').css('p').text.squish().gsub("[1]","").gsub("[2]","").gsub("[3]","").gsub("[4]","").gsub("[5]","").truncate_words(100, omission: '...[via Wikipedia]')
+
+		country.update(description: first_100_words)
+		puts "#{country.name} updated"
+	rescue => e
+		puts "FAIL: #{country.name}: #{e}"
+		fails.append(country.name)
+	end
+
+end
+
+
+# attach images to country
+file_path =
+filename = 'antigua.jpg'
+Country.photos.attach(io: File.open(file_path), filename: 'file.pdf')

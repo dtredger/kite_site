@@ -1,9 +1,10 @@
 <!--render 'partials/leaflet_map', locals={loc_map: @kite_spot.location_map} %> -->
 
-<% if loc_map %>
-  <%= map(loc_map.leaflet_map_details) %>
-<% else %>
-  <p>No Map</p>
-<% end %>
-
+<div class="container-fluid">
+  <% if loc_map %>
+    <%= map(loc_map.leaflet_map_details) %>
+  <% else %>
+    <p>No Map</p>
+  <% end %>
+</div>
 

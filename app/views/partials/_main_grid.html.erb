@@ -1,35 +1,26 @@
 <!--render 'partials/main_grid', locals={resource: @kite_spots}  -->
 <!-- TODO - resize_to_limit set to actual size -->
 
-<div class="row">
-  <div class="col-12">
-    <h2 class="text-center"><%= pluralize(resource.length, resource.name) %></h2>
-  </div>
+
+<div class="col-12">
+  <h2 class="text-center"><%= pluralize(resource.length, resource.name) %></h2>
 </div>
 
+<% resource.each do |el| %>
+  <div class="col-6 col-md-4 col-lg-3 mb-2">
 
-<div class="row">
-
-  <% resource.each do |el| %>
-    <div class="col-6 col-md-4 col-lg-3 mb-2">
-
-      <div class="card">
-        <%= link_to el do %>
-          <% unless el.cover_photo.attachment.nil? %>
-            <%= image_tag el.cover_photo.variant(resize_to_limit: [250, nil]), class: 'card-img-top' %>
-          <% else %>
-            <%= image_tag "//lorempixel.com/200/160/", class: 'card-img-top' %>
-          <% end %>
-          <div class="card-body">
-            <h5 class="card-title"><%= el.name %></h5>
-          </div>
+    <div class="card">
+      <%= link_to el do %>
+        <% unless el.cover_photo.attachment.nil? %>
+          <%= image_tag el.cover_photo.variant(resize_to_limit: [250, nil]), class: 'card-img-top' %>
+        <% else %>
+          <%= image_tag "//lorempixel.com/200/160/", class: 'card-img-top' %>
         <% end %>
-      </div>
-
+        <div class="card-body">
+          <h5 class="card-title"><%= el.name %></h5>
+        </div>
+      <% end %>
     </div>
-  <% end %>
 
-</div>
-
-
-
+  </div>
+<% end %>
