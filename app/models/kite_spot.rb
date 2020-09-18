@@ -4,6 +4,8 @@
 #
 #  id                 :integer          not null, primary key
 #  description        :text
+#  latitude           :float
+#  longitude          :float
 #  monthly_conditions :string
 #  name               :string
 #  created_at         :datetime         not null
@@ -16,7 +18,7 @@
 #
 class KiteSpot < ApplicationRecord
   # belongs_to :country
-  has_one_attached :cover_photo
+  has_many_attached :photos
   has_one :location_map, as: :record
 
   belongs_to :country
@@ -47,6 +49,9 @@ class KiteSpot < ApplicationRecord
 	  %w(beach parking test_amenity)
   end
 
+  def card_subtitle
+		country.name
+  end
 
   private
 

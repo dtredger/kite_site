@@ -4,6 +4,8 @@
 #
 #  id          :integer          not null, primary key
 #  description :text
+#  latitude    :float
+#  longitude   :float
 #  name        :text
 #  region      :text
 #  created_at  :datetime         not null
@@ -22,5 +24,14 @@ class Country < ApplicationRecord
 	has_many :kite_spots
 
   has_one :location_map, as: :record
+
+
+	def cover_photo
+		self.photos.first
+	end
+
+	def card_subtitle
+		region
+	end
 
 end

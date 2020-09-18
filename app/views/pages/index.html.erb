@@ -4,5 +4,21 @@
 
 <!-- end header sticky -->
 <div class="container">
-  <%= render 'partials/main_grid', locals = {resource: Country.all} %>
+  <div class="col-12">
+    <h4>Countries</h4>
+  </div>
+  <%= render 'partials/main_grid', locals = {resource: @countries} %>
+
+  <br>
+  <h5 class="text-center"><%= link_to 'See All Countries', countries_path %></h5>
+
+  <hr>
+  <div class="col-12">
+    <h4>Kite Spots</h4>
+  </div>
+  <%= render 'partials/main_grid', locals = {resource: @kite_spots} %>
+
+  <br>
+  <h5 class="text-center"><%= link_to 'See All Kite Spots', kite_spots_path %></h5>
+
 </div>
