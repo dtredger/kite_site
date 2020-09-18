@@ -18,7 +18,8 @@
 #
 class LocationMap < ApplicationRecord
 
-  belongs_to :kite_spot, polymorphic: true, optional: true
+  # KiteSpots & Countries have Location Maps
+  belongs_to :record, polymorphic: true, optional: true
 
   validates_presence_of :name,
                         :latitude,
@@ -37,11 +38,13 @@ class LocationMap < ApplicationRecord
       },
       markers: [{
          latlng: [self.latitude, self.longitude],
-         popup: self.name
+         popup: "<a href='localhost:3000/#{record_type.tableize}/#{self.record.id}'>#{self.name}</a>"
       }],
       max_zoom: 14
     }
   end
+
+
 
   def zoom
     self[:zoom] || 10
@@ -51,7 +54,7 @@ class LocationMap < ApplicationRecord
 		all_spots_geo = []
 		LocationMap.all.each do |loc_map|
 			all_spots_geo.push({ latlng: [loc_map['latitude'], loc_map['longitude']],
-			                     popup: loc_map['name'] })
+			                     popup: "<a href='localhost:3000/#{loc_map.record_type.tableize}/#{loc_map.record_id}'>#{loc_map['name']}</a>" })
 
 		end
 		{
