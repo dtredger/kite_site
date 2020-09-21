@@ -1,10 +1,10 @@
 <!--render 'partials/main_grid', locals={resource: @kite_spots}  -->
 <!-- TODO - resize_to_limit set to actual size -->
 
-<div class="row">
+<div id="grid-items" class="row">
   <% resource.each do |el| %>
 
-    <div class="col-6 col-md-4 col-lg-3 mb-2">
+    <div class="col-6 col-md-4 col-lg-3 mb-2 resource-col <%= el.name %>">
       <div class="card">
         <%= link_to el do %>
           <% if el.photos.any? %>
@@ -41,3 +41,18 @@
     <!--</div>-->
   <!--</div>-->
 <!--</div>-->
+
+<!-- TODO - this duplicates packs/filter-search (which is not reloaded when page changes) -->
+<script type="text/javascript" charset="utf-8">
+  $(document).ready(function() {
+    $("#sticky-search").on("keyup", function(a) {
+      var value = $(this).val().toLowerCase();
+
+      $("#grid-items .resource-col").filter(function() {
+
+        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+      });
+    });
+  });
+
+</script>

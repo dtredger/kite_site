@@ -28,6 +28,10 @@ class LocationMap < ApplicationRecord
                         :record_id
 
 
+  def zoom
+	  self[:zoom] || 10
+  end
+
   def leaflet_map_details
     return if self.latitude.nil? || self.longitude.nil?
     {
@@ -38,23 +42,18 @@ class LocationMap < ApplicationRecord
       },
       markers: [{
          latlng: [self.latitude, self.longitude],
-         popup: "<a href='localhost:3000/#{record_type.tableize}/#{self.record.id}'>#{self.name}</a>"
+         popup: self.popup_link(record_type, self.record.id, self.name)
       }],
       max_zoom: 14
     }
-  end
-
-
-
-  def zoom
-    self[:zoom] || 10
   end
 
 	def self.all_spots_map
 		all_spots_geo = []
 		LocationMap.all.each do |loc_map|
 			all_spots_geo.push({ latlng: [loc_map['latitude'], loc_map['longitude']],
-			                     popup: "<a href='localhost:3000/#{loc_map.record_type.tableize}/#{loc_map.record_id}'>#{loc_map['name']}</a>" })
+			                     popup: self.popup_link(loc_map.record_type, loc_map.record_id, loc_map['name'])
+			                   })
 
 		end
 		{
@@ -63,6 +62,15 @@ class LocationMap < ApplicationRecord
 	    zoom: '2',
 			markers: all_spots_geo
 		}
+	end
+
+	# TODO - handle site protocol
+	def popup_link(record_type, record_id, record_name)
+		"<a href='http://localhost:3000/#{record_type.tableize}/#{record_id}'>#{record_name}</a>"
+	end
+
+	def self.popup_link(record_type, record_id, record_name)
+		popup_link(record_type, record_id, record_name)
 	end
 
 
