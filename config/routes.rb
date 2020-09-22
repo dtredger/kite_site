@@ -5,9 +5,8 @@ Rails.application.routes.draw do
 	resources :countries
 	resources :location_maps
 
-
-  root to: 'pages#index'
-
   devise_for :users
+	# resources :users
 
+	root to: 'pages#index'
 end

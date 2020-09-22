@@ -1,41 +1,34 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
 
-Country.delete_all
-# countries = Country.create([
-#   {name: 'Canada', region: 'North America'},
-#   {name: 'United States', region: 'North America'},
-#   {name: 'Mexico', region: 'North America'},
-#   ])
-# countries.each do |country|
-#   puts "country:" country.name
-# end
+# Country.delete_all
+# # countries = Country.create([
+# #   {name: 'Canada', region: 'North America'},
+# #   {name: 'United States', region: 'North America'},
+# #   {name: 'Mexico', region: 'North America'},
+# #   ])
+# # countries.each do |country|
+# #   puts "country:" country.name
+# # end
+# #
+# KiteSpot.delete_all
+# # kite_spots = KiteSpot.create([
+# #   { name: 'Nitnat Lake',
+# #     country: countries[0],
+# #     monthly_conditions: 111111000000
+# #   },
+# #   { name: 'San Francisco',
+# #     country: countries[1],
+# #     monthly_conditions: 000111111000
+# #   },
+# #   { name: 'La Ventana',
+# #     country: countries[2],
+# #     monthly_conditions: 000000111111
+# #   }
+# # ])
+# # kite_spots.each do |spot|
+# #   puts "spot:" + spot.name
+# # end
 #
-KiteSpot.delete_all
-# kite_spots = KiteSpot.create([
-#   { name: 'Nitnat Lake',
-#     country: countries[0],
-#     monthly_conditions: 111111000000
-#   },
-#   { name: 'San Francisco',
-#     country: countries[1],
-#     monthly_conditions: 000111111000
-#   },
-#   { name: 'La Ventana',
-#     country: countries[2],
-#     monthly_conditions: 000000111111
-#   }
-# ])
-# kite_spots.each do |spot|
-#   puts "spot:" + spot.name
-# end
-
-LocationMap.delete_all
+# LocationMap.delete_all
 
 require 'csv'
 csv_path_and_name = "#{Rails.root}/lib/assets/Sailing\ Sheet\ -\ Kite\ Spots.csv"
@@ -77,13 +70,16 @@ csv_rows.each do |row|
 	puts "#{country_model.name} - #{spot_name} - #{map.latitude}, #{map.longitude}"
 end
 
-## use tags for months going forward
-# KiteSpot.all.each do |kite_spot|
-# 	kite_spot.monthly_conditions.each do |month|
-# 			kite_spot.kiteable_month_list.add(month)
-# 	end
-# 	kite_spot.save
-# end
+
+
+# use tags for months going forward
+KiteSpot.all.each do |kite_spot|
+	kite_spot.monthly_conditions.each do |month|
+			kite_spot.kiteable_month_list.add(month)
+	end
+	kite_spot.save
+end
+
 
 
 # add maps to countries
@@ -130,7 +126,7 @@ Country.all.each do |country|
 end
 
 
-# attach images to country
-file_path =
-filename = 'antigua.jpg'
-Country.photos.attach(io: File.open(file_path), filename: 'file.pdf')
+# # attach images to country
+# file_path =
+# filename = 'antigua.jpg'
+# Country.photos.attach(io: File.open(file_path), filename: 'file.pdf')
