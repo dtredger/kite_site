@@ -1,11 +1,17 @@
 <%= render 'partials/sticky_filter_bar' %>
 
 <div class="container">
+
+  <%= render 'partials/search_panel', locals={valid_months: @valid_months} %>
+
+  <hr>
+
+  <div class="row">
+    <div class="col">
+      <h5><%= @kite_spots.length %> of <%= KiteSpot.all.length %> spots displayed</h5>
+    </div>
+  </div>
+
   <%= render 'partials/main_grid', locals={resource: @kite_spots} %>
 
 </div>
-
-
-<%= link_to 'New Kite Spot', new_kite_spot_path %>
-
-<hr>

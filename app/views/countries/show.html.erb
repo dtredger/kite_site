@@ -40,10 +40,13 @@
 
   <hr>
 
-
+  <div class="row">
+    <div class="col-12">
+      <h5>Kite Spots in <%= @country.name %></h5>
+    </div>
+  </div>
   <%= render 'partials/main_grid', locals = {resource: @country.kite_spots} %>
 
 </div>
 
-
-<%= render 'partials/footer' %>
+<%= console %>

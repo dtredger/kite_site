@@ -29,8 +29,12 @@ class KiteSpot < ApplicationRecord
 	acts_as_ordered_taggable_on :kiteable_months
 
 
-  def all_months
+  def self.all_months
 	  %w(Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec)
+  end
+
+  def self.find_tagged_kite_spots(months)
+	  KiteSpot.tagged_with(months, any: true)
   end
 
   def monthly_conditions
@@ -52,6 +56,8 @@ class KiteSpot < ApplicationRecord
   def card_subtitle
 		country.name
   end
+
+
 
   private
 

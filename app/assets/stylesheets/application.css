@@ -21,3 +21,7 @@
 .notice, .alert {
   position: absolute;
 }
+
+body {
+  background-color: rgb(240,245,255);
+}
