@@ -1,7 +1,5 @@
 <%= render 'partials/sticky_filter_bar' %>
 
-
-
 <div class="container">
 
   <br>
@@ -37,7 +35,16 @@
       <%= render 'partials/leaflet_map', locals={loc_map: @country.location_map} %>
     </div>
   </div>
+  <hr>
 
+  <div class="row">
+    <div class="col">
+      <h5>Best Months in <%= @country.name %></h5>
+    </div>
+    <div class="col">
+      <%= render 'partials/kiteable_month_selector', locals={kiteable_month_list: @country.kiteable_month_list} %>
+    </div>
+  </div>
   <hr>
 
   <div class="row">
@@ -48,5 +55,3 @@
   <%= render 'partials/main_grid', locals = {resource: @country.kite_spots} %>
 
 </div>
-
-<%= console %>

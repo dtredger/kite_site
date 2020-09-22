@@ -34,4 +34,16 @@ class Country < ApplicationRecord
 		region
 	end
 
+	def kiteable_month_list
+		wind_in_country_months = []
+		self.kite_spots.each do |kite_spot|
+			kite_spot.kiteable_months.each do |month|
+				unless month.name.in? wind_in_country_months
+					wind_in_country_months.push(month.name)
+				end
+			end
+		end
+		wind_in_country_months
+	end
+
 end

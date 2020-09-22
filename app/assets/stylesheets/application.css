@@ -24,4 +24,5 @@
 
 body {
   background-color: rgb(240,245,255);
+  min-height: 100vh;
 }

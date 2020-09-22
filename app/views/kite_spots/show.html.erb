@@ -2,9 +2,10 @@
 
 <br>
 
-<div class="container">
 
+<div class="container">
   <h4><%= @kite_spot.name %></h4>
+  <h5><%= link_to @kite_spot.country.name, @kite_spot.country %></h5>
   <br>
   <div class="row">
     <div class="col-2">
@@ -12,12 +13,13 @@
     </div>
 
     <%= render 'partials/kiteable_month_selector', locals={kiteable_month_list: @kite_spot.kiteable_month_list} %>
-
   </div>
 
   <br><br>
 
-  <%= render 'partials/leaflet_map', locals={loc_map: @kite_spot.location_map} %>
+  <div class="row">
+    <%= render 'partials/leaflet_map', locals={loc_map: @kite_spot.location_map} %>
+  </div>
 
   <div class="row">
     <div class="col-12">
@@ -38,9 +40,5 @@
     <% end %>
 
   </div>
-
-  <hr>
-  <%= link_to 'Edit', edit_kite_spot_path(@kite_spot) %> |
-  <%= link_to 'Back', kite_spots_path %>
 
 </div>
