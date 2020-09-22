@@ -26,3 +26,22 @@ body {
   background-color: rgb(240,245,255);
   min-height: 100vh;
 }
+
+
+.background-image-gray {
+    height: 100%;
+    background: #999;
+    display: flex;
+    flex-direction: column;
+}
+.gray-zone {
+    height: 18vh;
+    background: #888;
+}
+
+.bottom-float-card {
+    background: #fff;
+    width: 100%;
+    margin-top: auto;
+    padding-top: auto;
+}
