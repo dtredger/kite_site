@@ -27,7 +27,7 @@ class KiteSpotsController < ApplicationController
   end
 
   def set_kite_spot
-	  @kite_spot = KiteSpot.find(params[:id])
+	  @kite_spot = KiteSpot.friendly.find(params[:id])
   end
 
 end
