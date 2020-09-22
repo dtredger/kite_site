@@ -12,7 +12,7 @@
     </label>
   <% end %>
   <label class="btn btn-sm">
-    <%= submit_tag('Search', class: 'btn btn-sm btn-success') %>
+    <%= submit_tag('Search', disabled: true, class: 'btn btn-sm btn-outline-dark month-search-btn') %>
   </label>
 <% end %>
 
@@ -26,5 +26,7 @@
     } else {
       $(this).removeClass('btn-primary').addClass('btn-light');
     }
+    $('.month-search-btn').removeClass('btn-outline-dark').addClass('btn-dark');
+    $('.month-search-btn').prop('disabled', false)
   });
 </script>
