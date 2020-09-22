@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_17_142350) do
+ActiveRecord::Schema.define(version: 2020_09_22_031813) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -42,7 +42,9 @@ ActiveRecord::Schema.define(version: 2020_09_17_142350) do
     t.text "description"
     t.float "latitude"
     t.float "longitude"
+    t.string "slug"
     t.index ["photos_id"], name: "index_countries_on_photos_id"
+    t.index ["slug"], name: "index_countries_on_slug", unique: true
   end
 
   create_table "kite_spots", force: :cascade do |t|
@@ -54,7 +56,9 @@ ActiveRecord::Schema.define(version: 2020_09_17_142350) do
     t.text "description"
     t.float "latitude"
     t.float "longitude"
+    t.string "slug"
     t.index ["country_id"], name: "index_kite_spots_on_country_id"
+    t.index ["slug"], name: "index_kite_spots_on_slug", unique: true
   end
 
   create_table "location_maps", force: :cascade do |t|

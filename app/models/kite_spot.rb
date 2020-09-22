@@ -8,6 +8,7 @@
 #  longitude          :float
 #  monthly_conditions :string
 #  name               :string
+#  slug               :string
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null
 #  country_id         :integer
@@ -15,15 +16,18 @@
 # Indexes
 #
 #  index_kite_spots_on_country_id  (country_id)
+#  index_kite_spots_on_slug        (slug) UNIQUE
 #
 class KiteSpot < ApplicationRecord
+	extend FriendlyId
+	friendly_id :name, use: :slugged
+
   # belongs_to :country
   has_many_attached :photos
   has_one :location_map, as: :record
 
   belongs_to :country
 
-  validate :acceptable_image
   validates :name, presence: true, uniqueness: true
 
 	acts_as_ordered_taggable_on :kiteable_months
@@ -58,13 +62,7 @@ class KiteSpot < ApplicationRecord
   end
 
 
-
   private
 
-  def acceptable_image
-    return unless cover_photo.attached?
-
-    errors.add(:cover_photo, "EEEEEE")
-  end
 
 end

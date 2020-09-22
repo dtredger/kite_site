@@ -8,6 +8,7 @@
 #  longitude          :float
 #  monthly_conditions :string
 #  name               :string
+#  slug               :string
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null
 #  country_id         :integer
@@ -15,6 +16,7 @@
 # Indexes
 #
 #  index_kite_spots_on_country_id  (country_id)
+#  index_kite_spots_on_slug        (slug) UNIQUE
 #
 require 'rails_helper'
 

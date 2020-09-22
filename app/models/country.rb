@@ -8,6 +8,7 @@
 #  longitude   :float
 #  name        :text
 #  region      :text
+#  slug        :string
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #  photos_id   :integer
@@ -15,8 +16,12 @@
 # Indexes
 #
 #  index_countries_on_photos_id  (photos_id)
+#  index_countries_on_slug       (slug) UNIQUE
 #
 class Country < ApplicationRecord
+	extend FriendlyId
+	friendly_id :name, use: :slugged
+
   validates :name, presence: true, uniqueness: true
 
   has_many_attached :photos, dependent: :destroy
@@ -24,6 +29,8 @@ class Country < ApplicationRecord
 	has_many :kite_spots
 
   has_one :location_map, as: :record
+
+
 
 
 	def cover_photo
