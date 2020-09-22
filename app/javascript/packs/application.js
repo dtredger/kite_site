@@ -24,3 +24,5 @@ require('packs/filter-search')
 
 require("trix")
 require("@rails/actiontext")
+
+global.toastr = require("toastr")

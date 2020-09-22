@@ -3,11 +3,6 @@
  * For filtering grid items
  */
 
-window.jQuery = $;
-window.$ = $;
-global.$ = global.jQuery = jQuery;
-window.$ = window.jQuery = jQuery;
-
 $(document).ready(function() {
   $("#sticky-search").on("keyup", function(a) {
     var value = $(this).val().toLowerCase();
