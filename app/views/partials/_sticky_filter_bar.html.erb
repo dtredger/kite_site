@@ -1,18 +1,25 @@
-<nav class="navbar navbar-expand-md navbar-dark bg-dark sticky-top">
-  <a href="#" class="navbar-brand">Brand</a>
+<nav class="navbar navbar-expand-md navbar-dark sticky-top">
+  <%= link_to 'TBA Kite Site', root_path, class: 'navbar-brand' %>
+
   <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
     <span class="navbar-toggler-icon"></span>
   </button>
 
   <div class="collapse navbar-collapse" id="navbarCollapse">
     <div class="navbar-nav">
-      <a href="#" class="nav-item nav-link active">Home</a>
-      <a href="#" class="nav-item nav-link">About</a>
-      <a href="#" class="nav-item nav-link">Products</a>
+      <%= link_to 'Kite Spots', kite_spots_path, class: 'nav-item nav-link ' %>
+      <%= link_to 'Countries', countries_path, class: 'nav-item nav-link ' %>
+      <%= link_to 'Global Map', location_maps_path, class: 'nav-item nav-link' %>
     </div>
     <form class="form-inline ml-auto">
-      <input type="text" class="form-control mr-sm-2" placeholder="Search">
+      <input id="sticky-search" type="text" class="form-control mr-sm-2" placeholder="Search">
       <button type="submit" class="btn btn-outline-light">Search</button>
     </form>
   </div>
 </nav>
+
+<style>
+  .navbar {
+    background: rgba(4,58,203);
+  }
+</style>

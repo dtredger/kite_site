@@ -1,4 +1,57 @@
-<p id="notice"><%= notice %></p>
+<%= render 'partials/sticky_filter_bar' %>
 
-<%= link_to 'Edit', edit_country_path(@country) %> |
-<%= link_to 'Back', countries_path %>
+<div class="container">
+
+  <br>
+
+  <!-- TODO - show 3 cover images (or gray if < 3 img present -->
+  <div class="row">
+    <div class="m-0 p-1 col-md-4 col-sm-6">
+      <% if @country.photos.any? %>
+        <% @country.photos.each do |photo| %>
+          <%= image_tag photo.variant(resize_to_limit: [250, nil]), class: 'img-fluid' %>
+        <% end %>
+      <% end %>
+    </div>
+    <div class="m-0 p-1 col-md-4 col-sm-6 d-none d-sm-block">
+      <%= image_tag '//lorempixel.com/500/300/', class: 'img-fluid' %>
+    </div>
+    <div class="m-0 p-1 col-md-4 col-sm-6 d-none d-md-block">
+      <%= image_tag '//lorempixel.com/499/300/', class: 'img-fluid' %>
+    </div>
+
+  </div>
+
+  <br>
+
+  <div class="row">
+    <div class="col-12 col-lg-6">
+      <h4><%= @country.name %></h4>
+      <h5><%= @country.region %></h5>
+      <p><%= @country.description %></p>
+    </div>
+
+    <div class="col-12 col-lg-6">
+      <%= render 'partials/leaflet_map', locals={loc_map: @country.location_map} %>
+    </div>
+  </div>
+  <hr>
+
+  <div class="row">
+    <div class="col">
+      <h5>Best Months in <%= @country.name %></h5>
+    </div>
+    <div class="col">
+      <%= render 'partials/kiteable_month_selector', locals={kiteable_month_list: @country.kiteable_month_list} %>
+    </div>
+  </div>
+  <hr>
+
+  <div class="row">
+    <div class="col-12">
+      <h5>Kite Spots in <%= @country.name %></h5>
+    </div>
+  </div>
+  <%= render 'partials/main_grid', locals = {resource: @country.kite_spots} %>
+
+</div>

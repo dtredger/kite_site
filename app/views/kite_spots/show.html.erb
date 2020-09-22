@@ -1,17 +1,52 @@
+<%= render 'partials/sticky_filter_bar' %>
+
+<br>
+
+
 <div class="container">
-
   <h4><%= @kite_spot.name %></h4>
-
+  <h5><%= link_to @kite_spot.country.name, @kite_spot.country %></h5>
+  <br>
   <div class="row">
-    <% @kite_spot.monthly_conditions.each do |month| %>
-      <div class="col-1"><%= month %></div>
+    <div class="col-2">
+      <h5>Best Months</h5>
+    </div>
 
-    <% end %>
+    <%= render 'partials/kiteable_month_selector', locals={kiteable_month_list: @kite_spot.kiteable_month_list} %>
   </div>
 
-  <hr>
+  <br><br>
 
-  <%= link_to 'Edit', edit_kite_spot_path(@kite_spot) %> |
-  <%= link_to 'Back', kite_spots_path %>
+  
+  <div class="row">
+    <div class="col-md-5">
+      <p>
+      <%= @kite_spot.content %></p>
+    </div>
+    <div class="col-md-7">
+      <%= render 'partials/leaflet_map', locals={loc_map: @kite_spot.location_map} %>
+    </div>
+  </div>
+
+
+  <div class="row">
+    <div class="col-12">
+      <%= @kite_spot.description %>
+    </div>
+  </div>
+
+  <br>
+  <div class="row">
+    <div class="col-4">
+      <h4>Amenities</h4>
+    </div>
+
+    <% @kite_spot.amenities.each do |amenity| %>
+      <div class="col-1">
+        <%= amenity %>
+      </div>
+    <% end %>
+
+  </div>
 
 </div>

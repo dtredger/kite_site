@@ -1,0 +1,32 @@
+<!-- Search all KiteSpots' months & get list of months to kitespots#search -->
+<!--render 'partials/search_panel', locals={valid_months: @valid_months} -->
+
+
+<h5>Search Spots by Month</h5>
+
+<%= form_with(url: '/kite_spots', method: 'get', local: true, class: 'form-check') do %>
+  <% %w(Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec).each do |month| %>
+    <label class="btn btn-sm month-btn <%= month.in?(@valid_months) ? 'btn-primary' : 'btn-light' %>">
+      <%= check_box_tag('month[]', month, month.in?(@valid_months)) %>
+      <%= label_tag(:month, month, class: 'form-check-label') %>
+    </label>
+  <% end %>
+  <label class="btn btn-sm">
+    <%= submit_tag('Search', disabled: true, class: 'btn btn-sm btn-outline-dark month-search-btn') %>
+  </label>
+<% end %>
+
+<script type="text/javascript" charset="utf-8">
+  $('label.month-btn').click(function() {
+    var inputs = $(this).children('input');
+    var input = inputs[0];
+    input.checked = !input.checked;
+    if(input.checked) {
+      $(this).removeClass('btn-light').addClass('btn-primary');
+    } else {
+      $(this).removeClass('btn-primary').addClass('btn-light');
+    }
+    $('.month-search-btn').removeClass('btn-outline-dark').addClass('btn-dark');
+    $('.month-search-btn').prop('disabled', false)
+  });
+</script>

@@ -1,23 +1,36 @@
-<%= form_with(model: kite_spot, local: true) do |form| %>
-  <% if kite_spot.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(kite_spot.errors.count, "error") %> prohibited this kite_spot from being saved:</h2>
+<div class="container">
+  <div class="row">
+    <%= form_with(model: kite_spot, local: true) do |form| %>
+      <% if kite_spot.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(kite_spot.errors.count, "error") %> prohibited this kite_spot from being saved:</h2>
 
-      <ul>
-        <% kite_spot.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
+          <ul>
+            <% kite_spot.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
 
-  <%= form.label :name %>
-  <%= form.text_field :name %>
+      <div class="field">
+        <%= form.label :name %>
+        <%= form.text_field :name %>
+      </div>
 
-  <%= form.label :cover_photo %>
-  <%= form.file_field :cover_photo %>
+      <div class="field">
+        <%= form.label :cover_photo %>
+        <%= form.file_field :cover_photo %>
+      </div>
 
-  <div class="actions">
-    <%= form.submit %>
+      <div class="field">
+        <%= form.label :content %>
+        <%= form.rich_text_area :content %>
+      </div>
+
+      <div class="actions">
+        <%= form.submit %>
+      </div>
+    <% end %>
   </div>
-<% end %>
+</div>

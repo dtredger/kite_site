@@ -1,11 +1,12 @@
 Rails.application.routes.draw do
-  resources :kite_spots
-  resources :countries
+	# For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+
+	resources :kite_spots
+	resources :countries
+	resources :location_maps
+
   devise_for :users
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+	# resources :users
 
-  # root to: lambda { |x| [200, {"Content-Type" => "text/html"}, [content]] }
-
-  root to: 'pages#index'
-
+	root to: 'pages#index'
 end

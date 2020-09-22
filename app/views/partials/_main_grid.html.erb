@@ -1,23 +1,60 @@
-<!-- locals: {resource} -->
+<!--render 'partials/main_grid', locals={resource: @kite_spots}  -->
 <!-- TODO - resize_to_limit set to actual size -->
 
-<h2><%= pluralize(resource.length, resource.name) %></h2>
-<h5>Full-width (within .container-fluid)</h5>
-
-<div class="row">
-
+<div id="grid-items" class="row">
   <% resource.each do |el| %>
-    <div class="col-6 col-md-4 col-lg-3 mb-2">
-      <h5><%= el.name %></h5>
-      <% unless el.cover_photo.attachment.nil? %>
-        <%= link_to image_tag(el.cover_photo.variant(resize_to_limit: [250, nil])), el %>
-      <% else %>
-        <img src="//placehold.it/640x480" class="img-fluid">
-      <% end %>
 
+    <div class="col-6 col-md-4 col-lg-3 mb-2 resource-col <%= el.name %>">
+      <div class="card h-100">
+        <%= link_to el, class: 'h-100' do %>
+          <div class="background-image-grey">
+            <% if el.photos.any? %>
+              <%= image_tag el.photos[0], class: 'card-img-top' %>
+            <% else %>
+              <div class="gray-zone"></div>
+            <% end %>
+            <div class="card-body bottom-float-card">
+              <h5 class="card-title"><%= el.name %></h5>
+              <h6 class="card-subtitle mb-2 text-muted"><%= el.card_subtitle %></h6>
+              <!--<p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>-->
+            </div>
+          </div>
+        <% end %>
+      </div>
     </div>
-  <% end %>
 
+  <% end %>
 </div>
 
-<hr>
+
+<!--wide cards-->
+<!--<div class="card mb-3">-->
+  <!--<div class="row no-gutters">-->
+    <!--<div class="col-md-4">-->
+      <!--<svg class="bd-placeholder-img" width="100%" height="250" xmlns="http://www.w3.org/2000/svg" aria-label="Placeholder: Image" preserveAspectRatio="xMidYMid slice" role="img"><title>Placeholder</title><rect width="100%" height="100%" fill="#868e96"/><text x="50%" y="50%" fill="#dee2e6" dy=".3em">Image</text></svg>-->
+
+    <!--</div>-->
+    <!--<div class="col-md-8">-->
+      <!--<div class="card-body">-->
+        <!--<h5 class="card-title">Card title</h5>-->
+        <!--<p class="card-text">It's a broader card with text below as a natural lead-in to extra content. This content is a little longer.</p>-->
+        <!--<p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>-->
+      <!--</div>-->
+    <!--</div>-->
+  <!--</div>-->
+<!--</div>-->
+
+<!-- TODO - this duplicates packs/filter-search (which is not reloaded when page changes) -->
+<script type="text/javascript" charset="utf-8">
+  $(document).ready(function() {
+    $("#sticky-search").on("keyup", function(a) {
+      var value = $(this).val().toLowerCase();
+
+      $("#grid-items .resource-col").filter(function() {
+
+        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+      });
+    });
+  });
+
+</script>
