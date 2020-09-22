@@ -21,3 +21,6 @@ require('packs/leaflet-custom')
 
 require('jquery')
 require('packs/filter-search')
+
+require("trix")
+require("@rails/actiontext")

@@ -31,6 +31,7 @@ class KiteSpot < ApplicationRecord
   validates :name, presence: true, uniqueness: true
 
 	acts_as_ordered_taggable_on :kiteable_months
+	has_rich_text :content
 
 
   def self.all_months

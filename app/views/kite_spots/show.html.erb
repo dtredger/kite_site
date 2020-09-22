@@ -17,9 +17,17 @@
 
   <br><br>
 
+  
   <div class="row">
-    <%= render 'partials/leaflet_map', locals={loc_map: @kite_spot.location_map} %>
+    <div class="col-md-5">
+      <p>
+      <%= @kite_spot.content %></p>
+    </div>
+    <div class="col-md-7">
+      <%= render 'partials/leaflet_map', locals={loc_map: @kite_spot.location_map} %>
+    </div>
   </div>
+
 
   <div class="row">
     <div class="col-12">
