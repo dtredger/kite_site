@@ -70,7 +70,7 @@ class LocationMap < ApplicationRecord
 	end
 
 	def self.popup_link(record_type, record_id, record_name)
-		popup_link(record_type, record_id, record_name)
+		"<a href='http://localhost:3000/#{record_type.tableize}/#{record_id}'>#{record_name}</a>"
 	end
 
 
