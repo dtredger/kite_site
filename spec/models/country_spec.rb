@@ -27,7 +27,7 @@ RSpec.describe Country, type: :model do
   describe 'relations' do
 	  let(:country) { create(:country) }
 	  let(:country_with_2_spots) { create(:country_with_2_kitespots) }
-	  let(:country_with_location_map) { create(:country_with_location_map) }
+	  let(:country_with_location_map) { create(:country, :with_location_map) }
 
 	  it 'has_many KiteSpots' do
 		  expect(country_with_2_spots.kite_spots.count).to eq(2)

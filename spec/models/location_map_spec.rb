@@ -49,7 +49,6 @@ RSpec.describe LocationMap, type: :model do
 	end
 
 	describe 'methods' do
-
     context 'Class' do
       describe '#all_spots_map' do
         before(:each) do
@@ -73,6 +72,6 @@ RSpec.describe LocationMap, type: :model do
         end
       end
     end
-	end
 
+	end
 end

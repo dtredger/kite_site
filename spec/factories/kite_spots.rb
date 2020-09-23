@@ -31,11 +31,13 @@ FactoryBot.define do
     latitude { 11.111 }
     longitude { 22.222 }
 
-	  factory :kite_spot_with_location_map do
-		  location_map
-	  end
+    trait :with_location_map do
+      after(:create) do |kite_spot|
+        create(:location_map, record: kite_spot)
+      end
+    end
 
-	  factory :kite_spot_with_2_kiteable_months do
+	  trait :with_2_kiteable_months do
 		  after(:create) do |kite_spot|
 			  kite_spot.kiteable_month_list.add(['Jan', 'Feb'])
 			  kite_spot.save

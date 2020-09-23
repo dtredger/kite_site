@@ -26,8 +26,8 @@ require 'rails_helper'
 RSpec.describe KiteSpot, type: :model do
 	describe 'relations' do
 		let(:kite_spot) { create(:kite_spot) }
-		let(:kite_spot_with_map) { create(:kite_spot_with_location_map) }
-		let(:spot_with_2_months) { create(:kite_spot_with_2_kiteable_months) }
+		let(:kite_spot_with_map) { create(:kite_spot, :with_location_map) }
+		let(:spot_with_2_months) { create(:kite_spot, :with_2_kiteable_months) }
 
 		it 'requires name' do
 			expect(build(:kite_spot, name: '')).not_to be_valid

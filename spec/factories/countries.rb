@@ -35,9 +35,11 @@ FactoryBot.define do
       kite_spots { build_list(:kite_spot, 2) }
     end
 
-	  factory :country_with_location_map do
-		  location_map
-	  end
+    trait :with_location_map do
+      after(:create) do |country|
+        create(:location_map, record: country)
+      end
+    end
 
     # after(:create) do |article|
 	   #  create(:comment, article: article)

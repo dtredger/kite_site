@@ -55,7 +55,7 @@ class LocationMap < ApplicationRecord
 
   def self.all_spots_map
     { container_id: 'global_location_map',
-      center: { latlng: self.default_leaflet_map_center },
+      center: { latlng: default_leaflet_map_center },
       zoom: '2',
       markers: all_location_markers }
   end
