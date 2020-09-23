@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_23_052718) do
+ActiveRecord::Schema.define(version: 2020_09_23_054739) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -72,6 +72,7 @@ ActiveRecord::Schema.define(version: 2020_09_23_052718) do
     t.float "longitude"
     t.string "slug"
     t.index ["country_id"], name: "index_kite_spots_on_country_id"
+    t.index ["name"], name: "index_kite_spots_on_name", unique: true
     t.index ["slug"], name: "index_kite_spots_on_slug", unique: true
   end
 

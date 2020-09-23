@@ -18,15 +18,29 @@
 # Indexes
 #
 #  index_kite_spots_on_country_id  (country_id)
+#  index_kite_spots_on_name        (name) UNIQUE
 #  index_kite_spots_on_slug        (slug) UNIQUE
 #
 FactoryBot.define do
   factory :kite_spot do
+	  country
     sequence(:name) { |x| "kite_spot_#{x}" }
     sequence(:description) do |x|
       "description #{x} for kite spots"
     end
     latitude { 11.111 }
     longitude { 22.222 }
+
+	  factory :kite_spot_with_location_map do
+		  location_map
+	  end
+
+	  factory :kite_spot_with_2_kiteable_months do
+
+		  after(:create) do |kite_spot|
+			  kite_spot.kiteable_month_list.add(['Jan', 'Feb'])
+			  kite_spot.save
+		  end
+	  end
   end
 end
