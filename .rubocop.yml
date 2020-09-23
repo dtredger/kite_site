@@ -16,9 +16,13 @@ AllCops:
     - 'bin/*'
     - 'tmp/**/*'
     - 'node_modules/**/*'
+    - 'Guardfile'
     - '.git/**/*'
     - !ruby/regexp /old_and_unused\.rb$/
 
+Documentation:
+  Exclude:
+    - 'app/controllers/*'
 #
 ## rubocop-performance
 #Performance/Size:
