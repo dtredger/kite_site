@@ -10,7 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_22_050841) do
+ActiveRecord::Schema.define(version: 2020_09_23_052718) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
 
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.string "name", null: false
@@ -53,6 +56,7 @@ ActiveRecord::Schema.define(version: 2020_09_22_050841) do
     t.float "latitude"
     t.float "longitude"
     t.string "slug"
+    t.index ["name"], name: "index_countries_on_name", unique: true
     t.index ["photos_id"], name: "index_countries_on_photos_id"
     t.index ["slug"], name: "index_countries_on_slug", unique: true
   end

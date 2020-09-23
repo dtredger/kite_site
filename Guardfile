@@ -71,14 +71,14 @@ guard :rspec, cmd: 'bundle exec rspec' do
   end
 end
 
-guard :brakeman, run_on_start: true do
-  watch(%r{^app/.+\.(erb|haml|rhtml|rb)$})
-  watch(%r{^config/.+\.rb$})
-  watch(%r{^lib/.+\.rb$})
-  watch('Gemfile')
-end
+# guard :brakeman, run_on_start: true do
+#   watch(%r{^app/.+\.(erb|haml|rhtml|rb)$})
+#   watch(%r{^config/.+\.rb$})
+#   watch(%r{^lib/.+\.rb$})
+#   watch('Gemfile')
+# end
 
 # https://github.com/yujinakayama/guard-rubocop
-guard :rubocop, all_on_start: false, cli: ['--format', 'clang', '--rails'] do
+guard :rubocop, cli: ['--format', 'clang'] do
   # ...
 end

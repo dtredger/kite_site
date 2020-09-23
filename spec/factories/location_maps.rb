@@ -4,7 +4,7 @@
 #
 # Table name: location_maps
 #
-#  id          :integer          not null, primary key
+#  id          :bigint           not null, primary key
 #  latitude    :float
 #  longitude   :float
 #  name        :string

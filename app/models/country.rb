@@ -4,7 +4,7 @@
 #
 # Table name: countries
 #
-#  id          :integer          not null, primary key
+#  id          :bigint           not null, primary key
 #  description :text
 #  latitude    :float
 #  longitude   :float
@@ -17,6 +17,7 @@
 #
 # Indexes
 #
+#  index_countries_on_name       (name) UNIQUE
 #  index_countries_on_photos_id  (photos_id)
 #  index_countries_on_slug       (slug) UNIQUE
 #
@@ -28,9 +29,9 @@ class Country < ApplicationRecord
 
   has_many_attached :photos, dependent: :destroy
 
-  has_many :kite_spots
+  has_many :kite_spots, dependent: :nullify
 
-  has_one :location_map, as: :record
+  has_one :location_map, as: :record, dependent: :destroy
 
   def cover_photo
     photos.first

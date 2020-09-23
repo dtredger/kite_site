@@ -4,7 +4,7 @@
 #
 # Table name: kite_spots
 #
-#  id                 :integer          not null, primary key
+#  id                 :bigint           not null, primary key
 #  description        :text
 #  latitude           :float
 #  longitude          :float
@@ -22,6 +22,11 @@
 #
 FactoryBot.define do
   factory :kite_spot do
-    name { 'MyString' }
+    sequence(:name) { |x| "kite_spot_#{x}" }
+    sequence(:description) do |x|
+      "description #{x} for kite spots"
+    end
+    latitude { 11.111 }
+    longitude { 22.222 }
   end
 end
