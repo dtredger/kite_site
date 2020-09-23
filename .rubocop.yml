@@ -1,0 +1,28 @@
+require:
+  - rubocop-rails
+  - rubocop-performance
+  - rubocop-rspec
+
+
+AllCops:
+  NewCops: enable
+  Exclude:
+    - 'node_modules/**/*'
+    - 'tmp/**/*'
+    - 'vendor/**/*'
+    - '.git/**/*'
+    - 'db/**/*'
+    - 'config/**/*'
+    - 'script/**/*'
+    - 'bin/{rails,rake}'
+    - !ruby/regexp /old_and_unused\.rb$/
+
+#
+## rubocop-performance
+#Performance/Size:
+#  Exclude:
+#    #- lib/example.rb
+#
+#Rails/FindBy:
+#  Exclude:
+#    #- lib/example.rb

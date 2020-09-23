@@ -12,6 +12,17 @@
 # the additional setup, and require it from the spec files that actually need
 # it.
 #
+require 'simplecov'
+SimpleCov.start do
+	add_group 'Models', 'app/models'
+	add_group 'Controllers', 'app/controllers'
+	add_group 'Long files' do |src_file|
+		src_file.lines.count > 100
+	end
+	# add_group 'Multiple Files', ['app/models', 'app/controllers'] # You can also pass in an array
+	# add_group 'Short files', LineFilter.new(5) # Using the LineFilter class defined in Filters section above
+end
+
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 RSpec.configure do |config|
   # rspec-expectations config goes here. You can use an alternate
