@@ -7,6 +7,7 @@ class LocationMapsController < ApplicationController
   # GET /location_maps.json
   def index
     @location_maps = LocationMap.all
+    @global_map_data = LocationMap.all_spots_map
   end
 
   # GET /location_maps/1

@@ -36,11 +36,11 @@ FactoryBot.define do
 	  end
 
 	  factory :kite_spot_with_2_kiteable_months do
-
 		  after(:create) do |kite_spot|
 			  kite_spot.kiteable_month_list.add(['Jan', 'Feb'])
 			  kite_spot.save
 		  end
 	  end
+
   end
 end

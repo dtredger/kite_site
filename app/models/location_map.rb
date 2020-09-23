@@ -4,7 +4,7 @@
 #
 # Table name: location_maps
 #
-#  id          :integer          not null, primary key
+#  id          :bigint           not null, primary key
 #  latitude    :float
 #  longitude   :float
 #  name        :string
@@ -32,43 +32,47 @@ class LocationMap < ApplicationRecord
     self[:zoom] || 10
   end
 
-  def leaflet_map_details
-    return if latitude.nil? || longitude.nil?
+  def self.default_leaflet_map_center
+    [40, 0]
+  end
 
-    {
-      container_id: 'location_map',
-      center: {
-        latlng: [latitude, longitude],
-        zoom: zoom
-      },
-      markers: [{
-        latlng: [latitude, longitude],
-        popup: popup_link(record_type, record.id, name)
-      }],
-      max_zoom: 14
-    }
+  def leaflet_map_details
+    { container_id: 'location_map',
+      max_zoom: 14,
+      center: leaflet_map_center,
+      markers: [leaflet_marker] }
+  end
+
+  def self.all_location_markers
+    all_spots_arr = []
+    LocationMap.find_each do |loc_map|
+      all_spots_arr.push({ latlng: [loc_map['latitude'],
+                                    loc_map['longitude']],
+                           popup: loc_map.popup_link })
+    end
+    all_spots_arr
   end
 
   def self.all_spots_map
-    all_spots_geo = []
-    LocationMap.all.find_each do |loc_map|
-      all_spots_geo.push({ latlng: [loc_map['latitude'], loc_map['longitude']],
-                           popup: popup_link(loc_map.record_type, loc_map.record_id, loc_map['name']) })
-    end
-    {
-      container_id: 'global_location_map',
-      center: { latlng: [40, 0] },
+    { container_id: 'global_location_map',
+      center: { latlng: self.default_leaflet_map_center },
       zoom: '2',
-      markers: all_spots_geo
-    }
+      markers: all_location_markers }
   end
 
-  # TODO: - handle site protocol
-  def popup_link(record_type, record_id, record_name)
-    "<a href='http://localhost:3000/#{record_type.tableize}/#{record_id}'>#{record_name}</a>"
+  def popup_link
+    "<a href='#{site_url}#{record_type.tableize}/#{record_id}'>#{name}</a>"
   end
 
-  def self.popup_link(record_type, record_id, record_name)
-    "<a href='http://localhost:3000/#{record_type.tableize}/#{record_id}'>#{record_name}</a>"
+  private
+
+  def leaflet_map_center
+    { latlng: [latitude, longitude],
+      zoom: zoom }
+  end
+
+  def leaflet_marker
+    { latlng: [latitude, longitude],
+      popup: popup_link }
   end
 end

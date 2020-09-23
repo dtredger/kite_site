@@ -19,12 +19,24 @@
 #  index_location_maps_on_record_type_and_record_id  (record_type,record_id)
 #
 FactoryBot.define do
-  factory :location_map do
-    latitude { 1.5 }
-    longitude { 1.5 }
-    zoom { 1 }
-    name { 'MyString' }
-    record_type { 'MyString' }
-    record_id { 1 }
-  end
+	factory :location_map do
+
+	  factory :location_map_for_kite_spot do
+	    sequence(:name) { |x| "kite_spot_location_map_#{x}" }
+	    latitude { 152.315 }
+	    longitude { 21.525 }
+	    zoom { 3 }
+			association :record, factory: :kite_spot
+	  end
+
+	  factory :location_map_for_country do
+		  sequence(:name) { |x| "country_location_map_#{x}" }
+		  latitude { 152.315 }
+		  longitude { 21.525 }
+		  zoom { 3 }
+		  association :record, factory: :country
+	  end
+
+	end
 end
+

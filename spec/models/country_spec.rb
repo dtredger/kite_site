@@ -46,7 +46,6 @@ RSpec.describe Country, type: :model do
 	  end
 
 	  describe 'dependent actions' do
-
 		  it 'destroys associated LocationMap' do
 			  country_with_location_map
 			  expect{country_with_location_map.destroy}.to change{LocationMap.count}.by(-1)
@@ -56,7 +55,6 @@ RSpec.describe Country, type: :model do
 			  country_with_2_spots
 			  expect{country_with_2_spots.destroy}.not_to change{KiteSpot.count}
 		  end
-
 	  end
 
   end
