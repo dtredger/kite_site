@@ -122,6 +122,9 @@ GEM
       guard (~> 2.1)
       guard-compat (~> 1.1)
       rspec (>= 2.99.0, < 4.0)
+    guard-rubocop (1.3.0)
+      guard (~> 2.0)
+      rubocop (~> 0.20)
     i18n (1.8.5)
       concurrent-ruby (~> 1.0)
     image_processing (1.11.0)
@@ -330,6 +333,7 @@ DEPENDENCIES
   guard
   guard-brakeman
   guard-rspec
+  guard-rubocop
   image_processing
   jbuilder (~> 2.7)
   leaflet-rails
