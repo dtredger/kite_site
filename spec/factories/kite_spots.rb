@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: kite_spots
@@ -20,6 +22,6 @@
 #
 FactoryBot.define do
   factory :kite_spot do
-    name { "MyString" }
+    name { 'MyString' }
   end
 end

@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class CountriesController < ApplicationController
-  before_action :set_country, only: [:show, :edit, :update, :destroy]
+  before_action :set_country, only: %i[show edit update destroy]
 
   # GET /countries
   # GET /countries.json
@@ -9,8 +11,7 @@ class CountriesController < ApplicationController
 
   # GET /countries/1
   # GET /countries/1.json
-  def show
-  end
+  def show; end
 
   # GET /countries/new
   def new
@@ -18,8 +19,7 @@ class CountriesController < ApplicationController
   end
 
   # GET /countries/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /countries
   # POST /countries.json
@@ -62,13 +62,14 @@ class CountriesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_country
-      @country = Country.friendly.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def country_params
-      params.fetch(:country, {})
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_country
+    @country = Country.friendly.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def country_params
+    params.fetch(:country, {})
+  end
 end

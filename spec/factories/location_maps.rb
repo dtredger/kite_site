@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: location_maps
@@ -21,8 +23,8 @@ FactoryBot.define do
     latitude { 1.5 }
     longitude { 1.5 }
     zoom { 1 }
-    name { "MyString" }
-    record_type { "MyString" }
+    name { 'MyString' }
+    record_type { 'MyString' }
     record_id { 1 }
   end
 end

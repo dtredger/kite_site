@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: countries
@@ -20,8 +22,8 @@
 #
 FactoryBot.define do
   factory :country do
-    name { "MyText" }
-    region { "MyText" }
-    has_many { "" }
+    name { 'MyText' }
+    region { 'MyText' }
+    has_many { '' }
   end
 end
