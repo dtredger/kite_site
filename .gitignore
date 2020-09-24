@@ -27,6 +27,8 @@
 /storage/*
 !/storage/.keep
 
+coverage
+
 /public/assets
 .byebug_history
 
