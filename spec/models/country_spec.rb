@@ -22,11 +22,11 @@
 require 'rails_helper'
 
 RSpec.describe Country, type: :model do
-  describe 'relations' do
-    let(:country) { create(:country) }
-    let(:country_with_2_spots) { create(:country_with_2_kitespots) }
-    let(:country_with_location_map) { create(:country, :with_location_map) }
+  let(:country) { create(:country) }
+  let(:country_with_2_spots) { create(:country_with_2_kitespots) }
+  let(:country_with_location_map) { create(:country, :with_location_map) }
 
+  describe 'relations' do
     it 'has_many KiteSpots' do
       expect(country_with_2_spots.kite_spots.count).to eq(2)
     end
@@ -42,17 +42,17 @@ RSpec.describe Country, type: :model do
     it 'does not have a User' do
       expect(subject).not_to respond_to :user
     end
+  end
 
-    describe 'dependent actions' do
-      it 'destroys associated LocationMap' do
-        country_with_location_map
-        expect { country_with_location_map.destroy }.to change(LocationMap, :count).by(-1)
-      end
+  describe 'dependent actions' do
+    it 'destroys associated LocationMap' do
+      country_with_location_map
+      expect { country_with_location_map.destroy }.to change(LocationMap, :count).by(-1)
+    end
 
-      it 'does not destroy associated KiteSpots' do
-        country_with_2_spots
-        expect { country_with_2_spots.destroy }.not_to change(KiteSpot, :count)
-      end
+    it 'does not destroy associated KiteSpots' do
+      country_with_2_spots
+      expect { country_with_2_spots.destroy }.not_to change(KiteSpot, :count)
     end
   end
 end

@@ -21,14 +21,14 @@ RSpec.describe 'Countries_routes', type: :request do
   end
 
   describe 'GET /countries/new' do
-    context 'unauthorized visitor' do
+    context 'when unauthorized visitor' do
       it 'redirects unauthorized' do
         get new_country_path
         expect(response).to redirect_to(new_user_session_path)
       end
     end
 
-    context 'authorized User' do
+    context 'when authorized User' do
       log_in_user
 
       it 'shows new form' do
@@ -39,7 +39,7 @@ RSpec.describe 'Countries_routes', type: :request do
   end
 
   describe 'POST /countries' do
-    context 'unauthorized visitor' do
+    context 'when unauthorized visitor' do
       it 'does not create Country' do
         expect do
           post countries_path, params: { country: attributes_for(:country) }
@@ -47,7 +47,7 @@ RSpec.describe 'Countries_routes', type: :request do
       end
     end
 
-    context 'authorized User' do
+    context 'when authorized User' do
       log_in_user
 
       it 'creates new Country' do
@@ -59,14 +59,14 @@ RSpec.describe 'Countries_routes', type: :request do
   end
 
   describe 'GET /countries/:id/edit' do
-    context 'unauthorized visitor' do
+    context 'when unauthorized visitor' do
       it 'redirects unauthorized' do
         get edit_country_path(country)
         expect(response).to redirect_to(new_user_session_path)
       end
     end
 
-    context 'authorized User' do
+    context 'when authorized User' do
       log_in_user
 
       it 'shows edit form' do
@@ -77,7 +77,7 @@ RSpec.describe 'Countries_routes', type: :request do
   end
 
   describe 'PATCH /countries/:id' do
-    context 'unauthorized visitor' do
+    context 'when unauthorized visitor' do
       it 'does not update Country' do
         expect do
           patch country_path(country.id), params: { country: attributes_for(:country, name: 'new') }
@@ -86,7 +86,7 @@ RSpec.describe 'Countries_routes', type: :request do
       end
     end
 
-    context 'authorized User' do
+    context 'when authorized User' do
       log_in_user
 
       it 'updates Country' do
@@ -99,14 +99,14 @@ RSpec.describe 'Countries_routes', type: :request do
   end
 
   describe 'DELETE /countries/:id' do
-    context 'unauthorized visitor' do
+    context 'when unauthorized visitor' do
       it 'does not delete Country' do
         country
         expect { delete country_path(country) }.not_to change(Country, :count)
       end
     end
 
-    context 'authorized User' do
+    context 'when authorized User' do
       log_in_user
 
       it 'deletes Country' do

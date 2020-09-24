@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# inherits from devise for signing up new users
 module Users
   class RegistrationsController < Devise::RegistrationsController
     # before_action :configure_sign_up_params, only: [:create]
