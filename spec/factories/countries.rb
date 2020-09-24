@@ -42,7 +42,7 @@ FactoryBot.define do
     end
 
     # after(:create) do |article|
-	   #  create(:comment, article: article)
+    #  create(:comment, article: article)
     # end
   end
 end

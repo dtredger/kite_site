@@ -23,7 +23,7 @@
 #
 FactoryBot.define do
   factory :kite_spot do
-	  country
+    country
     sequence(:name) { |x| "kite_spot_#{x}" }
     sequence(:description) do |x|
       "description #{x} for kite spots"
@@ -37,12 +37,11 @@ FactoryBot.define do
       end
     end
 
-	  trait :with_2_kiteable_months do
-		  after(:create) do |kite_spot|
-			  kite_spot.kiteable_month_list.add(['Jan', 'Feb'])
-			  kite_spot.save
-		  end
-	  end
-
+    trait :with_2_kiteable_months do
+      after(:create) do |kite_spot|
+        kite_spot.kiteable_month_list.add(%w[Jan Feb])
+        kite_spot.save
+      end
+    end
   end
 end

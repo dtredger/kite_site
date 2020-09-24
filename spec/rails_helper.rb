@@ -34,18 +34,15 @@ rescue ActiveRecord::PendingMigrationError => e
 end
 
 RSpec.configure do |config|
+  # https://github.com/thoughtbot/factory_girl/blob/master/GETTING_STARTED.md#configure-your-test-suite
+  config.include FactoryBot::Syntax::Methods
 
+  # config.include Devise::TestHelpers
 
-	# https://github.com/thoughtbot/factory_girl/blob/master/GETTING_STARTED.md#configure-your-test-suite
-	config.include FactoryBot::Syntax::Methods
+  require 'support/devise_macros'
+  config.extend DeviseMacros
 
-	config.include Devise::Test::ControllerHelpers, type: :controller
-
-	# require 'support/devise_macros'
-	# config.extend DeviseMacros, type: :controller
-
-
-	# Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
+  # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   # config.fixture_path = "#{::Rails.root}/spec/fixtures"
 
   # If you're not using ActiveRecord, or you'd prefer not to run each of your

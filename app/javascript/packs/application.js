@@ -26,3 +26,16 @@ require("trix")
 require("@rails/actiontext")
 
 global.toastr = require("toastr")
+global.toastr.options = {
+    showMethod: 'slideDown',
+    hideMethod: 'slideUp',
+    hideDuration: 150,
+    closeMethod: 'slideUp',
+    closeButton: true,
+    closeDuration: 150,
+    showEasing: 'linear',
+    hideEasing: 'linear',
+    closeEasing: 'linear',
+    timeOut: 10000,
+    progressBar: true
+}

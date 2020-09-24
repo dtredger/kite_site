@@ -66,16 +66,23 @@ Rails.application.configure do
     g.test_framework :rspec
     g.fixture_replacement :factory_bot
     g.factory_bot dir: 'spec/factories'
+
     g.model_specs true
-    g.controller_specs true
-    g.mailer_specs true
-    g.system_specs true
+
+    g.controller_specs false
+    g.routing_specs false
+    g.request_specs true
 
     g.view_specs false
-    g.request_specs false
-    g.helper_specs false
+
     g.feature_specs false
+    g.system_specs true
+
+    g.mailer_specs true
+
+    g.helper_specs false
+
     g.observer_specs false
-    g.routing_specs false
   end
+
 end

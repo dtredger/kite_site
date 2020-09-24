@@ -3,10 +3,17 @@ Rails.application.routes.draw do
 
 	resources :kite_spots
 	resources :countries
-	resources :location_maps
+
+  get 'global-map', to: 'location_maps#index'
 
   devise_for :users
 	# resources :users
 
+
 	root to: 'pages#index'
+
+  unless Rails.env.eeedevelopment?
+    get '*path' => redirect { |p, request| request.flash[:alert] = 'Requested Page not found'; '/' }
+  end
+
 end
