@@ -21,42 +21,42 @@
 require 'rails_helper'
 
 RSpec.describe LocationMap, type: :model do
-	let(:location_map_for_kite_spot) { create(:location_map_for_kite_spot) }
+  let(:location_map_for_kite_spot) { create(:location_map_for_kite_spot) }
 
-	describe 'relations' do
-		it 'requires name' do
-			expect do
-				create(:location_map_for_country, name: '')
-			end.to raise_error(ActiveRecord::RecordInvalid)
-		end
+  describe 'relations' do
+    it 'requires name' do
+      expect do
+        create(:location_map_for_country, name: '')
+      end.to raise_error(ActiveRecord::RecordInvalid)
+    end
 
-		it 'requires lat/lon' do
-			expect do
-				create(:location_map_for_country, latitude: nil, longitude: nil)
-			end.to raise_error(ActiveRecord::RecordInvalid)
-		end
+    it 'requires lat/lon' do
+      expect do
+        create(:location_map_for_country, latitude: nil, longitude: nil)
+      end.to raise_error(ActiveRecord::RecordInvalid)
+    end
 
-		it 'polymorphic belongs_to Record' do
-			expect(subject).to respond_to :record
-		end
+    it 'polymorphic belongs_to Record' do
+      expect(subject).to respond_to :record
+    end
 
-		describe 'dependent actions' do
-			it 'does not destroys associated record' do
-				location_map_for_kite_spot
-				expect{location_map_for_kite_spot.destroy}.not_to change{KiteSpot.count}
-			end
-		end
-	end
+    describe 'dependent actions' do
+      it 'does not destroys associated record' do
+        location_map_for_kite_spot
+        expect { location_map_for_kite_spot.destroy }.not_to change(KiteSpot, :count)
+      end
+    end
+  end
 
-	describe 'methods' do
+  describe 'methods' do
     context 'Class' do
       describe '#all_spots_map' do
-        before(:each) do
-          5.times { create(:location_map_for_country) }
+        before do
+          create_list(:location_map_for_country, 5)
         end
 
         it 'returns markers for all locations' do
-          expect(LocationMap.all_spots_map[:markers].count). to eq(5)
+          expect(described_class.all_spots_map[:markers].count).to eq(5)
         end
       end
     end
@@ -64,7 +64,7 @@ RSpec.describe LocationMap, type: :model do
     context 'Instance' do
       describe '#leaflet_map_details' do
         it 'returns leaflet config obj' do
-          expect(location_map_for_kite_spot.leaflet_map_details.keys).to eq([:container_id, :max_zoom, :center, :markers])
+          expect(location_map_for_kite_spot.leaflet_map_details.keys).to eq(%i[container_id max_zoom center markers])
         end
 
         it 'centers on map coordinates' do
@@ -72,6 +72,5 @@ RSpec.describe LocationMap, type: :model do
         end
       end
     end
-
-	end
+  end
 end

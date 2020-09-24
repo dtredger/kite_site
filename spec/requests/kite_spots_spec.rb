@@ -79,10 +79,10 @@ RSpec.describe 'KiteSpots', type: :request do
   describe 'PATCH /kite_spots/:id' do
     context 'unauthorized visitor' do
       it 'does not update KiteSpot' do
-        expect {
-          patch kite_spot_path(kite_spot.id), params: {kite_spot: attributes_for(:kite_spot, name: 'new')}
+        expect do
+          patch kite_spot_path(kite_spot.id), params: { kite_spot: attributes_for(:kite_spot, name: 'new') }
           kite_spot.reload
-        }.not_to change{ kite_spot.name }
+        end.not_to change(kite_spot, :name)
       end
     end
 
@@ -90,11 +90,10 @@ RSpec.describe 'KiteSpots', type: :request do
       log_in_user
 
       it 'updates KiteSpot' do
-
-        expect {
-          patch kite_spot_path(kite_spot.id), params: {kite_spot: attributes_for(:kite_spot, name: 'new')}
+        expect do
+          patch kite_spot_path(kite_spot.id), params: { kite_spot: attributes_for(:kite_spot, name: 'new') }
           kite_spot.reload
-        }.to change{ kite_spot.name }
+        end.to change(kite_spot, :name)
       end
     end
   end
@@ -116,5 +115,4 @@ RSpec.describe 'KiteSpots', type: :request do
       end
     end
   end
-
 end

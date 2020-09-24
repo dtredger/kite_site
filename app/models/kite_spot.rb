@@ -30,7 +30,7 @@ class KiteSpot < ApplicationRecord
 
   has_one :location_map, as: :record, dependent: :destroy
 
-  belongs_to :country
+  belongs_to :country, optional: false
 
   validates :name, presence: true, uniqueness: true
 
