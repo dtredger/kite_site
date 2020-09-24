@@ -116,4 +116,3 @@ RSpec.describe 'Countries_routes', type: :request do
     end
   end
 end
-

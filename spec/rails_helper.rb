@@ -74,12 +74,10 @@ RSpec.configure do |config|
   # config.filter_gems_from_backtrace("gem name")
 
   if Bullet.enable?
-    config.before(:each) { Bullet.start_request }
-    config.after(:each)  { Bullet.end_request }
+    config.before { Bullet.start_request }
+    config.after  { Bullet.end_request }
   end
-
 end
-
 
 Capybara.configure do |config|
   # config.server = :webrick

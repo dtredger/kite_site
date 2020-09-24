@@ -61,7 +61,7 @@ class LocationMap < ApplicationRecord
   end
 
   def popup_link
-    "<a href='#{site_url}#{record_type.tableize}/#{record_id}'>#{name}</a>"
+    "<a href='#{site_url}#{record_type.tableize}/#{record.name}'>#{record.name}</a>"
   end
 
   private

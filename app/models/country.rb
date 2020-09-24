@@ -31,7 +31,6 @@ class Country < ApplicationRecord
 
   has_one :location_map, as: :record, dependent: :destroy
 
-
   def cover_photo
     photos.first
   end
