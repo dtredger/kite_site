@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe 'KiteSpots', type: :request do
+RSpec.describe 'KiteSpots_routes', type: :request do
   let(:country) { create(:country) }
   let(:kite_spot) { create(:kite_spot) }
 

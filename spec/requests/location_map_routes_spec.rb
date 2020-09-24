@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe 'LocationMaps', type: :request do
+RSpec.describe 'LocationMaps_routes', type: :request do
   let(:country) { create(:country) }
 
   describe 'GET /global-map' do
