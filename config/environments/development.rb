@@ -85,4 +85,14 @@ Rails.application.configure do
     g.observer_specs false
   end
 
+  # for N+1 Query Detection (dev & test)
+  config.after_initialize do
+    Bullet.enable = true
+
+    # Bullet.console = true
+
+    Bullet.add_footer = true
+    Bullet.skip_html_injection = false
+  end
+
 end

@@ -13,13 +13,11 @@
 #  slug        :string
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
-#  photos_id   :integer
 #
 # Indexes
 #
-#  index_countries_on_name       (name) UNIQUE
-#  index_countries_on_photos_id  (photos_id)
-#  index_countries_on_slug       (slug) UNIQUE
+#  index_countries_on_name  (name) UNIQUE
+#  index_countries_on_slug  (slug) UNIQUE
 #
 class Country < ApplicationRecord
   extend FriendlyId
@@ -32,6 +30,7 @@ class Country < ApplicationRecord
   has_many :kite_spots, dependent: :nullify
 
   has_one :location_map, as: :record, dependent: :destroy
+
 
   def cover_photo
     photos.first

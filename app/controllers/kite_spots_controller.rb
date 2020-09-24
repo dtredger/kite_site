@@ -41,7 +41,7 @@ class KiteSpotsController < ApplicationController
 
   private
 
-  # TODO: - move to model ; params are url-params
+  # TODO: - move to model ; params are url-params ; includes for query
   def set_kite_spots
     months = params.fetch(:month, {})
     if months.respond_to?(:length)
@@ -49,7 +49,7 @@ class KiteSpotsController < ApplicationController
       @kite_spots = KiteSpot.find_tagged_kite_spots(@valid_months)
     else
       @valid_months = %w[Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec]
-      @kite_spots = KiteSpot.all
+      @kite_spots = KiteSpot.all.includes([:photos_attachments]).includes(:country)
     end
   end
 
