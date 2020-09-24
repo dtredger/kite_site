@@ -6,8 +6,7 @@ Rails.application.routes.draw do
 
   get 'global-map', to: 'location_maps#index'
 
-  devise_for :users
-	# resources :users
+  devise_for :users, controllers: { registrations: 'users/registrations' }
 
 
 	root to: 'pages#index'
