@@ -37,7 +37,7 @@ RSpec.configure do |config|
   # https://github.com/thoughtbot/factory_girl/blob/master/GETTING_STARTED.md#configure-your-test-suite
   config.include FactoryBot::Syntax::Methods
 
-  # config.include Devise::TestHelpers
+  config.include Devise::Test::IntegrationHelpers, type: :request
 
   require 'support/devise_macros'
   config.extend DeviseMacros

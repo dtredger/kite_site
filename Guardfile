@@ -60,6 +60,9 @@ guard :rspec, cmd: 'bundle exec rspec' do
   watch(rails.routes)          { "#{rspec.spec_dir}/routing" }
   watch(rails.app_controller)  { "#{rspec.spec_dir}/controllers" }
 
+  # request specs
+  watch(%r{^spec/requests/.+_spec\.rb$})
+
   # Capybara features specs
   watch(rails.view_dirs)     { |m| rspec.spec.call("features/#{m[1]}") }
   watch(rails.layouts)       { |m| rspec.spec.call("features/#{m[1]}") }
@@ -71,12 +74,12 @@ guard :rspec, cmd: 'bundle exec rspec' do
   end
 end
 
-# guard :brakeman, run_on_start: true do
-#   watch(%r{^app/.+\.(erb|haml|rhtml|rb)$})
-#   watch(%r{^config/.+\.rb$})
-#   watch(%r{^lib/.+\.rb$})
-#   watch('Gemfile')
-# end
+guard :brakeman, run_on_start: false do
+  watch(%r{^app/.+\.(erb|haml|rhtml|rb)$})
+  watch(%r{^config/.+\.rb$})
+  watch(%r{^lib/.+\.rb$})
+  watch('Gemfile')
+end
 
 # https://github.com/yujinakayama/guard-rubocop
 guard :rubocop, cli: ['--format', 'clang'] do
