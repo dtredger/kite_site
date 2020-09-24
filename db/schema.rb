@@ -10,7 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_22_050841) do
+ActiveRecord::Schema.define(version: 2020_09_24_182902) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
 
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.string "name", null: false
@@ -46,14 +49,13 @@ ActiveRecord::Schema.define(version: 2020_09_22_050841) do
   create_table "countries", force: :cascade do |t|
     t.text "name"
     t.text "region"
-    t.integer "photos_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.text "description"
     t.float "latitude"
     t.float "longitude"
     t.string "slug"
-    t.index ["photos_id"], name: "index_countries_on_photos_id"
+    t.index ["name"], name: "index_countries_on_name", unique: true
     t.index ["slug"], name: "index_countries_on_slug", unique: true
   end
 
@@ -68,6 +70,7 @@ ActiveRecord::Schema.define(version: 2020_09_22_050841) do
     t.float "longitude"
     t.string "slug"
     t.index ["country_id"], name: "index_kite_spots_on_country_id"
+    t.index ["name"], name: "index_kite_spots_on_name", unique: true
     t.index ["slug"], name: "index_kite_spots_on_slug", unique: true
   end
 

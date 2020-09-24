@@ -5,6 +5,10 @@
         var $toastContent = $('<span><%= flash[:success] %></span>');
         toastr.success($toastContent)
       <% end %>
+      <% if flash[:notice] %>
+        var $toastContent = $('<span><%= flash[:notice] %></span>');
+        toastr.success($toastContent)
+      <% end %>
       <% if flash[:info] %>
         var $toastContent = $('<span><%= flash[:info] %></span>');
         toastr.info($toastContent)
