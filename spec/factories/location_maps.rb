@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: location_maps
 #
-#  id          :integer          not null, primary key
+#  id          :bigint           not null, primary key
 #  latitude    :float
 #  longitude   :float
 #  name        :string
@@ -18,11 +20,26 @@
 #
 FactoryBot.define do
   factory :location_map do
-    latitude { 1.5 }
-    longitude { 1.5 }
-    zoom { 1 }
-    name { "MyString" }
-    record_type { "MyString" }
-    record_id { 1 }
+    sequence(:name) { |x| "location_map_#{x}" }
+    latitude { 32.915 }
+    longitude { 41.225 }
+    zoom { 3 }
+    # association :record, factory: [:kite_spot, :location_map]
+
+    factory :location_map_for_kite_spot do
+      sequence(:name) { |x| "kite_spot_location_map_#{x}" }
+      latitude { 152.315 }
+      longitude { 21.525 }
+      zoom { 3 }
+      association :record, factory: :kite_spot
+    end
+
+    factory :location_map_for_country do
+      sequence(:name) { |x| "country_location_map_#{x}" }
+      latitude { 152.315 }
+      longitude { 21.525 }
+      zoom { 3 }
+      association :record, factory: :country
+    end
   end
 end

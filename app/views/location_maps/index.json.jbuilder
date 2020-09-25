@@ -1,1 +1,3 @@
-json.array! @location_maps, partial: "location_maps/location_map", as: :location_map
+# frozen_string_literal: true
+
+json.array! @location_maps, partial: 'location_maps/location_map', as: :location_map

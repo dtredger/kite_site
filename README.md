@@ -1,24 +1,31 @@
-# README
+rspec matchers: https://rubydoc.info/gems/rspec-expectations/frames
+(rails specific extras: https://relishapp.com/rspec/rspec-rails/v/4-0/docs/matchers)
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
 
-Things you may want to cover:
 
-* Ruby version
 
-* System dependencies
 
-* Configuration
+##Optimization Tools / Gems
 
-* Database creation
+Annotate
+> automatic comments of schema on model
 
-* Database initialization
+Bullet
+> development & test - looks for n+1 queries
 
-* How to run the test suite
 
-* Services (job queues, cache servers, search engines, etc.)
+lol_dba
+> installed on system NOT added to gemfile
+> to find missing indices
+> lol_dba db:find_indexes
 
-* Deployment instructions
+Guard
+> test-runner that watches for changes
 
-* ...
+Rubocop
+> style linter
+> rubocop -A to have it autocorrect if possible
+
+Simplecov
+> generates coverage report
+

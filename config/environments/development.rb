@@ -61,4 +61,38 @@ Rails.application.configure do
   # Use an evented file watcher to asynchronously detect changes in source code,
   # routes, locales, etc. This feature depends on the listen gem.
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
+
+  config.generators do |g|
+    g.test_framework :rspec
+    g.fixture_replacement :factory_bot
+    g.factory_bot dir: 'spec/factories'
+
+    g.model_specs true
+
+    g.controller_specs false
+    g.routing_specs false
+    g.request_specs true
+
+    g.view_specs false
+
+    g.feature_specs false
+    g.system_specs true
+
+    g.mailer_specs true
+
+    g.helper_specs false
+
+    g.observer_specs false
+  end
+
+  # for N+1 Query Detection (dev & test)
+  config.after_initialize do
+    Bullet.enable = true
+
+    # Bullet.console = true
+
+    Bullet.add_footer = true
+    Bullet.skip_html_injection = false
+  end
+
 end
