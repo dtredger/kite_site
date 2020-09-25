@@ -50,3 +50,5 @@ class CountriesController < ApplicationController
     params.fetch(:country, {}).permit(:name, :latitude, :longitude, :region)
   end
 end
+
+# permit images: []
