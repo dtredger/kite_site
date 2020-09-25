@@ -38,6 +38,10 @@ class KiteSpot < ApplicationRecord
 
   has_rich_text :content
 
+  def cover_photo
+    photos.first
+  end
+
   def self.all_months
     %w[Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec]
   end

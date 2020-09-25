@@ -8,8 +8,8 @@
       <div class="card h-100">
         <%= link_to el, class: 'h-100' do %>
           <div class="background-image-grey">
-            <% if el.photos.any? %>
-              <%= image_tag el.photos[0], class: 'card-img-top' %>
+            <% if el.cover_photo %>
+              <%= image_tag el.cover_photo.variant(resize_to_fill: [250, 150]), class: 'card-img-top' %>
             <% else %>
               <div class="gray-zone"></div>
             <% end %>
