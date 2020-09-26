@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 # download seed images & attach to countries
 if Rails.env.development?
- task find_images: :environment do
+  task find_images: :environment do
     require 'rubygems'
     require 'nokogiri'
     require 'open-uri'
@@ -25,7 +27,7 @@ if Rails.env.development?
 
       image_divs = noko_page.css('.img_cont')
 
-      if image_divs.count == 0
+      if image_divs.count.zero?
         puts "#{image_divs.count} image divs for #{model.name}"
         fails.push(model.name)
       end
@@ -33,17 +35,17 @@ if Rails.env.development?
       img_count = 1
       max_img_count = 3
       image_divs.each do |img_div|
-        if img_div.children[0].attributes['src']
-          image_url = img_div.children[0].attributes['src'].value
-        else
-          image_url = img_div.children[0].attributes['data-src'].value
-        end
+        image_url = if img_div.children[0].attributes['src']
+                      img_div.children[0].attributes['src'].value
+                    else
+                      img_div.children[0].attributes['data-src'].value
+                    end
 
         next if image_url.match?('base64')
 
         file_name = File.join(Rails.root, '/tmp/storage', "#{model.name}-#{img_count}.jpg")
 
-        File.open(file_name, "wb") do |f|
+        File.open(file_name, 'wb') do |f|
           f.write(open(image_url).read)
         end
 
@@ -51,7 +53,7 @@ if Rails.env.development?
 
         model.photos.attach(io: File.open(file_name),
                             filename: file_name,
-                            content_type:'application/jpg')
+                            content_type: 'application/jpg')
         puts "attached #{file_name} to #{model.name}, image #{img_count} of #{max_img_count}"
         img_count += 1
         break if img_count > max_img_count
@@ -60,6 +62,5 @@ if Rails.env.development?
 
     puts 'fails: '
     puts fails
-
   end
 end
