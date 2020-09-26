@@ -4,16 +4,15 @@
 #
 # Table name: kite_spots
 #
-#  id                 :bigint           not null, primary key
-#  description        :text
-#  latitude           :float
-#  longitude          :float
-#  monthly_conditions :string
-#  name               :string
-#  slug               :string
-#  created_at         :datetime         not null
-#  updated_at         :datetime         not null
-#  country_id         :integer
+#  id          :bigint           not null, primary key
+#  description :text
+#  latitude    :float
+#  longitude   :float
+#  name        :string
+#  slug        :string
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#  country_id  :integer
 #
 # Indexes
 #
@@ -23,24 +22,19 @@
 #
 class KiteSpot < ApplicationRecord
   extend FriendlyId
-  friendly_id :name, use: :slugged
 
-  # belongs_to :country
+  friendly_id :name, use: :slugged
+  acts_as_ordered_taggable_on :kiteable_months
   has_many_attached :photos
 
-  has_one :location_map, as: :record, dependent: :destroy
+  has_one :location_map, as: :record,
+                         dependent: :destroy
 
   belongs_to :country, optional: false
 
   validates :name, presence: true, uniqueness: true
 
-  acts_as_ordered_taggable_on :kiteable_months
-
   has_rich_text :content
-
-  def cover_photo
-    photos.first
-  end
 
   def self.all_months
     %w[Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec]
@@ -50,22 +44,15 @@ class KiteSpot < ApplicationRecord
     KiteSpot.tagged_with(months, any: true)
   end
 
-  # # TODO - deprecated
-  # def monthly_conditions
-  #   months = %w[Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec]
-  #   split_str = self[:monthly_conditions].split('')
-  #   good_conditions = []
-  #   split_str.each_with_index do |letter, ix|
-  #     good_conditions.push(months[ix]) if letter == '1'
-  #   end
-  #   good_conditions
-  # end
-
   def amenities
     %w[beach parking test_amenity]
   end
 
   def card_subtitle
     country.name
+  end
+
+  def cover_photo
+    photos.first
   end
 end
