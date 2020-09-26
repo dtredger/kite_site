@@ -2,9 +2,13 @@
 
 <br>
 
+photos: <%= @kite_spot.photos.count %>
+<% @kite_spot.photos.each do |photo| %>
+  <%= image_tag photo, class: 'img-fluid' %>
+<% end %>
 
 <div class="container">
-  <h4><%= @kite_spot.name %></h4>
+  <h4 class="kitespot-name"><%= @kite_spot.name %></h4>
   <h5><%= link_to @kite_spot.country.name, @kite_spot.country %></h5>
   <br>
   <div class="row">
@@ -17,7 +21,7 @@
 
   <br><br>
 
-  
+
   <div class="row">
     <div class="col-md-5">
       <p>

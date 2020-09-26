@@ -29,3 +29,6 @@ Rubocop
 Simplecov
 > generates coverage report
 
+
+Brakeman
+> automated security checks

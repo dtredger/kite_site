@@ -37,10 +37,17 @@ RSpec.configure do |config|
   # https://github.com/thoughtbot/factory_girl/blob/master/GETTING_STARTED.md#configure-your-test-suite
   config.include FactoryBot::Syntax::Methods
 
-  config.include Devise::Test::IntegrationHelpers, type: :request
+  config.include Devise::Test::IntegrationHelpers
 
   require 'support/devise_macros'
   config.extend DeviseMacros
+
+  require 'support/system_spec_macros'
+  config.include SystemSpecMacros, type: :system
+
+  #
+  # require 'support/screenshot_helper'
+  # # Reopens ActionDispatch::SystemTesting::TestHelpers::ScreenshotHelper to specify file path
 
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   # config.fixture_path = "#{::Rails.root}/spec/fixtures"
