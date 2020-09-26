@@ -2,7 +2,7 @@
 <!--render 'partials/search_panel', locals={valid_months: @valid_months} -->
 
 
-<h5>Search Spots by Month</h5>
+<h5><%= t('kitespot_month_filter_header') %></h5>
 
 <%= form_with(url: '/kite_spots', method: 'get', local: true, class: 'form-check') do %>
   <% %w(Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec).each do |month| %>

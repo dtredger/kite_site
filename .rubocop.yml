@@ -5,7 +5,6 @@ require:
   - rubocop-performance
   - rubocop-rspec
 
-
 AllCops:
   NewCops: enable
   Exclude:
@@ -23,12 +22,17 @@ AllCops:
 Documentation:
   Exclude:
     - 'app/controllers/*'
-#
-## rubocop-performance
-#Performance/Size:
-#  Exclude:
-#    #- lib/example.rb
-#
-#Rails/FindBy:
-#  Exclude:
-#    #- lib/example.rb
+
+Metrics/BlockLength:
+  Exclude:
+    - 'spec/**/*'
+
+
+# rubocop-performance
+Performance/Size:
+  Exclude:
+    #- lib/example.rb
+
+Rails/FindBy:
+  Exclude:
+    #- lib/example.rb

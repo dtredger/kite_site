@@ -18,7 +18,6 @@ class KiteSpotsController < ApplicationController
 
   def create
     @kite_spot = KiteSpot.new(kite_spot_params)
-
     if @kite_spot.save
       redirect_to @kite_spot, notice: 'Kite Spot was successfully created.'
     else
@@ -58,6 +57,7 @@ class KiteSpotsController < ApplicationController
   end
 
   def kite_spot_params
-    params.fetch(:kite_spot, {}).permit(:name, :content, :latitude, :longitude, :description, :country_id)
+    params.fetch(:kite_spot).permit(:name, :content, :latitude, :longitude, :description, :country_id,
+                                    kiteable_month_list: [], photos: [])
   end
 end

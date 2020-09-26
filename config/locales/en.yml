@@ -30,4 +30,6 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  main_header: 'TBA Kite Site'
+  main_header_subtitle: 'Site Subtitle'
+  kitespot_month_filter_header: 'Search Spots by Month'

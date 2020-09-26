@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_24_182902) do
+ActiveRecord::Schema.define(version: 2020_09_26_033629) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -61,7 +61,6 @@ ActiveRecord::Schema.define(version: 2020_09_24_182902) do
 
   create_table "kite_spots", force: :cascade do |t|
     t.string "name"
-    t.string "monthly_conditions"
     t.integer "country_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -84,18 +83,6 @@ ActiveRecord::Schema.define(version: 2020_09_24_182902) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["record_type", "record_id"], name: "index_location_maps_on_record_type_and_record_id"
-  end
-
-  create_table "maps", force: :cascade do |t|
-    t.float "latitude"
-    t.float "longitude"
-    t.integer "zoom"
-    t.string "name"
-    t.string "record_type", null: false
-    t.integer "record_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["record_type", "record_id"], name: "index_maps_on_record_type_and_record_id"
   end
 
   create_table "taggings", force: :cascade do |t|
