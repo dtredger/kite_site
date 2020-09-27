@@ -1,56 +1,72 @@
 <div class="container">
   <div class="row">
-    <%= form_with(model: kite_spot, local: true) do |form| %>
-      <% if kite_spot.errors.any? %>
-        <div id="error_explanation">
-          <h2><%= pluralize(kite_spot.errors.count, 'error') %> prohibited this kite_spot from being saved:</h2>
+    <div class="col-12 card">
+      <%= form_with(model: kite_spot, local: true) do |form| %>
+        <% if kite_spot.errors.any? %>
+          <div id="error_explanation">
+            <h2><%= pluralize(kite_spot.errors.count, 'error') %> prohibited this kite_spot from being saved:</h2>
 
-          <ul>
-            <% kite_spot.errors.full_messages.each do |message| %>
-              <li><%= message %></li>
-            <% end %>
-          </ul>
+            <ul>
+              <% kite_spot.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
+
+        <div class="form-group">
+          <%= form.label :name %>
+          <%= form.text_field :name, class: 'form-control' %>
         </div>
+
+        <div class="row">
+          <div class="col-6">
+            <div class="form-group">
+              <%= form.label :latitude %>
+              <%= form.number_field :latitude, class: 'form-control'%>
+            </div>
+
+            <div class="form-group">
+              <%= form.label :longitude %>
+              <%= form.number_field :longitude, class: 'form-control' %>
+            </div>
+
+            <div class="form-group">
+              <%= form.label :country %>
+              <%= form.collection_select(:country_id, Country.all, :id, :name, {}, {class: 'custom-select
+              custom-select-lg'}) %>
+            </div>
+
+            <div class="form-group">
+              <%= form.label :photos %>
+              <%= form.file_field :photos, multiple: true, class: 'form-control-file' %>
+            </div>
+          </div>
+
+          <div class="col-6">
+            <div class="form-group">
+              <%= form.label :kiteable_month_list %>
+              <%= form.select :kiteable_month_list,
+                              KiteSpot.all_months, {},
+                              {multiple: true, class: 'custom-select', size: 12} %>
+            </div>
+
+
+          </div>
+        </div>
+
+        <div class="form-group">
+          <%= form.label :content %>
+          <%= form.rich_text_area :content %>
+        </div>
+
+        <div class="actions">
+          <%= form.submit 'Submit', {class: 'btn btn-primary'} %>
+        </div>
+
+        <br>
+
       <% end %>
-
-      <div class="field">
-        <%= form.label :name %>
-        <%= form.text_field :name %>
-      </div>
-
-      <div class="field">
-        <%= form.label :photos %>
-        <%= form.file_field :photos, multiple: true %>
-      </div>
-
-      <div class="field">
-        <%= form.label :latitude %>
-        <%= form.number_field :latitude %>
-      </div>
-
-      <div class="field">
-        <%= form.label :longitude %>
-        <%= form.number_field :longitude %>
-      </div>
-
-      <div class="field">
-        <%= form.label :country %>
-        <%= form.collection_select(:country_id, Country.all, :id, :name) %>
-      </div>
-
-      <div class="field">
-        <%= form.label :kiteable_month_list %>
-        <%= form.select :kiteable_month_list, KiteSpot.all_months, {}, {multiple: true} %>
-      </div>
-
-      <div class="field">
-        <%= form.label :content %>
-        <%= form.rich_text_area :content %>
-      </div>
-
-      <div class="actions">
-        <%= form.submit %>
-      </div>
-    <% end %>
+    </div>
   </div>
 </div>
