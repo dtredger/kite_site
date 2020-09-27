@@ -31,14 +31,6 @@ class Country < ApplicationRecord
 
   has_one :location_map, as: :record, dependent: :destroy
 
-  def cover_photo
-    photos.first
-  end
-
-  def card_subtitle
-    region
-  end
-
   def kiteable_month_list
     wind_in_country_months = []
     kite_spots.each do |kite_spot|
@@ -47,5 +39,21 @@ class Country < ApplicationRecord
       end
     end
     wind_in_country_months
+  end
+
+
+  # for grid subtitle
+  def card_subtitle
+    region
+  end
+
+  # for grid card
+  def cover_photo
+    photos.first
+  end
+
+  # for #show page gallery
+  def header_photos
+    photos.take(3)
   end
 end

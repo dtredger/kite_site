@@ -48,11 +48,18 @@ class KiteSpot < ApplicationRecord
     %w[beach parking test_amenity]
   end
 
+  # for grid subtitle
   def card_subtitle
     country.name
   end
 
+  # for grid card
   def cover_photo
     photos.first
+  end
+
+  # for #show page gallery
+  def header_photos
+    photos.take(3)
   end
 end

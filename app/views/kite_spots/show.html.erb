@@ -1,11 +1,7 @@
 <%= render 'partials/sticky_filter_bar' %>
 
-<br>
+<%= render 'partials/photo_gallery', locals={resource: @kite_spot} %>
 
-photos: <%= @kite_spot.photos.count %>
-<% @kite_spot.photos.each do |photo| %>
-  <%= image_tag photo, class: 'img-fluid' %>
-<% end %>
 
 <div class="container">
   <h4 class="kitespot-name"><%= @kite_spot.name %></h4>

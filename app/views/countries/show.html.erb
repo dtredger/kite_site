@@ -1,29 +1,10 @@
 <%= render 'partials/sticky_filter_bar' %>
 
+<%= render 'partials/photo_gallery', locals={resource: @country} %>
+
+<br>
+
 <div class="container">
-
-  <br>
-
-  <!-- TODO - show 3 cover images (or gray if < 3 img present -->
-  <div class="row">
-    <div class="m-0 p-1 col-md-4 col-sm-6">
-      <% if @country.photos.any? %>
-        <% @country.photos.each do |photo| %>
-          <%= image_tag photo.variant(resize_to_limit: [250, nil]), class: 'img-fluid' %>
-        <% end %>
-      <% end %>
-    </div>
-    <div class="m-0 p-1 col-md-4 col-sm-6 d-none d-sm-block">
-      <%= image_tag '//lorempixel.com/500/300/', class: 'img-fluid' %>
-    </div>
-    <div class="m-0 p-1 col-md-4 col-sm-6 d-none d-md-block">
-      <%= image_tag '//lorempixel.com/499/300/', class: 'img-fluid' %>
-    </div>
-
-  </div>
-
-  <br>
-
   <div class="row">
     <div class="col-12 col-lg-6">
       <h4 class="country-name"><%= @country.name %></h4>
@@ -38,10 +19,12 @@
   <hr>
 
   <div class="row">
-    <div class="col">
+    <div class="col-12">
       <h5>Best Months in <%= @country.name %></h5>
     </div>
-    <div class="col">
+  </div>
+  <div class="row">
+    <div class="col-12">
       <%= render 'partials/kiteable_month_selector', locals={kiteable_month_list: @country.kiteable_month_list} %>
     </div>
   </div>
