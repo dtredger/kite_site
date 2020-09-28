@@ -21,4 +21,11 @@ module SystemSpecMacros
       create(:kite_spot, :with_location_map, :with_2_kiteable_months)
     end
   end
+
+
+  # # remove files used in testing (db rollback never calls destroy)
+  # def after_teardown
+  #   super
+  #   FileUtils.rm_rf("#{Rails.root}/storage_test")
+  # end
 end
