@@ -17,7 +17,6 @@
 
   <br><br>
 
-
   <div class="row">
     <div class="col-md-5">
       <p>
@@ -28,7 +27,6 @@
     </div>
   </div>
 
-
   <div class="row">
     <div class="col-12">
       <%= @kite_spot.description %>
@@ -36,17 +34,19 @@
   </div>
 
   <br>
+
   <div class="row">
-    <div class="col-4">
+    <div class="col">
       <h4>Amenities</h4>
     </div>
-
-    <% @kite_spot.amenities.each do |amenity| %>
-      <div class="col-1">
-        <%= amenity %>
-      </div>
-    <% end %>
-
   </div>
+
+  <% @kite_spot.amenities.each do |amenity| %>
+    <hr>
+    <div class="row">
+      <%= amenity %>
+    </div>
+  <% end %>
+
 
 </div>

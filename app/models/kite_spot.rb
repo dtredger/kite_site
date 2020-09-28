@@ -23,6 +23,9 @@
 class KiteSpot < ApplicationRecord
   extend FriendlyId
 
+  scope :with_eager_loaded_image, -> { eager_load(photos: :blob) }
+  scope :with_preloaded_image, -> { preload(photos: :blob) }
+
   friendly_id :name, use: :slugged
   acts_as_ordered_taggable_on :kiteable_months
   has_many_attached :photos
@@ -45,7 +48,7 @@ class KiteSpot < ApplicationRecord
   end
 
   def amenities
-    %w[beach parking test_amenity]
+    %w[TBD]
   end
 
   # for grid subtitle
