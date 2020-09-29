@@ -10,7 +10,8 @@
 
     <% resource.header_photos.each do |photo| %>
       <div class="col p-0 grey-bg">
-        <%= image_tag photo.variant(resize_to_fill: [550, 450]), class: 'img-fluid text-center' %>
+        <!--.variant(resize_to_fill: [550, 450])-->
+        <%= image_tag photo, class: 'img-fluid text-center' %>
       </div>
     <% end %>
 

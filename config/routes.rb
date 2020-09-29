@@ -11,8 +11,8 @@ Rails.application.routes.draw do
 
 	root to: 'pages#index'
 
-  unless Rails.env.development?
-    get '*path' => redirect { |p, request| request.flash[:alert] = 'Requested Page not found'; '/' }
-  end
+  # unless Rails.env.development?
+  #   get '*path' => redirect { |p, request| request.flash[:alert] = 'Requested Page not found'; '/' }
+  # end
 
 end
