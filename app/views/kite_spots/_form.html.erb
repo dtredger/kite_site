@@ -48,7 +48,7 @@
                 <% end  %>
               </div>
               <%= form.label :photos %>
-              <%= form.file_field :photos, multiple: true, class: 'form-control-file' %>
+              <%= form.file_field :photos, {multiple: true, direct_upload: true, class: 'form-control-file'} %>
             </div>
           </div>
 

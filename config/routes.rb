@@ -11,8 +11,12 @@ Rails.application.routes.draw do
 
 	root to: 'pages#index'
 
-  # unless Rails.env.development?
-  #   get '*path' => redirect { |p, request| request.flash[:alert] = 'Requested Page not found'; '/' }
-  # end
+
+  # ensure active_storage routes aren't caught in traditional routes catchall
+  unless Rails.env.development?
+    get '*all', to: redirect { |_, req| req.flash[:alert] = 'Requested Page not found'; '/' }, constraints: ->(req) do
+                req.path.exclude? 'rails/active_storage'
+              end
+  end
 
 end
