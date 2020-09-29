@@ -42,3 +42,4 @@ coverage
 yarn-debug.log*
 .yarn-integrity
 coverage
+doc

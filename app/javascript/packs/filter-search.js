@@ -1,7 +1,4 @@
-/**
- * Created by dtredger on 20-09-18.
- * For filtering grid items
- */
+//For filtering main_grid items
 
 $(document).ready(function() {
   $("#sticky-search").on("keyup", function(a) {

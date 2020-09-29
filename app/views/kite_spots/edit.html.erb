@@ -1,6 +1,9 @@
-<h1>Editing Kite Spot</h1>
+<div class="container">
+  <h4>Editing Kite Spot</h4>
+
+  <%= link_to 'Show', @kite_spot %> |
+  <%= link_to 'Back', kite_spots_path %>
+</div>
+
 
 <%= render 'form', kite_spot: @kite_spot %>
-
-<%= link_to 'Show', @kite_spot %> |
-<%= link_to 'Back', kite_spots_path %>

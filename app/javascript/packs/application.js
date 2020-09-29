@@ -39,3 +39,17 @@ global.toastr.options = {
     timeOut: 10000,
     progressBar: true
 }
+
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+
+gtag('config', 'UA-179199554-1');
+
+document.addEventListener('turbolinks:load', function(event) {
+  if (typeof gtag === 'function') {
+    gtag('config', 'UA-179199554-1', {
+      'page_location': event.data.url
+    })
+  }
+})

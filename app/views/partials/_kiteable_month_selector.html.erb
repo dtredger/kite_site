@@ -1,7 +1,7 @@
 <!--render 'partials/kiteable_month_selector', locals={kiteable_month_list: @kite_spot.kiteable_month_list} %>-->
 
-<div class="btn-group" role="group" aria-label="Months">
-  <% %w(Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec).each do |month| %>
+<div class="btn-group flex-wrap" role="group" aria-label="Months">
+  <% %w[Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec].each do |month| %>
     <% if kiteable_month_list.include? month %>
       <div class="btn btn-success"><%= month %></div>
     <% else  %>

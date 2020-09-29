@@ -23,8 +23,8 @@ FactoryBot.define do
   factory :country do
     sequence(:name) { |x| "country_#{x}" }
     region { 'test region' }
-    sequence(:description) do |x|
-      "This is the description for country #{x}"
+    sequence(:content) do |x|
+      "This is the rich-text content for country #{x}"
     end
     latitude { 33.333 }
     longitude { 44.444 }

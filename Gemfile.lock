@@ -65,6 +65,22 @@ GEM
       rake (>= 10.4, < 14.0)
     ast (2.4.1)
     awesome_print (1.8.0)
+    aws-eventstream (1.1.0)
+    aws-partitions (1.376.0)
+    aws-sdk-core (3.108.0)
+      aws-eventstream (~> 1, >= 1.0.2)
+      aws-partitions (~> 1, >= 1.239.0)
+      aws-sigv4 (~> 1.1)
+      jmespath (~> 1.0)
+    aws-sdk-kms (1.38.0)
+      aws-sdk-core (~> 3, >= 3.99.0)
+      aws-sigv4 (~> 1.1)
+    aws-sdk-s3 (1.81.1)
+      aws-sdk-core (~> 3, >= 3.104.3)
+      aws-sdk-kms (~> 1)
+      aws-sigv4 (~> 1.1)
+    aws-sigv4 (1.2.2)
+      aws-eventstream (~> 1, >= 1.0.2)
     bcrypt (3.1.13)
     bindex (0.8.1)
     bootsnap (1.4.8)
@@ -133,6 +149,7 @@ GEM
     image_processing (1.11.0)
       mini_magick (>= 4.9.5, < 5)
       ruby-vips (>= 2.0.17, < 3)
+    jmespath (1.4.0)
     leaflet-rails (1.7.0)
       rails (>= 4.2.0)
     listen (3.2.1)
@@ -325,6 +342,7 @@ DEPENDENCIES
   acts-as-taggable-on
   annotate
   awesome_print
+  aws-sdk-s3
   bootsnap (>= 1.4.2)
   brakeman
   bullet

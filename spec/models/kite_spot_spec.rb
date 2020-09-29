@@ -4,16 +4,15 @@
 #
 # Table name: kite_spots
 #
-#  id                 :bigint           not null, primary key
-#  description        :text
-#  latitude           :float
-#  longitude          :float
-#  monthly_conditions :string
-#  name               :string
-#  slug               :string
-#  created_at         :datetime         not null
-#  updated_at         :datetime         not null
-#  country_id         :integer
+#  id          :bigint           not null, primary key
+#  description :text
+#  latitude    :float
+#  longitude   :float
+#  name        :string
+#  slug        :string
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#  country_id  :integer
 #
 # Indexes
 #
