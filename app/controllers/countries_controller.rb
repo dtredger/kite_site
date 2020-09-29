@@ -2,7 +2,6 @@
 
 class CountriesController < ApplicationController
   before_action :authenticate_user!, except: %i[index show]
-
   before_action :set_country, only: %i[show edit update destroy]
 
   def index
@@ -47,8 +46,6 @@ class CountriesController < ApplicationController
   end
 
   def country_params
-    params.fetch(:country, {}).permit(:name, :latitude, :longitude, :region)
+    params.fetch(:country, {}).permit(:name, :latitude, :longitude, :region, :content)
   end
 end
-
-# permit images: []

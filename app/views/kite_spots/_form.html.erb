@@ -38,6 +38,15 @@
             </div>
 
             <div class="form-group">
+              <div class="row">
+                <% kite_spot.photos.each do |photo| %>
+                  <div class="col">
+                    <%= image_tag photo, class: 'img-fluid' %>
+                    <p><%= photo.blob.filename %> </p>
+                    <p><%= photo.blob.metadata[:width] %>x<%= photo.blob.metadata[:height] %></p>
+                  </div>
+                <% end  %>
+              </div>
               <%= form.label :photos %>
               <%= form.file_field :photos, multiple: true, class: 'form-control-file' %>
             </div>

@@ -33,7 +33,7 @@ RSpec.describe 'Countries_routes', type: :request do
 
       it 'shows new form' do
         get new_country_path
-        expect(response.body).to match('Create Country')
+        expect(response.body).to match('Create a new Country')
       end
     end
   end
@@ -54,6 +54,11 @@ RSpec.describe 'Countries_routes', type: :request do
         expect do
           post countries_path, params: { country: attributes_for(:country) }
         end.to change(Country, :count).by(1)
+      end
+
+      it 'saves rich-text content' do
+        post countries_path, params: { country: attributes_for(:country) }
+        expect(Country.last.content.body.to_s).to match(/This is the rich-text content/)
       end
     end
   end
