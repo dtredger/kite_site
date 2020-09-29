@@ -4,7 +4,7 @@
 <div id="grid-items" class="row">
   <% resource.each do |el| %>
 
-    <div class="col-6 col-md-4 col-lg-3 mb-2 resource-<%= el.class.table_name %>">
+    <div class="col-6 col-md-4 col-lg-3 mb-2 resource-col resource-<%= el.class.table_name %>">
       <div class="card h-100">
         <%= link_to el, class: 'h-100' do %>
           <div class="background-image-grey">

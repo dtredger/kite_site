@@ -11,15 +11,15 @@
       <%= link_to 'Countries', countries_path, class: 'nav-item nav-link ' %>
       <%= link_to 'Global Map', global_map_path, class: 'nav-item nav-link' %>
     </div>
-    <form class="form-inline ml-auto">
-      <input id="sticky-search" type="text" class="form-control mr-sm-2" placeholder="Search">
-      <button type="submit" class="btn btn-outline-light">Search</button>
-    </form>
+
+    <% unless controller_path == 'pages' %>
+      <form class="form-inline ml-auto">
+        <input id="sticky-search" type="text" class="form-control mr-sm-2" placeholder="Filter">
+
+        <!-- TODO: add db search -->
+        <!--<button type="submit" class="btn btn-outline-light" disabled>Search</button>-->
+      </form>
+    <% end %>
+
   </div>
 </nav>
-
-<style>
-  .navbar {
-    background: rgba(4,58,203);
-  }
-</style>

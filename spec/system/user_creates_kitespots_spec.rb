@@ -27,8 +27,8 @@ RSpec.describe 'UserCreatesKitespots', type: :system do
       fill_in 'kite_spot[latitude]', with: 33
       fill_in 'kite_spot[longitude]', with: 180
 
-      select('Sep', from: 'kite_spot[kiteable_months][]')
-      select('Nov', from: 'kite_spot[kiteable_months][]')
+      select('Sep', from: 'kite_spot[kiteable_month_list][]')
+      select('Nov', from: 'kite_spot[kiteable_month_list][]')
 
       select country.name, from: 'kite_spot[country_id]'
 

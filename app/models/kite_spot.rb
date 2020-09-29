@@ -23,21 +23,18 @@
 class KiteSpot < ApplicationRecord
   extend FriendlyId
 
-  scope :with_eager_loaded_image, -> { eager_load(photos: :blob) }
-  scope :with_preloaded_image, -> { preload(photos: :blob) }
+  validates :name, presence: true, uniqueness: true
+
+  belongs_to :country, optional: false
 
   friendly_id :name, use: :slugged
   acts_as_ordered_taggable_on :kiteable_months
   has_many_attached :photos
-
-  has_one :location_map, as: :record,
-                         dependent: :destroy
-
-  belongs_to :country, optional: false
-
-  validates :name, presence: true, uniqueness: true
-
+  has_one :location_map, as: :record, dependent: :destroy
   has_rich_text :content
+
+  scope :with_eager_loaded_image, -> { eager_load(photos: :blob) }
+  scope :with_preloaded_image, -> { preload(photos: :blob) }
 
   def self.all_months
     %w[Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec]
