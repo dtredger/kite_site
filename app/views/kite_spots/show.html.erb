@@ -3,20 +3,22 @@
 <%= render 'partials/photo_gallery', locals={resource: @kite_spot} %>
 
 
-<div class="container">
+<div class="container card">
   <h4 class="kitespot-name"><%= @kite_spot.name %></h4>
   <h5><%= link_to @kite_spot.country.name, @kite_spot.country %></h5>
   <br>
+
+  <!-- months selector -->
   <div class="row">
-    <div class="col-2">
+    <div class="col-12">
       <h5>Best Months</h5>
+      <%= render 'partials/kiteable_month_selector', locals={kiteable_month_list: @kite_spot.kiteable_month_list} %>
     </div>
-
-    <%= render 'partials/kiteable_month_selector', locals={kiteable_month_list: @kite_spot.kiteable_month_list} %>
   </div>
+  <br>
+  <br>
 
-  <br><br>
-
+  <!-- content & map -->
   <div class="row">
     <div class="col-md-5">
       <p>
@@ -27,26 +29,28 @@
     </div>
   </div>
 
+  <!-- description TODO - duplicate of content? remove?-->
   <div class="row">
     <div class="col-12">
       <%= @kite_spot.description %>
     </div>
   </div>
-
   <br>
 
+  <h4>Amenities</h4>
+  <br>
+  <!-- amenities -->
   <div class="row">
-    <div class="col">
-      <h4>Amenities</h4>
+    <div class="col-12">
+      <% @kite_spot.amenities.each do |amenity| %>
+        <p><%= amenity %></p>
+      <% end %>
     </div>
   </div>
 
-  <% @kite_spot.amenities.each do |amenity| %>
-    <hr>
-    <div class="row">
-      <%= amenity %>
-    </div>
-  <% end %>
-
+  <!-- wind-info -->
+  <%= render 'partials/wind_info', locals={resource: @kite_spot} %>
+  <br>
+  <br>
 
 </div>

@@ -1,0 +1,45 @@
+<!--%= render 'partials/wind_info', locals={resource: @kite_spot} %>-->
+
+<h4>Wind Information</h4>
+
+<div class="row">
+
+  <div class="col-md-3">
+    <ul class="nav nav-pills flex-column">
+      <li class="nav-item">
+        <a class="nav-link wind-nav active" data-target="wind_history">windhistory.com</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link wind-nav" data-target="windy">windy.com</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link wind-nav" data-target="wind_finder">windfinder.com</a>
+      </li>
+    </ul>
+  </div>
+
+  <div class="col-md-9">
+    <div class="wind-panel wind_history">
+      <iframe class="wind-iframe" src="<%= resource.wind_information[:wind_history] %>" frameborder="0"></iframe>
+      <small class="text-center">
+        view the larger map at
+        <%= link_to 'windhistory.com', resource.wind_information[:wind_history] %>
+      </small>
+    </div>
+    <div class="wind-panel wind_finder" style="display: none">
+      <div class="wind-iframe inactive"></div>
+      <small class="text-center">
+        Not Available. Please visit
+        <%= link_to 'windfinder.com', resource.wind_information[:wind_finder] %> directly to see the complete map.
+      </small>
+    </div>
+    <div class="wind-panel windy" style="display: none">
+      <div class="wind-iframe inactive"></div>
+      <small class="text-center">
+        Not Available. Please visit
+        <%= link_to 'windy.com', resource.wind_information[:windy] %> directly to see the complete map.
+      </small>
+    </div>
+  </div>
+
+</div>

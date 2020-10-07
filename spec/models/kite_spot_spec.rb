@@ -53,4 +53,12 @@ RSpec.describe KiteSpot, type: :model do
       end
     end
   end
+
+  describe 'wind_information' do
+    let(:kite_spot) { create(:kite_spot, latitude:10, longitude: 20) }
+    it 'returns iframe' do
+      zoom = 5
+      expect(kite_spot.wind_information[:windy]).to match("https://www.windy.com/?10.0,20.0,#{zoom},")
+    end
+  end
 end
