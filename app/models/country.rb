@@ -35,15 +35,14 @@ class Country < ApplicationRecord
   # scope :with_eager_loaded_image, -> { eager_load(photos: :blob) }
   # scope :with_preloaded_image, -> { preload(photos: :blob) }
 
-  # TODO - this fetches all countries' kitespots' tags
+  # TODO: - this fetches all countries' kitespots' tags
   def self.find_months(months)
-    all.filter{ |c| c.includes_month?(months) }
+    all.filter { |c| c.includes_month?(months) }
   end
 
   def includes_month?(months)
     (month_tag_list & months).any?
   end
-
 
   def month_tag_list
     @wind_months ||= begin

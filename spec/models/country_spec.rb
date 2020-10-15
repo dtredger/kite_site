@@ -62,7 +62,7 @@ RSpec.describe Country, type: :model do
         aruba = create(:country, name: 'Aruba')
         argentina = create(:country, name: 'Argentina')
 
-        expect(Country.name_search('ar')).to eq([aruba, argentina])
+        expect(described_class.name_search('ar')).to eq([aruba, argentina])
       end
     end
 
@@ -73,7 +73,7 @@ RSpec.describe Country, type: :model do
         spot.month_tag_list.add('Mar')
         spot.save
 
-        expect(Country.month_search(['Mar', 'Apr']).count).to eq(1)
+        expect(described_class.month_search(%w[Mar Apr]).count).to eq(1)
       end
     end
   end
