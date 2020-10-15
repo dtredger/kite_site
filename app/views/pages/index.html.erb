@@ -7,6 +7,10 @@
   <div class="col-12">
     <h4>Countries</h4>
   </div>
+
+  <%= render 'partials/search_form', locals={months: @months} %>
+  <br>
+
   <%= render 'partials/main_grid', locals = {resource: @countries} %>
 
   <br>

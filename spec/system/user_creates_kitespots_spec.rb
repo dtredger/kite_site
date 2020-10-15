@@ -9,7 +9,7 @@ end
 RSpec.describe 'UserCreatesKitespots', type: :system do
   before do
     driven_by :selenium_chrome_headless
-    create_dummy_data(6)
+    create_dummy_records(6)
     User.create(email: 'test@mail.com',
                 password: '123123123')
   end
@@ -27,8 +27,8 @@ RSpec.describe 'UserCreatesKitespots', type: :system do
       fill_in 'kite_spot[latitude]', with: 33
       fill_in 'kite_spot[longitude]', with: 180
 
-      select('Sep', from: 'kite_spot[kiteable_month_list][]')
-      select('Nov', from: 'kite_spot[kiteable_month_list][]')
+      select('Sep', from: 'kite_spot[month_tags][]')
+      select('Nov', from: 'kite_spot[month_tags][]')
 
       select country.name, from: 'kite_spot[country_id]'
 

@@ -23,6 +23,8 @@ class Country < ApplicationRecord
   extend FriendlyId
   friendly_id :name, use: :slugged
 
+  include Searchable
+
   validates :name, presence: true, uniqueness: true
 
   has_many_attached :photos, dependent: :destroy
@@ -33,14 +35,24 @@ class Country < ApplicationRecord
   # scope :with_eager_loaded_image, -> { eager_load(photos: :blob) }
   # scope :with_preloaded_image, -> { preload(photos: :blob) }
 
-  def kiteable_month_list
-    wind_in_country_months = []
-    kite_spots.each do |kite_spot|
-      kite_spot.kiteable_months.each do |month|
-        wind_in_country_months.push(month.name) unless month.name.in? wind_in_country_months
+  # TODO - this fetches all countries' kitespots' tags
+  def self.find_months(months)
+    all.filter{ |c| c.includes_month?(months) }
+  end
+
+  def includes_month?(months)
+    (month_tag_list & months).any?
+  end
+
+
+  def month_tag_list
+    @wind_months ||= begin
+      @wind_months = Set.new
+      kite_spots.each do |spot|
+        @wind_months.merge(spot.month_tag_list)
       end
+      @wind_months
     end
-    wind_in_country_months
   end
 
   # for grid subtitle

@@ -1,3 +1,4 @@
+<!--TODO - uses Country.all & KiteSpot.all_months directly -->
 <div class="container">
   <div class="row">
     <div class="col-12 card">
@@ -54,9 +55,8 @@
 
           <div class="col-6">
             <div class="form-group">
-              <%= form.label :kiteable_month_list %>
-              <%= form.select :kiteable_month_list,
-                              KiteSpot.all_months, {},
+              <%= form.label :months %>
+              <%= form.select :month_tags, KiteSpot.all_months, {},
                               {multiple: true, class: 'custom-select', size: 12} %>
             </div>
 

@@ -52,7 +52,7 @@ RSpec.describe 'KiteSpots_routes', type: :request do
       let(:kite_spot_params) do
         { kite_spot: attributes_for(:kite_spot,
                                     country_id: country.id,
-                                    kiteable_month_list: %w[Jan Mar Dec]) }
+                                    month_tag_list: %w[Jan Mar Dec]) }
       end
 
       it 'creates new KiteSpot' do
@@ -61,9 +61,9 @@ RSpec.describe 'KiteSpots_routes', type: :request do
         end.to change(KiteSpot, :count).by(1)
       end
 
-      it 'creates with correct kiteable months' do
+      it 'creates with correct month tags' do
         post kite_spots_path, params: kite_spot_params
-        expect(KiteSpot.last.kiteable_month_list).to match(%w[Jan Mar Dec])
+        expect(KiteSpot.last.month_tag_list).to match(%w[Jan Mar Dec])
       end
     end
   end

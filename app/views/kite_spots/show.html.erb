@@ -2,7 +2,6 @@
 
 <%= render 'partials/photo_gallery', locals={resource: @kite_spot} %>
 
-
 <div class="container card">
   <h4 class="kitespot-name"><%= @kite_spot.name %></h4>
   <h5><%= link_to @kite_spot.country.name, @kite_spot.country %></h5>
@@ -12,7 +11,7 @@
   <div class="row">
     <div class="col-12">
       <h5>Best Months</h5>
-      <%= render 'partials/kiteable_month_selector', locals={kiteable_month_list: @kite_spot.kiteable_month_list} %>
+      <%= render 'partials/month_tag_selector', locals={month_tag_list: @kite_spot.month_tag_list} %>
     </div>
   </div>
   <br>
