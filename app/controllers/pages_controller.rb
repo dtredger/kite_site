@@ -13,10 +13,11 @@ class PagesController < ApplicationController
     @months = search_params[:month].to_h.filter{ |key, val| val == '1' }.keys
 
     if name.present?
-      name_countries = Country.name_search(name).to_a
-      name_kitespots = KiteSpot.name_search(name).to_a
+      name_countries = Country.name_search(name).includes(:kite_spots).to_a
+      name_kitespots = KiteSpot.name_search(name).includes(:country).to_a
     end
 
+    # TODO - month_search doesn't return ActiveRecord::Relation (so can't use .includes())
     if @months.any?
       month_countries = Country.month_search(@months)
       month_kitespots = KiteSpot.month_search(@months)

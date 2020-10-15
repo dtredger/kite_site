@@ -12,6 +12,7 @@ module Searchable
 
     ## return all records with matching Months
     #
+    # TODO - relies on model's #find_months method
     def month_search(months_arr)
       camel_arr = months_arr.map(&:camelcase)
       self.find_months(camel_arr)
