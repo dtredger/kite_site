@@ -3,7 +3,7 @@
 # For creating records for system specs
 module SystemSpecMacros
   # Will create kite_spot_count KiteSpots & kite_spot_count+country_count Countries
-  def create_dummy_data(kite_spot_count = 3, country_count = 0)
+  def create_dummy_records(kite_spot_count = 3, country_count = 0)
     create_kite_spot_and_country(kite_spot_count)
     create_country_without_kite_spot(country_count)
   end
@@ -18,7 +18,7 @@ module SystemSpecMacros
   # Creates #number KiteSpots with LocationMaps and #number Countries without locationMaps
   def create_kite_spot_and_country(number)
     number.times do
-      create(:kite_spot, :with_location_map, :with_2_kiteable_months)
+      create(:kite_spot, :with_location_map, :with_2_month_tags)
     end
   end
 

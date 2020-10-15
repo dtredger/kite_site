@@ -7,7 +7,7 @@ RSpec.describe 'VisitorBrowsesSite', type: :system do
 
   before do
     driven_by :selenium_chrome_headless
-    create_dummy_data(6)
+    create_dummy_records(6)
   end
 
   context 'with desktop screen-size' do

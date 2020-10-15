@@ -55,4 +55,26 @@ RSpec.describe Country, type: :model do
       expect { country_with_2_spots.destroy }.not_to change(KiteSpot, :count)
     end
   end
+
+  context 'search' do
+    describe 'name' do
+      it 'returns all partial matches' do
+        aruba = create(:country, name: 'Aruba')
+        argentina = create(:country, name: 'Argentina')
+
+        expect(Country.name_search('ar')).to eq([aruba, argentina])
+      end
+    end
+
+    describe 'months' do
+      it 'returns all matching months' do
+        create(:country_with_2_kitespots)
+        spot = KiteSpot.first
+        spot.month_tag_list.add('Mar')
+        spot.save
+
+        expect(Country.month_search(['Mar', 'Apr']).count).to eq(1)
+      end
+    end
+  end
 end
