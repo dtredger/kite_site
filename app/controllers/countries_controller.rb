@@ -5,7 +5,7 @@ class CountriesController < ApplicationController
   before_action :set_country, only: %i[show edit update destroy]
 
   def index
-    @countries = Country.all.includes([:photos_attachments])
+    @countries = Country.all.includes([:photos_attachments]).page(params[:page])
   end
 
   def show; end

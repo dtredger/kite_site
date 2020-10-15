@@ -27,6 +27,7 @@ gem 'devise'
 gem 'acts-as-taggable-on'
 gem 'friendly_id'
 gem 'image_processing'
+gem 'kaminari'
 gem 'leaflet-rails'
 
 gem 'aws-sdk-s3', require: false
