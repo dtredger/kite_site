@@ -1,0 +1,31 @@
+<!--%= render 'partials/search_form', locals={months: @months} %>-->
+
+<div class="container">
+  <div class="row">
+
+    <div class="col-12">
+
+      <%= form_with(url: search_path, scope: :search, method: :get, local: true) do |form| %>
+        <%= form.label :name %>
+        <% if params['search'] && params['search']['name'] %>
+          <%= form.text_field :name, placeholder: params['search']['name'], class: 'form-control' %>
+        <% else %>
+          <%= form.text_field :name, placeholder: '', class: 'form-control' %>
+        <% end %>
+
+        <% %w[Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec].each do |month| %>
+          <%= form.label month %>
+          <% if months && months.include?(month)  %>
+            <%= form.check_box "month[#{month}]", {checked: true} %>
+          <% else %>
+            <%= form.check_box "month[#{month}]", {checked: false} %>
+          <% end %>
+        <% end %>
+
+        <%= form.submit 'Submit', {class: 'btn btn-primary'} %>
+      <% end %>
+
+    </div>
+
+  </div>
+</div>
