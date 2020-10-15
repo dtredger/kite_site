@@ -75,7 +75,7 @@
 # # use tags for months going forward
 # KiteSpot.all.each do |kite_spot|
 # 	kite_spot.monthly_conditions.each do |month|
-# 			kite_spot.kiteable_month_list.add(month)
+# 			kite_spot.month_tag_list.add(month)
 # 	end
 # 	kite_spot.save
 # end

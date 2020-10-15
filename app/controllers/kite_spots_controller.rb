@@ -45,7 +45,7 @@ class KiteSpotsController < ApplicationController
     months = params.fetch(:month, {})
     if months.respond_to?(:length)
       @valid_months = months & KiteSpot.all_months
-      @kite_spots = KiteSpot.find_tagged_kite_spots(@valid_months)
+      @kite_spots = KiteSpot.find_months(@valid_months)
     else
       @valid_months = %w[Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec]
       @kite_spots = KiteSpot.all.includes([:photos_attachments]).includes(:country)
@@ -58,6 +58,6 @@ class KiteSpotsController < ApplicationController
 
   def kite_spot_params
     params.fetch(:kite_spot).permit(:name, :content, :latitude, :longitude, :description, :country_id,
-                                    kiteable_month_list: [], photos: [])
+                                    month_tag_list: [], photos: [])
   end
 end
