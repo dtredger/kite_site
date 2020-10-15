@@ -42,13 +42,12 @@ class KiteSpotsController < ApplicationController
 
   # TODO: - move to model ; params are url-params ; includes for query
   def set_kite_spots
-    months = params.fetch(:month, {})
-    if months.respond_to?(:length)
-      @valid_months = months & KiteSpot.all_months
-      @kite_spots = KiteSpot.find_months(@valid_months)
+    if month_params.any?
+      @valid_months = month_params & KiteSpot.all_months
+      @kite_spots = KiteSpot.find_months(@valid_months).includes(:country).page(params[:page])
     else
       @valid_months = %w[Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec]
-      @kite_spots = KiteSpot.all.includes([:photos_attachments]).includes(:country)
+      @kite_spots = KiteSpot.all.includes([:photos_attachments]).includes(:country).page(params[:page])
     end
   end
 
@@ -59,5 +58,9 @@ class KiteSpotsController < ApplicationController
   def kite_spot_params
     params.fetch(:kite_spot).permit(:name, :content, :latitude, :longitude, :description, :country_id,
                                     month_tag_list: [], photos: [])
+  end
+
+  def month_params
+    params.fetch(:month, {})
   end
 end

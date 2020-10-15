@@ -38,43 +38,44 @@ class KiteSpot < ApplicationRecord
 
   scope :find_months, ->(months) { tagged_with(months, any: true) }
 
-
   def amenities
     %w[TBD]
   end
 
   def latitude
     return location_map.latitude if location_map && self[:latitude].nil?
+
     super
   end
 
   def longitude
     return location_map.longitude if location_map && self[:longitude].nil?
+
     super
   end
 
   def wind_information
     zoom = 5
     {
-        wind_history: "http://windhistory.com/map.html##{zoom}/#{latitude}/#{longitude}",
-        windy: "https://www.windy.com/?#{latitude},#{longitude},#{zoom},",
-        windfinder:  "https://www.windfinder.com/##{zoom}/#{latitude}/#{longitude}"
+      wind_history: "http://windhistory.com/map.html##{zoom}/#{latitude}/#{longitude}",
+      windy: "https://www.windy.com/?#{latitude},#{longitude},#{zoom},",
+      windfinder: "https://www.windfinder.com/##{zoom}/#{latitude}/#{longitude}"
     }
   end
 
-    # TODO - presenters moved elsewhere
-    # for grid subtitle
-    def card_subtitle
-      country.name
-    end
+  # TODO: - presenters moved elsewhere
+  # for grid subtitle
+  def card_subtitle
+    country.name
+  end
 
-    # for grid card
-    def cover_photo
-      photos.first
-    end
+  # for grid card
+  def cover_photo
+    photos.first
+  end
 
-    # for #show page gallery
-    def header_photos
-      photos.take(3)
-    end
+  # for #show page gallery
+  def header_photos
+    photos.take(3)
+  end
 end

@@ -59,9 +59,10 @@ RSpec.describe KiteSpot, type: :model do
       it 'returns all partial matches' do
         aruba = create(:kite_spot, name: 'Aruba')
         argentina = create(:kite_spot, name: 'Argentina')
-        expect(KiteSpot.name_search('ar')).to eq([aruba, argentina])
+        expect(described_class.name_search('ar')).to eq([aruba, argentina])
       end
     end
+
     describe 'months' do
       it 'returns all matching months' do
         spot_with_2_months
@@ -70,14 +71,14 @@ RSpec.describe KiteSpot, type: :model do
         kite_spot_apr = create(:kite_spot)
         kite_spot_apr.month_tag_list.add('Mar')
         kite_spot_apr.save
-        expect(KiteSpot.month_search(['Mar', 'Apr']).count).to eq(2)
+        expect(described_class.month_search(%w[Mar Apr]).count).to eq(2)
       end
     end
   end
 
-
   describe 'wind_information' do
-    let(:kite_spot) { create(:kite_spot, latitude:10, longitude: 20) }
+    let(:kite_spot) { create(:kite_spot, latitude: 10, longitude: 20) }
+
     it 'returns iframe' do
       zoom = 5
       expect(kite_spot.wind_information[:windy]).to match("https://www.windy.com/?10.0,20.0,#{zoom},")

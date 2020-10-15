@@ -14,4 +14,8 @@
 
   <%= render 'partials/main_grid', locals={resource: @kite_spots} %>
 
+  <div class="navbar-light bg-light card paginate-pad">
+    <%= paginate @kite_spots %>
+  </div>
+
 </div>

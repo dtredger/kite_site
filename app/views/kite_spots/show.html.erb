@@ -1,9 +1,10 @@
 <%= render 'partials/sticky_filter_bar' %>
 
 <%= render 'partials/photo_gallery', locals={resource: @kite_spot} %>
+<br>
 
 <div class="container card">
-  <h4 class="kitespot-name"><%= @kite_spot.name %></h4>
+  <h3 class="kitespot-name"><%= @kite_spot.name %></h3>
   <h5><%= link_to @kite_spot.country.name, @kite_spot.country %></h5>
   <br>
 
@@ -20,18 +21,10 @@
   <!-- content & map -->
   <div class="row">
     <div class="col-md-5">
-      <p>
-      <%= @kite_spot.content %></p>
+      <%= @kite_spot.content %>
     </div>
     <div class="col-md-7">
       <%= render 'partials/leaflet_map', locals={loc_map: @kite_spot.location_map} %>
-    </div>
-  </div>
-
-  <!-- description TODO - duplicate of content? remove?-->
-  <div class="row">
-    <div class="col-12">
-      <%= @kite_spot.description %>
     </div>
   </div>
   <br>
@@ -46,6 +39,7 @@
       <% end %>
     </div>
   </div>
+  <br>
 
   <!-- wind-info -->
   <%= render 'partials/wind_info', locals={resource: @kite_spot} %>

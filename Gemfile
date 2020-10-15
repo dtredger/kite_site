@@ -27,6 +27,7 @@ gem 'devise'
 gem 'acts-as-taggable-on'
 gem 'friendly_id'
 gem 'image_processing'
+gem 'kaminari'
 gem 'leaflet-rails'
 
 gem 'aws-sdk-s3', require: false
@@ -61,6 +62,8 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
+  # for rails-panel
+  gem 'meta_request'
 end
 
 group :test do

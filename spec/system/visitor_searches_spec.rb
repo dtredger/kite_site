@@ -72,5 +72,4 @@ RSpec.describe 'VisitorSearches', type: :system do
       end
     end
   end
-
 end
