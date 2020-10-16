@@ -42,7 +42,7 @@ class KiteSpotsController < ApplicationController
 
   # TODO: - move to model ; params are url-params ; includes for query
   def set_kite_spots
-    if month_params.any?
+    unless month_params.empty?
       @valid_months = month_params & KiteSpot.all_months
       @kite_spots = KiteSpot.find_months(@valid_months).includes(:country).page(params[:page])
     else

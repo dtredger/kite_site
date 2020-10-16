@@ -45,11 +45,13 @@ class KiteSpot < ApplicationRecord
 
   def latitude
     return location_map.latitude if location_map && self[:latitude].nil?
+
     super
   end
 
   def longitude
     return location_map.longitude if location_map && self[:longitude].nil?
+
     super
   end
 
@@ -61,7 +63,6 @@ class KiteSpot < ApplicationRecord
       windfinder: "https://www.windfinder.com/##{zoom}/#{latitude}/#{longitude}"
     }
   end
-
 
   # TODO: - presenters moved elsewhere
   # for grid subtitle

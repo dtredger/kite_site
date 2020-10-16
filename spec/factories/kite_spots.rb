@@ -49,6 +49,5 @@ FactoryBot.define do
         spot.save
       end
     end
-
   end
 end
