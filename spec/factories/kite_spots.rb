@@ -42,5 +42,13 @@ FactoryBot.define do
         kite_spot.save
       end
     end
+
+    trait :with_parking do
+      after(:create) do |spot|
+        spot.amenity_tag_list.add('parking')
+        spot.save
+      end
+    end
+
   end
 end

@@ -30,7 +30,8 @@ class KiteSpot < ApplicationRecord
   belongs_to :country, optional: false
 
   acts_as_ordered_taggable_on :month_tags
-  # acts_as_ordered_taggable_on :kiteable_months
+
+  acts_as_ordered_taggable_on :amenity_tags
 
   has_many_attached :photos
   has_one :location_map, as: :record, dependent: :destroy
@@ -39,18 +40,16 @@ class KiteSpot < ApplicationRecord
   scope :find_months, ->(months) { tagged_with(months, any: true) }
 
   def amenities
-    %w[TBD]
+    amenity_tag_list
   end
 
   def latitude
     return location_map.latitude if location_map && self[:latitude].nil?
-
     super
   end
 
   def longitude
     return location_map.longitude if location_map && self[:longitude].nil?
-
     super
   end
 
@@ -62,6 +61,7 @@ class KiteSpot < ApplicationRecord
       windfinder: "https://www.windfinder.com/##{zoom}/#{latitude}/#{longitude}"
     }
   end
+
 
   # TODO: - presenters moved elsewhere
   # for grid subtitle
