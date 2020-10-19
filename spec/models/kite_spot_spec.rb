@@ -26,6 +26,7 @@ RSpec.describe KiteSpot, type: :model do
   let(:kite_spot) { create(:kite_spot) }
   let(:kite_spot_with_map) { create(:kite_spot, :with_location_map) }
   let(:spot_with_2_months) { create(:kite_spot, :with_2_month_tags) }
+  let(:spot_with_parking) { create(:kite_spot, :with_parking) }
 
   describe 'relations' do
     it 'requires name' do
@@ -36,13 +37,23 @@ RSpec.describe KiteSpot, type: :model do
       expect(subject).to respond_to :country
     end
 
-    describe 'Kiteable Months' do
+    describe 'Month tags' do
       it 'has month_tag_list' do
         expect(subject).to respond_to :month_tag_list
       end
 
-      it 'has_many month_tags' do
+      it 'has many month_tags' do
         expect(spot_with_2_months.month_tags.count).to eq(2)
+      end
+    end
+
+    describe 'Amenities' do
+      it 'has amenity tags' do
+        expect(subject).to respond_to :amenity_tag_list
+      end
+
+      it 'has many amenities' do
+        expect(spot_with_parking.amenity_tags.first.name).to include('parking')
       end
     end
 

@@ -34,9 +34,12 @@
   <!-- amenities -->
   <div class="row">
     <div class="col-12">
-      <% @kite_spot.amenities.each do |amenity| %>
-        <p><%= amenity %></p>
-      <% end %>
+      <ul class="nav nav-pills">
+        <% @kite_spot.amenities.each do |amenity| %>
+          <li class="card" style="color: white; background-color: #497; margin: 4px; padding: 4px 8px"><%= amenity
+          %></li>
+        <% end %>
+      </ul>
     </div>
   </div>
   <br>

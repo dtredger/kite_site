@@ -70,6 +70,12 @@ RSpec.describe LocationMap, type: :model do
         it 'centers on map coordinates' do
           expect(location_map_for_kite_spot.leaflet_map_details[:center][:latlng]).to eq([location_map_for_kite_spot.latitude, location_map_for_kite_spot.longitude])
         end
+
+        it 'returns correct URL' do
+          loc_map = create(:location_map_for_kite_spot)
+          slug = loc_map.record.slug
+          expect(loc_map.popup_link).to eq("<a href='http://localhost:3000/kite_spots/#{slug}'>#{loc_map.record.name}</a>")
+        end
       end
     end
   end

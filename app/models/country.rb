@@ -45,12 +45,12 @@ class Country < ApplicationRecord
   end
 
   def month_tag_list
-    @wind_months ||= begin
-      @wind_months = Set.new
+    @month_tag_list ||= begin
+      @month_tag_list = Set.new
       kite_spots.each do |spot|
-        @wind_months.merge(spot.month_tag_list)
+        @month_tag_list.merge(spot.month_tag_list)
       end
-      @wind_months
+      @month_tag_list
     end
   end
 
