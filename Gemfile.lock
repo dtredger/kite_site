@@ -109,6 +109,10 @@ GEM
       railties (>= 4.1.0)
       responders
       warden (~> 1.2.3)
+    devise_token_auth (1.1.3)
+      bcrypt (~> 3.0)
+      devise (> 3.5.2, < 5)
+      rails (>= 4.2.0, < 6.1)
     diff-lcs (1.4.4)
     docile (1.3.2)
     erubi (1.9.0)
@@ -150,6 +154,8 @@ GEM
       mini_magick (>= 4.9.5, < 5)
       ruby-vips (>= 2.0.17, < 3)
     jmespath (1.4.0)
+    jsonapi-serializer (2.1.0)
+      activesupport (>= 4.2)
     kaminari (1.2.0)
       activesupport (>= 4.1.0)
       kaminari-actionview (= 1.2.0)
@@ -206,6 +212,8 @@ GEM
     rack (2.2.3)
     rack-contrib (2.2.0)
       rack (~> 2.0)
+    rack-cors (1.1.1)
+      rack (>= 2.0.0)
     rack-proxy (0.6.5)
       rack
     rack-test (1.1.0)
@@ -366,6 +374,7 @@ DEPENDENCIES
   byebug
   capybara (>= 2.15)
   devise
+  devise_token_auth
   factory_bot_rails
   friendly_id
   guard
@@ -373,12 +382,14 @@ DEPENDENCIES
   guard-rspec
   guard-rubocop
   image_processing
+  jsonapi-serializer
   kaminari
   leaflet-rails
   listen (~> 3.2)
   meta_request
   pg
   puma (~> 4.1)
+  rack-cors
   rails (~> 6.0.3, >= 6.0.3.2)
   rspec-rails
   rubocop
