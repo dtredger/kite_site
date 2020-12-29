@@ -4,6 +4,14 @@ class PagesController < ApplicationController
   def index
     @countries = Country.with_attached_photos.take(4)
     @kite_spots = KiteSpot.with_attached_photos.includes([:country]).take(4)
+
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json { render json: [
+                      KiteSpotSerializer.new(@kite_spots),
+                      CountrySerializer.new(@countries) ]
+      }
+    end
   end
 
   # TODO: - N+1 for month_search queries
