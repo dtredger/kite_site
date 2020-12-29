@@ -24,5 +24,16 @@ module KiteSite
       request_specs:    false,
       controller_specs: true
     end
+
+    # TODO: limit in production context
+    config.middleware.insert_before 0, Rack::Cors do
+      allow do
+         origins '*'
+         resource '*', headers: :any,
+                       expose: '*',
+                       # expose: %w(access-token expiry content-type token-type uid client),
+                       methods: [:get, :post, :put, :options, :delete]
+       end
+    end
   end
 end
