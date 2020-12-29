@@ -30,6 +30,7 @@ gem 'friendly_id'
 gem 'image_processing'
 gem 'kaminari'
 gem 'leaflet-rails'
+gem 'administrate'
 
 gem 'aws-sdk-s3', require: false
 
