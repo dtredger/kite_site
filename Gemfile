@@ -7,7 +7,7 @@ ruby '2.6.5'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'pg'
-gem 'rails', '~> 6.0.3', '>= 6.0.3.2'
+gem 'rails', '~> 6.1.0'
 # Use Puma as the app server
 gem 'puma', '~> 4.1'
 # Use SCSS for stylesheets
@@ -19,14 +19,14 @@ gem 'turbolinks', '~> 5'
 gem 'jsonapi-serializer'
 gem 'rack-cors'
 # Use Redis adapter to run Action Cable in production
-# gem 'redis', '~> 4.0'
+gem 'redis', '~> 4.0'
 # Use Active Model has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 gem 'devise'
-gem 'devise_token_auth'
-# Use Active Storage variant
+# gem 'devise_token_auth'
 gem 'acts-as-taggable-on'
 gem 'friendly_id'
+# Use Active Storage variant
 gem 'image_processing'
 gem 'kaminari'
 gem 'leaflet-rails'

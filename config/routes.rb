@@ -14,7 +14,7 @@ Rails.application.routes.draw do
 
   get 'global-map', to: 'location_maps#index'
 
-  devise_for :users, controllers: { registrations: 'users/registrations' }
+  devise_for :users #, controllers: { registrations: 'users/registrations' }
 
   get 'search', to: 'pages#search'
 

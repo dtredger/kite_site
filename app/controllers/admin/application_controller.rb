@@ -11,6 +11,7 @@ module Admin
     def authenticate_admin
       # TODO Add authentication logic here.
       # http_basic_authenticate_with name: "dhh", password: "secret"
+      redirect_to root_path, danger: 'Not Authorized' unless current_user
     end
 
     # Override this value to specify the number of elements to display at a time
