@@ -7,10 +7,10 @@ class PagesController < ApplicationController
 
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: [
-                      KiteSpotSerializer.new(@kite_spots),
-                      CountrySerializer.new(@countries) ]
-      }
+      # format.json { render json: [
+      #                 KiteSpotSerializer.new(@kite_spots),
+      #                 CountrySerializer.new(@countries) ]
+      # }
     end
   end
 
