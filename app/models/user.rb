@@ -45,7 +45,8 @@ class User < ApplicationRecord
          # :trackable,
          # :omniauthable
 
-  include DeviseTokenAuth::Concerns::User
+  # TODO - disable token auth (for api)for now
+  # include DeviseTokenAuth::Concerns::User
 
 
   # https://www.rubydoc.info/github/plataformatec/devise/Devise/Models/Authenticatable

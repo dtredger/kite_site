@@ -65,7 +65,8 @@ group :development do
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
   # for rails-panel
-  gem 'meta_request'
+  # TODO - causes recursion error in rails 6.1?
+  # gem 'meta_request'
 end
 
 group :test do

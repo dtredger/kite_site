@@ -17,12 +17,12 @@ module KiteSite
     # the framework and any gems in your application.
     config.generators do |g|
       g.test_framework :rspec,
-      fixtures:         false,
-      view_specs:       false,
-      helper_specs:     false,
-      routing_specs:    false,
-      request_specs:    false,
-      controller_specs: true
+                       fixtures:         false,
+                       view_specs:       false,
+                       helper_specs:     false,
+                       routing_specs:    false,
+                       request_specs:    false,
+                       controller_specs: true
     end
 
     # TODO: re-enable when using API. limit in production context

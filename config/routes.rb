@@ -9,8 +9,8 @@ Rails.application.routes.draw do
   end
 
 
-	resources :kite_spots
-	resources :countries
+  resources :kite_spots
+  resources :countries
 
   get 'global-map', to: 'location_maps#index'
 
@@ -19,7 +19,7 @@ Rails.application.routes.draw do
   get 'search', to: 'pages#search'
 
 
-	root to: 'pages#index'
+  root to: 'pages#index'
 
 
   # TODO - disable API for now
