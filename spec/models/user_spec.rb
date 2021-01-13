@@ -38,9 +38,15 @@
 #  index_users_on_uid_and_provider      (uid,provider) UNIQUE
 #  index_users_on_unlock_token          (unlock_token) UNIQUE
 #
-FactoryBot.define do
-  factory :user do
-    email { 'test@email.com' }
-    password { '123123123' }
+require 'rails_helper'
+
+RSpec.describe User, type: :model do
+  let(:user) { create(:user) }
+
+  describe 'properties' do
+    it 'has name' do
+      expect(user).to respond_to(:name)
+    end
   end
+
 end

@@ -10,6 +10,16 @@
       <%= link_to 'Kite Spots', kite_spots_path, class: 'nav-item nav-link ' %>
       <%= link_to 'Countries', countries_path, class: 'nav-item nav-link ' %>
       <%= link_to 'Global Map', global_map_path, class: 'nav-item nav-link' %>
+
+      <!--<p class="nav-link nav-item">|</p>-->
+      <% if current_user %>
+        <%= link_to 'Profile', profile_path, class: 'nav-item nav-link' %>
+        <%= link_to 'Sign Out', destroy_user_session_path, method: :delete, class: 'nav-item nav-link' %>
+      <% else %>
+        <%= link_to 'Sign Up', new_user_registration_path, class: 'nav-item nav-link' %>
+        <%= link_to 'Sign In', new_user_session_path, class: 'nav-item nav-link' %>
+      <% end %>
+
     </div>
 
     <% unless controller_path == 'pages' %>
@@ -20,6 +30,5 @@
         <!--<button type="submit" class="btn btn-outline-light" disabled>Search</button>-->
       </form>
     <% end %>
-
   </div>
 </nav>

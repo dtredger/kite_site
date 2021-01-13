@@ -7,10 +7,10 @@ module Users
     # before_action :configure_account_update_params, only: [:update]
 
     # GET /resource/sign_up
-    def new
-      redirect_to root_path, danger: 'User Signup currently disabled.'
-      # super
-    end
+    # def new
+    #   redirect_to root_path, danger: 'User Signup currently disabled.'
+    #   super
+    # end
 
     # POST /resource
     # def create
