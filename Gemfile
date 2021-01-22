@@ -31,6 +31,7 @@ gem 'image_processing'
 gem 'kaminari'
 gem 'leaflet-rails'
 gem 'administrate'
+gem 'cancancan'
 
 gem 'aws-sdk-s3', require: false
 

@@ -22,6 +22,7 @@
 #  remember_created_at    :datetime
 #  reset_password_sent_at :datetime
 #  reset_password_token   :string
+#  role                   :string
 #  sign_in_count          :integer          default(0), not null
 #  tokens                 :json
 #  uid                    :string           default(""), not null
@@ -41,11 +42,22 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
+  let(:admin) { create(:user, email: 'admin@email.com') }
   let(:user) { create(:user) }
 
   describe 'properties' do
     it 'has name' do
       expect(user).to respond_to(:name)
+    end
+  end
+
+  context 'permissions' do
+    it 'sets admin email to admin' do
+      expect(admin.admin?).to be(true)
+    end
+
+    it 'does not set others to admin' do
+      expect(user.admin?).to be(false)
     end
   end
 

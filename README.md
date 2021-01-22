@@ -34,3 +34,8 @@ Simplecov
 
 Brakeman
 > automated security checks
+
+
+redis
+
+> redis-server /usr/local/etc/redis.conf

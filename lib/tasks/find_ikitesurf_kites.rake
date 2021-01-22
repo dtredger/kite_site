@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 # download seed images & attach to countries
-# if Rails.env.development?
-#   task find_used_kites: :environment do
+if Rails.env.development?
+  task find_used_kites: :environment do
     # require 'rubygems'
     require 'nokogiri'
     require 'open-uri'
@@ -44,5 +44,5 @@
     #   break
     # end
 
-  # end
-# end
+  end
+end
