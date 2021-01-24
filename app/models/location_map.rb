@@ -45,7 +45,7 @@ class LocationMap < ApplicationRecord
 
   def self.all_location_markers
     all_spots_arr = []
-    LocationMap.find_each do |loc_map|
+    LocationMap.all.includes([:record]).each do |loc_map|
       all_spots_arr.push({ latlng: [loc_map['latitude'],
                                     loc_map['longitude']],
                            popup: loc_map.popup_link })
