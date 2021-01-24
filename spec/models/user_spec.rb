@@ -42,7 +42,7 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  let(:admin) { create(:user, email: 'admin@email.com') }
+  let(:admin) { create(:admin) }
   let(:user) { create(:user) }
 
   describe 'properties' do

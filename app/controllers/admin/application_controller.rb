@@ -9,9 +9,16 @@ module Admin
     before_action :authenticate_admin
 
     def authenticate_admin
-      # TODO Add authentication logic here.
-      # http_basic_authenticate_with name: "dhh", password: "secret"
-      redirect_to root_path, danger: 'Not Authorized' unless current_user
+      redirect_to root_path, alert: 'Not Authorized' unless current_user && current_user.admin?
+
+      admin_name = Rails.application.credentials.dig(:admin, :name)
+      admin_pw = Rails.application.credentials.dig(:admin, :password)
+      
+      if admin_name.blank? || admin_pw.blank?
+        redirect_to root_path, alert: 'Credentials Not Set'
+      else
+        http_basic_authenticate_or_request_with name: admin_name, password: admin_pw
+      end
     end
 
     # Override this value to specify the number of elements to display at a time

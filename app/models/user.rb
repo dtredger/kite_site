@@ -56,17 +56,10 @@ class User < ApplicationRecord
   # include DeviseTokenAuth::Concerns::User
 
 
-  # https://www.rubydoc.info/github/plataformatec/devise/Devise/Models/Authenticatable
-  # don't worry about confirmable for now
-  # def active_for_authentication?
-  #   true
-  # end
-  # before_save -> do
-  #   skip_confirmation!
-  # end
+
 
   def admin?
-    if self.email =='admin@email.com'
+    if role == 'admin'
       true
     else
       false
@@ -74,5 +67,8 @@ class User < ApplicationRecord
   end
 
 
+  # ROLES = %i[admin moderator author banned]
+  # after_create :set_role
+  # https://github.com/CanCanCommunity/cancancan/wiki/Role-Based-Authorization
 
 end
