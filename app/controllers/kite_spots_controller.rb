@@ -44,12 +44,12 @@ class KiteSpotsController < ApplicationController
 
   # TODO: - move to model ; params are url-params ; includes for query
   def set_kite_spots
-    unless month_params.empty?
-      @valid_months = month_params & KiteSpot.all_months
-      @kite_spots = KiteSpot.find_months(@valid_months).includes(:country).page(params[:page])
-    else
+    if month_params.empty?
       @valid_months = %w[Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec]
       @kite_spots = KiteSpot.all.includes([:photos_attachments]).includes(:country).page(params[:page])
+    else
+      @valid_months = month_params & KiteSpot.all_months
+      @kite_spots = KiteSpot.find_months(@valid_months).includes(:country).page(params[:page])
     end
   end
 
