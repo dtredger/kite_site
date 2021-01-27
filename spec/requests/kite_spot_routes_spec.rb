@@ -21,15 +21,17 @@ RSpec.describe 'KiteSpots_routes', type: :request do
   end
 
   describe 'GET /kite_spots/new' do
-    context 'when unauthorized visitor' do
+    context 'when unauthorized User' do
+      log_in_user
+
       it 'redirects unauthorized' do
         get new_kite_spot_path
-        expect(response).to redirect_to(new_user_session_path)
+        expect(response).to redirect_to(root_path)
       end
     end
 
     context 'when authorized User' do
-      log_in_user
+      log_in_admin
 
       it 'shows new form' do
         get new_kite_spot_path
@@ -39,7 +41,9 @@ RSpec.describe 'KiteSpots_routes', type: :request do
   end
 
   describe 'POST /kite_spots' do
-    context 'when unauthorized visitor' do
+    context 'when unauthorized User' do
+      log_in_user
+
       it 'does not create KiteSpot' do
         expect do
           post kite_spots_path, params: { kite_spot: attributes_for(:kite_spot, country_id: country.id) }
@@ -48,7 +52,7 @@ RSpec.describe 'KiteSpots_routes', type: :request do
     end
 
     context 'when authorized User' do
-      log_in_user
+      log_in_admin
       let(:kite_spot_params) do
         { kite_spot: attributes_for(:kite_spot,
                                     country_id: country.id,
@@ -69,15 +73,17 @@ RSpec.describe 'KiteSpots_routes', type: :request do
   end
 
   describe 'GET /kite_spots/:id/edit' do
-    context 'when unauthorized visitor' do
+    context 'when unauthorized User' do
+      log_in_user
+
       it 'redirects unauthorized' do
         get edit_kite_spot_path(kite_spot)
-        expect(response).to redirect_to(new_user_session_path)
+        expect(response).to redirect_to(root_path)
       end
     end
 
     context 'when authorized User' do
-      log_in_user
+      log_in_admin
 
       it 'shows edit form' do
         get edit_kite_spot_path(kite_spot)
@@ -87,7 +93,9 @@ RSpec.describe 'KiteSpots_routes', type: :request do
   end
 
   describe 'PATCH /kite_spots/:id' do
-    context 'when unauthorized visitor' do
+    context 'when unauthorized User' do
+      log_in_user
+
       it 'does not update KiteSpot' do
         expect do
           patch kite_spot_path(kite_spot.id), params: { kite_spot: attributes_for(:kite_spot, name: 'new') }
@@ -97,7 +105,7 @@ RSpec.describe 'KiteSpots_routes', type: :request do
     end
 
     context 'when authorized User' do
-      log_in_user
+      log_in_admin
 
       it 'updates KiteSpot' do
         expect do
@@ -109,7 +117,9 @@ RSpec.describe 'KiteSpots_routes', type: :request do
   end
 
   describe 'DELETE /kite_spots/:id' do
-    context 'when unauthorized visitor' do
+    context 'when unauthorized User' do
+      log_in_user
+
       it 'does not delete KiteSpot' do
         kite_spot
         expect { delete kite_spot_path(kite_spot) }.not_to change(KiteSpot, :count)
@@ -117,7 +127,7 @@ RSpec.describe 'KiteSpots_routes', type: :request do
     end
 
     context 'when authorized User' do
-      log_in_user
+      log_in_admin
 
       it 'deletes KiteSpot' do
         kite_spot

@@ -6,20 +6,20 @@ def fill_in_trix_editor(id, content)
   find(:xpath, "//*[@id='#{id}']", visible: false).click.set(content)
 end
 
-RSpec.describe 'UserCreatesKitespots', type: :system do
+RSpec.describe 'AdminCreatesKitespots', type: :system do
   before do
     driven_by :selenium_chrome_headless
     create_dummy_records(6)
-    User.create(email: 'test@mail.com',
-                password: '123123123')
   end
 
   describe 'create KiteSpot' do
     let(:user) { User.first }
+    let(:admin) { create(:admin) }
     let(:country) { Country.first }
 
+    log_in_admin
+
     it 'saves and shows' do
-      sign_in user
       visit '/kite_spots/new'
 
       fill_in 'kite_spot[name]', with: 'Sample Kite Spot'

@@ -66,6 +66,6 @@ class Country < ApplicationRecord
 
   # for #show page gallery
   def header_photos
-    photos.take(3)
+    photos.includes([:blob]).take(3)
   end
 end

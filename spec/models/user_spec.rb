@@ -39,36 +39,26 @@
 #  index_users_on_uid_and_provider      (uid,provider) UNIQUE
 #  index_users_on_unlock_token          (unlock_token) UNIQUE
 #
-class User < ApplicationRecord
+require 'rails_helper'
 
-  devise :database_authenticatable,
-         :registerable,
-         :recoverable,
-         :rememberable,
-         :validatable #,
-         # :confirmable,
-         # :lockable,
-         # :timeoutable,
-         # :trackable
-         # :omniauthable
+RSpec.describe User, type: :model do
+  let(:admin) { create(:admin) }
+  let(:user) { create(:user) }
 
-  # TODO - disable token auth (for api)for now
-  # include DeviseTokenAuth::Concerns::User
-
-
-
-
-  def admin?
-    if role == 'admin'
-      true
-    else
-      false
+  describe 'properties' do
+    it 'has name' do
+      expect(user).to respond_to(:name)
     end
   end
 
+  context 'permissions' do
+    it 'sets admin email to admin' do
+      expect(admin.admin?).to be(true)
+    end
 
-  # ROLES = %i[admin moderator author banned]
-  # after_create :set_role
-  # https://github.com/CanCanCommunity/cancancan/wiki/Role-Based-Authorization
+    it 'does not set others to admin' do
+      expect(user.admin?).to be(false)
+    end
+  end
 
 end
