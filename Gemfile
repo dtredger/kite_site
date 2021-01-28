@@ -7,6 +7,9 @@ ruby '2.6.5'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'pg'
+gem 'pghero'
+gem 'pg_query', '>= 0.9.0'
+
 gem 'rails', '~> 6.1.0'
 # Use Puma as the app server
 gem 'puma', '~> 4.1'
@@ -32,6 +35,9 @@ gem 'kaminari'
 gem 'leaflet-rails'
 gem 'administrate'
 gem 'cancancan'
+
+gem 'rollbar'
+gem 'strong_migrations'
 
 gem 'aws-sdk-s3', require: false
 
