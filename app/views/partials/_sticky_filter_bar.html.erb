@@ -19,16 +19,16 @@
         <%= link_to 'Sign Up', new_user_registration_path, class: 'nav-item nav-link' %>
         <%= link_to 'Sign In', new_user_session_path, class: 'nav-item nav-link' %>
       <% end %>
-
     </div>
 
-    <% unless controller_path == 'pages' %>
+    <% if filterable_controller(controller_path) %>
       <form class="form-inline ml-auto">
         <input id="sticky-search" type="text" class="form-control mr-sm-2" placeholder="Filter">
-
         <!-- TODO: add db search -->
         <!--<button type="submit" class="btn btn-outline-light" disabled>Search</button>-->
       </form>
     <% end %>
   </div>
 </nav>
+
+afms-0-ms33f

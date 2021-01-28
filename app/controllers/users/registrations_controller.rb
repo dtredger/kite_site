@@ -8,7 +8,6 @@ module Users
 
     # GET /resource/sign_up
     def new
-      redirect_to root_path, danger: 'User Signup currently disabled.'
       super
     end
 

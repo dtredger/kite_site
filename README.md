@@ -7,6 +7,10 @@ HEROKU:
 > heroku buildpacks:add -i 1 https://github.com/heroku/heroku-buildpack-activestorage-preview
 
 
+Credentials Editing:
+
+> EDITOR="atom --wait" rails credentials:edit
+
 ##Optimization Tools / Gems
 
 Annotate
@@ -39,3 +43,13 @@ Brakeman
 redis
 
 > redis-server /usr/local/etc/redis.conf
+
+Mailcatcher (for dev)
+
+> mailcatcher (starts daemon; view at :1080) 
+
+Mail API
+ 
+ > Sendgrid SMTP Relay
+ > Username	apikey
+ > Password	{{sendgrid_mailer_key}}

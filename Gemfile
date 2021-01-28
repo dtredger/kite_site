@@ -68,6 +68,7 @@ group :development do
   # for rails-panel
   # TODO - causes recursion error in rails 6.1?
   # gem 'meta_request'
+  # TODO - install & run mailcatcher to read mails (not part of bundle)
 end
 
 group :test do
