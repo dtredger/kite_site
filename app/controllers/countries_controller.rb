@@ -1,11 +1,12 @@
 # frozen_string_literal: true
 
 class CountriesController < ApplicationController
-  before_action :authenticate_user!, except: %i[index show]
+  load_and_authorize_resource #cancancan before_action
+
   before_action :set_country, only: %i[show edit update destroy]
 
   def index
-    @countries = Country.all.includes([:photos_attachments])
+    @countries = Country.all.includes([:photos_attachments]).page(params[:page])
   end
 
   def show; end

@@ -20,7 +20,7 @@
 #
 class LocationMap < ApplicationRecord
   # KiteSpots & Countries have Location Maps
-  belongs_to :record, polymorphic: true, optional: true
+  belongs_to :record, polymorphic: true, optional: false
 
   validates :name,
             :latitude,
@@ -45,7 +45,7 @@ class LocationMap < ApplicationRecord
 
   def self.all_location_markers
     all_spots_arr = []
-    LocationMap.find_each do |loc_map|
+    LocationMap.all.includes([:record]).each do |loc_map|
       all_spots_arr.push({ latlng: [loc_map['latitude'],
                                     loc_map['longitude']],
                            popup: loc_map.popup_link })
@@ -61,7 +61,7 @@ class LocationMap < ApplicationRecord
   end
 
   def popup_link
-    "<a href='#{site_url}#{record_type.tableize}/#{record.name}'>#{record.name}</a>"
+    "<a href='#{site_url}#{record_type.tableize}/#{record.slug}'>#{record.name}</a>"
   end
 
   private

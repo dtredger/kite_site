@@ -20,14 +20,14 @@
 #
 FactoryBot.define do
   factory :location_map do
-    sequence(:name) { |x| "location_map_#{x}" }
+    sequence(:name) { |x| "location map #{x}" }
     latitude { 32.915 }
     longitude { 41.225 }
     zoom { 3 }
     # association :record, factory: [:kite_spot, :location_map]
 
     factory :location_map_for_kite_spot do
-      sequence(:name) { |x| "kite_spot_location_map_#{x}" }
+      sequence(:name) { |x| "kite_spot_location map #{x}" }
       latitude { 152.315 }
       longitude { 21.525 }
       zoom { 3 }
@@ -35,7 +35,7 @@ FactoryBot.define do
     end
 
     factory :location_map_for_country do
-      sequence(:name) { |x| "country_location_map_#{x}" }
+      sequence(:name) { |x| "country_location map #{x}" }
       latitude { 152.315 }
       longitude { 21.525 }
       zoom { 3 }

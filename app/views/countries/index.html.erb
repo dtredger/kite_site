@@ -1,7 +1,12 @@
 <%= render 'partials/sticky_filter_bar' %>
-
 <br>
-<!-- end header sticky -->
+
 <div class="container">
+
   <%= render 'partials/main_grid', locals = {resource: @countries} %>
+
+  <div class="navbar-light bg-light card paginate-pad">
+    <%= paginate @countries %>
+  </div>
+
 </div>

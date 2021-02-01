@@ -1,52 +1,52 @@
 <%= render 'partials/sticky_filter_bar' %>
 
 <%= render 'partials/photo_gallery', locals={resource: @kite_spot} %>
+<br>
 
-
-<div class="container">
-  <h4 class="kitespot-name"><%= @kite_spot.name %></h4>
+<div class="container card">
+  <h3 class="kitespot-name"><%= @kite_spot.name %></h3>
   <h5><%= link_to @kite_spot.country.name, @kite_spot.country %></h5>
   <br>
+
+  <!-- months selector -->
   <div class="row">
-    <div class="col-2">
+    <div class="col-12">
       <h5>Best Months</h5>
+      <%= render 'partials/month_tag_selector', locals={month_tag_list: @kite_spot.month_tag_list} %>
     </div>
-
-    <%= render 'partials/kiteable_month_selector', locals={kiteable_month_list: @kite_spot.kiteable_month_list} %>
   </div>
+  <br>
+  <br>
 
-  <br><br>
-
+  <!-- content & map -->
   <div class="row">
     <div class="col-md-5">
-      <p>
-      <%= @kite_spot.content %></p>
+      <%= @kite_spot.content %>
     </div>
     <div class="col-md-7">
       <%= render 'partials/leaflet_map', locals={loc_map: @kite_spot.location_map} %>
     </div>
   </div>
-
-  <div class="row">
-    <div class="col-12">
-      <%= @kite_spot.description %>
-    </div>
-  </div>
-
   <br>
 
+  <h4>Amenities</h4>
+  <br>
+  <!-- amenities -->
   <div class="row">
-    <div class="col">
-      <h4>Amenities</h4>
+    <div class="col-12">
+      <ul class="nav nav-pills">
+        <% @kite_spot.amenities.each do |amenity| %>
+          <li class="card" style="color: white; background-color: #497; margin: 4px; padding: 4px 8px"><%= amenity
+          %></li>
+        <% end %>
+      </ul>
     </div>
   </div>
+  <br>
 
-  <% @kite_spot.amenities.each do |amenity| %>
-    <hr>
-    <div class="row">
-      <%= amenity %>
-    </div>
-  <% end %>
-
+  <!-- wind-info -->
+  <%= render 'partials/wind_info', locals={resource: @kite_spot} %>
+  <br>
+  <br>
 
 </div>

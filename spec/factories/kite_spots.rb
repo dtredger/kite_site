@@ -36,10 +36,17 @@ FactoryBot.define do
       end
     end
 
-    trait :with_2_kiteable_months do
+    trait :with_2_month_tags do
       after(:create) do |kite_spot|
-        kite_spot.kiteable_month_list.add(%w[Jan Feb])
+        kite_spot.month_tag_list.add(%w[Jan Feb])
         kite_spot.save
+      end
+    end
+
+    trait :with_parking do
+      after(:create) do |spot|
+        spot.amenity_tag_list.add('parking')
+        spot.save
       end
     end
   end

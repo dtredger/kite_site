@@ -17,12 +17,23 @@ module KiteSite
     # the framework and any gems in your application.
     config.generators do |g|
       g.test_framework :rspec,
-      fixtures:         false,
-      view_specs:       false,
-      helper_specs:     false,
-      routing_specs:    false,
-      request_specs:    false,
-      controller_specs: true
+                       fixtures:         false,
+                       view_specs:       false,
+                       helper_specs:     false,
+                       routing_specs:    false,
+                       request_specs:    false,
+                       controller_specs: true
     end
+
+    # TODO: re-enable when using API. limit in production context
+    # config.middleware.insert_before 0, Rack::Cors do
+    #   allow do
+    #      origins '*'
+    #      resource '*', headers: :any,
+    #                    expose: '*',
+    #                    # expose: %w(access-token expiry content-type token-type uid client),
+    #                    methods: [:get, :post, :put, :options, :delete]
+    #    end
+    # end
   end
 end

@@ -1,12 +1,14 @@
 # frozen_string_literal: true
 
 class KiteSpotsController < ApplicationController
-  before_action :authenticate_user!, except: %i[index show]
+  load_and_authorize_resource #cancancan before_action
 
-  before_action :set_kite_spots, only: :index
   before_action :set_kite_spot, only: %i[show edit update destroy]
 
-  def index; end
+
+  def index
+    set_kite_spots
+  end
 
   def show; end
 
@@ -42,13 +44,12 @@ class KiteSpotsController < ApplicationController
 
   # TODO: - move to model ; params are url-params ; includes for query
   def set_kite_spots
-    months = params.fetch(:month, {})
-    if months.respond_to?(:length)
-      @valid_months = months & KiteSpot.all_months
-      @kite_spots = KiteSpot.find_tagged_kite_spots(@valid_months)
-    else
+    if month_params.empty?
       @valid_months = %w[Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec]
-      @kite_spots = KiteSpot.all.includes([:photos_attachments]).includes(:country)
+      @kite_spots = KiteSpot.all.includes([:photos_attachments]).includes(:country).page(params[:page])
+    else
+      @valid_months = month_params & KiteSpot.all_months
+      @kite_spots = KiteSpot.find_months(@valid_months).includes(:country).page(params[:page])
     end
   end
 
@@ -58,6 +59,10 @@ class KiteSpotsController < ApplicationController
 
   def kite_spot_params
     params.fetch(:kite_spot).permit(:name, :content, :latitude, :longitude, :description, :country_id,
-                                    kiteable_month_list: [], photos: [])
+                                    month_tag_list: [], photos: [])
+  end
+
+  def month_params
+    params.fetch(:month, {})
   end
 end

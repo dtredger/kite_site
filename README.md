@@ -7,6 +7,10 @@ HEROKU:
 > heroku buildpacks:add -i 1 https://github.com/heroku/heroku-buildpack-activestorage-preview
 
 
+Credentials Editing:
+
+> EDITOR="atom --wait" rails credentials:edit
+
 ##Optimization Tools / Gems
 
 Annotate
@@ -34,3 +38,23 @@ Simplecov
 
 Brakeman
 > automated security checks
+
+
+redis
+
+> redis-server /usr/local/etc/redis.conf
+
+Mailcatcher (for dev)
+
+> mailcatcher (starts daemon; view at :1080) 
+
+Mail API
+ 
+ > Sendgrid SMTP Relay
+ > Username	apikey
+ > Password	{{sendgrid_mailer_key}}
+ 
+ Nginx
+ 
+ (when not using port 80, sudo not required)  
+ > nginx -c {{full_path}}/config/nginx-osx.conf

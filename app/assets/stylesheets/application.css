@@ -46,3 +46,15 @@ body {
     margin-top: auto;
     padding-top: auto;
 }
+
+a {
+    cursor: pointer;
+}
+
+/* kaminari pagination */
+.paginate-pad > * {
+    margin: 5px;
+}
+.paginate-pad > * > * {
+    margin: 5px;
+}

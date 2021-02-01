@@ -21,33 +21,50 @@
 #  index_kite_spots_on_slug        (slug) UNIQUE
 #
 class KiteSpot < ApplicationRecord
+  include Searchable
+
   extend FriendlyId
+  friendly_id :name, use: :slugged
 
   validates :name, presence: true, uniqueness: true
-
   belongs_to :country, optional: false
 
-  friendly_id :name, use: :slugged
-  acts_as_ordered_taggable_on :kiteable_months
+  acts_as_ordered_taggable_on :month_tags
+
+  acts_as_ordered_taggable_on :amenity_tags
+
   has_many_attached :photos
   has_one :location_map, as: :record, dependent: :destroy
   has_rich_text :content
 
-  scope :with_eager_loaded_image, -> { eager_load(photos: :blob) }
-  scope :with_preloaded_image, -> { preload(photos: :blob) }
-
-  def self.all_months
-    %w[Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec]
-  end
-
-  def self.find_tagged_kite_spots(months)
-    KiteSpot.tagged_with(months, any: true)
-  end
+  scope :find_months, ->(months) { tagged_with(months, any: true) }
 
   def amenities
-    %w[TBD]
+    amenity_tag_list
   end
 
+  def latitude
+    return location_map.latitude if location_map && self[:latitude].nil?
+
+    super
+  end
+
+  def longitude
+    return location_map.longitude if location_map && self[:longitude].nil?
+
+    super
+  end
+
+  def wind_information
+    zoom = 5
+    {
+      wind_history: "http://windhistory.com/map.html##{zoom}/#{latitude}/#{longitude}",
+      windy: "https://www.windy.com/?#{latitude},#{longitude},#{zoom},",
+      windfinder: "https://www.windfinder.com/##{zoom}/#{latitude}/#{longitude}"
+    }
+  end
+
+  # TODO: - presenters moved elsewhere
   # for grid subtitle
   def card_subtitle
     country.name
@@ -60,6 +77,6 @@ class KiteSpot < ApplicationRecord
 
   # for #show page gallery
   def header_photos
-    photos.take(3)
+    photos.includes([:blob]).take(3)
   end
 end

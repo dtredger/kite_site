@@ -24,6 +24,7 @@ require('packs/filter-search')
 
 require("trix")
 require("@rails/actiontext")
+require('packs/action-text-files')
 
 global.toastr = require("toastr")
 global.toastr.options = {
@@ -53,3 +54,11 @@ document.addEventListener('turbolinks:load', function(event) {
     })
   }
 })
+
+//var glob = require( 'glob' ),
+//    path = require( 'path' );
+//
+//glob.sync( './partials/**/*.js' ).forEach(function(file) {
+//  require(path.resolve(file));
+//});
+require("packs/partials/wind-info")
