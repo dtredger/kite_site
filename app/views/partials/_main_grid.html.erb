@@ -9,7 +9,8 @@
         <%= link_to el, class: 'h-100' do %>
           <div class="background-image-grey">
             <% if el.cover_photo %>
-              <%= image_tag el.cover_photo.variant(resize_to_fill: [250, 150]), class: 'card-img-top' %>
+              <%= image_tag el.cover_photo.variant(resize_to_fill: [250, 150]), class: 'card-img-top', loading: 'lazy'
+              %>
             <% else %>
               <div class="gray-zone"></div>
             <% end %>
