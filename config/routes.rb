@@ -4,8 +4,11 @@ Rails.application.routes.draw do
     resources :kite_spots
     resources :countries
     resources :location_maps
-
     root to: 'users#index'
+  end
+
+  authenticate :user, -> (user) { user.admin? } do
+    mount PgHero::Engine, at: 'pghero'
   end
 
 

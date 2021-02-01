@@ -53,3 +53,8 @@ Mail API
  > Sendgrid SMTP Relay
  > Username	apikey
  > Password	{{sendgrid_mailer_key}}
+ 
+ Nginx
+ 
+ (when not using port 80, sudo not required)  
+ > nginx -c {{full_path}}/config/nginx-osx.conf
