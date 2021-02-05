@@ -21,23 +21,18 @@
 require 'rails_helper'
 
 RSpec.describe LocationMap, type: :model do
+  let(:user) { create(:user) }
   let(:location_map_for_kite_spot) { create(:location_map_for_kite_spot) }
 
   describe 'relations' do
-    it 'requires name' do
-      expect do
-        create(:location_map_for_country, name: '')
-      end.to raise_error(ActiveRecord::RecordInvalid)
-    end
-
-    it 'requires lat/lon' do
-      expect do
-        create(:location_map_for_country, latitude: nil, longitude: nil)
-      end.to raise_error(ActiveRecord::RecordInvalid)
-    end
-
     it 'polymorphic belongs_to Record' do
       expect(subject).to respond_to :record
+    end
+
+    it 'validates coordinates of parent Record' do
+      user = create(:user, latitude: nil, longitude: nil)
+      invalid_map = user.create_location_map
+      expect(invalid_map).not_to be_valid
     end
 
     describe 'dependent actions' do
@@ -56,6 +51,11 @@ RSpec.describe LocationMap, type: :model do
         end
 
         it 'returns markers for all locations' do
+          expect(described_class.all_spots_map[:markers].count).to eq(5)
+        end
+
+        it 'does not map users' do
+          user.create_location_map
           expect(described_class.all_spots_map[:markers].count).to eq(5)
         end
       end

@@ -16,9 +16,9 @@
         <% %w[Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec].each do |month| %>
           <%= form.label month %>
           <% if months && months.include?(month)  %>
-            <%= form.check_box "month[#{month}]", {checked: true} %>
+            <%= form.check_box "months[#{month}]", {checked: true} %>
           <% else %>
-            <%= form.check_box "month[#{month}]", {checked: false} %>
+            <%= form.check_box "months[#{month}]", {checked: false} %>
           <% end %>
         <% end %>
 
