@@ -11,14 +11,16 @@ module SystemSpecMacros
   # Creates #number Countries with LocationMaps
   def create_country_without_kite_spot(number)
     number.times do
-      create(:country, :with_location_map)
+      country = create(:country)
+      country.create_location_map
     end
   end
 
   # Creates #number KiteSpots with LocationMaps and #number Countries without locationMaps
   def create_kite_spot_and_country(number)
     number.times do
-      create(:kite_spot, :with_location_map, :with_2_month_tags)
+      country = create(:kite_spot, :with_2_month_tags)
+      country.create_location_map
     end
   end
 

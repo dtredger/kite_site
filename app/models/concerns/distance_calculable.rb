@@ -7,25 +7,27 @@ module DistanceCalculable
   EARTH_RADIUS_KM = 6371
 
   def get_lat_lon(coord_obj)
-    if coord_obj[:latitude]
+    if coord_obj.has_key?(:latitude)
       lat = coord_obj[:latitude]
-    elsif coord_obj.latitude
+    elsif coord_obj.respond_to?(latitude)
       lat = coord_obj.latitude
     else
       return nil
     end
-    if coord_obj[:longitude]
+    if coord_obj.has_key?(:longitude)
       lon = coord_obj[:longitude]
-    elsif coord_obj.longitude
+    elsif coord_obj.respond_to?(longitude)
       lon = coord_obj.longitude
     else
       return nil
     end
+    return nil unless lat && lon
     {latitude: lat, longitude: lon}
   end
 
   def coord_radians(coord_obj)
     coords = get_lat_lon(coord_obj)
+    return unless coords
     radians = lambda { |deg| deg * PI / 180 }
     {lat: radians[coords[:latitude]], lng: radians[coords[:longitude]]}
   end

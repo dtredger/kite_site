@@ -45,18 +45,18 @@ RSpec.describe LocationMap, type: :model do
 
   describe 'methods' do
     context 'Class' do
-      describe '#all_spots_map' do
+      describe '#leaflet_map_details' do
         before do
           create_list(:location_map_for_country, 5)
         end
 
         it 'returns markers for all locations' do
-          expect(described_class.all_spots_map[:markers].count).to eq(5)
+          expect(described_class.leaflet_map_details[:markers].count).to eq(5)
         end
 
         it 'does not map users' do
           user.create_location_map
-          expect(described_class.all_spots_map[:markers].count).to eq(5)
+          expect(described_class.leaflet_map_details[:markers].count).to eq(5)
         end
       end
     end
@@ -74,7 +74,7 @@ RSpec.describe LocationMap, type: :model do
         it 'returns correct URL' do
           loc_map = create(:location_map_for_kite_spot)
           slug = loc_map.record.slug
-          expect(loc_map.popup_link).to eq("<a href='http://localhost:3000/kite_spots/#{slug}'>#{loc_map.record.name}</a>")
+          expect(loc_map.popup_link).to eq("<a href='http://localhost:3000/kite-spots/#{slug}'>#{loc_map.record.name}</a>")
         end
       end
     end

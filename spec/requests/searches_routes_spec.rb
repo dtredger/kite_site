@@ -20,14 +20,20 @@ RSpec.describe 'searches_routes', type: :request do
         expect(response).to have_http_status(:ok)
       end
     end
+  end
 
-    context 'signed in' do
-      before { login_as(user) }
+  describe 'GET /search/advanced' do
+    context 'signed-in user' do
+      log_in_user
 
-      pending 'shows custom search results' do
-        fail "ie: cost of flights from user's location, whether visa required"
+      it 'allows location-based search' do
+        get search_advanced_path, params: { search: {max_distance:2000} }
+        expect(response).to have_http_status(:ok)
       end
     end
   end
 
 end
+
+
+

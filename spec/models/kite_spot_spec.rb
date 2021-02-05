@@ -59,7 +59,8 @@ RSpec.describe KiteSpot, type: :model do
 
     describe 'dependent actions' do
       it 'destroys associated LocationMap' do
-        kite_spot_with_map
+        kite_spot_with_map = kite_spot
+        kite_spot_with_map.create_location_map
         expect { kite_spot_with_map.destroy }.to change(LocationMap, :count).by(-1)
       end
     end
