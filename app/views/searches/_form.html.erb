@@ -1,0 +1,69 @@
+
+<div class="row">
+  <div class="col-12 card">
+    <%= form_with(url: search_advanced_path, scope: :search, method: :get, local: true) do |form| %>
+
+      <br>
+      <div class="form-group">
+        <%= form.label :name %>
+        <%= form.text_field :name, class: 'form-control' %>
+      </div>
+
+      <div class="row">
+        <div class="col-6">
+          <div class="form-group">
+            <%= form.label :months %>
+            <%= form.select('months', all_months, {}, {include_blank: true, multiple: true, class: 'form-control'})
+            %>
+          </div>
+        </div>
+
+        <div class="col-6">
+          <div class="form-group">
+            <%= form.label :region %>
+            <%= form.select('regions', all_regions, {}, {include_blank: true, multiple: true, class: 'form-control'}) %>
+          </div>
+        </div>
+
+        <div class="col-6">
+          <div class="form-group">
+            <div class="form-group">
+              <%= form.label :amenities %>
+              <%= form.select('amenities', all_amenities, {}, {include_blank: true, multiple: true, class: 'form-control'}) %>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-6">
+          <div class="form-group">
+            <div class="form-group">
+              <%= form.label :languages %>
+              <%= form.select('languages', all_languages, {}, {include_blank: true, multiple: true, class: 'form-control'}) %>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12">
+          <div id="distance-range-search" class="form-group">
+            <% if current_user %>
+              <%= form.label 'Max Distance away from me: Unlimited' %>
+              <%= form.range_field :distance, in: 100..10000, step: 100, value: 10000, id: 'distance-range-selector' %>
+            <% else %>
+              <%= link_to('Sign In', new_user_session_path) %>
+              <%= form.label 'to set a Max Distance from your location' %>
+              <%= form.range_field :distance, in: 100..10000, step: 100, value: 10000, id: 'distance-range-selector',
+             disabled: true %>
+            <% end %>
+
+          </div>
+        </div>
+      </div>
+
+      <div class="actions">
+        <%= form.submit 'Submit', {class: 'btn btn-primary'} %>
+      </div>
+      <br>
+    <% end %>
+  </div>
+</div>
+

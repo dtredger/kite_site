@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   end
 
 
-  resources :kite_spots
+  resources :kite_spots, path: '/kite-spots'
   resources :countries
 
   get 'global-map', to: 'location_maps#index'
@@ -20,7 +20,9 @@ Rails.application.routes.draw do
   devise_for :users, controllers: { registrations: 'users/registrations' }
   get 'profile', to: 'users/profiles#index'
 
-  get 'search', to: 'pages#search'
+
+  get 'search', to: 'searches#search'
+  get 'search/advanced', to: 'searches#show'
 
 
   root to: 'pages#index'
