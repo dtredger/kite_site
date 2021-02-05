@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_13_224010) do
+ActiveRecord::Schema.define(version: 2021_02_04_003207) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -55,13 +55,14 @@ ActiveRecord::Schema.define(version: 2021_01_13_224010) do
 
   create_table "countries", force: :cascade do |t|
     t.text "name"
-    t.text "region"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.text "description"
     t.float "latitude"
     t.float "longitude"
     t.string "slug"
+    t.integer "language"
+    t.integer "region"
     t.index ["name"], name: "index_countries_on_name", unique: true
     t.index ["slug"], name: "index_countries_on_slug", unique: true
   end
@@ -128,7 +129,6 @@ ActiveRecord::Schema.define(version: 2021_01_13_224010) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "provider", default: "email", null: false
-    t.string "uid", default: "", null: false
     t.boolean "allow_password_change", default: false
     t.string "confirmation_token"
     t.datetime "confirmed_at"
@@ -144,11 +144,13 @@ ActiveRecord::Schema.define(version: 2021_01_13_224010) do
     t.datetime "last_sign_in_at"
     t.string "current_sign_in_ip"
     t.string "last_sign_in_ip"
-    t.string "role"
+    t.float "latitude"
+    t.float "longitude"
+    t.integer "role"
+    t.string "region"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
-    t.index ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true
     t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true
   end
 

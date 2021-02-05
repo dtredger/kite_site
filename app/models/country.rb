@@ -6,10 +6,11 @@
 #
 #  id          :bigint           not null, primary key
 #  description :text
+#  language    :integer
 #  latitude    :float
 #  longitude   :float
 #  name        :text
-#  region      :text
+#  region      :integer
 #  slug        :string
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
@@ -25,6 +26,8 @@ class Country < ApplicationRecord
 
   include Searchable
 
+  include DistanceCalculable
+
   validates :name, presence: true, uniqueness: true
 
   has_many_attached :photos, dependent: :destroy
@@ -32,13 +35,19 @@ class Country < ApplicationRecord
   has_one :location_map, as: :record, dependent: :destroy
   has_rich_text :content
 
-  # scope :with_eager_loaded_image, -> { eager_load(photos: :blob) }
-  # scope :with_preloaded_image, -> { preload(photos: :blob) }
+  enum region: ['Europe', 'Caribbean', 'South America', 'Asia', 'Africa', 'North America', 'Pacific', 'ANZA', 'Middle East']
+  enum language: [:English, :French, :Spanish, :Italian, :German]
 
   # TODO: - this fetches all countries' kitespots' tags
-  def self.find_months(months)
-    all.filter { |c| c.includes_month?(months) }
-  end
+  scope :find_months, ->(months) { all.filter { |c| c.includes_month?(months) } }
+  scope :find_region, ->(regions) { all.filter { |c| regions.include? c.region } }
+  scope :find_language, ->(language) { all.filter { |c| languages.include? c.language } }
+  scope :max_distance, ->(max_km, target) { all.filter do |c|
+                                              distance = c.haversine_distance(target)
+                                              distance.present? && distance <= max_km
+                                            end }
+  # scope :with_eager_loaded_image, -> { eager_load(photos: :blob) }
+  # scope :with_preloaded_image, -> { preload(photos: :blob) }
 
   def includes_month?(months)
     (month_tag_list & months).any?
@@ -54,6 +63,18 @@ class Country < ApplicationRecord
     end
   end
 
+  def latitude
+    return location_map.latitude if location_map && self[:latitude].nil?
+    super
+  end
+
+  def longitude
+    return location_map.longitude if location_map && self[:longitude].nil?
+    super
+  end
+
+
+  # Presenters
   # for grid subtitle
   def card_subtitle
     region
@@ -68,4 +89,5 @@ class Country < ApplicationRecord
   def header_photos
     photos.includes([:blob]).take(3)
   end
+
 end

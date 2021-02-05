@@ -16,16 +16,18 @@
 #  failed_attempts        :integer          default(0), not null
 #  last_sign_in_at        :datetime
 #  last_sign_in_ip        :string
+#  latitude               :float
 #  locked_at              :datetime
+#  longitude              :float
 #  name                   :string
 #  provider               :string           default("email"), not null
+#  region                 :string
 #  remember_created_at    :datetime
 #  reset_password_sent_at :datetime
 #  reset_password_token   :string
-#  role                   :string
+#  role                   :integer
 #  sign_in_count          :integer          default(0), not null
 #  tokens                 :json
-#  uid                    :string           default(""), not null
 #  unconfirmed_email      :string
 #  unlock_token           :string
 #  created_at             :datetime         not null
@@ -36,7 +38,6 @@
 #  index_users_on_confirmation_token    (confirmation_token) UNIQUE
 #  index_users_on_email                 (email) UNIQUE
 #  index_users_on_reset_password_token  (reset_password_token) UNIQUE
-#  index_users_on_uid_and_provider      (uid,provider) UNIQUE
 #  index_users_on_unlock_token          (unlock_token) UNIQUE
 #
 require 'rails_helper'
@@ -58,6 +59,28 @@ RSpec.describe User, type: :model do
 
     it 'does not set others to admin' do
       expect(user.admin?).to be(false)
+    end
+  end
+
+  context 'distance_calculable' do
+    describe '#haversine_distance' do
+      it 'calculates distance to country' do
+        user = create(:user, latitude: 0, longitude: 0)
+        country = create(:country, latitude: 10, longitude: 10)
+        expect(user.haversine_distance(country)).to eq(1569)
+      end
+
+      it 'calculates distance to points' do
+        user = create(:user, latitude: 0, longitude: 0)
+        points = {latitude: 20, longitude: 20}
+        expect(user.haversine_distance(points)).to eq(3112)
+      end
+
+      it 'gives nil for bad coordinates' do
+        user = create(:user, latitude: 0, longitude: 0)
+        points = {latitude: nil, longitude: ''}
+        expect(user.haversine_distance(points)).to eq(nil)
+      end
     end
   end
 
