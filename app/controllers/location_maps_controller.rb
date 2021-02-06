@@ -5,6 +5,6 @@ class LocationMapsController < ApplicationController
 
   # GET /global-map
   def index
-    @global_map_data = LocationMap.all_spots_map
+    @global_map_markers = LocationMap.leaflet_map_details
   end
 end

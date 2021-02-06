@@ -5,23 +5,46 @@
   <h4>Your Profiles</h4>
   <br>
 
-  <p>Email: <%= @user.email %></p>
+  <div class="row">
+    <div class="col-lg-6">
+      <p>Email: <%= @user.email %></p>
 
-  <p>Name:
-    <% if @user.name %>
-      <%= @user.name %>
-    <% else %>
-      <i>Your name is unset. Please <%= link_to 'Update your Profile', edit_user_registration_path %> to set.</i>
-    <% end %>
-  </p>
+      <p>Name:
+        <% if @user.name %>
+          <%= @user.name %>
+        <% else %>
+          <i>Your name is unset. Please <%= link_to 'Update your Profile', edit_user_registration_path %> to set.</i>
+        <% end %>
+      </p>
 
-  <p>Account created: <b><%= @user.created_at.strftime('%b %d, %Y at %l:%M %P GMT')  %></b></p>
+      <p>Location:
+        <% if @user.coordinates? %>
+          <b>Latitude: <%= @user.latitude %></b>
+          <b>Longitude: <%= @user.longitude %></b>
+        <% end %>
+      </p>
 
-  <p>Account last updated: <b><%= @user.updated_at.strftime('%b %d, %Y at %l:%M %P GMT') %></b></p>
+      <p>Account created: <b><%= @user.created_at.strftime('%b %d, %Y at %l:%M %P GMT')  %></b></p>
+      <p>Account last updated: <b><%= @user.updated_at.strftime('%b %d, %Y at %l:%M %P GMT') %></b></p>
+      <i>(The timezone above may not match your current timezone)</i>
 
-  <i>(The timezone above may not match your current timezone)</i>
+      <hr>
+      <%= link_to 'Update Profile', edit_user_registration_path %>
+    </div>
 
-  <hr>
-  <%= link_to 'Update Profile', edit_user_registration_path %>
+    <div class="col-lg-6">
+      <% if @user.location_map %>
+        <%= render 'partials/leaflet_map', locals={map_markers: @user.location_map.leaflet_map_details} %>
+      <% else %>
+        <p>set latitude/longitude to see a map of your location</p>
+      <% end %>
 
+      <% if @user.coordinates? %>
+        <b>Closest 5 Spots:</b>
+        <% @user.kite_spots_by_distance[0..4].each do |spot| %>
+          <p><%= spot[0] %>: <%= spot[1] %>KM</p>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
 </div>

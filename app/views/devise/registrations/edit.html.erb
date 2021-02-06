@@ -17,6 +17,15 @@
       <%= f.text_field :name, autofocus: true, autocomplete: "name" %>
     </div>
 
+    <div class="field">
+      <%= f.label :latitude %><i>(Your latitude to calculate distances from)</i><br />
+      <%= f.number_field :latitude, autofocus: true, step: 0.00001 %>
+    </div>
+
+    <div class="field">
+      <%= f.label :longitude %><i>(Your longitude to calculate distances from)</i><br />
+      <%= f.number_field :longitude, autofocus: true, step: 0.00001 %>
+    </div>
 
     <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
       <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>

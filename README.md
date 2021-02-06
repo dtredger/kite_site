@@ -58,3 +58,7 @@ Mail API
  
  (when not using port 80, sudo not required)  
  > nginx -c {{full_path}}/config/nginx-osx.conf
+ 
+ 
+ Foreman (for starting processes in procfile)
+ > foreman start

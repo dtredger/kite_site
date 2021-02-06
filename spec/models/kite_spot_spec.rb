@@ -59,7 +59,8 @@ RSpec.describe KiteSpot, type: :model do
 
     describe 'dependent actions' do
       it 'destroys associated LocationMap' do
-        kite_spot_with_map
+        kite_spot_with_map = kite_spot
+        kite_spot_with_map.create_location_map
         expect { kite_spot_with_map.destroy }.to change(LocationMap, :count).by(-1)
       end
     end
@@ -85,6 +86,14 @@ RSpec.describe KiteSpot, type: :model do
         expect(described_class.month_search(%w[Mar Apr]).count).to eq(2)
       end
     end
+
+    describe '#haversine_distance' do
+      it 'calculates from user' do
+        kite_spot_ten = create(:kite_spot, latitude: 10, longitude: 10)
+        user_zero = create(:user, latitude: 0, longitude: 0)
+        expect(kite_spot_ten.haversine_distance(user_zero)).to eq(1569)
+      end
+    end
   end
 
   describe 'wind_information' do
@@ -93,6 +102,17 @@ RSpec.describe KiteSpot, type: :model do
     it 'returns iframe' do
       zoom = 5
       expect(kite_spot.wind_information[:windy]).to match("https://www.windy.com/?10.0,20.0,#{zoom},")
+    end
+  end
+
+  context 'scopes' do
+    describe 'max_distance' do
+      it 'filters kite spots' do
+        target = {latitude: 0, longitude: 0}
+        fifteen_hundred_km = create(:kite_spot, latitude: 10, longitude: 10)
+        three_thousand_km = create(:kite_spot, latitude: 20, longitude: 20)
+        expect(described_class.max_distance(2000, target)).to eq([fifteen_hundred_km])
+      end
     end
   end
 end

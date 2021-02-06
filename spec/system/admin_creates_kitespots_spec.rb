@@ -20,7 +20,7 @@ RSpec.describe 'AdminCreatesKitespots', type: :system do
     log_in_admin
 
     it 'saves and shows' do
-      visit '/kite_spots/new'
+      visit '/kite-spots/new'
 
       fill_in 'kite_spot[name]', with: 'Sample Kite Spot'
       # fill_in 'photos'

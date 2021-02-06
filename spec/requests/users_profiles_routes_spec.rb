@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe 'Countries_routes', type: :request do
+RSpec.describe 'Users_routes', type: :request do
   let(:kite_spot) { create(:kite_spot) }
   let(:country) { create(:country) }
   let(:user) { create(:user) }

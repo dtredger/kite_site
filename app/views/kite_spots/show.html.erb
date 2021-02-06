@@ -14,6 +14,14 @@
       <h5>Best Months</h5>
       <%= render 'partials/month_tag_selector', locals={month_tag_list: @kite_spot.month_tag_list} %>
     </div>
+
+    <div class="col-12">
+      <br>
+      <p> <b>Coordinates:</b> <%= @kite_spot.latitude %>, <%= @kite_spot.longitude %></p>
+      <% if current_user %>
+        <b><%= current_user.haversine_distance(@kite_spot) %></b> KM from your set location
+      <% end %>
+    </div>
   </div>
   <br>
   <br>
@@ -24,7 +32,7 @@
       <%= @kite_spot.content %>
     </div>
     <div class="col-md-7">
-      <%= render 'partials/leaflet_map', locals={loc_map: @kite_spot.location_map} %>
+      <%= render 'partials/leaflet_map', locals={map_markers: @kite_spot.location_map.leaflet_map_details} %>
     </div>
   </div>
   <br>
@@ -36,8 +44,9 @@
     <div class="col-12">
       <ul class="nav nav-pills">
         <% @kite_spot.amenities.each do |amenity| %>
-          <li class="card" style="color: white; background-color: #497; margin: 4px; padding: 4px 8px"><%= amenity
-          %></li>
+          <li class="card" style="color: white; background-color: #497; margin: 4px; padding: 4px 8px">
+            <%= amenity %>
+          </li>
         <% end %>
       </ul>
     </div>

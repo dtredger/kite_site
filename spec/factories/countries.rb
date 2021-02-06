@@ -6,10 +6,11 @@
 #
 #  id          :bigint           not null, primary key
 #  description :text
+#  language    :integer
 #  latitude    :float
 #  longitude   :float
 #  name        :text
-#  region      :text
+#  region      :integer
 #  slug        :string
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
@@ -22,7 +23,7 @@
 FactoryBot.define do
   factory :country do
     sequence(:name) { |x| "country_#{x}" }
-    region { 'test region' }
+    region { 'Europe' }
     sequence(:content) do |x|
       "This is the rich-text content for country #{x}"
     end
