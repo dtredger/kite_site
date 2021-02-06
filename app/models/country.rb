@@ -56,9 +56,7 @@ class Country < ApplicationRecord
   def month_tag_list
     @month_tag_list ||= begin
       @month_tag_list = Set.new
-      kite_spots.each do |spot|
-        @month_tag_list.merge(spot.month_tag_list)
-      end
+      kite_spots.each { |spot| @month_tag_list.merge(spot.month_tag_list) }
       @month_tag_list
     end
   end

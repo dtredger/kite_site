@@ -46,15 +46,12 @@ RSpec.describe User, type: :model do
   let(:admin) { create(:admin) }
   let(:user) { create(:user) }
 
-  describe 'properties' do
-    it 'has name' do
-      expect(user).to respond_to(:name)
-    end
-  end
 
   context 'permissions' do
     it 'sets admin email to admin' do
-      expect(admin.admin?).to be(true)
+      new_admin = user
+      new_admin.update(role: 'admin')
+      expect(new_admin.admin?).to be(true)
     end
 
     it 'does not set others to admin' do
