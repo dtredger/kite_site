@@ -1,118 +1,113 @@
-<style>
-
-  .wave-container {
-    position:relative;
-    text-align:center;
-    /*background: ; /!*linear-gradient(60deg, rgba(84,58,183,1) 0%, rgba(0,172,193,1) 100%);*!/*/
-    /*color:white;*/
-  }
-  .logo {
-    width:50px;
-    fill:white;
-    padding-right:15px;
-    display:inline-block;
-    vertical-align: middle;
-  }
-
-  .inner-header {
-    /*height:65vh;*/
-    width:100%;
-    margin: 0;
-    padding: 0;
-  }
-
-  .flex { /*Flexbox for containers*/
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-  }
-
-  .waves {
-    position:relative;
-    width: 100%;
-    height:15vh;
-    margin-bottom:-7px; /*Fix for safari gap*/
-    min-height:100px;
-    max-height:150px;
-  }
-
-  .content {
-    position:relative;
-    height:10vh;
-    text-align:center;
-    background-color: rgba(4,58,203);
-    color: #fff;
-  }
-
-  /* Animation */
-
-  .parallax > use {
-    animation: move-forever 25s cubic-bezier(.55,.5,.45,.5)     infinite;
-  }
-  .parallax > use:nth-child(1) {
-    animation-delay: -2s;
-    animation-duration: 7s;
-  }
-  .parallax > use:nth-child(2) {
-    animation-delay: -3s;
-    animation-duration: 10s;
-  }
-  .parallax > use:nth-child(3) {
-    animation-delay: -4s;
-    animation-duration: 13s;
-  }
-  .parallax > use:nth-child(4) {
-    animation-delay: -5s;
-    animation-duration: 20s;
-  }
-  @keyframes move-forever {
-    0% {
-      transform: translate3d(-90px,0,0);
-    }
-    100% {
-      transform: translate3d(85px,0,0);
-    }
-  }
-  /*Shrinking for mobile*/
-  @media (max-width: 768px) {
-    .waves {
-      height:40px;
-      min-height:40px;
-    }
-    .content {
-      height:20vh;
-    }
-    h1 {
-      font-size:24px;
-    }
-  }
-</style>
-
-<footer class="footer">
-
-  <div class="wave-container">
-    <div class="inner-header flex">
-
-    </div>
-
-    <div>
-      <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-           viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
-        <defs>
-          <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
-        </defs>
-        <g class="parallax">
-          <use xlink:href="#gentle-wave" x="48" y="0" fill="rgba(34,58,183,0.7" />
-          <use xlink:href="#gentle-wave" x="48" y="3" fill="rgba(24,58,183,0.5)" />
-          <use xlink:href="#gentle-wave" x="48" y="5" fill="rgba(14,58,203,0.3)" />
-          <use xlink:href="#gentle-wave" x="48" y="7" fill="rgba(4,58,203)" />
-        </g>
-      </svg>
+<footer class="position-relative z-index-10 d-print-none">
+  <div class="py-6 bg-gray-200 text-muted">
+    <div class="container">
+      <div class="row">
+        <div class="mb-5 mb-lg-0 col-lg-4">
+          <div class="font-weight-bold text-uppercase text-dark mb-3">Directory</div>
+          <p class="">Lorem ipsum dolor sit amet, consectetur adipisicing.</p>
+          <ul class="list-inline">
+            <li class="list-inline-item">
+              <a href="#" target="_blank" rel="noopener noreferrer" title="twitter" class="text-muted text-hover-primary">
+                <i class="fab fa-twitter"></i></a>
+            </li>
+            <li class="list-inline-item">
+              <a href="#" target="_blank" rel="noopener noreferrer" title="facebook" class="text-muted text-hover-primary">
+                <i class="fab fa-facebook"></i></a>
+            </li>
+            <li class="list-inline-item">
+              <a href="#" target="_blank" rel="noopener noreferrer" title="instagram" class="text-muted text-hover-primary">
+                <i class="fab fa-instagram"></i></a>
+            </li>
+            <li class="list-inline-item">
+              <a href="#" target="_blank" rel="noopener noreferrer" title="pinterest" class="text-muted text-hover-primary">
+                <i class="fab fa-pinterest"></i></a>
+            </li>
+            <li class="list-inline-item">
+              <a href="#" target="_blank" rel="noopener noreferrer" title="vimeo" class="text-muted text-hover-primary">
+                <i class="fab fa-vimeo"></i></a>
+            </li>
+          </ul>
+        </div>
+        <div class="mb-5 mb-lg-0 col-md-6 col-lg-2">
+          <div class="font-weight-bold text-uppercase text-dark mb-3">Rentals</div>
+          <ul class="list-unstyled">
+            <li><a class="text-muted" href="/">Rooms</a></li>
+            <li><a class="text-muted" href="/category-rooms">Map on top</a></li>
+            <li><a class="text-muted" href="/category-2-rooms">Side map</a></li>
+            <li><a class="text-muted" href="/category-3-rooms">No map</a></li>
+            <li><a class="text-muted" href="/detail-rooms">Room detail</a></li>
+          </ul>
+        </div>
+        <div class="mb-5 mb-lg-0 col-md-6 col-lg-2">
+          <div class="font-weight-bold text-uppercase text-dark mb-3">Pages</div>
+          <ul class="list-unstyled">
+            <li><a class="text-muted" href="/compare">Comparison<span class="ml-1 badge badge-info-light">New</span></a></li>
+            <li><a class="text-muted" href="/team">Team<span class="ml-1 badge badge-info-light">New</span></a></li>
+            <li><a class="text-muted" href="/contact">Contact</a></li>
+            <li><a class="text-muted" href="/pricing">Pricing</a></li>
+            <li><a class="text-muted" href="/detail-rooms">Room detail</a></li>
+            <li><a class="text-muted" href="/text">Text page</a></li>
+            <li><a class="text-muted" href="/faq">F.A.Q.s</a></li>
+            <li><a class="text-muted" href="/coming-soon">Coming soon</a></li>
+            <li><a class="text-muted" href="/404">404 page<span class="ml-1 badge badge-info-light">New</span></a></li>
+          </ul>
+        </div>
+        <div class="mb-5 mb-lg-0 col-lg-4">
+          <div class="font-weight-bold text-uppercase text-dark mb-3">Daily Offers &amp; Discounts</div>
+          <p class="mb-3">Lorem ipsum dolor sit amet, consectetur adipisicing elit. At itaque temporibus.</p>
+          <form id="newsletter-form" class="">
+            <div class="input-group mb-3"><input type="email" placeholder="Your Email Address" aria-label="Your Email Address" class="bg-transparent border-dark border-right-0 form-control">
+              <div class="input-group-append">
+                <button type="submit" class="btn-outline-dark border-left-0 btn btn-deoco">
+                  <i class="fa fa-paper-plane text-lg"></i>
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
     </div>
   </div>
 
-  <div class="content flex">
-    <p>Copyright TBA Kite Site - Last Updated September 2020</p>
+  <div>
+    <svg class="waves bg-gray-200" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+         viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+      <defs>
+        <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z"> </path>
+      </defs>
+      <g class="parallax">
+        <use xlink:href="#gentle-wave" x="48" y="0" fill="rgba(34,58,183,0.7)" />
+        <use xlink:href="#gentle-wave" x="48" y="3" fill="rgba(24,58,183,0.5)" />
+        <use xlink:href="#gentle-wave" x="48" y="5" fill="rgba(14,58,203,0.3)" />
+        <use xlink:href="#gentle-wave" x="48" y="7" fill="rgba(4,58,203)" />
+      </g>
+    </svg>
+  </div>
+
+  <div class="py-4 font-weight-light text-gray-300 wave-bg-color">
+    <!--bg-gray-800-->
+    <div class="container">
+      <div class="align-items-center row">
+        <div class="text-center text-md-left col-md-6">
+          <p class="text-sm mb-md-0">© 2020, Your company. All rights reserved.</p>
+        </div>
+        <div class="col-md-6">
+          <ul class="list-inline mb-0 mt-2 mt-md-0 text-center text-md-right">
+            <li class="list-inline-item">
+              <img src="/content/svg/visa.svg" alt="..." class="w-2rem">
+            </li>
+            <li class="list-inline-item">
+              <img src="/content/svg/mastercard.svg" alt="..." class="w-2rem">
+            </li>
+            <li class="list-inline-item">
+              <img src="/content/svg/paypal.svg" alt="..." class="w-2rem">
+            </li>
+            <li class="list-inline-item">
+              <img src="/content/svg/western-union.svg" alt="..." class="w-2rem">
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
   </div>
 </footer>

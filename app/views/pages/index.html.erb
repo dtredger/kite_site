@@ -1,30 +1,54 @@
-<%= render 'partials/background_video' %>
+<%= render 'partials/jumbo' %>
 
-<%= render 'partials/sticky_filter_bar' %>
+<%= render 'partials/sticky_nav' %>
 
-<!-- end header sticky -->
+<!--%= render 'partials/sticky_filter_bar' %>-->
+
 <div class="container">
+  <%= render 'partials/search_form' %>
+</div>
 
-  <br>
-  <%= render 'partials/search_form', locals={months: @months} %>
-  <hr>
-
-  <div class="col-12">
-    <h4>Countries</h4>
+<section class="py-6 ">
+  <div class="container">
+    <div class="row mb-5">
+      <div class="col-md-8">
+        <p class="subtitle text-primary">Find your next Destination</p>
+        <h2>Countries</h2>
+      </div>
+      <div class="col-md-4 d-lg-flex align-items-center justify-content-end">
+        <%= link_to countries_path, class: 'text-muted text-sm' do %>
+          See all Countries
+          <i class="fas fa-angle-double-right ml-2"></i>
+        <% end %>
+      </div>
+    </div>
   </div>
 
   <%= render 'partials/main_grid', locals = {resource: @countries} %>
+</section>
 
-  <br>
-  <h5 class="text-center"><%= link_to 'See All Countries', countries_path %></h5>
-
-  <hr>
-  <div class="col-12">
-    <h4>Kite Spots</h4>
+<section class="py-6 bg-gray-100">
+  <div class="container">
+    <div class="text-center pb-lg-4">
+      <p class="subtitle text-secondary"><%= t('kite_spots.subtitle') %></p>
+      <h2 class="mb-5">
+        <%= t('kite_spots.header') %>
+      </h2>
+    </div>
   </div>
   <%= render 'partials/main_grid', locals = {resource: @kite_spots} %>
 
-  <br>
-  <h5 class="text-center"><%= link_to 'See All Kite Spots', kite_spots_path %></h5>
+  <div class="container container-fluid fluid">
+    <div class="text-center mt-5">
+      <%= link_to kite_spots_path, class: 'btn btn-outline-primary' do %>
+        See all Kite Spots
+        <i class="fas fa-angle-double-right ml-2"></i>
+      <% end %>
+    </div>
+  </div>
 
-</div>
+
+
+
+</section>
+

@@ -33,3 +33,6 @@ en:
   main_header: 'TBA Kite Site'
   main_header_subtitle: 'Site Subtitle'
   kitespot_month_filter_header: 'Search Spots by Month'
+  kite_spots:
+    subtitle: 'Find the perfect location'
+    header: 'Kite Spots'
