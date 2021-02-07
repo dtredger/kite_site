@@ -36,3 +36,15 @@ en:
   kite_spots:
     subtitle: 'Find the perfect location'
     header: 'Kite Spots'
+    best_months_subtitle: 'Best time to visit'
+    amenity_subtitle: 'Available at this location'
+  countries:
+    header: 'Countries'
+    index_page:
+      header: 'All Countries'
+      subtitle: 'Search for your next destination from among dozens of countries'
+    show:
+      sidebar_subtitle: 'At a glance'
+      sidebar_title: 'Quick Details'
+  footer:
+    copyright_notice: © TBA Kite Site, 2021.

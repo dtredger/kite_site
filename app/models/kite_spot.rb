@@ -91,7 +91,9 @@ class KiteSpot < ApplicationRecord
 
   # for grid card
   def cover_photo
-    photos.first
+    if photos.any?
+      photos.first
+    end
   end
 
   # for #show page gallery

@@ -71,6 +71,10 @@ class Country < ApplicationRecord
     super
   end
 
+  def currency
+    'Money'
+  end
+
 
   # Presenters
   # for grid subtitle
