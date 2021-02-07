@@ -65,6 +65,14 @@ class KiteSpot < ApplicationRecord
     country.region
   end
 
+  def closest_city
+    'Close City'
+  end
+
+  def defining_feature
+    'Waves and flat Water'
+  end
+
   def wind_information
     zoom = 5
     {

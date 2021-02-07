@@ -15,6 +15,7 @@
  *
  *= require bootstrap_styles/app
  *= require footer
+ *= require actiontext
  */
 
 /*
@@ -22,63 +23,55 @@
 
 
 
-.notice, .alert {
-  position: absolute;
-}
-
-body {
-  background-color: rgb(240,245,255);
-  min-height: 100vh;
-}
 
 
-.background-image-gray {
-    height: 100%;
-    background: #999;
-    display: flex;
-    flex-direction: column;
-}
-.gray-zone {
-    height: 18vh;
-    background: #888;
-}
+/*.notice, .alert {*/
+  /*position: absolute;*/
+/*}*/
 
-.bottom-float-card {
-    background: #fff;
-    width: 100%;
-    margin-top: auto;
-    padding-top: auto;
-}
-
-a {
-    cursor: pointer;
-}
-
-/* kaminari pagination */
-.paginate-pad > * {
-    margin: 5px;
-}
-.paginate-pad > * > * {
-    margin: 5px;
-}
+/*body {*/
+  /*background-color: rgb(240,245,255);*/
+  /*min-height: 100vh;*/
+/*}*/
 
 
-#location_map {
-    height: 50vh;
-    width: 100%;
-}
+/*.background-image-gray {*/
+    /*height: 100%;*/
+    /*background: #999;*/
+    /*display: flex;*/
+    /*flex-direction: column;*/
+/*}*/
+/*.gray-zone {*/
+    /*height: 18vh;*/
+    /*background: #888;*/
+/*}*/
 
-#global_location_map {
-    height: 90vh;
-    width: 100%;
-}
+/*.bottom-float-card {*/
+    /*background: #fff;*/
+    /*width: 100%;*/
+    /*margin-top: auto;*/
+    /*padding-top: auto;*/
+/*}*/
+
+/*a {*/
+    /*cursor: pointer;*/
+/*}*/
+
+/*/!* kaminari pagination *!/*/
+/*.paginate-pad > * {*/
+    /*margin: 5px;*/
+/*}*/
+/*.paginate-pad > * > * {*/
+    /*margin: 5px;*/
+/*}*/
 
 
 
-.wind-iframe {
-  width: 100%;
-  height: 50vh;
-}
-.inactive {
-    background: gray;
-}
+
+/*.wind-iframe {*/
+  /*width: 100%;*/
+  /*height: 50vh;*/
+/*}*/
+/*.inactive {*/
+    /*background: gray;*/
+/*}*/

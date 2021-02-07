@@ -1,61 +1,125 @@
-<%= render 'partials/sticky_filter_bar' %>
-
 <%= render 'partials/photo_gallery', locals={resource: @kite_spot} %>
-<br>
 
-<div class="container card">
-  <h3 class="kitespot-name"><%= @kite_spot.name %></h3>
-  <h5><%= link_to @kite_spot.country.name, @kite_spot.country %></h5>
-  <br>
+<section>
+  <div class="container py-5">
+    <div class="row">
+      <div class="col-lg-8">
 
-  <!-- months selector -->
-  <div class="row">
-    <div class="col-12">
-      <h5>Best Months</h5>
-      <%= render 'partials/month_tag_selector', locals={month_tag_list: @kite_spot.month_tag_list} %>
+          <p class="text-primary">
+            <i class="fa-map-marker-alt fa mr-1"></i>
+            <%= link_to "#{@kite_spot.closest_city}, #{@kite_spot.country.name}", @kite_spot.country %>
+          </p>
+
+          <h1><%= @kite_spot.name %></h1>
+
+          <div class="text-muted text-uppercase mb-4">
+            <%= @kite_spot.defining_feature %>
+          </div>
+
+        <div class="text-block">
+          <p class="subtitle text-sm text-primary mb-4"><%= t('kite_spots.best_months_subtitle') %></p>
+          <%= render 'partials/month_tag_selector', locals={month_tag_list: @kite_spot.month_tag_list} %>
+        </div>
+        <div class="text-block">
+          <%= @kite_spot.content %>
+        </div>
+
+
+
+        <div class="text-block">
+          <h4 class="mb-0">Amenities</h4>
+          <p class="subtitle text-sm text-primary mb-4"><%= t('kite_spots.amenity_subtitle') %></p>
+          <ul class="list-inline">
+            <% @kite_spot.amenities.each do |amenity| %>
+              <li class="list-inline-item mb-2">
+                <%= link_to root_path do %>
+                  <p class="p-3 text-muted font-weight-normal badge badge-light badge-pill">
+                    <b><%= amenity %></b>
+                  </p>
+                <% end %>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+
+        <div class="text-block">
+          <h3 class="mb-4">Location</h3>
+          <div class="map-wrapper-450 mb-3">
+            <%= render 'partials/leaflet_map', locals={map_markers: @kite_spot.location_map.leaflet_map_details} %>
+          </div>
+        </div>
+
+
+        <div class="text-block">
+          <h3 class="mb-4">Gallery</h3>
+          <div class="row ml-n1 mr-n1">
+            <!--<Ui::Gallery @images={{@model.pictures}} />-->
+            <%= render 'partials/photo_gallery', locals={resource: @kite_spot} %>
+          </div>
+        </div>
+
+      </div>
+
+
+      <div class="col-lg-4">
+        <div style="top:100px" class="p-4 shadow ml-lg-4 rounded sticky-top">
+          <!--<p class="text-muted"><span class="text-primary h2">$120</span> per night</p>-->
+          <!--<hr class="my-4">-->
+          <!--<form id="booking-form" method="get" action="#" autocomplete="off" class="form">-->
+            <!--<div class="form-group"><label class="form-label">Your stay *</label>-->
+              <!--<div class="DateRangePicker DateRangePicker_1 DateRangePicker__block DateRangePicker__block_2">-->
+                <!--<div>-->
+                  <!--<div class="DateRangePickerInput DateRangePickerInput_1 DateRangePickerInput__withBorder DateRangePickerInput__withBorder_2 DateRangePickerInput__block DateRangePickerInput__block_3">-->
+                    <!--<div class="DateInput DateInput_1"><input type="text" class="DateInput_input DateInput_input_1" aria-label="Start Date" id="fromDate" name="fromDate" value="" placeholder="Start Date" autocomplete="off" aria-describedby="DateInput__screen-reader-message-fromDate">-->
+                      <!--<p class="DateInput_screenReaderMessage DateInput_screenReaderMessage_1" id="DateInput__screen-reader-message-fromDate">Navigate forward to interact with the calendar and select a date. Press the question mark key to get the keyboard-->
+                        <!--shortcuts for changing dates.</p>-->
+                    <!--</div>-->
+                    <!--<div class="DateRangePickerInput_arrow DateRangePickerInput_arrow_1" aria-hidden="true" role="presentation"><svg class="DateRangePickerInput_arrow_svg DateRangePickerInput_arrow_svg_1" focusable="false" viewBox="0 0 1000 1000">-->
+                      <!--<path d="M694 242l249 250c12 11 12 21 1 32L694 773c-5 5-10 7-16 7s-11-2-16-7c-11-11-11-21 0-32l210-210H68c-13 0-23-10-23-23s10-23 23-23h806L662 275c-21-22 11-54 32-33z"></path>-->
+                    <!--</svg></div>-->
+                    <!--<div class="DateInput DateInput_1"><input type="text" class="DateInput_input DateInput_input_1" aria-label="End Date" id="toDate" name="toDate" value="" placeholder="End Date" autocomplete="off" aria-describedby="DateInput__screen-reader-message-toDate">-->
+                      <!--<p class="DateInput_screenReaderMessage DateInput_screenReaderMessage_1" id="DateInput__screen-reader-message-toDate">Navigate backward to interact with the calendar and select a date. Press the question mark key to get the keyboard-->
+                        <!--shortcuts for changing dates.</p>-->
+                    <!--</div>-->
+                  <!--</div>-->
+                <!--</div>-->
+              <!--</div>-->
+            <!--</div>-->
+            <!--<div class="mb-4 form-group"><label for="guests" class="form-label">Guests *</label><select name="guests" id="guests" class="form-control">-->
+              <!--<option value="1">1 Guest</option>-->
+              <!--<option value="2">2 Guests</option>-->
+              <!--<option value="3">3 Guests</option>-->
+              <!--<option value="4">4 Guests</option>-->
+              <!--<option value="5">5 Guests</option>-->
+            <!--</select></div>-->
+            <!--<div class="form-group"><button type="submit" class="btn btn-primary btn-block">Book your stay</button></div>-->
+          <!--</form>-->
+
+          <p class="text-muted text-sm text-center">
+            <% if current_user %>
+              This spot is
+              <b><%= current_user.haversine_distance(@kite_spot) %></b>
+              KM away from you.
+            <% else %>
+              <%= link_to 'Sign Up', new_user_registration_path %> to see how far this spot is from you.
+            <% end %>
+          </p>
+          <hr class="my-4">
+          <div class="text-center">
+            <p><a href="#" class="text-sm"><i class="fa fa-heart"></i>&nbsp;Bookmark This Listing</a></p>
+            <p class="text-muted text-sm">79 people bookmarked this place </p>
+          </div>
+        </div>
+      </div>
     </div>
 
-    <div class="col-12">
-      <br>
-      <p> <b>Coordinates:</b> <%= @kite_spot.latitude %>, <%= @kite_spot.longitude %></p>
-      <% if current_user %>
-        <b><%= current_user.haversine_distance(@kite_spot) %></b> KM from your set location
-      <% end %>
-    </div>
+    <!--<br>-->
+    <!--<hr>-->
+    <!--<div class="text-muted text-small mb-4">-->
+      <!--Last updated at <%= @kite_spot.updated_at.strftime('%m %d, %Y') %> (timedelta) days ago-->
+    <!--</div>-->
+
   </div>
-  <br>
-  <br>
+</section>
 
-  <!-- content & map -->
-  <div class="row">
-    <div class="col-md-5">
-      <%= @kite_spot.content %>
-    </div>
-    <div class="col-md-7">
-      <%= render 'partials/leaflet_map', locals={map_markers: @kite_spot.location_map.leaflet_map_details} %>
-    </div>
-  </div>
-  <br>
-
-  <h4>Amenities</h4>
-  <br>
-  <!-- amenities -->
-  <div class="row">
-    <div class="col-12">
-      <ul class="nav nav-pills">
-        <% @kite_spot.amenities.each do |amenity| %>
-          <li class="card" style="color: white; background-color: #497; margin: 4px; padding: 4px 8px">
-            <%= amenity %>
-          </li>
-        <% end %>
-      </ul>
-    </div>
-  </div>
-  <br>
-
-  <!-- wind-info -->
-  <%= render 'partials/wind_info', locals={resource: @kite_spot} %>
-  <br>
-  <br>
-
-</div>
+<!--%= render 'partials/wind_info', locals={resource: @kite_spot} %>-->

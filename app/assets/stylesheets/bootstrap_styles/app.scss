@@ -1,7 +1,7 @@
 $templateColour: blue;
 
 $theme-colors: (
-  "primary":   #4E66F8
+  "primary":   rgba(4,58,203,1)
   // "secondary":  ..,
   // "success":    ..,
   // "info":       ..,
@@ -16,7 +16,7 @@ $theme-colors: (
 
 // primary colour is set to false by default to enable multiple colour variants stylesheet creation,
 // change to your brand colour if needed
-$primary: blue;
+$primary: rgba(4,58,203,1);
 $secondary: green;
 // This is here just as an example, uncomment the lines here and see it in action
 // $primary:       #ef5285;
