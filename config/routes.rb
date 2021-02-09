@@ -16,20 +16,18 @@ Rails.application.routes.draw do
   resources :countries
 
   get 'global-map', to: 'location_maps#index'
-  get 'region', to: 'location_maps#show'
+  get 'region',     to: 'location_maps#show'
 
   devise_for :users, controllers: { registrations: 'users/registrations' }
   get 'profile', to: 'users/profiles#index'
 
+  get 'search',           to: 'searches#search'
+  get 'search/index',     to: 'searches#index'
+  get 'search/advanced',  to: 'searches#show'
 
-  get 'search', to: 'searches#search'
-  get 'search/advanced', to: 'searches#show'
-  get 'search/index', to: 'searches#index'
-
-
-
-  get 'contact', to: 'pages#contact'
-  root to: 'pages#index'
+  get 'contact',  to: 'pages#contact'
+  get 'faq',      to: 'pages#faq'
+  root            to: 'pages#index'
 
 
   # TODO - disable API for now
