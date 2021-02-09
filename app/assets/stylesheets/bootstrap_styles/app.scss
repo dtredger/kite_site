@@ -1,7 +1,7 @@
-$templateColour: blue;
+$templateColour: rgba(4,58,203,1);
 
 $theme-colors: (
-  "primary":   rgba(4,58,203,1)
+  "primary":   rgba(4,58,203,1)  // #4E66F8
   // "secondary":  ..,
   // "success":    ..,
   // "info":       ..,
@@ -58,4 +58,22 @@ $secondary: green;
 
 .mxw-350 {
   max-width: 350px;
+}
+
+.mxh-150 {
+  max-height: 150px;
+  overflow: hidden;
+}
+
+.inside-tile-link {
+  z-index: 35;
+  position: relative;
+}
+
+.select-style {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  border-bottom: 1px solid;
+  color: #888;
 }

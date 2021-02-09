@@ -74,16 +74,19 @@
               <hr class="my-4">
               <p class="text-center">
                 <% if current_user %>
-                  This Country is approximately
-                  <b><%= current_user.haversine_distance(@country) %></b>
-                  KM away from you.
+                  <% if current_user.coordinates? %>
+                    This spot is
+                    <b><%= current_user.haversine_distance(@kite_spot) %></b>
+                    KM away from you.
+                  <% else %>
+                    <%= link_to 'Set your Location', edit_user_registration_path %> to see how far this spot is from you.
+                  <% end %>
                 <% else %>
                   <%= link_to 'Sign Up', new_user_registration_path %> to see how far this spot is from you.
                 <% end %>
               </p>
               <div class="text-center">
-                <p><a href="#" class="text-sm"><i class="fa fa-heart"></i>&nbsp;Bookmark This Listing</a></p>
-                <p class="text-muted text-sm">79 people bookmarked this place </p>
+                <%= render 'partials/components/favourites_form' %>
               </div>
             </div>
           </div>

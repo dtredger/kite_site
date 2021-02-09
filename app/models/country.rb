@@ -35,7 +35,10 @@ class Country < ApplicationRecord
   has_one :location_map, as: :record, dependent: :destroy
   has_rich_text :content
 
-  enum region: ['Europe', 'Caribbean', 'South America', 'Asia', 'Africa', 'North America', 'Pacific', 'ANZA', 'Middle East']
+  enum region: ['Europe', 'Caribbean', 'South America', 'Asia', 'Africa', 'North America', 'ANZA/Pacific', 'Middle East']
+
+
+
   enum language: [:English, :French, :Spanish, :Italian, :German]
 
   # TODO: - this fetches all countries' kitespots' tags

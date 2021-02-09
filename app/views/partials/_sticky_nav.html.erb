@@ -5,7 +5,7 @@
     <div class="d-flex align-items-center">
       <%= link_to root_path do %>
         <%= image_tag 'favicons/android-chrome-192x192', style: 'max-height:35px;' %>
-        <%= t('main_header') %>
+        <%= t('site_name') %>
       <% end %>
     </div>
 
@@ -32,19 +32,34 @@
         <li class="nav-item"><%= link_to 'Search', search_advanced_path, class: 'nav-link' %></li>
 
         <% if current_user %>
-          <!--<li class="dropdown nav-item show">-->
-            <!--<a aria-haspopup="true" href="#" class="dropdown-toggle nav-link" aria-expanded="false">-->
-              <!--%= image_tag current_user.profile_picture, style: 'max-height:22px;' %>-->
-            <!--</a>-->
-            <!--<div tabindex="-1" role="menu" aria-hidden="true" class="dropdown-menu">-->
-          <li class="nav-item"><%= link_to 'Profile', profile_path, class: 'nav-item nav-link', role: 'menuitem', tabindex: '0' %></li>
-          <li class="nav-item"><%= link_to 'Sign Out', destroy_user_session_path, method: :delete,
-                                           class: 'nav-item nav-link', role: 'menuitem', tabindex: '0' %></li>
-            <!--</div>-->
-          <!--</li>-->
+          <li class="ml-lg-3 dropdown show nav-item">
+            <a style="padding:0" aria-haspopup="true" href="#" class="nav-link" aria-expanded="false">
+              <%= image_tag current_user.profile_picture, class: 'avatar avatar-sm avatar-border-white mr-2' %>
+            </a>
+            <div tabindex="-1" role="menu" aria-hidden="true" class="dropdown-menu dropdown-menu-right">
+              <a href="/user-booking-1" tabindex="0" role="menuitem" class="dropdown-item">Booking process - 4 pages</a>
+              <a href="/user-grid" tabindex="0" role="menuitem" class="dropdown-item">Bookings — grid view</a>
+              <a href="/user-booking-detail" tabindex="0" role="menuitem" class="active dropdown-item">Booking detail</a>
+              <a href="/login" tabindex="0" role="menuitem" class="dropdown-item">Sign out</a>
+            </div>
+          </li>
+
+
+          <li class="nav-item">
+            <%= link_to 'Profile', profile_path, class: 'nav-item nav-link', role: 'menuitem', tabindex: '0' %>
+          </li>
+          <li class="nav-item">
+            <%= link_to 'Sign Out', destroy_user_session_path, method: :delete,
+                        class: 'nav-item nav-link', role: 'menuitem', tabindex: '0' %>
+          </li>
+
         <% else %>
-          <li class="nav-item"><%= link_to 'Sign Up', new_user_registration_path, class: 'nav-item nav-link' %></li>
-          <li class="nav-item"><%= link_to 'Sign In', new_user_session_path, class: 'nav-item nav-link' %></li>
+          <li class="nav-item">
+            <%= link_to 'Sign In', new_user_session_path, class: 'nav-item nav-link' %>
+          </li>
+          <li class="nav-item">
+            <%= link_to 'Sign Up', new_user_registration_path, class: 'nav-item btn btn-primary button-sm' %>
+          </li>
         <% end %>
       </ul>
     </div>
@@ -56,3 +71,4 @@
 
   </div>
 </nav>
+

@@ -9,12 +9,16 @@ module ApplicationHelper
     false
   end
 
+  def background_img_name
+    'kite-south-africa-md'
+  end
+
   def all_months
     %w[Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec]
   end
 
   def all_regions
-    ['Europe', 'Caribbean', 'South America', 'Asia', 'Africa', 'North America', 'Pacific', 'ANZA', 'Middle East']
+    ['Asia', 'Africa', 'Middle East', 'Europe', 'North America', 'South America', 'Caribbean', 'ANZA/Pacific']
   end
 
   def all_amenities

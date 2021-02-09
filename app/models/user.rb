@@ -83,7 +83,15 @@ class User < ApplicationRecord
   end
 
   def profile_picture
+    # 'profile_pics/cat_sad'
     'profile_pics/oinky_pig'
+    # 'profile_pics/skinny_boy'
+    # 'profile_pics/racoon'
+    # 'profile_pics/pingu_noot'
+    # 'profile_pics/rigby_redemption'
+    # 'profile_pics/peeposhortonagoose'
+    # 'profile_pics/spagett'
+    # 'profile_pics/snrub'
   end
 
   def profile_text

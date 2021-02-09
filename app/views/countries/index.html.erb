@@ -12,7 +12,9 @@
 
   <div class="row">
     <% @countries.each do |model| %>
-      <%= render 'partials/components/country_card', locals = {model: model} %>
+      <div class="col col-xs-6 col-lg-4 col-xl-3 px-0">
+        <%= render 'partials/components/country_card', locals = {model: model} %>
+      </div>
     <% end %>
   </div>
 

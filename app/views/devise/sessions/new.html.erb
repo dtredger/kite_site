@@ -11,6 +11,8 @@
         </div>
 
         <%= form_for(resource, as: resource_name, url: session_path(resource_name), class: 'form-validate') do |f| %>
+          <%= render 'devise/shared/error_messages', resource: resource %>
+
           <div class="form-group">
             <label for="loginUsername" class="form-label">Email Adress</label>
             <%= f.email_field :email, autofocus: true, autocomplete: 'email', class:
@@ -50,12 +52,12 @@
         </p>
 
         <a class="close-absolute mr-md-5 mr-xl-6 pt-5" href="/"><svg class="svg-icon w-3rem h-3rem">
-        <use xlink:href="<%= image_url('svg/orion-svg-sprite') %>"></use>
+        <use xlink:href="<%= image_url('svg/orion-svg-sprite#close-1') %>"></use>
       </svg></a>
       </div>
     </div>
     <div class="d-none d-md-block col-md-4 col-lg-6 col-xl-7">
-      <div style="background-image:url(<%= image_url('kite-south-africa-md') %>)" class="bg-cover h-100 mr-n3"></div>
+      <div style="background-image:url(<%= image_url(background_img_name) %>)" class="bg-cover h-100 mr-n3"></div>
     </div>
   </div>
 </div>

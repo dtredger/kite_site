@@ -1,10 +1,10 @@
 <footer class="position-relative z-index-10 d-print-none">
-  <div class="py-6 bg-gray-200 text-muted">
+  <div class="pt-6 bg-gray-200 text-muted">
     <div class="container">
       <div class="row">
         <div class="mb-5 mb-lg-0 col-lg-4">
-          <div class="font-weight-bold text-uppercase text-dark mb-3">Directory</div>
-          <p class="">Lorem ipsum dolor sit amet, consectetur adipisicing.</p>
+          <div class="font-weight-bold text-uppercase text-dark mb-3"><%= t('site_name') %></div>
+          <p><%= t('footer.site_description') %></p>
           <ul class="list-inline">
             <li class="list-inline-item">
               <a href="#" target="_blank" rel="noopener noreferrer" title="twitter" class="text-muted text-hover-primary">
@@ -29,32 +29,30 @@
           </ul>
         </div>
         <div class="mb-5 mb-lg-0 col-md-6 col-lg-2">
-          <div class="font-weight-bold text-uppercase text-dark mb-3">Rentals</div>
+          <div class="font-weight-bold text-uppercase text-dark mb-3">Regions</div>
           <ul class="list-unstyled">
-            <li><a class="text-muted" href="/">Rooms</a></li>
-            <li><a class="text-muted" href="/category-rooms">Map on top</a></li>
-            <li><a class="text-muted" href="/category-2-rooms">Side map</a></li>
-            <li><a class="text-muted" href="/category-3-rooms">No map</a></li>
-            <li><a class="text-muted" href="/detail-rooms">Room detail</a></li>
+            <% all_regions.each do |region| %>
+              <li><%= link_to region, region_path(name: region.parameterize), class: 'text-muted' %></li>
+            <% end %>
           </ul>
         </div>
         <div class="mb-5 mb-lg-0 col-md-6 col-lg-2">
           <div class="font-weight-bold text-uppercase text-dark mb-3">Pages</div>
           <ul class="list-unstyled">
-            <li><a class="text-muted" href="/compare">Comparison<span class="ml-1 badge badge-info-light">New</span></a></li>
-            <li><a class="text-muted" href="/team">Team<span class="ml-1 badge badge-info-light">New</span></a></li>
-            <li><a class="text-muted" href="/contact">Contact</a></li>
-            <li><a class="text-muted" href="/pricing">Pricing</a></li>
-            <li><a class="text-muted" href="/detail-rooms">Room detail</a></li>
-            <li><a class="text-muted" href="/text">Text page</a></li>
+
+            <li><%= link_to 'Contact', contact_path, class: 'text-muted' %></li>
             <li><a class="text-muted" href="/faq">F.A.Q.s</a></li>
-            <li><a class="text-muted" href="/coming-soon">Coming soon</a></li>
-            <li><a class="text-muted" href="/404">404 page<span class="ml-1 badge badge-info-light">New</span></a></li>
+            <li style="text-decoration: line-through">
+              <span class="text-muted" href="/team">Team<span class="ml-1 badge badge-info-light">Soon</span></span>
+            </li>
+            <li style="text-decoration: line-through">
+              <span class="text-muted">Flight Search<span class="ml-1 badge badge-info-light">Maybe?</span></span>
+            </li>
           </ul>
         </div>
         <div class="mb-5 mb-lg-0 col-lg-4">
-          <div class="font-weight-bold text-uppercase text-dark mb-3">Daily Offers &amp; Discounts</div>
-          <p class="mb-3">Lorem ipsum dolor sit amet, consectetur adipisicing elit. At itaque temporibus.</p>
+          <div class="font-weight-bold text-uppercase text-dark mb-3"><%= t('footer.email_field_header') %></div>
+          <p class="mb-3"><%= t('footer.email_field_description') %></p>
           <form id="newsletter-form" class="">
             <div class="input-group mb-3"><input type="email" placeholder="Your Email Address" aria-label="Your Email Address" class="bg-transparent border-dark border-right-0 form-control">
               <div class="input-group-append">
