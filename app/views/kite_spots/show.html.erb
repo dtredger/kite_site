@@ -1,4 +1,4 @@
-<%= render 'partials/photo_gallery', locals={resource: @kite_spot} %>
+<%= render 'partials/components/gallery_jumbo', locals={photos: @kite_spot.header_photos} %>
 
 <section>
   <div class="container py-5">
@@ -50,7 +50,7 @@
         <div class="text-block">
           <h3 class="mb-4">Gallery</h3>
           <div class="row ml-n1 mr-n1">
-            <%= render 'partials/photo_gallery', locals={resource: @kite_spot} %>
+            <%= render 'partials/photo_gallery', locals={photos: @kite_spot.photos} %>
           </div>
         </div>
       </div>

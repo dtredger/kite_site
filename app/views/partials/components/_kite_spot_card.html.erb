@@ -7,17 +7,27 @@
         <%= model.name %>
       </h4>
       <p class="mb-2 text-xs">
+
+        <!--STARS-->
+        <!--% (1..5).each do |i|  %>-->
+          <!--&lt;!&ndash;<i key="%= i %>" class="fa fa-star text-warning"> </i>&ndash;&gt;-->
+          <!--<i class="fas fa-crow text-warning"></i>-->
+        <!--% end %>-->
+
+        <!--<i key={i} className={`fa fa-star ${props.size ? `fa-`+props.size : ""} text-gray-300`} />-->
+
+
         <!--{{!&#45;&#45; <Stars stars={data.stars} /> &#45;&#45; %>-->
       </p>
     </div>
 
     <div class="card-img-overlay-top d-flex justify-content-between align-items-center">
       <div class="pill badge px-3 py-2">
-        <!--Kite Spot-->
+        <!--todo - tags etc-->
       </div>
       <a href="#" class="card-fav-icon position-relative z-index-40">
         <svg class="svg-icon text-white">
-          <use xlink:href="<%= image_url('svg/orion-svg-sprite.svg#heart-1') %>"></use>
+          <use xlink:href="<%= image_url('svg/orion-svg-sprite.svg#like-1') %>"></use>
         </svg>
       </a>
     </div>
@@ -36,7 +46,7 @@
 
     <p class="text-sm mb-0">
       <% model.amenities.each do |amenity| %>
-        <span class="mr-1" href="#">
+        <span class="mr-1">
           <%= amenity %>
         </span>
       <% end %>

@@ -10,16 +10,25 @@
  * files in this directory. Styles in this file should be added after the last require_* statement.
  * It is generally better to create a new file per style scope.
  *
- *= require leaflet
- *= require toastr
+
  *
  *= require bootstrap_styles/app
+
+ *= require leaflet
+ *= require toastr
+
+
+
+ *= require ekko-lightbox
  *= require footer
  *= require actiontext
+
  */
 
 /*
 /* dont use require_tree . or require_self.*/
+
+
 
 
 
@@ -31,16 +40,20 @@
     margin: 5px;
 }
 
+/*photo-gallery*/
+.grey-bg {
+    background-color: #9ab;
+}
 
 
 /*.notice, .alert {*/
   /*position: absolute;*/
 /*}*/
 
-/*body {*/
+body {
   /*background-color: rgb(240,245,255);*/
-  /*min-height: 100vh;*/
-/*}*/
+  min-height: 100vh;
+}
 
 
 /*.background-image-gray {*/
@@ -76,3 +89,6 @@
 /*.inactive {*/
     /*background: gray;*/
 /*}*/
+
+
+/*ekko*/

@@ -1,5 +1,4 @@
-<%= render 'partials/photo_gallery', locals={resource: @country} %>
-
+<%= render 'partials/components/gallery_jumbo', locals={photos: @country.header_photos} %>
 <br>
 
 <div class="container">
@@ -24,7 +23,7 @@
         <div class="text-block">
           <h3 class="mb-4">Gallery</h3>
           <div class="row ml-n1 mr-n1">
-            <%= render 'partials/photo_gallery', locals={resource: @country} %>
+            <%= render 'partials/photo_gallery', locals={photos: @country.photos} %>
           </div>
         </div>
 
@@ -48,7 +47,7 @@
                 <div class="media-body">
                   <p class="subtitle text-sm text-primary"><%= @country.name %> </p>
                   <h4 class="mb-0"><%= t('countries.show.sidebar_title') %></h4>
-                </div><svg class="svg-icon svg-icon svg-icon-light w-3rem h-3rem ml-3 text-muted">
+                </div><svg class="svg-icon svg-icon-light w-3rem h-3rem ml-3 text-muted">
                 <use xlink:href="<%= image_url('svg/orion-svg-sprite.svg#map-location-1') %>"></use>
               </svg>
               </div>

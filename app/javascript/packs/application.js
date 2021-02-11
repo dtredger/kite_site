@@ -26,6 +26,8 @@ require("trix")
 require("@rails/actiontext")
 require('packs/action-text-files')
 
+require("ekko-lightbox")
+
 global.toastr = require("toastr")
 global.toastr.options = {
     showMethod: 'slideDown',
@@ -61,4 +63,6 @@ document.addEventListener('turbolinks:load', function(event) {
 //glob.sync( './partials/**/*.js' ).forEach(function(file) {
 //  require(path.resolve(file));
 //});
-require("packs/partials/wind-info")
+require("packs/partials/wind-info");
+
+require("packs/partials/photo-gallery");
