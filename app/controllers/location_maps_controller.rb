@@ -1,16 +1,15 @@
 # frozen_string_literal: true
 
 class LocationMapsController < ApplicationController
-  include Regionable
-
   skip_authorization_check
-
+  include Regionable
 
   # GET /global-map
   def index
     @global_map_markers = LocationMap.leaflet_map_details
   end
 
+  # GET/regions?name='north-america'
   def show
     name_slug = location_map_params[:name] || ''
     @region_details = region_details(name_slug)
@@ -20,6 +19,8 @@ class LocationMapsController < ApplicationController
     @region_details
   end
 
+
+  private
 
   def location_map_params
     params.permit(:name)

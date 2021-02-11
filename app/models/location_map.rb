@@ -84,9 +84,11 @@ class LocationMap < ApplicationRecord
         all_location_markers.push(loc_map.leaflet_marker)
       end
     else
-      all_location_markers = obj_arr
+      obj_arr.each do |model|
+        next unless model.respond_to?(:location_map)
+        all_location_markers.push(model.location_map.leaflet_marker)
+      end
     end
-
     { container_id: 'location_map',
       center: { latlng: map_center },
       zoom: '2',

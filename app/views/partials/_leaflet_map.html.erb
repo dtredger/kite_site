@@ -12,7 +12,7 @@
   });
 </script>
 
-<!--render 'partials/leaflet_map', locals={loc_map: @user.location_map} %> -->
+<!--%= render 'partials/leaflet_map', locals={map_markers: @map_markers} %>-->
 <% if map_markers.any? %>
   <%= map(map_markers) %>
 <% else %>
