@@ -1,60 +1,72 @@
-
 <div class="row">
-  <div class="col-12 card">
+  <div class="col-12">
+
     <%= form_with(url: search_advanced_path, scope: :search, method: :get, local: true) do |form| %>
-
-      <br>
-      <div class="form-group">
-        <%= form.label :name %>
-        <%= form.text_field :name, class: 'form-control' %>
-      </div>
-
       <div class="row">
-        <div class="col-6">
+        <div class="col-12">
           <div class="form-group">
-            <%= form.label :months %>
-            <%= form.select('months', all_months, {}, {include_blank: true, multiple: true, class: 'form-control'})
-            %>
-          </div>
-        </div>
-
-        <div class="col-6">
-          <div class="form-group">
-            <%= form.label :region %>
-            <%= form.select('regions', all_regions, {}, {include_blank: true, multiple: true, class: 'form-control'}) %>
-          </div>
-        </div>
-
-        <div class="col-6">
-          <div class="form-group">
-            <div class="form-group">
-              <%= form.label :amenities %>
-              <%= form.select('amenities', all_amenities, {}, {include_blank: true, multiple: true, class: 'form-control'}) %>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-6">
-          <div class="form-group">
-            <div class="form-group">
-              <%= form.label :languages %>
-              <%= form.select('languages', all_languages, {}, {include_blank: true, multiple: true, class: 'form-control'}) %>
-            </div>
+            <label class="form-label mr-2">Name</label>
+            <%= form.text_field :name, class: 'form-control' %>
           </div>
         </div>
 
         <div class="col-12">
           <div id="distance-range-search" class="form-group">
             <% if current_user %>
-              <%= form.label 'Max Distance away from me: Unlimited' %>
-              <%= form.range_field :distance, in: 100..10000, step: 100, value: 10000, id: 'distance-range-selector' %>
-            <% else %>
-              <%= link_to('Sign In', new_user_session_path) %>
-              <%= form.label 'to set a Max Distance from your location' %>
-              <%= form.range_field :distance, in: 100..10000, step: 100, value: 10000, id: 'distance-range-selector',
-             disabled: true %>
-            <% end %>
+              <div class="range-slider">
+                <%= form.label 'Max Distance away from me (KM)' %>
+                <%= form.range_field :distance, in: 100..10000, step: 100, value: 10000, id: 'distance-range-selector',
+                                     class: 'range-slider__range', type: 'range' %>
+                <span class="range-slider__value">10000</span>
+              </div>
 
+            <% else %>
+              <div class="range-slider">
+                <%= link_to('Sign In', new_user_session_path) %>
+                <%= form.label 'to set a Max Distance from your location' %>
+                <%= form.range_field :distance, in: 100..10000, step: 100, value: 5000, id: 'distance-range-selector',
+                                     class: 'range-slider__range', type: 'range', disabled: true %>
+                <span class="range-slider__value">5000</span>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-6">
+          <div class="form-group">
+            <label class="form-label mr-2">Region</label>
+            <%= form.select('regions', all_regions, {}, {include_blank: true, multiple: true, class: 'multi-select',
+                                                         data: {'live-search': true, 'btn-class': 'form-control'}}) %>
+          </div>
+        </div>
+
+        <div class="col-6">
+          <div class="form-group">
+            <div class="form-group">
+              <label class="form-label mr-2">Languages</label>
+              <%= form.select('languages', all_languages, {}, {include_blank: true, multiple: true, class: 'multi-select',
+                                                               data: {'live-search': true, 'btn-class': 'form-control'}}) %>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-6">
+          <div class="form-group">
+            <label class="form-label mr-2">BEST MONTHS</label>
+            <%= form.select('months', all_months, {}, {include_blank: true, multiple: true, class: 'multi-select',
+                                                       data: {'live-search': true, 'btn-class': 'form-control'} }) %>
+          </div>
+        </div>
+
+        <div class="col-6">
+          <div class="form-group">
+            <div class="form-group">
+              <label class="form-label mr-2">Amenities</label>
+              <%= form.select('amenities', all_amenities, {}, {include_blank: true, multiple: true, class: 'multi-select',
+                                                               data: {'live-search': true, 'btn-class': 'form-control'} }) %>
+            </div>
           </div>
         </div>
       </div>
@@ -64,6 +76,41 @@
       </div>
       <br>
     <% end %>
+
   </div>
 </div>
 
+
+
+<script type="text/javascript">
+  $('.multi-select').extendSelect({
+    search: 'Find',
+    notSelectedTitle: 'ALL',
+    empty: 'Empty',
+    activeClass: 'bg-primary text-white',
+    disabledClass: 'bg-light'
+  });
+</script>
+
+<script type="text/javascript" charset="utf-8">
+  const settings={
+    fill: '#043ACB',
+    background: '#d7dcdf'
+  };
+
+  const sliders = document.querySelectorAll('.range-slider');
+  Array.prototype.forEach.call(sliders,(slider)=>{
+    slider.querySelector('input').addEventListener('input', (event)=>{
+      slider.querySelector('span').innerHTML = event.target.value;
+      applyFill(event.target);
+    });
+    applyFill(slider.querySelector('input'));
+  });
+
+  function applyFill(slider) {
+    const percentage = 100*(slider.value-slider.min)/(slider.max-slider.min);
+    const bg = `linear-gradient(90deg, ${settings.fill} ${percentage}%, ${settings.background} ${percentage+0.1}%)`;
+    slider.style.background = bg;
+  }
+
+</script>

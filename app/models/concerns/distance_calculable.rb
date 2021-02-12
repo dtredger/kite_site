@@ -13,7 +13,7 @@ module DistanceCalculable
 
   def coord_radians(coords)
     coords = get_obj_coords(coords) unless coords.is_a?(Hash)
-    return unless coords[:latitude] && coords[:longitude]
+    return unless coords && coords[:latitude] && coords[:longitude]
     radians = lambda { |deg| deg * PI / 180 }
     {lat: radians[coords[:latitude]], lng: radians[coords[:longitude]]}
   end

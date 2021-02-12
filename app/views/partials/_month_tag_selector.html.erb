@@ -1,11 +1,15 @@
-<!-- render 'partials/month_tag_selector', locals={month_tag_list: @kite_spot.month_tag_list} %> -->
+<!--locals={month_tag_list: @kite_spot.month_tag_list} %> -->
 
-<div class="btn-group flex-wrap" role="group" aria-label="Months">
-  <% %w[Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec].each do |month| %>
-    <% if month_tag_list.include? month %>
-      <div class="btn btn-success"><%= month %></div>
-    <% else  %>
-      <div class="btn btn-secondary"><%= month %></div>
-    <% end %>
+
+
+<% all_months.each do |month| %>
+  <% if month_tag_list.include? month %>
+    <p class="active p-3 font-weight-normal badge badge-secondary badge-pill">
+      <b><%= month %></b>
+    </p>
+  <% else %>
+    <p class="p-3 text-muted font-weight-normal badge badge-light badge-pill">
+    <b><%= month %></b>
+    </p>
   <% end %>
-</div>
+<% end %>

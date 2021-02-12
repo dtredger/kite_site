@@ -77,18 +77,20 @@ class LocationMap < ApplicationRecord
   end
 
 
-  def self.leaflet_map_details(obj_arr=[])
+  def self.leaflet_map_details(obj_arr=[], map_center=[40, 0])
     all_location_markers = []
-    if obj_arr.empty?
+    if !obj_arr || obj_arr.empty?
       public_maps.each do |loc_map|
         all_location_markers.push(loc_map.leaflet_marker)
       end
     else
-      all_location_markers = obj_arr
+      obj_arr.each do |model|
+        next unless model.respond_to?(:location_map)
+        all_location_markers.push(model.location_map.leaflet_marker)
+      end
     end
-
     { container_id: 'location_map',
-      center: { latlng: [40, 0] },
+      center: { latlng: map_center },
       zoom: '2',
       markers: all_location_markers }
   end

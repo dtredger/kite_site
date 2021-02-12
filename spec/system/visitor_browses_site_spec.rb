@@ -14,7 +14,7 @@ RSpec.describe 'VisitorBrowsesSite', type: :system do
     describe 'homepage' do
       it 'displays homepage' do
         visit '/'
-        expect(page).to have_css('.display-3', text: I18n.t('main_header'))
+        expect(page).to have_css('.display-3', text: I18n.t('site_name'))
       end
     end
 

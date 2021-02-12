@@ -1,0 +1,46 @@
+<section class="py-6 bg-gray-100">
+  <div class="container">
+    <h2 class="h4 mb-5">Contact form</h2>
+    <div class="row">
+      <div class="mb-5 mb-md-0 col-md-7">
+        <form class="">
+          <div class="controls">
+
+            <div class="form-group">
+              <label for="name" class="form-label">Your Name *</label>
+              <input name="name" id="name" placeholder="Enter your Name" required="" type="text" class="form-control">
+            </div>
+
+            <div class="form-group">
+              <label for="email" class="form-label">Your email *</label>
+              <input name="email" id="email" placeholder="Enter your email" required="" type="email" class="form-control">
+            </div>
+
+            <div class="form-group">
+              <label for="message" class="form-label">Your message for us *</label>
+              <textarea rows="4" name="message" id="message" placeholder="Enter your message" required="" class="form-control"></textarea>
+            </div>
+            <button type="submit" class="btn btn-outline-primary">Send message</button>
+          </div>
+        </form>
+      </div>
+      <div class="col-md-5">
+        <div class="pl-lg-4">
+          <div>
+            <p class="text-muted"><%= t('contact.first_block') %></p>
+            <p class="text-muted"><%= t('contact.second_block') %></p>
+          </div>
+          <div class="social">
+            <ul class="list-inline">
+              <!--<li class="list-inline-item"><a href="#" target="_blank"><i class="fab fa-twitter"></i></a></li>-->
+              <!--<li class="list-inline-item"><a href="#" target="_blank"><i class="fab fa-facebook"></i></a></li>-->
+              <!--<li class="list-inline-item"><a href="#" target="_blank"><i class="fab fa-instagram"></i></a></li>-->
+              <!--<li class="list-inline-item"><a href="#" target="_blank"><i class="fab fa-pinterest"></i></a></li>-->
+              <!--<li class="list-inline-item"><a href="#" target="_blank"><i class="fab fa-vimeo"></i></a></li>-->
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

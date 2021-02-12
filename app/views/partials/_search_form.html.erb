@@ -1,31 +1,35 @@
-<!--%= render 'partials/search_form', locals={months: @months} %>-->
+<div class="search-bar rounded p-3 p-lg-4 position-relative mt-n5 z-index-20">
+  <%= form_with(url: search_path, scope: :search, method: :get, local: true, class: 'form-validate') do |form| %>
+    <div class="row">
 
-<div class="">
-  <div class="row">
-
-    <div class="col-12">
-
-      <%= form_with(url: search_path, scope: :search, method: :get, local: true) do |form| %>
-        <%= form.label :name %>
+      <div class="d-flex align-items-center form-group col-lg-4">
         <% if params['search'] && params['search']['name'] %>
-          <%= form.text_field :name, placeholder: params['search']['name'], class: 'form-control' %>
+          <%= form.text_field :name, placeholder: params['search']['name'], class: 'border-0 shadow-0 form-control',
+                              required: true, autofocus: true %>
         <% else %>
-          <%= form.text_field :name, placeholder: '', class: 'form-control' %>
+          <%= form.text_field :name, placeholder: 'What are you searching for?', class: 'border-0 shadow-0 form-control',
+                              required: true, autofocus: true %>
         <% end %>
+      </div>
 
-        <% %w[Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec].each do |month| %>
-          <%= form.label month %>
-          <% if months && months.include?(month)  %>
-            <%= form.check_box "months[#{month}]", {checked: true} %>
-          <% else %>
-            <%= form.check_box "months[#{month}]", {checked: false} %>
-          <% end %>
-        <% end %>
+      <div class="d-flex align-items-center form-group col-md-6 col-lg-3">
+        <div class="input-label-absolute input-label-absolute-right w-100">
+          <label for="location" class="label-absolute">
+            <i class="fa fa-crosshairs"></i>
+            <span class="sr-only">City</span>
+          </label>
+          <%= form.text_field :location, placeholder: 'Your Location', class: 'border-0 shadow-0 form-control' %>
+        </div>
+      </div>
 
-        <%= form.submit 'Submit', {class: 'btn btn-primary'} %>
-      <% end %>
+      <div class="d-flex align-items-center form-group no-divider col-md-6 col-lg-3">
+        <%= form.select('category', ['All', 'Kite Spot', 'Country'], {class: 'dropdown bootstrap-select align-bottom', placeholder: 'Category'}, {class: 'select-style dropdown bootstrap-select align-bottom', placeholder: 'Category'}) %>
+      </div>
+
+      <div class="mb-0 col-lg-2">
+        <%= form.submit 'Search', class: 'btn-block h-100 btn btn-primary' %>
+      </div>
 
     </div>
-
-  </div>
+  <% end %>
 </div>

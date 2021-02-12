@@ -10,46 +10,30 @@
  * files in this directory. Styles in this file should be added after the last require_* statement.
  * It is generally better to create a new file per style scope.
  *
+
  *
+ *= require bootstrap_styles/app
+
+ *= require bootstrap-hardskilled-extend-select/css/select.min
+
  *= require leaflet
  *= require toastr
- *
- *= require_tree .
- *= require_self
+
+
+
+ *= require ekko-lightbox
+ *= require footer
+ *= require actiontext
+ *= require range-slider
+
  */
 
-
-.notice, .alert {
-  position: absolute;
-}
-
-body {
-  background-color: rgb(240,245,255);
-  min-height: 100vh;
-}
+/*
+/* dont use require_tree . or require_self.*/
 
 
-.background-image-gray {
-    height: 100%;
-    background: #999;
-    display: flex;
-    flex-direction: column;
-}
-.gray-zone {
-    height: 18vh;
-    background: #888;
-}
 
-.bottom-float-card {
-    background: #fff;
-    width: 100%;
-    margin-top: auto;
-    padding-top: auto;
-}
 
-a {
-    cursor: pointer;
-}
 
 /* kaminari pagination */
 .paginate-pad > * {
@@ -58,3 +42,63 @@ a {
 .paginate-pad > * > * {
     margin: 5px;
 }
+
+/*photo-gallery*/
+.grey-bg {
+    background-color: #9ab;
+}
+
+
+/*.notice, .alert {*/
+  /*position: absolute;*/
+/*}*/
+
+body {
+  /*background-color: rgb(240,245,255);*/
+  min-height: 100vh;
+}
+
+/* for select fields */
+button.dropdown-toggle {
+    border: 1px solid #ddd;
+}
+.dropdown-menu {
+    max-height: 500px;
+    overflow: scroll;
+}
+
+
+/*.background-image-gray {*/
+    /*height: 100%;*/
+    /*background: #999;*/
+    /*display: flex;*/
+    /*flex-direction: column;*/
+/*}*/
+/*.gray-zone {*/
+    /*height: 18vh;*/
+    /*background: #888;*/
+/*}*/
+
+/*.bottom-float-card {*/
+    /*background: #fff;*/
+    /*width: 100%;*/
+    /*margin-top: auto;*/
+    /*padding-top: auto;*/
+/*}*/
+
+/*a {*/
+    /*cursor: pointer;*/
+/*}*/
+
+
+
+
+
+/*.wind-iframe {*/
+  /*width: 100%;*/
+  /*height: 50vh;*/
+/*}*/
+/*.inactive {*/
+    /*background: gray;*/
+/*}*/
+

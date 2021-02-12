@@ -1,0 +1,58 @@
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="py-4 p-xl-5 col-lg-6">
+      <h2 class="mb-4">Search</h2>
+      <hr class="my-4">
+
+      <%= render 'form' %>
+
+      <hr class="my-4">
+      <div class="d-flex justify-content-between align-items-center flex-column flex-md-row mb-4">
+        <div class="mr-3">
+          <% if params[:search].present? && @countries.empty? && @kite_spots.empty? %>
+            <p class="mb-3 mb-md-0">No Matches Found</p>
+          <% else %>
+            <p class="mb-3 mb-md-0"><strong><%= @countries.count + @kite_spots.count %></strong>&nbsp;results found</p>
+          <% end %>
+        </div>
+
+        <div>
+          <%= form_with(url: search_advanced_path, scope: :search, method: :get, local: false) do |form| %>
+            <label class="form-label mr-2">Sort by</label>
+            <!--TODO - enable sorting-->
+            <%= form.select('results_sort', result_sort_options, {}, {class: 'custom-select mb-3', disabled: true}) %>
+          <% end %>
+          <script type="text/javascript" charset="utf-8">
+            // TODO - use onchange action on select tag
+            $('#search_results_sort').on('change', function() { this.form.submit() });
+          </script>
+        </div>
+      </div>
+      <div class="row">
+        <% @kite_spots.each do |kite_spot| %>
+          <div class="mb-5 hover-animate col-lg-6">
+            <%= render 'partials/components/kite_spot_card', locals={model: kite_spot} %>
+          </div>
+        <% end %>
+
+        <% @countries.each do |country| %>
+          <div class="d-flex align-items-lg-stretch mb-4 col-lg-6">
+            <%= render 'partials/components/rounded_image_card', locals = {model: country} %>
+          </div>
+        <% end %>
+      </div>
+
+      <div class="paginate-pad">
+        <%= paginate @kite_spots %>
+      </div>
+    </div>
+
+
+    <div class="map-side-lg pr-lg-0 col-lg-6">
+      <div class="map-full shadow-left leaflet-container leaflet-retina leaflet-fade-anim leaflet-grab leaflet-touch-drag" style="position: relative;" tabindex="0">
+        <%= render 'partials/leaflet_map', locals={map_markers: @map_markers} %>
+      </div>
+    </div>
+  </div>
+</div>

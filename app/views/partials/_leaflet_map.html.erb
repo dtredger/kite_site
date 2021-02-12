@@ -1,3 +1,10 @@
+<style>
+  #location_map {
+    height: 100%;
+    width: 100%;
+  }
+</style>
+
 <script>
   // Run this init hook to add the map global var to the window //
   L.Map.addInitHook(function () {
@@ -5,14 +12,15 @@
   });
 </script>
 
-<!--render 'partials/leaflet_map', locals={loc_map: @user.location_map} %> -->
-<div class="container-fluid">
-  <% if map_markers.any? %>
+<!--%= render 'partials/leaflet_map', locals={map_markers: @map_markers} %>-->
+<% if map_markers.any? %>
+  <div id="location_map">
     <%= map(map_markers) %>
-  <% else %>
-    <p>No Map</p>
-  <% end %>
-</div>
+  </div>
+<% else %>
+  <p>No Map</p>
+<% end %>
+
 
 
 <script type="text/javascript" charset="utf-8">

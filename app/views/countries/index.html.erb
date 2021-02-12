@@ -1,12 +1,28 @@
-<%= render 'partials/sticky_filter_bar' %>
-<br>
-
-<div class="container">
-
-  <%= render 'partials/main_grid', locals = {resource: @countries} %>
-
-  <div class="navbar-light bg-light card paginate-pad">
-    <%= paginate @countries %>
+<section class="pt-6">
+  <div class="container">
+    <div class="row mb-6">
+      <div class="col-lg-8">
+        <h2><%= t('countries.index_page.header') %></h2>
+        <p class="text-muted mb-0">
+          <%= t('countries.index_page.subtitle') %>
+        </p>
+      </div>
+    </div>
   </div>
 
-</div>
+  <div class="row">
+    <% @countries.each do |model| %>
+      <div class="col col-xs-6 col-lg-4 col-xl-3 px-0">
+        <%= render 'partials/components/country_card', locals = {model: model} %>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="col-8">
+    <br>
+    <div class="paginate-pad">
+      <%= paginate @countries %>
+    </div>
+  </div>
+  <br>
+</section>

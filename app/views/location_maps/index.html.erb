@@ -1,10 +1,7 @@
-<%= render 'partials/sticky_filter_bar' %>
-
-
-<!-- end header sticky -->
-<div class="container">
-  <%= render 'partials/leaflet_map', locals={map_markers: @global_map_markers} %>
-</div>
-
-
-
+<section>
+  <div class="map-wrapper-450">
+    <div class="h-100 leaflet-container leaflet-retina leaflet-fade-anim leaflet-grab leaflet-touch-drag" style="position: relative;" tabindex="0">
+      <%= render 'partials/leaflet_map', locals={map_markers: @global_map_markers} %>
+    </div>
+  </div>
+</section>

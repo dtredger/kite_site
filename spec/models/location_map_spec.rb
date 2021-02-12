@@ -46,18 +46,34 @@ RSpec.describe LocationMap, type: :model do
   describe 'methods' do
     context 'Class' do
       describe '#leaflet_map_details' do
-        before do
-          create_list(:location_map_for_country, 5)
+        context 'all public locations' do
+          before { create_list(:location_map_for_country, 5) }
+
+          it 'returns markers for all locations' do
+            expect(described_class.leaflet_map_details[:markers].count).to eq(5)
+          end
+
+          it 'does not map users' do
+            user.create_location_map
+            expect(described_class.leaflet_map_details[:markers].count).to eq(5)
+          end
         end
 
-        it 'returns markers for all locations' do
-          expect(described_class.leaflet_map_details[:markers].count).to eq(5)
+        context 'given models' do
+          it 'creates markers for given models' do
+            kite_spot = create(:kite_spot, latitude: 1, longitude: 2)
+            kite_spot.create_location_map
+            map_details = described_class.leaflet_map_details([kite_spot])
+            expect(map_details[:markers]).to match([
+                       {latlng: [1.0, 2.0],
+                        popup: "<a href='http://localhost:3000/kite-spots/kite_spot_1'>kite_spot_1</a>"}
+                                                   ])
+          end
         end
 
-        it 'does not map users' do
-          user.create_location_map
-          expect(described_class.leaflet_map_details[:markers].count).to eq(5)
-        end
+
+
+
       end
     end
 

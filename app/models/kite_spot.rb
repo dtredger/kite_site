@@ -65,6 +65,14 @@ class KiteSpot < ApplicationRecord
     country.region
   end
 
+  def closest_city
+    'Close City'
+  end
+
+  def defining_feature
+    'Waves and flat Water'
+  end
+
   def wind_information
     zoom = 5
     {
@@ -83,7 +91,9 @@ class KiteSpot < ApplicationRecord
 
   # for grid card
   def cover_photo
-    photos.first
+    if photos.any?
+      photos.first
+    end
   end
 
   # for #show page gallery
