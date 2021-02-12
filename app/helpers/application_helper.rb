@@ -29,4 +29,8 @@ module ApplicationHelper
     [:English, :French, :Spanish, :Italian, :German]
   end
 
+  def result_sort_options
+    ['Best Match', 'Alphabetical', 'Alphabetical by Country']
+  end
+
 end

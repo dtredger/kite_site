@@ -3,7 +3,9 @@
 // a relevant structure within app/javascript and only use these pack files to reference
 // that code so it'll be compiled.
 
-require("@rails/ujs").start()
+global.Rails = require("@rails/ujs")
+Rails.start()
+
 require("turbolinks").start()
 require("@rails/activestorage").start()
 require("channels")
@@ -27,6 +29,7 @@ require("@rails/actiontext")
 require('packs/action-text-files')
 
 require("ekko-lightbox")
+require("bootstrap-hardskilled-extend-select/js/select.min")
 
 global.toastr = require("toastr")
 global.toastr.options = {
@@ -64,5 +67,5 @@ document.addEventListener('turbolinks:load', function(event) {
 //  require(path.resolve(file));
 //});
 require("packs/partials/wind-info");
-
 require("packs/partials/photo-gallery");
+require("packs/bootstrap-forms");

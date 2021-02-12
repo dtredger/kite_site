@@ -14,7 +14,9 @@
 
 <!--%= render 'partials/leaflet_map', locals={map_markers: @map_markers} %>-->
 <% if map_markers.any? %>
-  <%= map(map_markers) %>
+  <div id="location_map">
+    <%= map(map_markers) %>
+  </div>
 <% else %>
   <p>No Map</p>
 <% end %>

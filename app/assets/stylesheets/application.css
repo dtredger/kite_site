@@ -14,6 +14,8 @@
  *
  *= require bootstrap_styles/app
 
+ *= require bootstrap-hardskilled-extend-select/css/select.min
+
  *= require leaflet
  *= require toastr
 
@@ -22,6 +24,7 @@
  *= require ekko-lightbox
  *= require footer
  *= require actiontext
+ *= require range-slider
 
  */
 
@@ -53,6 +56,15 @@
 body {
   /*background-color: rgb(240,245,255);*/
   min-height: 100vh;
+}
+
+/* for select fields */
+button.dropdown-toggle {
+    border: 1px solid #ddd;
+}
+.dropdown-menu {
+    max-height: 500px;
+    overflow: scroll;
 }
 
 
@@ -90,5 +102,3 @@ body {
     /*background: gray;*/
 /*}*/
 
-
-/*ekko*/

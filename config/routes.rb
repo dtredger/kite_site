@@ -20,8 +20,7 @@ Rails.application.routes.draw do
   get 'global-map',       to: 'location_maps#index'
   get 'region',           to: 'location_maps#show'
 
-  get 'search',           to: 'searches#search'
-  get 'search/index',     to: 'searches#index'
+  get 'search',           to: 'searches#index'
   get 'search/advanced',  to: 'searches#show'
 
   get 'contact',          to: 'pages#contact'
