@@ -46,6 +46,17 @@ RSpec.describe User, type: :model do
   let(:admin) { create(:admin) }
   let(:user) { create(:user) }
 
+  context 'methods' do
+    describe 'favorites' do
+      let(:kite_spot) { create(:kite_spot) }
+
+      it 'saves favorites' do
+        expect{
+          user.favorite(kite_spot)
+        }.to change(user.favorites, :count).by(1)
+      end
+    end
+  end
 
   context 'permissions' do
     it 'sets admin email to admin' do

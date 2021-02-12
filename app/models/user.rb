@@ -45,6 +45,7 @@ class User < ApplicationRecord
   include DistanceCalculable
 
   has_one :location_map, as: :record, dependent: :destroy
+  acts_as_favoritor
 
   validates_uniqueness_of :email
   # disable token auth (for api)for now

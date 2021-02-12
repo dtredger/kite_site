@@ -66,6 +66,19 @@ RSpec.describe KiteSpot, type: :model do
     end
   end
 
+  let(:user) { create(:user) }
+
+  context 'methods' do
+    describe 'favorites' do
+      let(:user) { create(:user) }
+
+      it 'is favoritable' do
+        user.favorite(kite_spot)
+        expect(kite_spot.favoritors).to eq([user])
+      end
+    end
+  end
+
   context 'search' do
     describe 'name' do
       it 'returns all partial matches' do

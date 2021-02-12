@@ -35,6 +35,7 @@ class KiteSpot < ApplicationRecord
   has_many_attached :photos
   has_one :location_map, as: :record, dependent: :destroy
   has_rich_text :content
+  acts_as_favoritable
 
   scope :find_months, ->(months) { tagged_with(months, any: true) }
   scope :find_amenities, ->(amenities) { tagged_with(amenities, any: true) }
