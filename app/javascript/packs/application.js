@@ -68,4 +68,4 @@ document.addEventListener('turbolinks:load', function(event) {
 //});
 require("packs/partials/wind-info");
 require("packs/partials/photo-gallery");
-require("packs/bootstrap-forms");
+//require("packs/bootstrap-forms");

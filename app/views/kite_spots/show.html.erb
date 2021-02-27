@@ -88,9 +88,16 @@
             <% end %>
           </p>
           <hr class="my-4">
-          <div class="text-center">
-            <%= render 'partials/components/favourites_form' %>
+          <div class="row">
+
+            <div class="col-2">
+              <%= render 'favorites/form', locals={model: @kite_spot} %>
+            </div>
+            <div class="col-10">
+              <p>Save this Kite Spot to your Favourites</p>
+            </div>
           </div>
+
         </div>
       </div>
     </div>

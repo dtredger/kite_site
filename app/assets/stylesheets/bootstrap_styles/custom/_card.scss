@@ -51,6 +51,15 @@
     }
 }
 
+.card-fav-icon-faved {
+  background-color: red;
+
+  &:hover {
+    opacity: .7;
+    background: $gray-800;
+  }
+}
+
 
 .card-highlight {
     margin-top: -2rem;

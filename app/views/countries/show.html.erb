@@ -71,7 +71,7 @@
               </table>
 
               <hr class="my-4">
-              <p class="text-center">
+              <p class="">
                 <% if current_user %>
                   <% if current_user.coordinates? %>
                     This spot is
@@ -84,8 +84,14 @@
                   <%= link_to 'Sign Up', new_user_registration_path %> to see how far this spot is from you.
                 <% end %>
               </p>
-              <div class="text-center">
-                <%= render 'partials/components/favourites_form' %>
+              <hr class="my-4">
+              <div class="row">
+                <div class="col-2">
+                  <%= render 'favorites/form', locals={model: @country} %>
+                </div>
+                <div class="col-10">
+                  <p>Save this Country to your Favourites</p>
+                </div>
               </div>
             </div>
           </div>
