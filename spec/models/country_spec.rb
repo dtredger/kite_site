@@ -45,6 +45,17 @@ RSpec.describe Country, type: :model do
     end
   end
 
+  context 'methods' do
+    describe 'favorites' do
+      let(:user) { create(:user) }
+
+      it 'is favoritable' do
+        user.favorite(country)
+        expect(country.favoritors).to eq([user])
+      end
+    end
+  end
+
   describe 'dependent actions' do
     it 'destroys associated LocationMap' do
       loc_map_country = create(:country)

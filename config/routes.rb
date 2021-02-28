@@ -13,6 +13,7 @@ Rails.application.routes.draw do
 
   devise_for :users, controllers: { registrations: 'users/registrations' }
   get 'profile',          to: 'users/profiles#index'
+  get 'faves',            to: 'users/profiles#show'
 
   resources :kite_spots, path: '/kite-spots'
   resources :countries
@@ -22,6 +23,8 @@ Rails.application.routes.draw do
 
   get 'search',           to: 'searches#index'
   get 'search/advanced',  to: 'searches#show'
+
+  post 'favorite',        to: 'favorites#update'
 
   get 'contact',          to: 'pages#contact'
   get 'faq',              to: 'pages#faq'

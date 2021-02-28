@@ -34,10 +34,9 @@ class Country < ApplicationRecord
   has_many :kite_spots, dependent: :nullify
   has_one :location_map, as: :record, dependent: :destroy
   has_rich_text :content
+  acts_as_favoritable
 
   enum region: ['Europe', 'Caribbean', 'South America', 'Asia', 'Africa', 'North America', 'ANZA/Pacific', 'Middle East']
-
-
 
   enum language: [:English, :French, :Spanish, :Italian, :German]
 

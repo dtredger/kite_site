@@ -13,6 +13,16 @@ module ApplicationHelper
     'kite-south-africa-md'
   end
 
+  # TODO - name of resource in page title
+  def page_title
+    if controller_name
+      "#{controller_name.humanize} - #{I18n.t('site_name')}"
+    else
+      I18n.t('site_name')
+    end
+
+  end
+
   def all_months
     %w[Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec]
   end

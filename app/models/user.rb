@@ -45,6 +45,7 @@ class User < ApplicationRecord
   include DistanceCalculable
 
   has_one :location_map, as: :record, dependent: :destroy
+  acts_as_favoritor
 
   validates_uniqueness_of :email
   # disable token auth (for api)for now
@@ -79,7 +80,7 @@ class User < ApplicationRecord
   end
 
   def location
-    'Cool City, Mongolia'
+    ''
   end
 
   def profile_picture
@@ -95,7 +96,7 @@ class User < ApplicationRecord
   end
 
   def profile_text
-    "Samsa was a travelling salesman - and above it there hung a picture that he had recently cut out of an illustrated magazine and housed in a nice, gilded frame. He must have tried it a hundred times, shut his eyes so that he wouldn't have to look at the floundering legs, and only stopped when he began to feel a mild, dull pain there that he had never felt before."
+    ''
   end
 
 
@@ -117,6 +118,14 @@ class User < ApplicationRecord
     end
   end
 
+  def favorite_kite_spots
+    kite_faves = favorites_by_type('KiteSpot')
+    KiteSpot.find(kite_faves.map(&:favoritable_id))
+  end
 
+  def favorite_countries
+    country_faves = favorites_by_type('Country')
+    Country.find(country_faves.map(&:favoritable_id))
+  end
 
 end
