@@ -6,10 +6,11 @@
 #
 #  id          :bigint           not null, primary key
 #  description :text
+#  language    :integer
 #  latitude    :float
 #  longitude   :float
 #  name        :text
-#  region      :text
+#  region      :integer
 #  slug        :string
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
@@ -44,10 +45,22 @@ RSpec.describe Country, type: :model do
     end
   end
 
+  context 'methods' do
+    describe 'favorites' do
+      let(:user) { create(:user) }
+
+      it 'is favoritable' do
+        user.favorite(country)
+        expect(country.favoritors).to eq([user])
+      end
+    end
+  end
+
   describe 'dependent actions' do
     it 'destroys associated LocationMap' do
-      country_with_location_map
-      expect { country_with_location_map.destroy }.to change(LocationMap, :count).by(-1)
+      loc_map_country = create(:country)
+      loc_map_country.create_location_map
+      expect { loc_map_country.destroy }.to change(LocationMap, :count).by(-1)
     end
 
     it 'does not destroy associated KiteSpots' do
@@ -74,6 +87,28 @@ RSpec.describe Country, type: :model do
         spot.save
 
         expect(described_class.month_search(%w[Mar Apr]).count).to eq(1)
+      end
+    end
+
+    describe 'region' do
+      it 'returns matching regions' do
+        aruba = create(:country, name: 'Aruba', region: 'Caribbean')
+        barbuda = create(:country, name: 'Barbuda', region: 'Caribbean')
+        create(:country, name: 'Argentina', region: 'South America')
+        create(:country, name: 'USA', region: 'North America')
+
+        expect(described_class.region_search(['Caribbean'])).to eq([aruba, barbuda])
+      end
+    end
+  end
+
+  context 'scopes' do
+    describe 'max_distance' do
+      it 'filters countries' do
+        target = {latitude: 0, longitude: 0}
+        fifteen_hundred_km = create(:country, latitude: 10, longitude: 10)
+        three_thousand_km = create(:country, latitude: 20, longitude: 20)
+        expect(described_class.max_distance(2000, target)).to eq([fifteen_hundred_km])
       end
     end
   end

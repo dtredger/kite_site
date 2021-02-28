@@ -1,15 +1,11 @@
-<!-- %= render 'partials/photo_gallery', locals={resource: @kite_spot} %> -->
-
-<style>
-  .grey-bg {
-    background-color: #9ab;
-  }
-</style>
-
+<!-- %= render 'partials/photo_gallery', locals={photos: @resource.photos} %> -->
 <div class="row">
-  <% resource.header_photos.each do |photo| %>
-    <div class="col p-0 grey-bg">
-      <%= image_tag photo.variant(resize_to_fill: [550, 450]), class: 'img-fluid text-center' %>
+  <% photos.each do |photo| %>
+    <div class="col-lg-3 col-md-4 col-6 pb-4">
+      <a href="<%= url_for(photo) %>" class="col"
+         data-toggle="lightbox" data-type="image" data-gallery="lightbox-gallery">
+        <%= image_tag photo.variant(resize_to_fill: [550, 450]), class: 'img-fluid text-center' %>
+      </a>
     </div>
   <% end %>
 </div>

@@ -21,23 +21,18 @@
 require 'rails_helper'
 
 RSpec.describe LocationMap, type: :model do
+  let(:user) { create(:user) }
   let(:location_map_for_kite_spot) { create(:location_map_for_kite_spot) }
 
   describe 'relations' do
-    it 'requires name' do
-      expect do
-        create(:location_map_for_country, name: '')
-      end.to raise_error(ActiveRecord::RecordInvalid)
-    end
-
-    it 'requires lat/lon' do
-      expect do
-        create(:location_map_for_country, latitude: nil, longitude: nil)
-      end.to raise_error(ActiveRecord::RecordInvalid)
-    end
-
     it 'polymorphic belongs_to Record' do
       expect(subject).to respond_to :record
+    end
+
+    it 'validates coordinates of parent Record' do
+      user = create(:user, latitude: nil, longitude: nil)
+      invalid_map = user.create_location_map
+      expect(invalid_map).not_to be_valid
     end
 
     describe 'dependent actions' do
@@ -50,14 +45,32 @@ RSpec.describe LocationMap, type: :model do
 
   describe 'methods' do
     context 'Class' do
-      describe '#all_spots_map' do
-        before do
-          create_list(:location_map_for_country, 5)
+      describe '#leaflet_map_details' do
+        context 'all public locations' do
+          before { create_list(:location_map_for_country, 5) }
+
+          it 'returns markers for all locations' do
+            expect(described_class.leaflet_map_details[:markers].count).to eq(5)
+          end
+
+          it 'does not map users' do
+            user.create_location_map
+            expect(described_class.leaflet_map_details[:markers].count).to eq(5)
+          end
         end
 
-        it 'returns markers for all locations' do
-          expect(described_class.all_spots_map[:markers].count).to eq(5)
+        context 'given models' do
+          it 'creates markers for given models' do
+            kite_spot = create(:kite_spot, latitude: 1, longitude: 2)
+            kite_spot.create_location_map
+            map_details = described_class.leaflet_map_details([kite_spot])
+            expect(map_details[:markers].first[:latlng]).to match([1.0, 2.0])
+          end
         end
+
+
+
+
       end
     end
 
@@ -74,7 +87,7 @@ RSpec.describe LocationMap, type: :model do
         it 'returns correct URL' do
           loc_map = create(:location_map_for_kite_spot)
           slug = loc_map.record.slug
-          expect(loc_map.popup_link).to eq("<a href='http://localhost:3000/kite_spots/#{slug}'>#{loc_map.record.name}</a>")
+          expect(loc_map.popup_link).to eq("<a href='http://localhost:3000/kite-spots/#{slug}'>#{loc_map.record.name}</a>")
         end
       end
     end

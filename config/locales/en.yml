@@ -30,6 +30,37 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
-  main_header: 'TBA Kite Site'
+  site_name: 'TBA Kite Site'
   main_header_subtitle: 'Site Subtitle'
   kitespot_month_filter_header: 'Search Spots by Month'
+  kite_spots:
+    subtitle: 'Find the perfect location'
+    header: 'Kite Spots'
+    best_months_subtitle: 'Best time to visit'
+    amenity_subtitle: 'Available at this location'
+  countries:
+    header: 'Countries'
+    index_page:
+      header: 'All Countries'
+      subtitle: 'Search for your next destination from among dozens of countries'
+    show:
+      sidebar_subtitle: 'At a glance'
+      sidebar_title: 'Quick Details'
+  footer:
+    copyright_notice: '© TBA Kite Site, 2021.'
+    site_description: 'Sign up to find your next Kiteboarding Destination'
+    email_field_header: 'Join our email list'
+    email_field_description: 'Enter your email to be part of periodic giveaways? No, this is to catch spam bots.'
+  contact:
+    first_block: 'Thank you for visiting this site. The intent is to be a resource for people looking for kiteboarding destinations around the world. Eventually the goal is to be the first stop for people who are looking to get into the sport, but are not able to learn locally. If you have ideas for features that would further this goal, please let us know.'
+    second_block: 'The information here is meant to be informative but is not guaranteed to be perfect or always up-to-date. If you are an expert on a specific location, please sign up and offer suggestions if you think something is inaccurate or incomplete. If you have other comments or criticisms, or are a spam bot, please use the contact form.'
+  regions:
+    blurbs:
+      europe: 'From snow-kiting the glaciers of Norway to the sparkling coastal waters of the Adriatic Sea, densely-populated Europe offers an array of opportunities and abundant facilities for all levels.'
+      caribbean: 'These sandy, sun-drenched islands offer travellers (and locals) warm conditions and mostly moderate breezes that are perfect for kiteboarding.'
+      south_america: 'With two different coasts to choose from, and kiteable locations up and down both of them, there are destinations both accessible and remote'
+      asia: 'The most different countries, possibly the widest range of conditions. From chasing winter storms in Taiwan to gliding along the sandy beaches of Sri Lanka, Asia offers an possibilities'
+      africa: 'The big-air destinations of South Africa share the same continent as the speed-record destinations in Namibia, and the crystalline waters of Mauritius.'
+      north_america: 'The giant climactic range of North America creates opportunities, from foil racing hotspots in San Francisco or La Ventana, the sun and surf of the Southern US, or frozen lakes and slopes in the central US and Canada in winter.'
+      anza_pacific: 'This region bundles together the sailing-crazy nations of Australia and New Zealand, as well as the island nations of oceania. Sun and sand is common to all, with destinations as remote as you are willing to venture to.'
+      middle_east: ''

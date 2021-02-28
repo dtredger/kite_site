@@ -33,4 +33,18 @@
       max-width: 100% !important;
     }
   }
+
+  //.text-muted style
+  color: #868e96 !important;
+  //.font-weight-light
+  font-weight: 300 !important;
+
+  strong {
+    margin-bottom: 1rem !important;
+    font-size: 1rem;
+    color: #212529;
+    font-family: "Poppins", sans-serif;
+    font-weight: 700;
+    line-height: 1.3;
+  }
 }

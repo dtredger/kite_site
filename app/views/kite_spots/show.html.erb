@@ -1,52 +1,114 @@
-<%= render 'partials/sticky_filter_bar' %>
+<%= render 'partials/components/gallery_jumbo', locals={photos: @kite_spot.header_photos} %>
 
-<%= render 'partials/photo_gallery', locals={resource: @kite_spot} %>
-<br>
+<section>
+  <div class="container py-5">
+    <div class="row">
+      <div class="col-lg-8">
+        <p class="text-primary">
+          <i class="fa-map-marker-alt fa mr-1"></i>
+          <%= link_to "#{@kite_spot.closest_city}, #{@kite_spot.country.name}", @kite_spot.country %>
+        </p>
 
-<div class="container card">
-  <h3 class="kitespot-name"><%= @kite_spot.name %></h3>
-  <h5><%= link_to @kite_spot.country.name, @kite_spot.country %></h5>
-  <br>
+        <h1><%= @kite_spot.name %></h1>
 
-  <!-- months selector -->
-  <div class="row">
-    <div class="col-12">
-      <h5>Best Months</h5>
-      <%= render 'partials/month_tag_selector', locals={month_tag_list: @kite_spot.month_tag_list} %>
+        <div class="text-muted text-uppercase mb-4">
+          <%= @kite_spot.defining_feature %>
+        </div>
+
+        <div class="text-block">
+          <p class="subtitle text-sm text-primary mb-4"><%= t('kite_spots.best_months_subtitle') %></p>
+          <%= render 'partials/month_tag_selector', locals={month_tag_list: @kite_spot.month_tag_list} %>
+        </div>
+
+        <div class="text-block">
+          <%= @kite_spot.content %>
+        </div>
+
+        <div class="text-block">
+          <h4 class="mb-0">Amenities</h4>
+          <p class="subtitle text-sm text-primary mb-4"><%= t('kite_spots.amenity_subtitle') %></p>
+          <ul class="list-inline">
+            <% @kite_spot.amenities.each do |amenity| %>
+              <li class="list-inline-item mb-2">
+                <%= link_to root_path do %>
+                  <p class="p-3 text-muted font-weight-normal badge badge-light badge-pill">
+                    <b><%= amenity %></b>
+                  </p>
+                <% end %>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+
+        <div class="text-block">
+          <h3 class="mb-4">Location</h3>
+          <div class="map-wrapper-450 mb-3">
+            <%= render 'partials/leaflet_map', locals={map_markers: @kite_spot.location_map.leaflet_map_details} %>
+          </div>
+        </div>
+
+        <div class="text-block">
+          <h3 class="mb-4">Gallery</h3>
+          <div class="row ml-n1 mr-n1">
+            <%= render 'partials/photo_gallery', locals={photos: @kite_spot.photos} %>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="col-lg-4">
+        <div style="top:100px" class="p-4 shadow ml-lg-4 rounded sticky-top">
+
+          <!--<p class="text-muted"><span class="text-primary h2">$120</span> per night</p>-->
+          <!--<hr class="my-4">-->
+          <!--<form id="booking-form" method="get" action="#" autocomplete="off" class="form">-->
+            <!--<div class="form-group"><label class="form-label">Your stay *</label>-->
+              <!--<div class="DateRangePicker DateRangePicker_1 DateRangePicker__block DateRangePicker__block_2">-->
+               <!-- -->
+              <!--</div>-->
+            <!--</div>-->
+            <!--<div class="mb-4 form-group">-->
+              <!--<label for="guests" class="form-label">Guests *</label><select name="guests" id="guests" class="form-control">-->
+              <!--<option value="1">1 Guest</option>-->
+            <!--</select></div>-->
+            <!--<div class="form-group"><button type="submit" class="btn btn-primary btn-block">Book your stay</button></div>-->
+          <!--</form>-->
+
+          <p class="text-muted text-sm text-center">
+            <% if current_user %>
+              <% if current_user.coordinates? %>
+                This spot is
+                <b><%= current_user.haversine_distance(@kite_spot) %></b>
+                KM away from you.
+              <% else %>
+                <%= link_to 'Set your Location', edit_user_registration_path %> to see how far this spot is from you.
+              <% end %>
+            <% else %>
+              <%= link_to 'Sign Up', new_user_registration_path %> to see how far this spot is from you.
+            <% end %>
+          </p>
+          <hr class="my-4">
+          <div class="row">
+
+            <div class="col-2">
+              <%= render 'favorites/form', locals={model: @kite_spot} %>
+            </div>
+            <div class="col-10">
+              <p>Save this Kite Spot to your Favourites</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
     </div>
+
+    <!--<br>-->
+    <!--<hr>-->
+    <!--<div class="text-muted text-small mb-4">-->
+      <!--Last updated at <%= @kite_spot.updated_at.strftime('%m %d, %Y') %> (timedelta) days ago-->
+    <!--</div>-->
+
   </div>
-  <br>
-  <br>
+</section>
 
-  <!-- content & map -->
-  <div class="row">
-    <div class="col-md-5">
-      <%= @kite_spot.content %>
-    </div>
-    <div class="col-md-7">
-      <%= render 'partials/leaflet_map', locals={loc_map: @kite_spot.location_map} %>
-    </div>
-  </div>
-  <br>
-
-  <h4>Amenities</h4>
-  <br>
-  <!-- amenities -->
-  <div class="row">
-    <div class="col-12">
-      <ul class="nav nav-pills">
-        <% @kite_spot.amenities.each do |amenity| %>
-          <li class="card" style="color: white; background-color: #497; margin: 4px; padding: 4px 8px"><%= amenity
-          %></li>
-        <% end %>
-      </ul>
-    </div>
-  </div>
-  <br>
-
-  <!-- wind-info -->
-  <%= render 'partials/wind_info', locals={resource: @kite_spot} %>
-  <br>
-  <br>
-
-</div>
+<!--%= render 'partials/wind_info', locals={resource: @kite_spot} %>-->

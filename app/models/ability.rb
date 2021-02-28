@@ -42,6 +42,7 @@ class Ability
 
   def registered_user_rules
     can :read, :all
+    can :manage, Favorite
   end
 
   def guest_rules

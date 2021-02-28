@@ -22,7 +22,7 @@
 #
 FactoryBot.define do
   factory :kite_spot do
-    country
+    association :country, factory: :country_with_map
     sequence(:name) { |x| "kite_spot_#{x}" }
     sequence(:description) do |x|
       "description #{x} for kite spots"

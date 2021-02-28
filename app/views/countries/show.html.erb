@@ -1,7 +1,4 @@
-<%= render 'partials/sticky_filter_bar' %>
-
-<%= render 'partials/photo_gallery', locals={resource: @country} %>
-
+<%= render 'partials/components/gallery_jumbo', locals={photos: @country.header_photos} %>
 <br>
 
 <div class="container">
@@ -13,28 +10,96 @@
     </div>
 
     <div class="col-12 col-lg-6">
-      <%= render 'partials/leaflet_map', locals={loc_map: @country.location_map} %>
+      <%= render 'partials/leaflet_map', locals={map_markers: @country.location_map.leaflet_map_details} %>
     </div>
-  </div>
-  <hr>
 
-  <div class="row">
-    <div class="col-12">
-      <h5>Best Months in <%= @country.name %></h5>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-12">
-      <%= render 'partials/month_tag_selector', locals={month_tag_list: @country.month_tag_list} %>
-    </div>
-  </div>
-  <hr>
+    <div class="row mt-4">
+      <div class="col-lg-8">
+        <div class="text-block">
+            <h5>Best Months in <%= @country.name %></h5>
+            <%= render 'partials/month_tag_selector', locals={month_tag_list: @country.month_tag_list} %>
+        </div>
 
-  <div class="row">
-    <div class="col-12">
-      <h5>Kite Spots in <%= @country.name %></h5>
+        <div class="text-block">
+          <h3 class="mb-4">Gallery</h3>
+          <div class="row ml-n1 mr-n1">
+            <%= render 'partials/photo_gallery', locals={photos: @country.photos} %>
+          </div>
+        </div>
+
+        <div class="text-block">
+          <h3 class="mb-4">Kite Spots in <%= @country.name %></h3>
+          <div class="row ml-n1 mr-n1">
+            <% @country.kite_spots.each do |kite_spot| %>
+              <div class="col col-sm-6 mb-4 hover-animate">
+                <%= render 'partials/components/kite_spot_card', locals={model: kite_spot} %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-4">
+        <div class="pl-xl-4 sticky-top mb-5" style="top:100px;">
+          <div class="border-0 shadow mb-5 card">
+            <div class="bg-gray-100 py-4 border-0 card-header">
+              <div class="align-items-center media">
+                <div class="media-body">
+                  <p class="subtitle text-sm text-primary"><%= @country.name %> </p>
+                  <h4 class="mb-0"><%= t('countries.show.sidebar_title') %></h4>
+                </div><svg class="svg-icon svg-icon-light w-3rem h-3rem ml-3 text-muted">
+                <use xlink:href="<%= image_url('svg/orion-svg-sprite.svg#map-location-1') %>"></use>
+              </svg>
+              </div>
+            </div>
+            <div class="card-body">
+              <table class="text-sm mb-0 table">
+                <tbody>
+                <tr>
+                  <th class="pl-0 border-0">Region</th>
+                  <td class="pr-0 text-right border-0"><%= @country.region %></td>
+                </tr>
+                <tr>
+                  <th class="pl-0 border-0">Most-Spoken Language</th>
+                  <td class="pr-0 text-right border-0"><%= @country.language %></td>
+                </tr>
+                <tr>
+                  <th class="pl-0 border-0">Currency</th>
+                  <td class="pr-0 text-right border-0"><%= @country.currency %></td>
+                </tr>
+                </tbody>
+              </table>
+
+              <hr class="my-4">
+              <p class="">
+                <% if current_user %>
+                  <% if current_user.coordinates? %>
+                    This spot is
+                    <b><%= current_user.haversine_distance(@kite_spot) %></b>
+                    KM away from you.
+                  <% else %>
+                    <%= link_to 'Set your Location', edit_user_registration_path %> to see how far this spot is from you.
+                  <% end %>
+                <% else %>
+                  <%= link_to 'Sign Up', new_user_registration_path %> to see how far this spot is from you.
+                <% end %>
+              </p>
+              <hr class="my-4">
+              <div class="row">
+                <div class="col-2">
+                  <%= render 'favorites/form', locals={model: @country} %>
+                </div>
+                <div class="col-10">
+                  <p>Save this Country to your Favourites</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
     </div>
   </div>
-  <%= render 'partials/main_grid', locals = {resource: @country.kite_spots} %>
 
 </div>

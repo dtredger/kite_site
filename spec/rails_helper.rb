@@ -88,4 +88,5 @@ end
 
 Capybara.configure do |config|
   # config.server = :webrick
+  config.raise_server_errors = false
 end

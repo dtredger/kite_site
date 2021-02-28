@@ -16,16 +16,18 @@
 #  failed_attempts        :integer          default(0), not null
 #  last_sign_in_at        :datetime
 #  last_sign_in_ip        :string
+#  latitude               :float
 #  locked_at              :datetime
+#  longitude              :float
 #  name                   :string
 #  provider               :string           default("email"), not null
+#  region                 :string
 #  remember_created_at    :datetime
 #  reset_password_sent_at :datetime
 #  reset_password_token   :string
-#  role                   :string
+#  role                   :integer
 #  sign_in_count          :integer          default(0), not null
 #  tokens                 :json
-#  uid                    :string           default(""), not null
 #  unconfirmed_email      :string
 #  unlock_token           :string
 #  created_at             :datetime         not null
@@ -36,13 +38,15 @@
 #  index_users_on_confirmation_token    (confirmation_token) UNIQUE
 #  index_users_on_email                 (email) UNIQUE
 #  index_users_on_reset_password_token  (reset_password_token) UNIQUE
-#  index_users_on_uid_and_provider      (uid,provider) UNIQUE
 #  index_users_on_unlock_token          (unlock_token) UNIQUE
 #
 FactoryBot.define do
   factory :user do
     email { 'test@email.com' }
     password { '123123123' }
+
+    latitude { 44.44 }
+    longitude { 33.33 }
 
     factory :admin do
       role { 'admin' }

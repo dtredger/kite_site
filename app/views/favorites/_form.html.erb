@@ -1,0 +1,63 @@
+<!-- locals={model: model} -->
+
+<% if current_user && model.favorited_by?(current_user)%>
+  <%= form_with(url: favorite_path, scope: :favorite, method: :post,
+                local: false, id: "favorite-#{model.slug}",
+                class: 'unfavorite-heart-form') do |form| %>
+    <%= form.hidden_field :model_name, value: model.class, id: nil %>
+    <%= form.hidden_field :id, value: model.id, id: nil %>
+    <%= form.hidden_field :status, value: 'remove', id: nil %>
+
+    <a href="#" class="card-fav-icon card-fav-icon-faved position-relative z-index-40" onclick="event.preventDefault()">
+      <svg class="svg-icon text-white">
+        <use xlink:href="<%= image_url('svg/orion-svg-sprite.svg#heart-1') %>"></use>
+      </svg>
+    </a>
+  <% end %>
+
+<% elsif current_user %>
+  <%= form_with(url: favorite_path, scope: :favorite, method: :post,
+                local: false, id: "favorite-#{model.slug}",
+                class: 'favorite-heart-form') do |form| %>
+    <%= form.hidden_field :model_name, value: model.class, id: nil %>
+    <%= form.hidden_field :id, value: model.id, id: nil %>
+    <%= form.hidden_field :status, value: 'add', id: nil %>
+
+    <a href="#" class="card-fav-icon position-relative z-index-40" onclick="event.preventDefault()">
+      <svg class="svg-icon text-white">
+        <use xlink:href="<%= image_url('svg/orion-svg-sprite.svg#heart-1') %>"></use>
+      </svg>
+    </a>
+  <% end %>
+
+<% else %>
+  <%= link_to new_user_registration_path, id: "favorite-#{model.slug}", class: 'card-fav-icon position-relative z-index-40' do %>
+    <svg class="svg-icon text-white">
+      <use xlink:href="<%= image_url('svg/orion-svg-sprite.svg#unlike-1') %>"></use>
+    </svg>
+  <% end %>
+<% end %>
+
+
+<script type="text/javascript" charset="utf-8">
+  $(".favorite-heart-form").on("click", function(evt) {
+    debugger;
+    evt.stopPropagation();
+    evt.stopImmediatePropagation();
+    console.log("click", evt);
+    $(".card-fav-icon", this).toggleClass("card-fav-icon-faved");
+//    $(".card-fav-icon", this).css("background-color", "red");
+    this.submit();
+  });
+
+  $(".unfavorite-heart-form").on("click", function(evt) {
+    debugger;
+    evt.stopPropagation();
+    evt.stopImmediatePropagation();
+    console.log("click", evt);
+    $(".card-fav-icon", this).toggleClass("card-fav-icon-faved");
+//    $(".card-fav-icon", this).css("background-color", "#343a40");
+    this.submit();
+  });
+</script>
+

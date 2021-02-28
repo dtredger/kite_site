@@ -1,8 +1,45 @@
-<!--render 'partials/leaflet_map', locals={loc_map: @kite_spot.location_map} %> -->
-<div class="container-fluid">
-  <% if loc_map %>
-    <%= map(loc_map.leaflet_map_details) %>
-  <% else %>
-    <p>No Map</p>
-  <% end %>
-</div>
+<style>
+  #location_map {
+    height: 100%;
+    width: 100%;
+  }
+</style>
+
+<script>
+  // Run this init hook to add the map global var to the window //
+  L.Map.addInitHook(function () {
+    this.getContainer()._leaflet_map = this;
+  });
+</script>
+
+<!--%= render 'partials/leaflet_map', locals={map_markers: @map_markers} %>-->
+<% if map_markers.any? %>
+  <div id="location_map">
+    <%= map(map_markers) %>
+  </div>
+<% else %>
+  <p>No Map</p>
+<% end %>
+
+
+
+<script type="text/javascript" charset="utf-8">
+  var map = document.querySelector('#location_map')._leaflet_map;
+
+  var sat = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+    attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
+  });
+  var osm = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+  });
+  var topo = L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+  });
+  var painting = L.tileLayer('http://tile.stamen.com/watercolor/{z}/{x}/{y}.png', {
+    attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+  });
+
+  var baseMaps = {'Satellite': sat, 'Open Streetmap':osm, 'Open Topomap': topo, 'Watercolour': painting};
+
+  L.control.layers(baseMaps, {}).addTo(map)
+</script>

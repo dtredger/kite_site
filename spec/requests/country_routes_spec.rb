@@ -6,6 +6,11 @@ RSpec.describe 'Countries_routes', type: :request do
   let(:kite_spot) { create(:kite_spot) }
   let(:country) { create(:country) }
 
+  before do
+    kite_spot.create_location_map
+    country.create_location_map
+  end
+
   describe 'GET /countries' do
     it 'returns countries page' do
       get countries_path

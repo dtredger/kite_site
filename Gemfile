@@ -35,6 +35,7 @@ gem 'kaminari'
 gem 'leaflet-rails'
 gem 'administrate'
 gem 'cancancan'
+gem 'acts_as_favoritor'
 
 gem 'rollbar'
 gem 'strong_migrations'
