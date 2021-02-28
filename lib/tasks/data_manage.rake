@@ -15,7 +15,7 @@ namespace :data_manage do
 
     with_config do |_app, host, db, user|
       full_path = "#{backup_dir}/#{Time.zone.now.strftime('%Y%m%d%H%M%S')}_#{db}.#{dump_sfx}"
-      cmd       = "pg_dump -F #{dump_fmt} -v -O -o -U '#{user}' -h '#{host}' -d '#{db}' -f '#{full_path}'"
+      cmd       = "pg_dump -F #{dump_fmt} -v -O -U '#{user}' -h '#{host}' -d '#{db}' -f '#{full_path}'"
     end
 
     puts cmd
@@ -39,7 +39,7 @@ namespace :data_manage do
 
         with_config do |_app, host, db, user|
           full_path = "#{backup_dir}/#{Time.zone.now.strftime('%Y%m%d%H%M%S')}_#{db}.#{table_name.parameterize.underscore}.#{dump_sfx}"
-          cmd       = "pg_dump -F #{dump_fmt} -v -O -o -U '#{user}' -h '#{host}' -d '#{db}' -t '#{table_name}' -f '#{full_path}'"
+          cmd       = "pg_dump -F #{dump_fmt} -v -O -U '#{user}' -h '#{host}' -d '#{db}' -t '#{table_name}' -f '#{full_path}'"
         end
 
         puts cmd
@@ -155,7 +155,7 @@ namespace :data_manage do
   end
 
   def with_config
-    yield Rails.application.class.parent_name.underscore,
+    yield Rails.application.class.module_parent_name.underscore,
         ActiveRecord::Base.connection_config[:host],
         ActiveRecord::Base.connection_config[:database],
         ActiveRecord::Base.connection_config[:username]
