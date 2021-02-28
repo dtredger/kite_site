@@ -20,34 +20,34 @@ RSpec.describe 'VisitorBrowsesSite', type: :system do
 
     describe 'country pages' do
       describe '/countries' do
-        it 'shows Countries grid' do
+        it 'shows Countries cards' do
           visit '/countries'
-          expect(page).to have_css('.resource-countries', count: 6)
+          expect(page).to have_css('.hover-scale-bg-image', count: 6)
         end
       end
 
       describe '/countries/:name' do
         it 'shows named country' do
           country = Country.all.sample
-          visit "/countries/#{country.name}"
+          visit "/countries/#{country.slug}"
           expect(page).to have_css('.country-name', text: country.name)
         end
       end
     end
 
     describe 'kite_spot pages' do
-      describe '/kite_spots' do
-        it 'shows KiteSpots grid' do
-          visit '/kite_spots'
-          expect(page).to have_css('.resource-kite_spots', count: 6)
+      describe '/kite-spots' do
+        it 'shows KiteSpots cards' do
+          visit '/kite-spots'
+          expect(page).to have_css('.card', count: 6)
         end
       end
 
-      describe '/kite_spots/:name' do
+      describe '/kite-spots/:name' do
         it 'shows named kitespot' do
           kitespot = KiteSpot.all.sample
-          visit "/kite_spots/#{kitespot.name}"
-          expect(page).to have_css('.kitespot-name', text: kitespot.name)
+          visit "/kite-spots/#{kitespot.slug}"
+          expect(page).to have_css('h1', text: kitespot.name)
         end
       end
     end

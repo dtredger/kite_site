@@ -64,10 +64,7 @@ RSpec.describe LocationMap, type: :model do
             kite_spot = create(:kite_spot, latitude: 1, longitude: 2)
             kite_spot.create_location_map
             map_details = described_class.leaflet_map_details([kite_spot])
-            expect(map_details[:markers]).to match([
-                       {latlng: [1.0, 2.0],
-                        popup: "<a href='http://localhost:3000/kite-spots/kite_spot_1'>kite_spot_1</a>"}
-                                                   ])
+            expect(map_details[:markers].first[:latlng]).to match([1.0, 2.0])
           end
         end
 

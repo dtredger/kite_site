@@ -48,20 +48,6 @@ class KiteSpot < ApplicationRecord
     amenity_tag_list
   end
 
-  def latitude
-    @latitude ||= begin
-      return location_map.latitude if location_map && self[:latitude].nil?
-      super
-    end
-  end
-
-  def longitude
-    @longitude ||= begin
-      return location_map.longitude if location_map && self[:longitude].nil?
-      super
-    end
-  end
-
   def region
     country.region
   end

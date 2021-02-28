@@ -25,10 +25,11 @@ class Country < ApplicationRecord
   friendly_id :name, use: :slugged
 
   include Searchable
-
   include DistanceCalculable
 
   validates :name, presence: true, uniqueness: true
+  validates_presence_of :latitude
+  validates_presence_of :longitude
 
   has_many_attached :photos, dependent: :destroy
   has_many :kite_spots, dependent: :nullify
@@ -61,16 +62,6 @@ class Country < ApplicationRecord
       kite_spots.each { |spot| @month_tag_list.merge(spot.month_tag_list) }
       @month_tag_list
     end
-  end
-
-  def latitude
-    return location_map.latitude if location_map && self[:latitude].nil?
-    super
-  end
-
-  def longitude
-    return location_map.longitude if location_map && self[:longitude].nil?
-    super
   end
 
   def currency

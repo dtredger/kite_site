@@ -2,6 +2,10 @@
 
 # For creating records for system specs
 module SystemSpecMacros
+  def fill_in_trix_editor(id, content)
+    find(:xpath, "//*[@id='#{id}']", visible: false).click.set(content)
+  end
+
   # Will create kite_spot_count KiteSpots & kite_spot_count+country_count Countries
   def create_dummy_records(kite_spot_count = 3, country_count = 0)
     create_kite_spot_and_country(kite_spot_count)
@@ -19,8 +23,8 @@ module SystemSpecMacros
   # Creates #number KiteSpots with LocationMaps and #number Countries without locationMaps
   def create_kite_spot_and_country(number)
     number.times do
-      country = create(:kite_spot, :with_2_month_tags)
-      country.create_location_map
+      kite_spot = create(:kite_spot, :with_2_month_tags)
+      kite_spot.create_location_map
     end
   end
 

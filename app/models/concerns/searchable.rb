@@ -8,7 +8,7 @@ module Searchable
     #
     def name_search(name_str)
       return none if name_str.blank?
-      where('slug like?', "%#{name_str}%")
+      where('slug like?', "%#{name_str.parameterize}%")
     end
 
     ## return all records with matching Months
