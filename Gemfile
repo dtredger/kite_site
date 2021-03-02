@@ -76,6 +76,7 @@ group :development do
   # TODO - causes recursion error in rails 6.1?
   # gem 'meta_request'
   # TODO - install & run mailcatcher to read mails (not part of bundle)
+  gem 'unsplash' # for images
 end
 
 group :test do

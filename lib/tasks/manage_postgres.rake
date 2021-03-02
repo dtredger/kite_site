@@ -4,7 +4,7 @@
 # Merged with: https://gist.github.com/kofronpi/37130f5ed670465b1fe2d170f754f8c6
 # Benefits of: https://gist.github.com/e12e/e0c7d2cc1d30d18c8050b309a43450ac
 # And fixes of: https://gist.github.com/joelvh/f50b8462611573cf9015e17d491a8a92
-namespace :data_manage do
+namespace :manage_postgres do
   desc 'Dumps the database to backups'
   task dump: :environment do
     dump_fmt   = ensure_format(ENV['format'])

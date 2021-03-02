@@ -1,155 +1,46 @@
 # frozen_string_literal: true
 
-# download seed images & attach to countries
-if Rails.env.development?
-  task find_images: :environment do
-    require 'rubygems'
-    require 'nokogiri'
-    require 'open-uri'
-    require 'json'
-    require 'csv'
+require 'rubygems'
+require 'nokogiri'
+require 'open-uri'
+require 'json'
+require 'csv'
 
 
+namespace :manage_images do
+  desc 'manage images, load, remove, or rename'
+
+  task load_from_unsplash: :environment do
     Unsplash.configure do |config|
       config.application_access_key = Rails.application.credentials.dig(:unsplash, :key)
       config.application_secret = Rails.application.credentials.dig(:unsplash, :secret)
     end
 
-    already_img = [
-        'Melbourne',
-        'Western Oz',
-        'Whitsunday Islands',
-        'Barbados (all)',
-        'Belize (all)',
-        'Cumbuco',
-        'British Virgin Islands (all)',
-        'Banff',
-        'Canada (all)',
-        'Cape Verde (all)',
-        'Grand Cayman',
-        'Puclaro',
-        'Chile (all)',
-        'Bol',
-        'Varadero',
-        'Cabarete',
-        'El Gouna',
-        'Ras Sudr',
-        'Safaga',
-        'Fiji (all)',
-        'Leucate',
-        'Tahiti',
-        'Germany (all)',
-        'Levkada',
-        'Naxos',
-        'Paros',
-        'Rhodes',
-        'Hong Kong (all)',
-        'Goa',
-        'Sumbawa',
-        'Iraq (all)',
-        'Eilat',
-        'Israel (all)',
-        'Porto Pollo',
-        'Buenos Aires',
-        'Madagascar (all)',
-        'Mauritius (all)',
-        'Lebanon (all)',
-        'Baja',
-        # batch 2
-        'Cozumel',
-        'La Ventana',
-        'Progreso',
-        'Dakhla',
-        'Essaouira',
-        'Ponto de Oura',
-        'Namibia',
-        'Noordwijk ann Zee',
-        'Bonaire',
-        'New Caledonia (all)',
-        'Auckland',
-        'Masirah Island',
-        'Mancora',
-        'Boracay',
-        'Esposende',
-        'Guincho',
-        'Yemen',
-        'St. Louis',
-        'Seychelles (all)',
-        'Solomon Islands (all)',
-        'Capetown',
-        'South Africa (all)',
-        'Fuerteventura',
-        'Ibiza',
-        'Lanzarote',
-        'Tarifa',
-        'Tenerife',
-        'Kalpitiya',
-        'Negombo',
-        'Sri Lanka (all)',
-        'St. Lucia (all)',
-        'Taipei',
-        'Zanzibar',
-        'Hua Hin',
-        'Monastir',
-        'Watergate',
-        'UK (all)',
-        'Carmelo',
-        'Cape Hatteras',
-        'Florida',
-        'Corsica',
-        'Red Sea',
-        'Mombasa',
-        'Puerto Vallarta',
-        'Maui',
-        'South Padre Island',
-        'The Gorge',
-        'El Yaque'
-    ]
-    unfound = [
-        'Iberaquera',
-        'Tucus',
-        'Raratonga',
-        'Copal',
-        'Paramali',
-        'Esbjerg',
-        'Rangiroa',
-        'Rosslare',
-        'Foddini',
-        'Nashiro',
-        'Pirlanta',
-        'Adicora'
-    ]
-
-    already_searched = already_img + unfound
-
     # SET which collection with photos to attach images to
     collection = KiteSpot.all
-
-    user_agent = 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.134 Safari/537.36'
+    # collection = Country.all
     successes = []
+    skips = []
     fails = []
+
+    def skip_model(model, min_width=500, photos_count=3)
+      big_photos_count = model.photos.filter do |p|
+        return true if p.blob.metadata[:width].nil?
+        p.blob.metadata[:width] > min_width
+      end.count
+      if big_photos_count >= photos_count
+        puts "already #{photos_count} images for #{model.name}"
+        return true
+      end
+    end
 
     begin
       collection.each do |model|
-        if model.name.in? already_searched
-          puts "already loaded #{model.name}"
+        if skip_model(model)
+          skips.push(model.name)
           next
         end
-        # query = model.name.gsub(' ', '%20')
 
-        # unsplash = "https://unsplash.com/s/photos/#{query}"
-        # page_url = "https://www.bing.com/images/search?q=#{query}&qft=+filterui:imagesize-large&form=IRFLTR&first=1"
-
-        # noko_page = Nokogiri::HTML(open(page_url, 'User-Agent' => user_agent))
-        #
-        # puts "Searched: #{noko_page.title}"
-
-
-        # BING-SPECIFIC
-        # image_divs = noko_page.css('.img_cont')
-        # image_divs = noko_page.css('.iusc')
-
-        # unsplash
         image_divs = Unsplash::Photo.search(model.name)
 
         if image_divs.count.zero?
@@ -160,26 +51,15 @@ if Rails.env.development?
         img_count = 1
         max_img_count = 3
         image_divs.each do |img_div|
-          # image_url = if img_div.children[0].attributes['src']
-          #               img_div.children[0].attributes['src'].value
-          #             else
-          #               img_div.children[0].attributes['data-src'].value
-          #             end
-          #
-          # next if image_url.match?('base64')
 
-          # m_attr = img_div.attr('m')
-          # image_url = JSON.parse(m_attr)['murl']
           image_url = img_div.urls['regular']
 
-          file_name = "#{model.name}-#{img_count}-b.jpg"
+          file_name = "#{model.slug}-#{img_count}-b.jpg"
           file_path = File.join(Rails.root, '/tmp/storage', file_name)
 
-          File.open(file_name, 'wb') do |f|
+          File.open(file_path, 'wb') do |f|
             f.write(open(image_url).read)
           end
-
-          # puts "saved file #{file_name}"
 
           model.photos.attach(io: File.open(file_path),
                               filename: file_name,
@@ -187,24 +67,54 @@ if Rails.env.development?
           puts "attached #{file_name} to #{model.name}, image #{img_count} of #{max_img_count}"
           img_count += 1
           successes.push(model.name)
+          puts "success count #{successes.uniq.count}"
           break if img_count > max_img_count
         end
       end
-    rescue e
-      print e
     ensure
-      puts "successes: #{successes}"
-      puts "fails: #{fails}"
+      puts "successes: #{successes.count} - #{successes}"
+      puts "skips: #{skips.count} - #{skips}"
+      puts "fails: #{fails.count} - #{fails}"
+      puts "#{successes.uniq.count + skips.count + fails.count} out of #{collection.count} records processed"
     end
+  end
+
+  task load_from_bing: :environment do
+    # user_agent = 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.134 Safari/537.36'
+    # query = model.name.gsub(' ', '%20')
+
+    # unsplash = "https://unsplash.com/s/photos/#{query}"
+    # page_url = "https://www.bing.com/images/search?q=#{query}&qft=+filterui:imagesize-large&form=IRFLTR&first=1"
+
+    # noko_page = Nokogiri::HTML(open(page_url, 'User-Agent' => user_agent))
+    #
+    # puts "Searched: #{noko_page.title}"
+
+
+    # BING-SPECIFIC
+    # image_divs = noko_page.css('.img_cont')
+    # image_divs = noko_page.css('.iusc')
+
+    # image_url = if img_div.children[0].attributes['src']
+    #               img_div.children[0].attributes['src'].value
+    #             else
+    #               img_div.children[0].attributes['data-src'].value
+    #             end
+    #
+    # next if image_url.match?('base64')
+
+    # m_attr = img_div.attr('m')
+    # image_url = JSON.parse(m_attr)['murl']
   end
 
   task delete_small_images: :environment do
     collection = KiteSpot.all
-
+    # collection = Country.all
     count = 0
     collection.each do |model|
       next if model.photos.count < 6
       model.photos.each do |photo|
+        next if photo.blob[:metadata]['width'].blank?
         if photo.blob[:metadata]['width'] < 600
           puts "deleting photo #{photo.blob[:filename]} from #{model.name}, with width: #{photo.blob[:metadata]['width']}"
           photo.destroy
@@ -228,5 +138,48 @@ if Rails.env.development?
     end
   end
 
+  task attach_local_images: :environment do
+    # file_name = "#{model.slug}-#{img_count}-b.jpg"
+    # file_path = File.join(Rails.root, '/tmp/storage', file_name)
+    #
+    # if File.file?(file_path)
+    #   model.photos.attach(io: File.open(file_path),
+    #                       filename: file_name,
+    #                       content_type: 'application/jpg')
+    #
+    #   puts "attached #{file_name} to #{model.name}, image #{img_count} of #{max_img_count}"
+    #   successes.push(model.name)
+    #   puts "success count #{successes.uniq.count}"
+    #   img_count += 1
+    #
+    #   file_name = "#{model.slug}-#{img_count}-b.jpg"
+    #   file_path = File.join(Rails.root, '/tmp/storage', file_name)
+    #
+    #   if File.file?(file_path)
+    #     model.photos.attach(io: File.open(file_path),
+    #                         filename: file_name,
+    #                         content_type: 'application/jpg')
+    #
+    #     puts "attached #{file_name} to #{model.name}, image #{img_count} of #{max_img_count}"
+    #     successes.push(model.name)
+    #     puts "success count #{successes.uniq.count}"
+    #     img_count += 1
+    #
+    #     file_name = "#{model.slug}-#{img_count}-b.jpg"
+    #     file_path = File.join(Rails.root, '/tmp/storage', file_name)
+    #
+    #     if File.file?(file_path)
+    #       model.photos.attach(io: File.open(file_path),
+    #                           filename: file_name,
+    #                           content_type: 'application/jpg')
+    #
+    #       puts "attached #{file_name} to #{model.name}, image #{img_count} of #{max_img_count}"
+    #       successes.push(model.name)
+    #       puts "success count #{successes.uniq.count}"
+    #       img_count += 1
+    #     end
+    #   end
+    # end
 
+  end
 end
