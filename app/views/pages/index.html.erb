@@ -4,7 +4,7 @@
   <%= render 'partials/search_form' %>
 </div>
 
-<section class="py-6 ">
+<section class="py-4 ">
   <div class="container">
     <div class="row mb-5">
       <div class="col-md-8">
@@ -29,7 +29,7 @@
   </div>
 </section>
 
-<section class="py-6 bg-gray-100">
+<section class="py-4 bg-gray-100">
   <div class="container-fluid">
     <div class="text-center pb-lg-4">
       <p class="subtitle text-secondary"><%= t('kite_spots.subtitle') %></p>
@@ -41,7 +41,7 @@
 
     <div class="row">
       <% @kite_spots.each do |kite_spot| %>
-        <div class="mb-5 hover-animate col-sm-6 col-lg-3">
+        <div class="mb-5 hover-animate col-xs-6 col-lg-4">
           <%= render 'partials/components/kite_spot_card', locals={model: kite_spot} %>
         </div>
       <% end %>
