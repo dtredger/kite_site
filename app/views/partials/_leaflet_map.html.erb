@@ -70,15 +70,15 @@
 
 
   var baseMaps = {
-    'cartoCDN': cartoCDN,
+    'Carto': cartoCDN,
     'Satellite': sat,
-    'Open Streetmap':osm,
+//    'Open Streetmap':osm,
 
     'Watercolour': painting,
-    'Esri StreetMap': Esri_WorldStreetMap,
+//    'Esri StreetMap': Esri_WorldStreetMap,
     'Esri Relief': Esri_WorldShadedRelief,
-    'Esri Oceans': Esri_OceanBasemap,
-    'Geoportail France Satellite': GeoportailFrance_orthos
+    'Esri Oceans': Esri_OceanBasemap //,
+//    'Geoportail France Satellite': GeoportailFrance_orthos
   };
 
   L.control.layers(baseMaps, {}).addTo(map);
