@@ -57,7 +57,7 @@ class KiteSpot < ApplicationRecord
   end
 
   def defining_feature
-    'Waves and flat Water'
+    region
   end
 
   def wind_information

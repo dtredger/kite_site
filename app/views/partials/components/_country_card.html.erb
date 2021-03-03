@@ -1,4 +1,5 @@
 <!--<div class="col col-lg-6 px-0">-->
+<!--TODO - responsive variants-->
 <div class="d-flex align-items-center dark-overlay hover-scale-bg-image mh-400">
 
   <div class="card-img-overlay-top d-flex justify-content-between align-items-center">
@@ -10,7 +11,7 @@
 
 
 
-  <img src="<%= url_for(model.cover_photo) %>" alt="<%= model.name %>" class="bg-image" />
+  <img src="<%= url_for(model.cover_photo.variant(resize_to_fill: [550, 450])) %>" alt="<%= model.name %>" class="bg-image" />
   <div class="p-3 p-sm-5 text-white z-index-20">
     <h4 class="h2"><%= model.name %></h4>
     <p class="mb-4 text-sm"><%= model.card_subtitle %></p>

@@ -20,6 +20,7 @@ require("channels")
 
 require("leaflet")
 require('packs/leaflet-custom')
+require('leaflet.awesome-markers')
 
 require('jquery')
 require('packs/filter-search')
