@@ -46,16 +46,23 @@ RSpec.describe LocationMap, type: :model do
   describe 'methods' do
     context 'Class' do
       describe '#leaflet_map_details' do
+        context 'empty map' do
+          it 'centers on hardcoded midpoint' do
+            map_details = described_class.leaflet_map_details
+            expect(map_details[:center][:latlng]).to match([20.0, 0])
+          end
+        end
+
         context 'all public locations' do
           before { create_list(:location_map_for_country, 5) }
 
           it 'returns markers for all locations' do
-            expect(described_class.leaflet_map_details[:markers].count).to eq(5)
+            expect(described_class.leaflet_map_details(:all)[:markers].count).to eq(5)
           end
 
           it 'does not map users' do
             user.create_location_map
-            expect(described_class.leaflet_map_details[:markers].count).to eq(5)
+            expect(described_class.leaflet_map_details(:all)[:markers].count).to eq(5)
           end
         end
 
@@ -66,11 +73,22 @@ RSpec.describe LocationMap, type: :model do
             map_details = described_class.leaflet_map_details([kite_spot])
             expect(map_details[:markers].first[:latlng]).to match([1.0, 2.0])
           end
+
+          it 'centers map on location' do
+            kite_spot = create(:kite_spot, latitude: 1, longitude: 2)
+            kite_spot.create_location_map
+            map_details = described_class.leaflet_map_details([kite_spot])
+            expect(map_details[:center][:latlng]).to match([1.0, 2.0])
+          end
+
+          it 'centers on avg lat/lon of array' do
+            kite_spot_1 = create(:kite_spot, :with_location_map, latitude: 10, longitude: 10)
+            kite_spot_2 = create(:kite_spot, :with_location_map, latitude: 30, longitude: 30)
+            kite_spot_3 = create(:kite_spot, :with_location_map, latitude: 50, longitude: 50)
+            map_details = described_class.leaflet_map_details([kite_spot_1, kite_spot_2, kite_spot_3])
+            expect(map_details[:center][:latlng]).to match([30.0, 30.0])
+          end
         end
-
-
-
-
       end
     end
 

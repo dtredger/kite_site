@@ -51,9 +51,9 @@ class LocationMap < ApplicationRecord
 
   def popup_link(model_obj=nil)
     if model_obj
-      "<a href='#{site_url}#{model_obj.class.name.tableize.dasherize}/#{model_obj.slug}'>#{model_obj.name}</a>"
+      "<h6><a href='#{site_url}#{model_obj.class.name.tableize.dasherize}/#{model_obj.slug}'>#{model_obj.name}</a></h6>"
     else
-      "<a href='#{site_url}#{record_type.tableize.dasherize}/#{record.slug}'>#{record.name}</a>"
+      "<h6><a href='#{site_url}#{record_type.tableize.dasherize}/#{record.slug}'>#{record.name}</a></h6>"
     end
   end
 
@@ -65,6 +65,7 @@ class LocationMap < ApplicationRecord
     end
   end
 
+  # TODO closest_markers for user should be separate
   def leaflet_map_details
     markers_arr = [leaflet_marker]
     closest_markers.each do |obj|
@@ -77,9 +78,9 @@ class LocationMap < ApplicationRecord
   end
 
 
-  def self.leaflet_map_details(obj_arr=[], map_center=[40, 0])
+  def self.leaflet_map_details(obj_arr=[], map_center=nil)
     all_location_markers = []
-    if !obj_arr || obj_arr.empty?
+    if obj_arr == :all
       public_maps.each do |loc_map|
         all_location_markers.push(loc_map.leaflet_marker)
       end
@@ -89,10 +90,25 @@ class LocationMap < ApplicationRecord
         all_location_markers.push(model.location_map.leaflet_marker)
       end
     end
+
+    map_center = self.calculate_center(all_location_markers) if map_center.nil?
     { container_id: 'location_map',
       center: { latlng: map_center },
       zoom: '2',
       markers: all_location_markers }
+  end
+
+  def self.calculate_center(loc_marker_arry)
+    marker_count = loc_marker_arry.length
+    return [20, 0] if marker_count == 0
+    return loc_marker_arry.first[:latlng] if marker_count == 1
+    lats = 0
+    lons = 0
+    loc_marker_arry.each do |marker|
+      lats += marker[:latlng][0]
+      lons += marker[:latlng][1]
+    end
+    [lats.to_f/marker_count.to_f, lons.to_f/marker_count.to_f, ]
   end
 
 

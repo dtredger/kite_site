@@ -3,14 +3,14 @@
 <section>
   <div class="map-wrapper-450">
     <div class="h-100 leaflet-container leaflet-retina leaflet-fade-anim leaflet-grab leaflet-touch-drag" style="position: relative;" tabindex="0">
-      <%= render 'partials/leaflet_map', locals={map_markers: @region_details[:map_markers]} %>
+      <%= render 'partials/leaflet_map', locals={map_markers: @region_details[:map_details]} %>
     </div>
   </div>
 </section>
 
 <section class="py-5 bg-gray-100 shadow">
   <div class="container">
-    <h1><%= @region_details[:region_name] %></h1>
+    <h1><%= @region_details[:region_name].capitalize %></h1>
     <p class="lead mb-5"><%= @region_details[:region_blurb] %></p>
     <h5>Countries</h5>
     <ul class="nav-pills-custom nav">
@@ -30,9 +30,20 @@
         <p class="mb-3 mb-md-0">Showing <strong><%= @region_details[:kite_spots].count %></strong> of
           <strong><%= @region_details[:kite_spots_count] %></strong>&nbsp;spots found</p>
       </div>
-      <div><label class="form-label mr-2">Sort by</label>
-        <%= select_tag([], {}, {class: 'select bootstrap-select'}) %>
+
+      <div>
+        <!-- Sort Map results -->
+        <%= form_with(url: search_advanced_path, scope: :search, method: :get, local: false) do |form| %>
+          <label class="form-label mr-2">Sort by</label>
+          <!--TODO - enable sorting-->
+          <%= form.select('results_sort', result_sort_options, {}, {class: 'custom-select mb-3', disabled: true}) %>
+        <% end %>
+        <script type="text/javascript" charset="utf-8">
+          // TODO - use onchange action on select tag
+          $('#search_results_sort').on('change', function() { this.form.submit() });
+        </script>
       </div>
+
     </div>
 
     <div class="row">

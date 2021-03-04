@@ -46,9 +46,9 @@ module Regionable
       else
         # TODO - global map uses same route with global name?
         region_details[:region_name]   = 'Not Set'
-        region_details[:countries]     = ''
+        region_details[:countries]     = []
         region_details[:lat_lon_arr]   = Country.none
-        region_details[:region_blurb]  = [40, 10]
+        region_details[:region_blurb]  = ''
       end
 
       kite_spots = []
