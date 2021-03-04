@@ -67,7 +67,6 @@ class Country < ApplicationRecord
   end
 
   def currency
-    'Money'
   end
 
 

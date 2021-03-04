@@ -5,7 +5,7 @@
     <div class="col p-0">
       <a href="<%= url_for(photo) %>" class="col"
          data-toggle="lightbox" data-type="image" data-gallery="lightbox-gallery">
-        <%= image_tag photo.variant(resize_to_fill: [550, 450]), class: 'img-fluid text-center' %>
+        <%= image_tag variant_550(photo), class: 'img-fluid text-center' %>
       </a>
     </div>
   <% end %>

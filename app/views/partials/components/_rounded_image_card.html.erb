@@ -1,6 +1,6 @@
 <!--<div class="d-flex align-items-lg-stretch mb-4 col-lg-4">-->
 <!--TODO - responsive variants-->
-<div style="background:url('<%= url_for(model.cover_photo.variant(resize_to_fill: [550, 450])) %>') no-repeat center;background-size:cover" class="shadow-lg border-0 w-100 border-0 hover-animate card">
+<div style="background:url('<%= url_for(variant_550(model.cover_photo)) %>') no-repeat center;background-size:cover" class="shadow-lg border-0 w-100 border-0 hover-animate card">
   <%= link_to '', model, class: 'tile-link' %>
   <div class="d-flex align-items-center h-100 text-white justify-content-center py-6 py-lg-7">
     <h3 class="text-shadow text-uppercase mb-0"><%= model.name %></h3>

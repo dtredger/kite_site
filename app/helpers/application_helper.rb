@@ -20,7 +20,10 @@ module ApplicationHelper
     else
       I18n.t('site_name')
     end
+  end
 
+  def variant_550(photo)
+    photo.variant(resize_to_fill: [550, 450]) if photo
   end
 
   def all_months

@@ -20,10 +20,9 @@ digital_ocean:
 
 mirror:
   service: Mirror
-  primary: digital_ocean #local
+  primary: local
   mirrors:
-    - local
-#    - digital_ocean
+    - digital_ocean
 
 
 
