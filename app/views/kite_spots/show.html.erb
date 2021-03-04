@@ -6,7 +6,7 @@
       <div class="col-lg-8">
         <p class="text-primary">
           <i class="fa-map-marker-alt fa mr-1"></i>
-          <%= link_to "#{@kite_spot.closest_city}, #{@kite_spot.country.name}", @kite_spot.country %>
+          <%= link_to @kite_spot.country.name, @kite_spot.country %>
         </p>
 
         <h1><%= @kite_spot.name %></h1>

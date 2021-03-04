@@ -6,16 +6,39 @@ local:
   service: Disk
   root: <%= Rails.root.join("storage") %>
 
-# Use rails credentials:edit to set the AWS secrets (as aws:access_key_id|secret_access_key)
-amazon:
-  service: S3
-  access_key_id: <%= Rails.application.credentials.dig(:aws, :access_key_id) %>
-  secret_access_key: <%= Rails.application.credentials.dig(:aws, :secret_access_key) %>
-  bucket: kite-site
-  http_open_timeout: 1
-  http_read_timeout: 1
-  region: us-east-1 # no longer required to specify
 
+digital_ocean:
+  service: S3 #digital-ocean uses s3 format
+  access_key_id: <%= Rails.application.credentials.dig(:digital_ocean, :token_key) %>
+  secret_access_key: <%= Rails.application.credentials.dig(:digital_ocean, :secret_key) %>
+  bucket: kite-site-app
+  endpoint: https://nyc3.digitaloceanspaces.com
+  region: us-east-1
+  public: true
+  #  base_url: nyc3.digitaloceanspaces.com
+
+
+mirror:
+  service: Mirror
+  primary: local
+  mirrors:
+    - digital_ocean
+
+
+
+
+
+
+
+# Use rails credentials:edit to set the AWS secrets (as aws:access_key_id|secret_access_key)
+#amazon:
+#  service: S3
+#  access_key_id: <%= Rails.application.credentials.dig(:aws, :access_key_id) %>
+#  secret_access_key: <%= Rails.application.credentials.dig(:aws, :secret_access_key) %>
+#  bucket: kite-site
+#  http_open_timeout: 1
+#  http_read_timeout: 1
+#  region: us-east-1 # no longer required to specify
 
 # Remember not to checkin your GCS keyfile to a repository
 # google:
@@ -30,9 +53,3 @@ amazon:
 # storage_account_name: your_account_name
 # storage_access_key: <%= Rails.application.credentials.dig(:azure_storage, :storage_access_key) %>
 # container: your_container_name
-
-mirror:
-  service: Mirror
-  primary: local
-  mirrors:
-    - amazon # [ amazon, google, microsoft ]

@@ -1,6 +1,7 @@
-<div class="card h-100 mxw-350 border-0 shadow">
+<!--TODO - responsive variants-->
+<div class="card h-100 border-0 shadow">
   <%= link_to '', model, class: 'tile-link' %>
-  <div style="background-image: url(<%= url_for(model.cover_photo) %>)" class="card-img-top overflow-hidden dark-overlay
+  <div style="background-image: url(<%= url_for(variant_550(model.cover_photo)) %>)" class="card-img-top overflow-hidden dark-overlay
   bg-cover">
     <div class="card-img-overlay-bottom z-index-20">
       <h4 class="text-white text-shadow">

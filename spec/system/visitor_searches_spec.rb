@@ -32,12 +32,19 @@ RSpec.describe 'VisitorSearches', type: :system do
     end
 
     describe 'name search only' do
-      it 'shows all names matching slug' do
+      before do
         visit '/search/advanced'
         fill_in 'search[name]', with: 'nz'
         click_button 'commit'
+      end
 
+      it 'shows all names matching slug' do
         expect(page).to have_css('.card', count: 2)
+      end
+
+      pending 'has map' do
+        fail('map has no styles')
+        expect(page).to have_css('#location_map')
       end
     end
 

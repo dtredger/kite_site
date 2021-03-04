@@ -33,12 +33,14 @@ class Country < ApplicationRecord
 
   has_many_attached :photos, dependent: :destroy
   has_many :kite_spots, dependent: :nullify
-  has_one :location_map, as: :record, dependent: :destroy
+  has_one :location_map, as: :record, dependent: :destroy #, required: true
   has_rich_text :content
   acts_as_favoritable
 
-  enum region: ['Europe', 'Caribbean', 'South America', 'Asia', 'Africa', 'North America', 'ANZA/Pacific', 'Middle East']
+  # TODO - kitespot and country should require location_map
+  # before_validation -> { create_location_map }
 
+  enum region: ['Europe', 'Caribbean', 'South America', 'Asia', 'Africa', 'North America', 'ANZA/Pacific', 'Middle East']
   enum language: [:English, :French, :Spanish, :Italian, :German]
 
   # TODO: - this fetches all countries' kitespots' tags
@@ -65,7 +67,6 @@ class Country < ApplicationRecord
   end
 
   def currency
-    'Money'
   end
 
 

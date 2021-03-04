@@ -13,15 +13,14 @@ class SearchesController < ApplicationController
     @countries = Kaminari.paginate_array(@countries).page(params[:page]).per(10)
     @kite_spots = results[:kite_spots] || []
     @kite_spots = Kaminari.paginate_array(@kite_spots).page(params[:page]).per(10)
-    @map_markers = get_location_markers(results)
-    render template: 'searches/index'
+    @map_details = get_location_markers(results)
   end
 
   def show
     @countries = []
     @kite_spots = []
-    @map_markers = []
     advanced_search(advanced_search_params) if params[:search]
+    @map_details = LocationMap.leaflet_map_details(@countries + @kite_spots)
     @countries = Kaminari.paginate_array(@countries).page(params[:page]).per(10)
     @kite_spots = Kaminari.paginate_array(@kite_spots).page(params[:page]).per(10)
     render template: 'searches/index'
@@ -41,7 +40,7 @@ class SearchesController < ApplicationController
   def get_location_markers(results)
     countries = results[:countries] || []
     kite_spots = results[:kite_spots] || []
-    LocationMap.leaflet_map_details(countries + kite_spots, map_center=[40, 0])
+    LocationMap.leaflet_map_details(countries + kite_spots)
   end
 
 

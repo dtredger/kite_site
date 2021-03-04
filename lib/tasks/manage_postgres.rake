@@ -4,7 +4,7 @@
 # Merged with: https://gist.github.com/kofronpi/37130f5ed670465b1fe2d170f754f8c6
 # Benefits of: https://gist.github.com/e12e/e0c7d2cc1d30d18c8050b309a43450ac
 # And fixes of: https://gist.github.com/joelvh/f50b8462611573cf9015e17d491a8a92
-namespace :data_manage do
+namespace :manage_postgres do
   desc 'Dumps the database to backups'
   task dump: :environment do
     dump_fmt   = ensure_format(ENV['format'])
@@ -15,7 +15,7 @@ namespace :data_manage do
 
     with_config do |_app, host, db, user|
       full_path = "#{backup_dir}/#{Time.zone.now.strftime('%Y%m%d%H%M%S')}_#{db}.#{dump_sfx}"
-      cmd       = "pg_dump -F #{dump_fmt} -v -O -o -U '#{user}' -h '#{host}' -d '#{db}' -f '#{full_path}'"
+      cmd       = "pg_dump -F #{dump_fmt} -v -O -U '#{user}' -h '#{host}' -d '#{db}' -f '#{full_path}'"
     end
 
     puts cmd
@@ -39,7 +39,7 @@ namespace :data_manage do
 
         with_config do |_app, host, db, user|
           full_path = "#{backup_dir}/#{Time.zone.now.strftime('%Y%m%d%H%M%S')}_#{db}.#{table_name.parameterize.underscore}.#{dump_sfx}"
-          cmd       = "pg_dump -F #{dump_fmt} -v -O -o -U '#{user}' -h '#{host}' -d '#{db}' -t '#{table_name}' -f '#{full_path}'"
+          cmd       = "pg_dump -F #{dump_fmt} -v -O -U '#{user}' -h '#{host}' -d '#{db}' -t '#{table_name}' -f '#{full_path}'"
         end
 
         puts cmd
@@ -155,7 +155,7 @@ namespace :data_manage do
   end
 
   def with_config
-    yield Rails.application.class.parent_name.underscore,
+    yield Rails.application.class.module_parent_name.underscore,
         ActiveRecord::Base.connection_config[:host],
         ActiveRecord::Base.connection_config[:database],
         ActiveRecord::Base.connection_config[:username]

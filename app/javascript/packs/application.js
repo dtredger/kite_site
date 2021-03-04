@@ -17,11 +17,12 @@ require("channels")
 // const images = require.context('../images', true)
 // const imagePath = (name) => images(name, true)
 
+global.jquery = require('jquery')
 
 require("leaflet")
 require('packs/leaflet-custom')
+require('leaflet.awesome-markers')
 
-require('jquery')
 require('packs/filter-search')
 
 require("trix")
@@ -29,7 +30,8 @@ require("@rails/actiontext")
 require('packs/action-text-files')
 
 require("ekko-lightbox")
-require("bootstrap-hardskilled-extend-select/js/select.min")
+//TODO - required on form directly because of rendering issue
+//require("bootstrap-hardskilled-extend-select/js/select.min")
 
 global.toastr = require("toastr")
 global.toastr.options = {

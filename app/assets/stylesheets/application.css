@@ -17,6 +17,7 @@
  *= require bootstrap-hardskilled-extend-select/css/select.min
 
  *= require leaflet
+ *= require leaflet.awesome-markers
  *= require toastr
 
 
