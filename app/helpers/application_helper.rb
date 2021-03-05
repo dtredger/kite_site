@@ -10,7 +10,7 @@ module ApplicationHelper
   end
 
   def background_img_name
-    'kite-south-africa-md'
+    'kite-south-africa-md.jpg'
   end
 
   # TODO - name of resource in page title

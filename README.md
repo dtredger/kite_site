@@ -6,12 +6,23 @@ HEROKU:
 - buildpacks (for activestorage):
 > heroku buildpacks:add -i 1 https://github.com/heroku/heroku-buildpack-activestorage-preview
 
+> heroku push
+> heroku pg:push mylocaldb DATABASE_URL --app sushi
+> heroku run rake:assets:precompile
+> heroku restart
+(for no-downtime pume restart use 
+bundle exec pumactl phased-restart
+
+> blobs uploaded to local or mirror have to get their service changed to load from digitalocean
+blobs.each do |blob|
+  blob.update(service_name: 'digital_ocean')
+
 
 Credentials Editing:
 
 > EDITOR="atom --wait" rails credentials:edit
 
-##Optimization Tools / Gems
+#Optimization Tools / Gems
 
 Annotate
 > automatic comments of schema on model
@@ -62,3 +73,12 @@ Mail API
  
  Foreman (for starting processes in procfile)
  > foreman start
+ 
+ 
+####activestorage
+ 
+variant_record = ActiveStorage::VariantRecord.where(blob_id: 904, 'variation_digest': 'qn9hs8VU+VtaWWNiKp0JwwZ5pl0=')
+
+variant_attachments = ActiveStorage::Attachment.where(record_id: 429, record_type: 'ActiveStorage::VariantRecord')
+
+blob = ActiveStorage::Blob.find(1476)

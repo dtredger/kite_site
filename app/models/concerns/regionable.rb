@@ -39,7 +39,7 @@ module Regionable
       region_details = {}
       name_sym = region_name.to_sym
       if REGION_ENUM_IDS.keys.include?(name_sym)
-        region_details[:region_name]   = name_sym
+        region_details[:region_name]   = name_sym.to_s.titleize
         region_details[:countries]     = Country.where(region: REGION_ENUM_IDS[name_sym])
         region_details[:lat_lon_arr]   = REGION_MAP_CENTERS[name_sym]
         region_details[:region_blurb]  = REGION_BLURBS[name_sym]
