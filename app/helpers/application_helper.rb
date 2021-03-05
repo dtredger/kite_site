@@ -15,8 +15,11 @@ module ApplicationHelper
 
   # TODO - name of resource in page title
   def page_title
-    if controller_name
-      "#{controller_name.humanize} - #{I18n.t('site_name')}"
+    if controller_name && controller_name != 'pages'
+      if params[:id].is_a? String
+        return "#{params[:id].titleize} - #{I18n.t('site_name')}"
+      end
+      "#{controller_name.titleize} - #{I18n.t('site_name')}"
     else
       I18n.t('site_name')
     end
