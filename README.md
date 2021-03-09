@@ -19,5 +19,6 @@ Uses:
 
 * Wikipedia-scraped placeholder descriptions
 
+* Rspec/selenium for model/system specs
 
 All the actual code is secret (⌐□_□)
