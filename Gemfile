@@ -34,6 +34,7 @@ gem 'image_processing'
 gem 'kaminari'
 gem 'leaflet-rails'
 gem 'administrate'
+gem 'administrate-field-active_storage'
 gem 'cancancan'
 gem 'acts_as_favoritor'
 

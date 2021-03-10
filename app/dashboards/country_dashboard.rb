@@ -30,46 +30,46 @@ class CountryDashboard < Administrate::BaseDashboard
   # By default, it's limited to four items to reduce clutter on index pages.
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = %i[
-  photos_attachments
-  photos_blobs
-  kite_spots
-  location_map
+    photos_attachments
+    photos_blobs
+    kite_spots
+    location_map
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = %i[
-  photos_attachments
-  photos_blobs
-  kite_spots
-  location_map
-  rich_text_content
-  id
-  name
-  region
-  created_at
-  updated_at
-  description
-  latitude
-  longitude
-  slug
+    photos_attachments
+    photos_blobs
+    kite_spots
+    location_map
+    rich_text_content
+    id
+    name
+    region
+    created_at
+    updated_at
+    description
+    latitude
+    longitude
+    slug
   ].freeze
 
   # FORM_ATTRIBUTES
   # an array of attributes that will be displayed
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = %i[
-  photos_attachments
-  photos_blobs
-  kite_spots
-  location_map
-  rich_text_content
-  name
-  region
-  description
-  latitude
-  longitude
-  slug
+    photos_attachments
+    photos_blobs
+    kite_spots
+    location_map
+    rich_text_content
+    name
+    region
+    description
+    latitude
+    longitude
+    slug
   ].freeze
 
   # COLLECTION_FILTERS
@@ -87,7 +87,7 @@ class CountryDashboard < Administrate::BaseDashboard
   # Overwrite this method to customize how countries are displayed
   # across all pages of the admin dashboard.
   #
-  # def display_resource(country)
-  #   "Country ##{country.id}"
-  # end
+  def display_resource(country)
+    country.name
+  end
 end
