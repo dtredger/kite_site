@@ -259,6 +259,8 @@ GEM
     rack (2.2.3)
     rack-cors (1.1.1)
       rack (>= 2.0.0)
+    rack-mini-profiler (2.3.1)
+      rack (>= 1.2.0)
     rack-proxy (0.6.5)
       rack
     rack-test (1.1.0)
@@ -452,6 +454,7 @@ DEPENDENCIES
   pghero
   puma (~> 4.1)
   rack-cors
+  rack-mini-profiler (~> 2.0)
   rails (~> 6.1.0)
   redis (~> 4.0)
   rollbar

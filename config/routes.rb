@@ -30,7 +30,6 @@ Rails.application.routes.draw do
   get 'faq',              to: 'pages#faq'
   root                    to: 'pages#index'
 
-
   # TODO - disable API for now
   # mount_devise_token_auth_for 'User', at: 'auth'
   #, controllers: { sessions: 'api/sessions', token_validations: 'api/token_validations' }

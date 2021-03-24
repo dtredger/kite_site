@@ -9,7 +9,7 @@
       <p><%= @country.content %></p>
     </div>
 
-    <div class="col-12 col-lg-6">
+    <div class="col-12 col-lg-6 mxh-500">
       <%= render 'partials/leaflet_map', locals={map_markers: @country.location_map.leaflet_map_details} %>
     </div>
 

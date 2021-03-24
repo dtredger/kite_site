@@ -61,9 +61,10 @@ class User < ApplicationRecord
          # :trackable
          # :omniauthable
 
-  after_save -> { create_location_map }
+  # TODO - after_save will happen after updates!
+  after_create -> { create_location_map unless location_maps.any? }
 
-  enum role: %i[admin moderator author banned]
+  enum role: %i[banned basic author moderator admin]
 
   # https://github.com/CanCanCommunity/cancancan/wiki/Role-Based-Authorization
   def admin?
