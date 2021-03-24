@@ -11,17 +11,18 @@ class UserDashboard < Administrate::BaseDashboard
     id: Field::Number,
     name: Field::String,
     email: Field::String,
-    role: Field::String,
-    encrypted_password: Field::String,
-    reset_password_token: Field::String,
-    reset_password_sent_at: Field::DateTime,
-    remember_created_at: Field::DateTime,
+    role: EnumField.with_options(collection:User.roles),
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
     provider: Field::String,
     latitude: Field::Number,
     longitude: Field::Number,
     location_map: Field::HasOne,
+    # encrypted_password: Field::String,
+    password: Field::Password,
+    reset_password_token: Field::String,
+    reset_password_sent_at: Field::DateTime,
+    remember_created_at: Field::DateTime,
     allow_password_change: Field::Boolean,
     confirmation_token: Field::String,
     confirmed_at: Field::DateTime,
@@ -41,6 +42,7 @@ class UserDashboard < Administrate::BaseDashboard
   COLLECTION_ATTRIBUTES = %i[
     id
     name
+    role
     email
     created_at
   ].freeze
@@ -56,7 +58,6 @@ class UserDashboard < Administrate::BaseDashboard
     updated_at
     reset_password_sent_at
     remember_created_at
-    provider
     latitude
     longitude
     location_map
@@ -65,7 +66,6 @@ class UserDashboard < Administrate::BaseDashboard
     confirmed_at
     unconfirmed_email
     failed_attempts
-    unlock_token
     locked_at
   ].freeze
 
@@ -76,11 +76,8 @@ class UserDashboard < Administrate::BaseDashboard
     email
     name
     role
-    encrypted_password
-    provider
     latitude
     longitude
-    location_map
     allow_password_change
     confirmed_at
     unconfirmed_email
