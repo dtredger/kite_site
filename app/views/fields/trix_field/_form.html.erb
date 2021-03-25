@@ -1,0 +1,9 @@
+<%= javascript_pack_tag 'action-text-files' %>
+<%= stylesheet_link_tag 'action-text', media: 'all', 'data-turbolinks-track': 'reload' %>
+
+<div class="field-unit__label">
+  <%= f.label field.attribute %>
+</div>
+<div class="field-unit__field">
+  <%= f.rich_text_area field.attribute %>
+</div>

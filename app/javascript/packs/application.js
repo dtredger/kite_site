@@ -25,8 +25,6 @@ require('leaflet.awesome-markers')
 
 require('packs/filter-search')
 
-require("trix")
-require("@rails/actiontext")
 require('packs/action-text-files')
 
 require("ekko-lightbox")
