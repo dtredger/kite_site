@@ -1,4 +1,6 @@
-require "administrate/base_dashboard"
+# frozen_string_literal: true
+
+require 'administrate/base_dashboard'
 
 class CountryDashboard < Administrate::BaseDashboard
   # ATTRIBUTE_TYPES
@@ -8,20 +10,31 @@ class CountryDashboard < Administrate::BaseDashboard
   # which determines how the attribute is displayed
   # on pages throughout the dashboard.
   ATTRIBUTE_TYPES = {
-    photos_attachments: Field::HasMany.with_options(class_name: "ActiveStorage::Attachment"),
-    photos_blobs: Field::HasMany.with_options(class_name: "ActiveStorage::Blob"),
-    kite_spots: Field::HasMany,
-    location_map: Field::HasOne,
-    rich_text_content: Field::HasOne,
     id: Field::Number,
-    name: Field::Text,
-    region: Field::Text,
-    created_at: Field::DateTime,
-    updated_at: Field::DateTime,
+    name: Field::String,
+    slug: Field::String,
+    region: EnumField.with_options(collection: Country.regions),
     description: Field::Text,
+    language: EnumField.with_options(collection: Country.languages),
+    content: TrixField,
     latitude: Field::Number.with_options(decimals: 2),
     longitude: Field::Number.with_options(decimals: 2),
-    slug: Field::String,
+    location_map: Field::HasOne,
+    kite_spots: Field::HasMany.with_options(
+      searchable: true,
+      searchable_fields: ['name']
+    ),
+    photos: Field::ActiveStorage.with_options(
+      destroy_url: proc do |_namespace, resource, photo|
+        [:admin_destroy_photo, { model: :Country, resource: resource, photo_id: photo.id }]
+      end
+    ),
+    created_at: Field::DateTime.with_options(
+      format: '%b %d, %Y'
+    ),
+    updated_at: Field::DateTime.with_options(
+      format: '%b %d, %Y'
+    )
   }.freeze
 
   # COLLECTION_ATTRIBUTES
@@ -30,46 +43,43 @@ class CountryDashboard < Administrate::BaseDashboard
   # By default, it's limited to four items to reduce clutter on index pages.
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = %i[
-    photos_attachments
-    photos_blobs
+    id
+    name
     kite_spots
-    location_map
+    created_at
+    updated_at
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = %i[
-    photos_attachments
-    photos_blobs
-    kite_spots
-    location_map
-    rich_text_content
     id
     name
+    slug
     region
-    created_at
-    updated_at
     description
+    language
+    content
     latitude
     longitude
-    slug
+    kite_spots
+    photos
+    created_at
+    updated_at
   ].freeze
 
   # FORM_ATTRIBUTES
   # an array of attributes that will be displayed
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = %i[
-    photos_attachments
-    photos_blobs
-    kite_spots
-    location_map
-    rich_text_content
     name
     region
     description
+    language
+    content
     latitude
     longitude
-    slug
+    photos
   ].freeze
 
   # COLLECTION_FILTERS
@@ -89,5 +99,9 @@ class CountryDashboard < Administrate::BaseDashboard
   #
   def display_resource(country)
     country.name
+  end
+
+  def permitted_attributes
+    super + [photos: []]
   end
 end

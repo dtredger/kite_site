@@ -4,7 +4,7 @@ Rails.application.routes.draw do
     resources :kite_spots
     resources :countries
     resources :location_maps
-    delete :destroy_photo, to: 'kite_spots#destroy_photo'
+    delete :destroy_photo, to: 'application#destroy_photo'
     root to: 'users#index'
   end
 

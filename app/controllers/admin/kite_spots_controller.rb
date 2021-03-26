@@ -7,15 +7,6 @@ module Admin
     #   super
     # end
 
-    def destroy_photo
-      kite_spot = KiteSpot.find_by(slug: params['resource'])
-      if kite_spot
-        photo = kite_spot.photos.find_by(id: params['photo_id'])
-        photo.purge if photo
-      end
-      redirect_back(fallback_location: admin_kite_spots_path)
-    end
-
     # Override this method to specify custom lookup behavior.
     # This will be used to set the resource for the `show`, `edit`, and `update`
     # actions.

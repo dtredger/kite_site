@@ -1,7 +1,12 @@
+# frozen_string_literal: true
+
 require 'administrate/field/base'
 
+# custom Administrate field for rails enums (see also views/fields/enum_field)
 class EnumField < Administrate::Field::Base
   def to_s
+    return '' unless data
+
     data
   end
 

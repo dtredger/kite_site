@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'administrate/base_dashboard'
 
 class KiteSpotDashboard < Administrate::BaseDashboard
@@ -16,14 +18,14 @@ class KiteSpotDashboard < Administrate::BaseDashboard
     latitude: Field::Number.with_options(decimals: 2),
     longitude: Field::Number.with_options(decimals: 2),
     country: Field::BelongsTo.with_options(
-        searchable: true,
-        searchable_fields: ['name'],
+      searchable: true,
+      searchable_fields: ['name']
     ),
     location_map: Field::HasOne,
     photos: Field::ActiveStorage.with_options(
-        destroy_url: proc do |namespace, resource, photo|
-          [:admin_destroy_photo, { resource: resource, photo_id: photo.id }]
-        end
+      destroy_url: proc do |_namespace, resource, photo|
+        [:admin_destroy_photo, { model: :KiteSpot, resource: resource, photo_id: photo.id }]
+      end
     ),
     # taggings: Field::HasMany.with_options(class_name: '::ActsAsTaggableOn::Tagging'),
     # base_tags: Field::HasMany.with_options(class_name: '::ActsAsTaggableOn::Tag'),
@@ -32,8 +34,12 @@ class KiteSpotDashboard < Administrate::BaseDashboard
     month_tags: Field::Tag.with_options(class_name: 'ActsAsTaggableOn::Tag'), #, attribute_name: :title),
     # amenity_tag_taggings: Field::HasMany.with_options(class_name: 'ActsAsTaggableOn::Tagging'),
     # amenity_tags: Field::HasMany.with_options(class_name: 'ActsAsTaggableOn::Tag'),
-    created_at: Field::DateTime,
-    updated_at: Field::DateTime
+    created_at: Field::DateTime.with_options(
+      format: '%b %d, %Y'
+    ),
+    updated_at: Field::DateTime.with_options(
+      format: '%b %d, %Y'
+    )
   }.freeze
 
   # COLLECTION_ATTRIBUTES
@@ -88,7 +94,6 @@ class KiteSpotDashboard < Administrate::BaseDashboard
 
   FORM_ATTRIBUTES = %i[
     name
-    slug
     description
     content
     country
