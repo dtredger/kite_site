@@ -19,7 +19,7 @@ gem 'sass-rails', '>= 6'
 gem 'webpacker'
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
 gem 'turbolinks', '~> 5'
-gem 'jsonapi-serializer'
+# gem 'jsonapi-serializer'
 gem 'rack-cors'
 # Use Redis adapter to run Action Cable in production
 gem 'redis', '~> 4.0'
@@ -34,6 +34,9 @@ gem 'image_processing'
 gem 'kaminari'
 gem 'leaflet-rails'
 gem 'administrate'
+gem 'administrate-field-active_storage'
+gem 'administrate-field-tag', git: 'git@github.com:herregroen/administrate-field-tag.git'
+
 gem 'cancancan'
 gem 'acts_as_favoritor'
 
@@ -69,6 +72,11 @@ group :development do
   # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
   gem 'listen', '~> 3.2'
   gem 'web-console', '>= 3.3.0'
+
+  # Display performance information such as SQL time and flame graphs for each request in your browser.
+  # Can be configured to work on production as well see: https://github.com/MiniProfiler/rack-mini-profiler/blob/master/README.md
+  gem 'rack-mini-profiler', '~> 2.0'
+
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'

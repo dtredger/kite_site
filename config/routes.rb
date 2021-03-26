@@ -4,6 +4,7 @@ Rails.application.routes.draw do
     resources :kite_spots
     resources :countries
     resources :location_maps
+    delete :destroy_photo, to: 'application#destroy_photo'
     root to: 'users#index'
   end
 
@@ -29,7 +30,6 @@ Rails.application.routes.draw do
   get 'contact',          to: 'pages#contact'
   get 'faq',              to: 'pages#faq'
   root                    to: 'pages#index'
-
 
   # TODO - disable API for now
   # mount_devise_token_auth_for 'User', at: 'auth'

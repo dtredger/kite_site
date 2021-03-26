@@ -5,7 +5,6 @@ module Admin
     #
     # def update
     #   super
-    #   send_foo_updated_email(requested_resource)
     # end
 
     # Override this method to specify custom lookup behavior.
@@ -28,17 +27,20 @@ module Admin
     #     resource_class.with_less_stuff
     #   end
     # end
+    def scoped_resource
+      resource_class.with_attached_photos
+    end
 
     # Override `resource_params` if you want to transform the submitted
     # data before it's persisted. For example, the following would turn all
     # empty values into nil values. It uses other APIs such as `resource_class`
     # and `dashboard`:
     #
-    # def resource_params
-    #   params.require(resource_class.model_name.param_key).
-    #     permit(dashboard.permitted_attributes).
-    #     transform_values { |value| value == "" ? nil : value }
-    # end
+    def resource_params
+      params.require(resource_class.model_name.param_key)
+          .permit(dashboard.permitted_attributes)
+          .transform_keys { |key| key == 'month_tags' ? 'month_tag_list' : key }
+    end
 
     # See https://administrate-prototype.herokuapp.com/customizing_controller_actions
     # for more information

@@ -32,11 +32,11 @@ class LocationMap < ApplicationRecord
   PUBLIC_MAP_TYPES = %w[Country KiteSpot]
 
   def latitude
-    self[:latitude] || record.latitude
+    self[:latitude] || record.latitude if record
   end
 
   def longitude
-    self[:longitude] || record.longitude
+    self[:longitude] || record.longitude if record
   end
 
   def zoom

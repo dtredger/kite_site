@@ -19,14 +19,12 @@ require("channels")
 
 global.jquery = require('jquery')
 
-require("leaflet")
+
 require('packs/leaflet-custom')
-require('leaflet.awesome-markers')
+
 
 require('packs/filter-search')
 
-require("trix")
-require("@rails/actiontext")
 require('packs/action-text-files')
 
 require("ekko-lightbox")
