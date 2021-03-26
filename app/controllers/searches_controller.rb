@@ -4,9 +4,8 @@ class SearchesController < ApplicationController
   skip_authorization_check
   include Searchable
 
-
   def index
-    # TODO - location not used
+    # TODO: - location not used
     results = name_loc_cat_search(basic_search_params)
 
     @countries = results[:countries] || []
@@ -26,7 +25,6 @@ class SearchesController < ApplicationController
     render template: 'searches/index'
   end
 
-
   private
 
   def basic_search_params
@@ -42,7 +40,4 @@ class SearchesController < ApplicationController
     kite_spots = results[:kite_spots] || []
     LocationMap.leaflet_map_details(countries + kite_spots)
   end
-
-
-
 end

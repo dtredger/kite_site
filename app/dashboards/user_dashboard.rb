@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'administrate/base_dashboard'
 
 class UserDashboard < Administrate::BaseDashboard
@@ -11,14 +13,13 @@ class UserDashboard < Administrate::BaseDashboard
     id: Field::Number,
     name: Field::String,
     email: Field::String,
-    role: EnumField.with_options(collection:User.roles),
+    role: EnumField.with_options(collection: User.roles),
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
     provider: Field::String,
     latitude: Field::Number,
     longitude: Field::Number,
     location_map: Field::HasOne,
-    # encrypted_password: Field::String,
     password: Field::Password,
     reset_password_token: Field::String,
     reset_password_sent_at: Field::DateTime,
@@ -31,7 +32,7 @@ class UserDashboard < Administrate::BaseDashboard
     failed_attempts: Field::Number,
     unlock_token: Field::String,
     locked_at: Field::DateTime,
-    tokens: Field::String.with_options(searchable: false),
+    tokens: Field::String.with_options(searchable: false)
   }.freeze
 
   # COLLECTION_ATTRIBUTES
@@ -93,12 +94,12 @@ class UserDashboard < Administrate::BaseDashboard
   # in the search field:
   #
   COLLECTION_FILTERS = {
-    admin: ->(resources) do
+    admin: lambda do |resources|
       resources.where(role: 'admin')
     end,
 
-    new: ->(resources) do
-      resources.where("created_at > ?", 1.week.ago)
+    new: lambda do |resources|
+      resources.where('created_at > ?', 1.week.ago)
     end
 
   }.freeze

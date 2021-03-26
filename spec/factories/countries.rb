@@ -38,7 +38,6 @@ FactoryBot.define do
       after(:create) { |country| create(:location_map, record: country) }
     end
 
-
     trait :with_location_map do
       after(:create) do |country|
         create(:location_map, record: country)

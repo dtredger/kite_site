@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class CountriesController < ApplicationController
-  load_and_authorize_resource #cancancan before_action
+  load_and_authorize_resource # cancancan before_action
 
   before_action :set_country, only: %i[show edit update destroy]
 

@@ -51,9 +51,9 @@ RSpec.describe User, type: :model do
       let(:kite_spot) { create(:kite_spot) }
 
       it 'saves favorites' do
-        expect{
+        expect  do
           user.favorite(kite_spot)
-        }.to change(user.favorites, :count).by(1)
+        end.to change(user.favorites, :count).by(1)
       end
     end
   end
@@ -80,16 +80,15 @@ RSpec.describe User, type: :model do
 
       it 'calculates distance to points' do
         user = create(:user, latitude: 0, longitude: 0)
-        points = {latitude: 20, longitude: 20}
+        points = { latitude: 20, longitude: 20 }
         expect(user.haversine_distance(points)).to eq(3112)
       end
 
       it 'gives nil for bad coordinates' do
         user = create(:user, latitude: 0, longitude: 0)
-        points = {latitude: nil, longitude: ''}
+        points = { latitude: nil, longitude: '' }
         expect(user.haversine_distance(points)).to eq(nil)
       end
     end
   end
-
 end

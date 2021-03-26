@@ -38,8 +38,8 @@ module Admin
     #
     def resource_params
       params.require(resource_class.model_name.param_key)
-          .permit(dashboard.permitted_attributes)
-          .transform_keys { |key| key == 'month_tags' ? 'month_tag_list' : key }
+            .permit(dashboard.permitted_attributes)
+            .transform_keys { |key| key == 'month_tags' ? 'month_tag_list' : key }
     end
 
     # See https://administrate-prototype.herokuapp.com/customizing_controller_actions

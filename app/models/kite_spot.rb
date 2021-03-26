@@ -39,18 +39,18 @@ class KiteSpot < ApplicationRecord
 
   scope :find_months, ->(months) { tagged_with(months, any: true) }
   scope :find_amenities, ->(amenities) { tagged_with(amenities, any: true) }
-  scope :max_distance, ->(max_km, target) { all.filter do |c|
-                                              distance = c.haversine_distance(target)
-                                              distance.present? && distance <= max_km
-                                            end }
+  scope :max_distance, lambda { |max_km, target|
+                         all.filter do |c|
+                           distance = c.haversine_distance(target)
+                           distance.present? && distance <= max_km
+                         end
+                       }
 
   def amenities
     amenity_tag_list
   end
 
-  def region
-    country.region
-  end
+  delegate :region, to: :country
 
   def closest_city
     'Close City'
@@ -69,7 +69,6 @@ class KiteSpot < ApplicationRecord
     }
   end
 
-
   # TODO: - presenters moved elsewhere
   # for grid subtitle
   def card_subtitle
@@ -78,9 +77,7 @@ class KiteSpot < ApplicationRecord
 
   # for grid card
   def cover_photo
-    if photos.any?
-      photos.first
-    end
+    photos.first if photos.any?
   end
 
   # for #show page gallery

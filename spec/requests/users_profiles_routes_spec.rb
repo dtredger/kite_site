@@ -24,5 +24,4 @@ RSpec.describe 'Users_routes', type: :request do
       end
     end
   end
-
 end

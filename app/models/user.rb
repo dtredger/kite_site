@@ -41,34 +41,34 @@
 #  index_users_on_unlock_token          (unlock_token) UNIQUE
 #
 class User < ApplicationRecord
-
   include DistanceCalculable
 
   has_one :location_map, as: :record, dependent: :destroy
   acts_as_favoritor
 
-  validates_uniqueness_of :email
+  validates :email, uniqueness: true
   # disable token auth (for api)for now
   # include DeviseTokenAuth::Concerns::User
   devise :database_authenticatable,
          :registerable,
          :recoverable,
          :rememberable,
-         :validatable #,
-         # :confirmable,
-         # :lockable,
-         # :timeoutable,
-         # :trackable
-         # :omniauthable
+         :validatable # ,
+  # :confirmable,
+  # :lockable,
+  # :timeoutable,
+  # :trackable
+  # :omniauthable
 
-  # TODO - after_save will happen after updates!
+  # TODO: - after_save will happen after updates!
   after_create -> { create_location_map unless location_maps.any? }
 
-  enum role: %i[banned basic author moderator admin]
+  enum role: { banned: 0, basic: 1, author: 2, moderator: 3, admin: 4 }
 
   # https://github.com/CanCanCommunity/cancancan/wiki/Role-Based-Authorization
   def admin?
     return true if role == 'admin'
+
     false
   end
 
@@ -100,10 +100,9 @@ class User < ApplicationRecord
     ''
   end
 
-
   def kite_spots_by_distance
     @spots_distances ||= {}
-    KiteSpot.all.each do |k|
+    KiteSpot.all.find_each do |k|
       @spots_distances[k.slug] = haversine_distance(k)
     end
     @spots_distances.sort_by { |_name, distance| distance }
@@ -128,5 +127,4 @@ class User < ApplicationRecord
     country_faves = favorites_by_type('Country')
     Country.find(country_faves.map(&:favoritable_id))
   end
-
 end

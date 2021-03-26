@@ -7,7 +7,7 @@ namespace :active_storage_blobs do
     ActiveStorage::Blob.all.each do |blob|
       # make sure all blobs created before use mirror service
       blob.update(service_name: 'mirror')
-      puts "change service for #{blob.filename.to_s}"
+      puts "change service for #{blob.filename}"
 
       source_mirror = if blob.service.primary.exist? blob.key
                         blob.service.primary
@@ -25,7 +25,7 @@ namespace :active_storage_blobs do
         end
       end
 
-    rescue StandardError  => e
+    rescue StandardError => e
       puts e
       puts blob.key.to_s
     end

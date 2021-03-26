@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
     redirect_to root_url, alert: 'Page Not Found'
   end
 
-  rescue_from CanCan::AccessDenied do |exception|
+  rescue_from CanCan::AccessDenied do |_exception|
     if current_user.nil?
       session[:next] = request.fullpath
       redirect_to new_user_session_path, alert: 'You have to log in to continue.'

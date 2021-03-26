@@ -105,7 +105,7 @@ RSpec.describe Country, type: :model do
   context 'scopes' do
     describe 'max_distance' do
       it 'filters countries' do
-        target = {latitude: 0, longitude: 0}
+        target = { latitude: 0, longitude: 0 }
         fifteen_hundred_km = create(:country, latitude: 10, longitude: 10)
         three_thousand_km = create(:country, latitude: 20, longitude: 20)
         expect(described_class.max_distance(2000, target)).to eq([fifteen_hundred_km])

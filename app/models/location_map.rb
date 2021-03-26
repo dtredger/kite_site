@@ -28,7 +28,6 @@ class LocationMap < ApplicationRecord
 
   scope :public_maps, -> { includes(:record).filter { |c| PUBLIC_MAP_TYPES.include?(c.record_type) } }
 
-
   PUBLIC_MAP_TYPES = %w[Country KiteSpot]
 
   def latitude
@@ -45,11 +44,11 @@ class LocationMap < ApplicationRecord
 
   def closest_markers
     return record.closest_5_kite_spots if record_type == 'User'
+
     []
   end
 
-
-  def popup_link(model_obj=nil)
+  def popup_link(model_obj = nil)
     if model_obj
       "<h6><a href='#{site_url}#{model_obj.class.name.tableize.dasherize}/#{model_obj.slug}'>#{model_obj.name}</a></h6>"
     else
@@ -57,7 +56,7 @@ class LocationMap < ApplicationRecord
     end
   end
 
-  def leaflet_marker(model_obj=nil)
+  def leaflet_marker(model_obj = nil)
     if model_obj
       { latlng: [model_obj.latitude, model_obj.longitude], popup: popup_link(model_obj) }
     else
@@ -65,7 +64,7 @@ class LocationMap < ApplicationRecord
     end
   end
 
-  # TODO closest_markers for user should be separate
+  # TODO: closest_markers for user should be separate
   def leaflet_map_details
     markers_arr = [leaflet_marker]
     closest_markers.each do |obj|
@@ -77,8 +76,7 @@ class LocationMap < ApplicationRecord
       markers: markers_arr }
   end
 
-
-  def self.leaflet_map_details(obj_arr=[], map_center=nil)
+  def self.leaflet_map_details(obj_arr = [], map_center = nil)
     all_location_markers = []
     if obj_arr == :all
       public_maps.each do |loc_map|
@@ -87,11 +85,12 @@ class LocationMap < ApplicationRecord
     else
       obj_arr.each do |model|
         next unless model.location_map
+
         all_location_markers.push(model.location_map.leaflet_marker)
       end
     end
 
-    map_center = self.calculate_center(all_location_markers) if map_center.nil?
+    map_center = calculate_center(all_location_markers) if map_center.nil?
     { container_id: 'location_map',
       center: { latlng: map_center },
       zoom: '2',
@@ -102,15 +101,15 @@ class LocationMap < ApplicationRecord
     marker_count = loc_marker_arry.length
     return [20, 0] if marker_count == 0
     return loc_marker_arry.first[:latlng] if marker_count == 1
+
     lats = 0
     lons = 0
     loc_marker_arry.each do |marker|
       lats += marker[:latlng][0]
       lons += marker[:latlng][1]
     end
-    [lats.to_f/marker_count.to_f, lons.to_f/marker_count.to_f, ]
+    [lats.to_f / marker_count.to_f, lons.to_f / marker_count.to_f]
   end
-
 
   private
 
@@ -120,8 +119,6 @@ class LocationMap < ApplicationRecord
   end
 
   def record_has_coordinates
-    unless record.latitude && record.longitude
-      errors.add(:base, 'Mapped object must have coordinates')
-    end
+    errors.add(:base, 'Mapped object must have coordinates') unless record.latitude && record.longitude
   end
 end

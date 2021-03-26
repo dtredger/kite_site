@@ -6,7 +6,6 @@ require 'open-uri'
 require 'json'
 require 'csv'
 
-
 namespace :manage_images do
   desc 'manage images, load, remove, or rename'
 
@@ -23,14 +22,15 @@ namespace :manage_images do
     skips = []
     fails = []
 
-    def skip_model(model, min_width=500, photos_count=3)
+    def skip_model(model, min_width = 500, photos_count = 3)
       big_photos_count = model.photos.filter do |p|
         return true if p.blob.metadata[:width].nil?
+
         p.blob.metadata[:width] > min_width
       end.count
       if big_photos_count >= photos_count
         puts "already #{photos_count} images for #{model.name}"
-        return true
+        true
       end
     end
 
@@ -51,7 +51,6 @@ namespace :manage_images do
         img_count = 1
         max_img_count = 3
         image_divs.each do |img_div|
-
           image_url = img_div.urls['regular']
 
           file_name = "#{model.slug}-#{img_count}-b.jpg"
@@ -90,7 +89,6 @@ namespace :manage_images do
     #
     # puts "Searched: #{noko_page.title}"
 
-
     # BING-SPECIFIC
     # image_divs = noko_page.css('.img_cont')
     # image_divs = noko_page.css('.iusc')
@@ -113,13 +111,15 @@ namespace :manage_images do
     count = 0
     collection.each do |model|
       next if model.photos.count < 6
+
       model.photos.each do |photo|
         next if photo.blob[:metadata]['width'].blank?
-        if photo.blob[:metadata]['width'] < 600
-          puts "deleting photo #{photo.blob[:filename]} from #{model.name}, with width: #{photo.blob[:metadata]['width']}"
-          photo.destroy
-          count += 1
-        end
+
+        next unless photo.blob[:metadata]['width'] < 600
+
+        puts "deleting photo #{photo.blob[:filename]} from #{model.name}, with width: #{photo.blob[:metadata]['width']}"
+        photo.destroy
+        count += 1
       end
     end
 
@@ -131,7 +131,7 @@ namespace :manage_images do
 
     collection.each do |model|
       model.photos.each_with_index do |photo, ix|
-        new_name = "#{model.slug}-#{ix+1}.jpg"
+        new_name = "#{model.slug}-#{ix + 1}.jpg"
         photo.blob.update(filename: new_name)
         puts "rename photo to #{new_name}"
       end
@@ -180,6 +180,5 @@ namespace :manage_images do
     #     end
     #   end
     # end
-
   end
 end

@@ -28,29 +28,39 @@ class Country < ApplicationRecord
   include DistanceCalculable
 
   validates :name, presence: true, uniqueness: true
-  validates_presence_of :latitude
-  validates_presence_of :longitude
+  validates :latitude, presence: true
+  validates :longitude, presence: true
 
   has_many_attached :photos, dependent: :destroy
   has_many :kite_spots, dependent: :nullify
-  has_one :location_map, as: :record, dependent: :destroy #, required: true
+  has_one :location_map, as: :record, dependent: :destroy # , required: true
   has_rich_text :content
   acts_as_favoritable
 
-  # TODO - kitespot and country should require location_map
+  # TODO: - kitespot and country should require location_map
   # before_validation -> { create_location_map }
 
-  enum region: ['Europe', 'Caribbean', 'South America', 'Asia', 'Africa', 'North America', 'ANZA/Pacific', 'Middle East']
-  enum language: [:English, :French, :Spanish, :Italian, :German]
+  enum region: { Europe: 0,
+                 Caribbean: 1,
+                 'South America': 2,
+                 Asia: 3,
+                 Africa: 4,
+                 'North America': 5,
+                 'ANZA/Pacific': 6,
+                 'Middle East': 7 }
+
+  enum language: { Other: 0, English: 1, French: 2, Spanish: 3, Italian: 4, German: 5 }
 
   # TODO: - this fetches all countries' kitespots' tags
   scope :find_months, ->(months) { all.filter { |c| c.includes_month?(months) } }
   scope :find_region, ->(regions) { all.filter { |c| regions.include? c.region } }
-  scope :find_language, ->(language) { all.filter { |c| languages.include? c.language } }
-  scope :max_distance, ->(max_km, target) { all.filter do |c|
-                                              distance = c.haversine_distance(target)
-                                              distance.present? && distance <= max_km
-                                            end }
+  scope :find_language, ->(_language) { all.filter { |c| languages.include? c.language } }
+  scope :max_distance, lambda { |max_km, target|
+                         all.filter do |c|
+                           distance = c.haversine_distance(target)
+                           distance.present? && distance <= max_km
+                         end
+                       }
   # scope :with_eager_loaded_image, -> { eager_load(photos: :blob) }
   # scope :with_preloaded_image, -> { preload(photos: :blob) }
 
@@ -66,9 +76,7 @@ class Country < ApplicationRecord
     end
   end
 
-  def currency
-  end
-
+  def currency; end
 
   # Presenters
   # for grid subtitle
@@ -85,5 +93,4 @@ class Country < ApplicationRecord
   def header_photos
     photos.includes([:blob]).take(3)
   end
-
 end

@@ -1,10 +1,9 @@
 # frozen_string_literal: true
 
 class KiteSpotsController < ApplicationController
-  load_and_authorize_resource #cancancan before_action
+  load_and_authorize_resource # cancancan before_action
 
   before_action :set_kite_spot, only: %i[show edit update destroy]
-
 
   def index
     set_kite_spots

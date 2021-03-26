@@ -12,7 +12,7 @@ if Rails.env.development?
     user_agent = 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.134 Safari/537.36'
     date = Time.new.strftime('%Y-%m-%d')
     filename = "ikitesurf_kites-fly-#{date}.csv"
-    brand = 'F-One' #'FlySurfer'
+    brand = 'F-One' # 'FlySurfer'
     page_root = "http://c.ikitesurf.com/classifieds?search=search&type=4&location=all&price=all&brand=#{brand}&year=all&sortby=date&expires=0&c_states=all&size=all&views=all&orderby=dsc&favourite=0&wanted=0&terms=all&deleted=0&reported=0&page="
 
     CSV.open(filename, 'wb') do |csv|
@@ -22,9 +22,7 @@ if Rails.env.development?
       while true
         noko_page = Nokogiri::HTML(open(page_root + page_counter.to_s, 'User-Agent' => user_agent))
         rows = noko_page.css('div.classified.cfix')
-        if rows.count == 0
-          break
-        end
+        break if rows.count == 0
 
         rows.each do |row|
           kite_model = row.css('span.class_brief')[0].content.strip
@@ -43,6 +41,5 @@ if Rails.env.development?
     #   puts e
     #   break
     # end
-
   end
 end

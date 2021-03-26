@@ -31,7 +31,7 @@ class KiteSpotDashboard < Administrate::BaseDashboard
     # base_tags: Field::HasMany.with_options(class_name: '::ActsAsTaggableOn::Tag'),
     # month_tag_taggings: Field::HasMany.with_options(class_name: 'ActsAsTaggableOn::Tagging'),
     # month_tags: Field::HasMany.with_options(class_name: 'ActsAsTaggableOn::Tag'),
-    month_tags: Field::Tag.with_options(class_name: 'ActsAsTaggableOn::Tag'), #, attribute_name: :title),
+    month_tags: Field::Tag.with_options(class_name: 'ActsAsTaggableOn::Tag'), # attribute_name: :title),
     # amenity_tag_taggings: Field::HasMany.with_options(class_name: 'ActsAsTaggableOn::Tagging'),
     # amenity_tags: Field::HasMany.with_options(class_name: 'ActsAsTaggableOn::Tag'),
     created_at: Field::DateTime.with_options(
@@ -114,7 +114,7 @@ class KiteSpotDashboard < Administrate::BaseDashboard
   #     open: ->(resources) { resources.where(open: true) }
   #   }.freeze
   COLLECTION_FILTERS = {
-    # TODO - ActiveRecord::StatementInvalid in Admin::KiteSpots#index
+    # TODO: - ActiveRecord::StatementInvalid in Admin::KiteSpots#index
     # (PG::AmbiguousColumn: ERROR:  column reference "updated_at" is ambiguous)
     # new: ->(resources) do
     #   resources.where("updated_at > ?", 1.week.ago)
@@ -131,6 +131,6 @@ class KiteSpotDashboard < Administrate::BaseDashboard
   # https://github.com/Dreamersoul/administrate-field-active_storage
   # permitted for has_many_attached
   def permitted_attributes
-    super + [:photos => []] + [:month_tags => []]
+    super + [photos: []] + [month_tags: []]
   end
 end

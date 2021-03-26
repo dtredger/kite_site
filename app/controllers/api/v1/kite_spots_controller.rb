@@ -1,5 +1,4 @@
 class Api::V1::KiteSpotsController < Api::BaseController
-
   # get ?page=2
   def index
     kite_spots = KiteSpot.all.includes(:country).includes([:photos_attachments]).page(pagination_params)
@@ -11,14 +10,10 @@ class Api::V1::KiteSpotsController < Api::BaseController
     render json: KiteSpotSerializer.new(kite_spot)
   end
 
-
   private
 
   # TODO: JSON::API creates "page"=>{"number"=>"1", "size"=>"20"}
   def pagination_params
-    if params[:page]
-      params[:page][:number]
-    end
+    params[:page][:number] if params[:page]
   end
-
 end

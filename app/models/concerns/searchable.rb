@@ -8,6 +8,7 @@ module Searchable
     #
     def name_search(name_str)
       return none if name_str.blank?
+
       where('slug like?', "%#{name_str.parameterize}%")
     end
 
@@ -26,11 +27,9 @@ module Searchable
 
     # def amenity_search(amenities)
     # end
-
   end
 
-
-  # TODO -ignores location
+  # TODO: -ignores location
   # basic search
   def name_loc_cat_search(search_params)
     results = {}
@@ -70,7 +69,8 @@ module Searchable
       month_countries = month_kite_spots.map(&:country).uniq
     end
 
-    all_regions = ['Europe', 'Caribbean', 'South America', 'Asia', 'Africa', 'North America', 'Pacific', 'ANZA', 'Middle East']
+    all_regions = ['Europe', 'Caribbean', 'South America', 'Asia', 'Africa', 'North America', 'Pacific', 'ANZA',
+                   'Middle East']
     regions = adv_search_params[:regions] & all_regions
     if regions && regions.any?
       region_countries = Country.find_region(regions)
@@ -79,7 +79,8 @@ module Searchable
       region_kite_spots = kite_spots.flatten(1).uniq
     end
 
-    all_amenities = ['Parking', 'Change Rooms', 'Washrooms', 'Not Crowded', 'Easily Accessible', 'Camping', 'Waves', 'Flat Water']
+    all_amenities = ['Parking', 'Change Rooms', 'Washrooms', 'Not Crowded', 'Easily Accessible', 'Camping', 'Waves',
+                     'Flat Water']
     amenities = adv_search_params[:amenities] & all_amenities
     if amenities && amenities.any?
       amenity_kite_spots = KiteSpot.find_amenities(amenities).includes(:country)
@@ -90,12 +91,12 @@ module Searchable
     languages = adv_search_params[:languages] & all_languages
     if languages && languages.any?
       language_countries = Country.find_language(languages)
-      language_kite_spots = language_countries.map(&:kite_spots).flatten(1).uniq
+      language_kite_spots = language_countries.flat_map(&:kite_spots).uniq
     end
 
     if current_user
       max_distance = adv_search_params[:distance].to_i
-      target = {latitude: current_user.latitude, longitude: current_user.longitude}
+      target = { latitude: current_user.latitude, longitude: current_user.longitude }
 
       if (100..9999).include?(max_distance) && target[:latitude] && target[:longitude]
         distance_countries = Country.max_distance(max_distance, target)
@@ -109,7 +110,8 @@ module Searchable
     amenity_countries ||= []
     language_countries ||= []
     distance_countries ||= []
-    @countries = [name_countries, month_countries, region_countries, amenity_countries, language_countries, distance_countries].reject( &:empty? ).reduce(:&) || []
+    @countries = [name_countries, month_countries, region_countries, amenity_countries, language_countries,
+                  distance_countries].reject(&:empty?).reduce(:&) || []
 
     name_kite_spots ||= []
     month_kite_spots ||= []
@@ -117,6 +119,7 @@ module Searchable
     amenity_kite_spots ||= []
     language_kite_spots ||= []
     distance_kite_spots ||= []
-    @kite_spots = [name_kite_spots, month_kite_spots, region_kite_spots, amenity_kite_spots, language_kite_spots, distance_kite_spots].reject( &:empty? ).reduce(:&) || []
+    @kite_spots = [name_kite_spots, month_kite_spots, region_kite_spots, amenity_kite_spots, language_kite_spots,
+                   distance_kite_spots].reject(&:empty?).reduce(:&) || []
   end
 end

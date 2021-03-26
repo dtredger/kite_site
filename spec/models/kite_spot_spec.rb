@@ -24,9 +24,12 @@ require 'rails_helper'
 
 RSpec.describe KiteSpot, type: :model do
   let(:kite_spot) { create(:kite_spot) }
+  let(:user) { create(:user) }
   let(:kite_spot_with_map) { create(:kite_spot, :with_location_map) }
   let(:spot_with_2_months) { create(:kite_spot, :with_2_month_tags) }
   let(:spot_with_parking) { create(:kite_spot, :with_parking) }
+
+  let(:user) { create(:user) }
 
   describe 'relations' do
     it 'requires name' do
@@ -65,8 +68,6 @@ RSpec.describe KiteSpot, type: :model do
       end
     end
   end
-
-  let(:user) { create(:user) }
 
   context 'methods' do
     describe 'favorites' do
@@ -121,7 +122,7 @@ RSpec.describe KiteSpot, type: :model do
   context 'scopes' do
     describe 'max_distance' do
       it 'filters kite spots' do
-        target = {latitude: 0, longitude: 0}
+        target = { latitude: 0, longitude: 0 }
         fifteen_hundred_km = create(:kite_spot, latitude: 10, longitude: 10)
         three_thousand_km = create(:kite_spot, latitude: 20, longitude: 20)
         expect(described_class.max_distance(2000, target)).to eq([fifteen_hundred_km])

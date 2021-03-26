@@ -5,7 +5,6 @@ module Administrate
     # the administrate-field-tag gem seems to not accept two args for permitted_attribute (not up-to-date)
     # the below is the standard for administrate's own HasMany field
     class Tag
-
       # options = {:class_name=>"ActsAsTaggableOn::Tag", :resource_class=>KiteSpot(id: integer, name: ..... )}
       def self.permitted_attribute(attr, _options = {})
         # This may seem arbitrary, and improvable by using reflection.
@@ -20,7 +19,6 @@ module Administrate
         # See https://github.com/rails/rails/blob/b30a23f53b52e59d31358f7b80385ee5c2ba3afe/activerecord/lib/active_record/associations/builder/collection_association.rb#L48
         { "#{attr.to_s.singularize}_ids".to_sym => [] }
       end
-
     end
   end
 end

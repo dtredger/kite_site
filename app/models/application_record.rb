@@ -16,5 +16,4 @@ class ApplicationRecord < ActiveRecord::Base
   def self.all_months
     %w[Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec]
   end
-
 end

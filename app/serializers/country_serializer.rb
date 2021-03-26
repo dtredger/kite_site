@@ -32,14 +32,14 @@ class CountrySerializer
     country.content.body.to_s
   end
 
-  attribute :photos do |country|
+  attribute :photos do |_country|
     # country.photos_attachments.map(&:service_url)
-    [ 'https://dummyimage.com/600x400&text=first',
-      'https://dummyimage.com/600x400&text=second',
-      'https://dummyimage.com/600x400&text=third',
-      'https://dummyimage.com/600x400&text=fourth',
-      'https://dummyimage.com/600x400&text=fifth',
-      'https://dummyimage.com/600x400&text=sixth' ]
+    ['https://dummyimage.com/600x400&text=first',
+     'https://dummyimage.com/600x400&text=second',
+     'https://dummyimage.com/600x400&text=third',
+     'https://dummyimage.com/600x400&text=fourth',
+     'https://dummyimage.com/600x400&text=fifth',
+     'https://dummyimage.com/600x400&text=sixth']
   end
 
   has_many :kite_spots

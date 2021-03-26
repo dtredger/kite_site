@@ -43,7 +43,7 @@ RSpec.describe 'VisitorSearches', type: :system do
       end
 
       pending 'has map' do
-        fail('map has no styles')
+        raise('map has no styles')
         expect(page).to have_css('#location_map')
       end
     end

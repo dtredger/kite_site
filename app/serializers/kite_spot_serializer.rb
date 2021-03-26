@@ -33,18 +33,18 @@ class KiteSpotSerializer
     kite_spot.content.body.to_s
   end
 
-  attribute :photos do |kite_spot|
+  attribute :photos do |_kite_spot|
     # kite_spot.photos_attachments.map(&:service_url)
-    [ 'https://dummyimage.com/600x400&text=first',
-      'https://dummyimage.com/600x400&text=second',
-      'https://dummyimage.com/600x400&text=third',
-      'https://dummyimage.com/600x400&text=fourth',
-      'https://dummyimage.com/600x400&text=fifth',
-      'https://dummyimage.com/600x400&text=sixth' ]
+    ['https://dummyimage.com/600x400&text=first',
+     'https://dummyimage.com/600x400&text=second',
+     'https://dummyimage.com/600x400&text=third',
+     'https://dummyimage.com/600x400&text=fourth',
+     'https://dummyimage.com/600x400&text=fifth',
+     'https://dummyimage.com/600x400&text=sixth']
   end
 
   belongs_to :country
-# has_one :location_map, as: :record, dependent: :destroy
+  # has_one :location_map, as: :record, dependent: :destroy
 
   # # use rails cache with a separate namespace and fixed expiry
   cache_options store: Rails.cache, namespace: 'jsonapi-serializer', expires_in: 1.hour

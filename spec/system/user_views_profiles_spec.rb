@@ -58,9 +58,5 @@ RSpec.describe 'UserViewsProfiles', type: :system do
         expect(page).to have_css('.hover-scale-bg-image', text: country.name)
       end
     end
-
-
   end
-
 end
-

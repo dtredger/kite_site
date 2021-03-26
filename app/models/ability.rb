@@ -31,7 +31,6 @@ class Ability
     # https://github.com/CanCanCommunity/cancancan/wiki/Defining-Abilities
   end
 
-
   def admin_rules
     can :manage, :all
   end

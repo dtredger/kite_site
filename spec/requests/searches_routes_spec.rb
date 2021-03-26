@@ -16,7 +16,7 @@ RSpec.describe 'searches_routes', type: :request do
   describe 'GET /searches' do
     context 'not signed in' do
       it 'accepts search param' do
-        get search_path, params: { search: {name: 'test'} }
+        get search_path, params: { search: { name: 'test' } }
         expect(response).to have_http_status(:ok)
       end
     end
@@ -27,13 +27,9 @@ RSpec.describe 'searches_routes', type: :request do
       log_in_user
 
       it 'allows location-based search' do
-        get search_advanced_path, params: { search: {max_distance:2000} }
+        get search_advanced_path, params: { search: { max_distance: 2000 } }
         expect(response).to have_http_status(:ok)
       end
     end
   end
-
 end
-
-
-
