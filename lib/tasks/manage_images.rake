@@ -23,11 +23,11 @@ namespace :manage_images do
     fails = []
 
     def skip_model(model, min_width = 500, photos_count = 3)
-      big_photos_count = model.photos.filter do |p|
+      big_photos_count = model.photos.count do |p|
         return true if p.blob.metadata[:width].nil?
 
         p.blob.metadata[:width] > min_width
-      end.count
+      end
       if big_photos_count >= photos_count
         puts "already #{photos_count} images for #{model.name}"
         true

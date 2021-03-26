@@ -99,7 +99,10 @@ RSpec.describe LocationMap, type: :model do
         end
 
         it 'centers on map coordinates' do
-          expect(location_map_for_kite_spot.leaflet_map_details[:center][:latlng]).to eq([location_map_for_kite_spot.latitude, location_map_for_kite_spot.longitude])
+          expect(
+            location_map_for_kite_spot.leaflet_map_details[:center][:latlng]
+          ).to eq([location_map_for_kite_spot.latitude,
+                   location_map_for_kite_spot.longitude])
         end
 
         it 'returns correct URL' do

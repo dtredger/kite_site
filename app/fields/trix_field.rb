@@ -1,5 +1,8 @@
+# frozen_string_literal: true
+
 require 'administrate/field/base'
 
+# Trix field for Administrate (see also views/fields/trix_field)
 class TrixField < Administrate::Field::Base
   def to_s
     data

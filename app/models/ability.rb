@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Ability Class for managing cancan
 class Ability
   include CanCan::Ability
 

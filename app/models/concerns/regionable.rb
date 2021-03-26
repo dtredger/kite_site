@@ -1,6 +1,11 @@
+# frozen_string_literal: true
+
+# Region details
+# much of this info could be in yaml
 module Regionable
   extend ActiveSupport::Concern
 
+  # TODO: use Country.regions
   REGION_ENUM_IDS = {
     europe: 0,
     caribbean: 1,
@@ -10,7 +15,7 @@ module Regionable
     'north-america': 5,
     'anza-pacific': 6,
     'middle-east': 7
-  }
+  }.freeze
 
   REGION_MAP_CENTERS = {
     europe: [-10, 30],
@@ -21,7 +26,7 @@ module Regionable
     'north-america': [60, 30],
     'anza-pacific': [-100, 0],
     'middle-east': [-20, 10]
-  }
+  }.freeze
 
   REGION_BLURBS = {
     europe: I18n.t('regions.blurbs.europe'),
@@ -32,19 +37,19 @@ module Regionable
     'north-america': I18n.t('regions.blurbs.north_america'),
     'anza-pacific': I18n.t('regions.blurbs.anza_pacific'),
     'middle-east': I18n.t('regions.blurbs.middle_east')
-  }
+  }.freeze
 
   def region_details(region_name = '')
     # @region_details ||= begin
     region_details = {}
     name_sym = region_name.to_sym
-    if REGION_ENUM_IDS.keys.include?(name_sym)
+    if REGION_ENUM_IDS.key?(name_sym)
       region_details[:region_name]   = name_sym.to_s.titleize
       region_details[:countries]     = Country.where(region: REGION_ENUM_IDS[name_sym])
       region_details[:lat_lon_arr]   = REGION_MAP_CENTERS[name_sym]
       region_details[:region_blurb]  = REGION_BLURBS[name_sym]
     else
-      # TODO: - global map uses same route with global name?
+      # TODO: global map uses same route with global name?
       region_details[:region_name]   = 'Not Set'
       region_details[:countries]     = []
       region_details[:lat_lon_arr]   = Country.none

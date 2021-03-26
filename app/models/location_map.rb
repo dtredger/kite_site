@@ -28,7 +28,7 @@ class LocationMap < ApplicationRecord
 
   scope :public_maps, -> { includes(:record).filter { |c| PUBLIC_MAP_TYPES.include?(c.record_type) } }
 
-  PUBLIC_MAP_TYPES = %w[Country KiteSpot]
+  PUBLIC_MAP_TYPES = %w[Country KiteSpot].freeze
 
   def latitude
     self[:latitude] || record.latitude if record
@@ -99,7 +99,7 @@ class LocationMap < ApplicationRecord
 
   def self.calculate_center(loc_marker_arry)
     marker_count = loc_marker_arry.length
-    return [20, 0] if marker_count == 0
+    return [20, 0] if marker_count.zero?
     return loc_marker_arry.first[:latlng] if marker_count == 1
 
     lats = 0
@@ -108,7 +108,7 @@ class LocationMap < ApplicationRecord
       lats += marker[:latlng][0]
       lons += marker[:latlng][1]
     end
-    [lats.to_f / marker_count.to_f, lons.to_f / marker_count.to_f]
+    [lats.to_f / marker_count, lons.to_f / marker_count]
   end
 
   private

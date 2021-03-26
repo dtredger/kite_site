@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 namespace :manage_descriptions do
   task scrape_wiki: :environment do
     require 'rubygems'

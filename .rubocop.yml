@@ -23,7 +23,7 @@ AllCops:
 Documentation:
   Exclude:
     - 'app/controllers/*'
-    - 'app/controllers/admin/*'
+    - 'app/controllers/**/*'
     - 'app/admin/*'
     - 'app/dashboards/*'
 
