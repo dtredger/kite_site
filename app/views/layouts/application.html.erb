@@ -28,6 +28,8 @@
 
     <div style="margin-top: 72px;">
       <%= yield %>
+
+      <%= render 'easy_feedback/reports/form', report: EasyFeedback::Report.new %>
     </div>
 
 

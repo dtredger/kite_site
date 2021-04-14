@@ -40,6 +40,8 @@ gem 'leaflet-rails'
 gem 'acts_as_favoritor'
 gem 'cancancan'
 
+gem 'easy_feedback', path: '../../easy_feedback'
+
 gem 'rollbar'
 gem 'strong_migrations'
 

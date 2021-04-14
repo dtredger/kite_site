@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_12_051857) do
+ActiveRecord::Schema.define(version: 2021_03_29_205412) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_stat_statements"
@@ -66,6 +66,13 @@ ActiveRecord::Schema.define(version: 2021_02_12_051857) do
     t.integer "region"
     t.index ["name"], name: "index_countries_on_name", unique: true
     t.index ["slug"], name: "index_countries_on_slug", unique: true
+  end
+
+  create_table "easy_feedback_reports", force: :cascade do |t|
+    t.string "detail"
+    t.string "reporter"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "favorites", force: :cascade do |t|

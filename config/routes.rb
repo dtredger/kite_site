@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+
+  mount EasyFeedback::Engine, at: 'ez'
+  authenticate :user, -> (user) { user.admin? } do
+    mount PgHero::Engine,       at: 'pghero'
+  end
+
   namespace :admin do
     resources :users
     resources :kite_spots
@@ -6,10 +12,6 @@ Rails.application.routes.draw do
     resources :location_maps
     delete :destroy_photo, to: 'application#destroy_photo'
     root to: 'users#index'
-  end
-
-  authenticate :user, -> (user) { user.admin? } do
-    mount PgHero::Engine, at: 'pghero'
   end
 
   devise_for :users, controllers: { registrations: 'users/registrations' }
