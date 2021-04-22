@@ -37,6 +37,8 @@ class KiteSpot < ApplicationRecord
   has_rich_text :content
   acts_as_favoritable
 
+  after_create -> { create_location_map unless location_map }
+
   scope :find_months, ->(months) { tagged_with(months, any: true) }
   scope :find_amenities, ->(amenities) { tagged_with(amenities, any: true) }
   scope :max_distance, lambda { |max_km, target|

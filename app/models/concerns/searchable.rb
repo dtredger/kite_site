@@ -68,7 +68,8 @@ module Searchable
     # TODO: inject months
     all_months = %w[Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec]
     months = adv_search_params[:months] & all_months
-    if months&.any?
+    # TODO: nil-safe does not handle when months is false (but not nil)
+    if months && months.any?
       month_kite_spots = KiteSpot.month_search(months).includes(:country)
       month_countries = month_kite_spots.map(&:country).uniq
     end
@@ -77,7 +78,7 @@ module Searchable
     all_regions = ['Europe', 'Caribbean', 'South America', 'Asia', 'Africa', 'North America', 'Pacific', 'ANZA',
                    'Middle East']
     regions = adv_search_params[:regions] & all_regions
-    if regions&.any?
+    if regions && regions.any?
       region_countries = Country.find_region(regions)
       kite_spots = []
       region_countries.each { |country| kite_spots << country.kite_spots }
@@ -88,7 +89,7 @@ module Searchable
     all_amenities = ['Parking', 'Change Rooms', 'Washrooms', 'Not Crowded', 'Easily Accessible', 'Camping', 'Waves',
                      'Flat Water']
     amenities = adv_search_params[:amenities] & all_amenities
-    if amenities&.any?
+    if amenities && amenities.any?
       amenity_kite_spots = KiteSpot.find_amenities(amenities).includes(:country)
       amenity_countries = amenity_kite_spots.map(&:country).uniq
     end
@@ -96,7 +97,7 @@ module Searchable
     # TODO: inject languages
     all_languages = %w[English French Spanish Italian German]
     languages = adv_search_params[:languages] & all_languages
-    if languages&.any?
+    if languages && languages.any?
       language_countries = Country.find_language(languages)
       language_kite_spots = language_countries.flat_map(&:kite_spots).uniq
     end

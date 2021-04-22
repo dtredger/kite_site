@@ -60,8 +60,7 @@ class User < ApplicationRecord
   # :trackable
   # :omniauthable
 
-  # TODO: - after_save will happen after updates!
-  after_create -> { create_location_map unless location_maps.any? }
+  after_create -> { create_location_map unless location_map }
 
   enum role: { banned: 0, basic: 1, author: 2, moderator: 3, admin: 4 }
 

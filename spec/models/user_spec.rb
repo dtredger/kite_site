@@ -46,6 +46,13 @@ RSpec.describe User, type: :model do
   let(:admin) { create(:admin) }
   let(:user) { create(:user) }
 
+  describe 'callbacks' do
+    it 'creates associated location_map' do
+      new_user = User.create(email: 'test@email.com', password: '123123123')
+      expect(new_user.location_map).to be_a(LocationMap)
+    end
+  end
+
   context 'methods' do
     describe 'favorites' do
       let(:kite_spot) { create(:kite_spot) }

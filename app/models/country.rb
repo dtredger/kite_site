@@ -37,8 +37,7 @@ class Country < ApplicationRecord
   has_rich_text :content
   acts_as_favoritable
 
-  # TODO: - kitespot and country should require location_map
-  # before_validation -> { create_location_map }
+  after_create -> { create_location_map unless location_map }
 
   enum region: { Europe: 0,
                  Caribbean: 1,
@@ -46,7 +45,7 @@ class Country < ApplicationRecord
                  Asia: 3,
                  Africa: 4,
                  'North America': 5,
-                 'ANZA/Pacific': 6,
+                 Oceania: 6,
                  'Middle East': 7 }
 
   enum language: { Other: 0, English: 1, French: 2, Spanish: 3, Italian: 4, German: 5 }

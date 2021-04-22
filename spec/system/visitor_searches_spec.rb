@@ -4,23 +4,24 @@ require 'rails_helper'
 
 RSpec.describe 'VisitorSearches', type: :system do
   before do
-    driven_by :selenium_chrome_headless
+    driven_by :selenium_chrome_headless, screen_size: [1400, 1400]
     create_dummy_records(6)
     create(:kite_spot, name: 'searched name one')
     create(:kite_spot, name: 'searched name two')
   end
 
-  context 'homepage search' do
+  describe 'homepage search' do
     it 'finds matching kite spot' do
       visit '/'
       fill_in 'search[name]', with: 'searched name one'
       click_button 'commit'
 
+      save_page
       expect(page).to have_css('.card', text: 'searched name one', count: 1)
     end
   end
 
-  context 'advanced search' do
+  describe 'advanced search' do
     before do
       create(:country, name: 'Tanzania')
       oct_beach = create(:kite_spot, name: 'Oct Beach')

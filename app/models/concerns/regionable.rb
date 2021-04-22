@@ -13,7 +13,7 @@ module Regionable
     asia: 3,
     africa: 4,
     'north-america': 5,
-    'anza-pacific': 6,
+    oceania: 6,
     'middle-east': 7
   }.freeze
 
@@ -24,7 +24,7 @@ module Regionable
     asia: [-50, 10],
     africa: [40, 20],
     'north-america': [60, 30],
-    'anza-pacific': [-100, 0],
+    oceania: [-100, 0],
     'middle-east': [-20, 10]
   }.freeze
 
@@ -35,7 +35,7 @@ module Regionable
     asia: I18n.t('regions.blurbs.asia'),
     africa: I18n.t('regions.blurbs.africa'),
     'north-america': I18n.t('regions.blurbs.north_america'),
-    'anza-pacific': I18n.t('regions.blurbs.anza_pacific'),
+    oceania: I18n.t('regions.blurbs.anza_pacific'),
     'middle-east': I18n.t('regions.blurbs.middle_east')
   }.freeze
 

@@ -33,7 +33,7 @@ module ApplicationHelper
   end
 
   def all_regions
-    ['Asia', 'Africa', 'Middle East', 'Europe', 'North America', 'South America', 'Caribbean', 'ANZA/Pacific']
+    ['Asia', 'Africa', 'Middle East', 'Europe', 'North America', 'South America', 'Caribbean', 'Oceania']
   end
 
   def all_amenities
