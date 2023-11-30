@@ -1,0 +1,16 @@
+<br>
+
+<div class="container">
+  <div class="row">
+    <h4>Editing Country</h4>
+  </div>
+
+  <div class="row">
+    <%= link_to 'Show', @country %> |
+    <%= link_to 'Back', countries_path %>
+  </div>
+
+  <br>
+  <%= render 'form', country: @country %>
+</div>
+

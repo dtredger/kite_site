@@ -1,0 +1,60 @@
+<%= render 'partials/jumbo' %>
+
+<div class="container">
+  <%= render 'partials/search_form' %>
+</div>
+
+<section class="py-4 ">
+  <div class="container">
+    <div class="row mb-5">
+      <div class="col-md-8">
+        <p class="subtitle text-primary">Find your next Destination</p>
+        <h2>Countries</h2>
+      </div>
+      <div class="col-md-4 d-lg-flex align-items-center justify-content-end">
+        <%= link_to countries_path, class: 'text-muted text-sm' do %>
+          See all Countries
+          <i class="fas fa-angle-double-right ml-2"></i>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <% @countries.each do |country| %>
+      <div class="col col-xs-6 col-lg-4 px-0">
+        <%= render 'partials/components/country_card', locals={model: country} %>
+      </div>
+    <% end %>
+  </div>
+</section>
+
+<section class="py-4 bg-gray-100">
+  <div class="container-fluid">
+    <div class="text-center pb-lg-4">
+      <p class="subtitle text-secondary"><%= t('kite_spots.subtitle') %></p>
+      <h2 class="mb-5">
+        <%= t('kite_spots.header') %>
+      </h2>
+    </div>
+
+
+    <div class="row">
+      <% @kite_spots.each do |kite_spot| %>
+        <div class="mb-5 hover-animate col-xs-6 col-lg-4">
+          <%= render 'partials/components/kite_spot_card', locals={model: kite_spot} %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="container container-fluid fluid">
+    <div class="text-center mt-5">
+      <%= link_to kite_spots_path, class: 'btn btn-outline-primary' do %>
+        See all Kite Spots
+        <i class="fas fa-angle-double-right ml-2"></i>
+      <% end %>
+    </div>
+  </div>
+</section>
+

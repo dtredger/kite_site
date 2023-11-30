@@ -1,0 +1,162 @@
+<br><br>
+
+<section class="py-5">
+  <div class="container">
+    <nav class="" aria-label="breadcrumb">
+      <ol class="breadcrumb pl-0 justify-content-start">
+        <li class="breadcrumb-item"><a href="/">Home</a></li>
+        <!--<li class="breadcrumb-item"><a href="/">Account</a></li>-->
+        <li class="active breadcrumb-item" aria-current="page">Profile</li>
+      </ol>
+    </nav>
+    <h1 class="hero-heading mb-0">Login &amp; Security</h1>
+    <p class="text-muted mb-5">Manage your Login &amp; Security settings here.</p>
+    <div class="row">
+      <div class="col-lg-7">
+
+        <div class="text-block">
+          <h3 class="mb-4">Personal Details</h3>
+          <div class="row">
+            <div class="col-sm-8">
+              <h6>Email</h6>
+              <p class="text-sm text-muted"><%= @user.email %></p>
+            </div>
+
+            <div class="col-sm-8">
+              <h6>Name</h6>
+              <% if @user.name %>
+                <p class="text-sm text-muted"><%= @user.name %></p>
+              <% else %>
+                <p class="text-sm text-muted">Your name is unset. Please <%= link_to 'update your profile', edit_user_registration_path %> to set it</p>
+              <% end %>
+
+            </div>
+            <div class="col-sm-8">
+              <h6>Coordinates</h6>
+              <% if @user.coordinates? %>
+                <p class="text-sm text-muted">
+                  Latitude: <b><%= @user.latitude %></b>, Longitude: <b><%= @user.longitude %></b>
+                </p>
+              <% else %>
+                <p class="text-sm text-muted">Location Unset</p>
+              <% end %>
+            </div>
+
+            <div class="col-sm-8">
+              <h6>Nearest Kite Spots</h6>
+              <% if @user.coordinates? %>
+                <% @user.kite_spots_by_distance[0..4].each do |spot| %>
+                  <p class="text-sm text-muted"><%= spot[0] %>: <%= spot[1] %>KM</>
+                <% end %>
+              <% else %>
+                <p class="text-sm text-muted">Please <%= link_to 'set your location', edit_user_registration_path %> to see a map of nearby kite spots</p>
+              <% end %>
+            </div>
+
+            <div class="text-right col">
+              <%= link_to 'Update', edit_user_registration_path, class: 'pl-0 text-primary btn btn-link' %>
+            </div>
+          </div>
+        </div>
+
+        <!--<div class="text-block">-->
+          <!--<h3 class="mb-4">Login</h3>-->
+          <!--<div class="row">-->
+            <!--<div class="col-sm-8">-->
+              <!--<h6>Password</h6>-->
+              <!--<p class="text-sm text-muted">Last updated 3 years ago</p>-->
+            <!--</div>-->
+            <!--<div class="text-right col">-->
+              <!--<%= link_to 'Update', edit_user_registration_path, class: 'pl-0 text-primary btn btn-link' %>-->
+            <!--</div>-->
+          <!--</div>-->
+          <!--<div class="collapse" style="">-->
+            <!--<form class="">-->
+              <!--<div class="mt-4 row">-->
+                <!--<div class="form-group col-12"><label for="password-current" class="form-label">Current Password</label><input type="password" name="password-current" id="password-current" class="form-control"></div>-->
+                <!--<div class="form-group col-md-6"><label for="password-new" class="form-label">New Password</label><input type="password" name="password-new" id="password-new" class="form-control"></div>-->
+                <!--<div class="form-group col-md-6"><label for="password-confirm" class="form-label">Confirm Password</label><input type="password" name="password-confirm" id="password-confirm" class="form-control"></div>-->
+              <!--</div><button type="submit" class="btn btn-outline-primary">Update Password</button>-->
+            <!--</form>-->
+          <!--</div>-->
+        <!--</div>-->
+
+        <div class="text-block mb-5 mb-lg-0">
+          <h3 class="mb-4">Account history</h3>
+          <div class="media">
+            <div class="icon-rounded bg-secondary-light">
+              <svg class="svg-icon text-secondary w-2rem h-2rem">
+                <use xlink:href="<%= image_url('svg/orion-svg-sprite.svg#imac-screen-1') %>"></use>
+              </svg>
+            </div>
+
+            <div class="pt-2 ml-3 media-body">
+              <strong>Account Created</strong>
+              <!--<span class="text-uppercase badge badge-secondary-light">Current Session</span>-->
+              <p class="text-sm text-muted"><%= @user.created_at.strftime('%b %d, %Y at %l:%M %P GMT') %>.</p>
+              <!--<button class="text-primary pl-0 btn btn-text">Log out device</button>-->
+            </div>
+          </div>
+          <div class="media">
+            <div class="icon-rounded bg-secondary-light">
+              <svg class="svg-icon text-secondary w-2rem h-2rem">
+                <!--
+                <use xlink:href="<%= image_url('svg/orion-svg-sprite.svg#imac-screen-1') %>"></use> -->
+              </svg>
+            </div>
+            <div class="pt-2 ml-3 media-body">
+              <strong>Account Last Updated</strong>
+              <!--<span class="text-uppercase badge badge-secondary-light">Current Session</span>-->
+              <p class="text-sm text-muted"><%= @user.updated_at.strftime('%d-%m-%Y at %H:%M') %> UTC.</p>
+              <!--<button class="text-primary pl-0 btn btn-text">Log out device</button>-->
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-5">
+
+          <div class="border-0 shadow card" style="height: 400px;">
+            <div class="bg-primary-light py-4 border-0 card-header">
+              <div class="align-items-center media">
+                <div class="media-body">
+                  <h4 class="h6 subtitle text-sm text-primary">Spots Nearby</h4>
+                </div>
+                <!--<svg class="svg-icon svg-icon svg-icon-light w-3rem h-3rem ml-3 text-primary">-->
+                  <!--<use xlink:href="<%= image_url('svg/orion-svg-sprite.svg#map-location-1') %>"> </use>-->
+                <!--</svg>-->
+              </div>
+            </div>
+            <% if @user.location_map %>
+              <%= render 'partials/leaflet_map', locals={map_markers: @user.location_map.leaflet_map_details} %>
+            <% else %>
+              <h4 class="text-sm text-muted m-4">
+                <%= link_to 'Set your location', edit_user_registration_path %> to see a map of nearby kite spots
+              </h4>
+            <% end %>
+          </div>
+      </div>
+
+      <!--<div class="ml-lg-auto col-md-6 col-lg-4">-->
+        <!--<div class="border-0 shadow card">-->
+          <!--<div class="bg-primary-light py-4 border-0 card-header">-->
+            <!--<div class="align-items-center media">-->
+              <!--<div class="media-body">-->
+                <!--<h4 class="h6 subtitle text-sm text-primary">Let's make your account more secure</h4>-->
+              <!--</div><svg class="svg-icon svg-icon svg-icon-light w-3rem h-3rem ml-3 text-primary">-->
+              <!--<use xlink:href="<%= image_url('svg/orion-svg-sprite.svg#shield-security-1') %>"> </use>-->
+            <!--</svg>-->
+            <!--</div>-->
+          <!--</div>-->
+          <!--<div class="p-4 card-body">-->
+            <!--<h6 class="card-text">Your account security:</h6>-->
+            <!--<p class="card-text mb-4"><span class="badge badge-info-light">Medium</span></p>-->
+            <!--<p class="text-muted card-text">We’re always working on ways to increase safety in our community. </p>-->
+            <!--<p class="text-muted card-text">That’s why we look at every account to make sure it’s as secure as possible.</p>-->
+            <!--<hr><button class="btn btn-outline-primary btn-sm">Improve</button>-->
+          <!--</div>-->
+        <!--</div>-->
+      <!--</div>-->
+    </div>
+  </div>
+</section>

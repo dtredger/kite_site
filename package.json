@@ -1,0 +1,29 @@
+{
+  "name": "kite_site",
+  "private": true,
+  "dependencies": {
+    "@babel/core": "^7.12.10",
+    "@rails/actioncable": "^6.0.0",
+    "@rails/actiontext": "^6.0.3-3",
+    "@rails/activestorage": "^6.0.0",
+    "@rails/ujs": "^6.0.0",
+    "@rails/webpacker": "4.3.0",
+    "babel-loader": "^8.2.2",
+    "bootstrap-hardskilled-extend-select": "^1.2.2",
+    "ekko-lightbox": "^5.3.0",
+    "jquery": "^3.5.1",
+    "leaflet": "^1.7.1",
+    "leaflet.awesome-markers": "^2.0.5",
+    "node-sass": "^5.0.0",
+    "toastr": "^2.1.4",
+    "trix": "^1.2.0",
+    "turbolinks": "^5.2.0"
+  },
+  "version": "0.1.0",
+  "devDependencies": {
+    "webpack-dev-server": "^3.11.0"
+  },
+  "resolutions": {
+    "node-sass/node-gyp": "^6.0.0"
+  }
+}

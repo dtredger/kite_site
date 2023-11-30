@@ -1,0 +1,112 @@
+<footer class="position-relative z-index-10 d-print-none">
+  <div class="pt-6 bg-gray-200 text-muted">
+    <div class="container">
+      <div class="row">
+        <div class="mb-5 mb-lg-0 col-lg-4">
+          <div class="font-weight-bold text-uppercase text-dark mb-3"><%= t('site_name') %></div>
+          <p><%= t('footer.site_description') %></p>
+          <!-- TODO enable socials -->
+          <!--<ul class="list-inline">-->
+            <!--<li class="list-inline-item">-->
+              <!--<a href="#" target="_blank" rel="noopener noreferrer" title="twitter" class="text-muted text-hover-primary">-->
+                <!--<i class="fab fa-twitter"></i></a>-->
+            <!--</li>-->
+            <!--<li class="list-inline-item">-->
+              <!--<a href="#" target="_blank" rel="noopener noreferrer" title="facebook" class="text-muted text-hover-primary">-->
+                <!--<i class="fab fa-facebook"></i></a>-->
+            <!--</li>-->
+            <!--<li class="list-inline-item">-->
+              <!--<a href="#" target="_blank" rel="noopener noreferrer" title="instagram" class="text-muted text-hover-primary">-->
+                <!--<i class="fab fa-instagram"></i></a>-->
+            <!--</li>-->
+            <!--<li class="list-inline-item">-->
+              <!--<a href="#" target="_blank" rel="noopener noreferrer" title="pinterest" class="text-muted text-hover-primary">-->
+                <!--<i class="fab fa-pinterest"></i></a>-->
+            <!--</li>-->
+            <!--<li class="list-inline-item">-->
+              <!--<a href="#" target="_blank" rel="noopener noreferrer" title="vimeo" class="text-muted text-hover-primary">-->
+                <!--<i class="fab fa-vimeo"></i></a>-->
+            <!--</li>-->
+          <!--</ul>-->
+        </div>
+        <div class="mb-5 mb-lg-0 col-md-6 col-lg-2">
+          <div class="font-weight-bold text-uppercase text-dark mb-3">Regions</div>
+          <ul class="list-unstyled">
+            <% all_regions.each do |region| %>
+              <li><%= link_to region, region_path(name: region.parameterize), class: 'text-muted' %></li>
+            <% end %>
+          </ul>
+        </div>
+        <div class="mb-5 mb-lg-0 col-md-6 col-lg-2">
+          <div class="font-weight-bold text-uppercase text-dark mb-3">Pages</div>
+          <ul class="list-unstyled">
+
+            <li><%= link_to 'Contact', contact_path, class: 'text-muted' %></li>
+            <li><a class="text-muted" href="/faq">F.A.Q.s</a></li>
+            <li style="text-decoration: line-through">
+              <span class="text-muted" href="/team">Team<span class="ml-1 badge badge-info-light">Soon</span></span>
+            </li>
+            <li style="text-decoration: line-through">
+              <span class="text-muted">Flight Search<span class="ml-1 badge badge-info-light">Maybe?</span></span>
+            </li>
+          </ul>
+        </div>
+        <div class="mb-5 mb-lg-0 col-lg-4">
+          <div class="font-weight-bold text-uppercase text-dark mb-3"><%= t('footer.email_field_header') %></div>
+          <p class="mb-3"><%= t('footer.email_field_description') %></p>
+          <form id="newsletter-form" class="">
+            <div class="input-group mb-3"><input type="email" placeholder="Your Email Address" aria-label="Your Email Address" class="bg-transparent border-dark border-right-0 form-control">
+              <div class="input-group-append">
+                <button type="submit" class="btn-outline-dark border-left-0 btn btn-deoco">
+                  <i class="fa fa-paper-plane text-lg"></i>
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <svg class="waves bg-gray-200" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+         viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+      <defs>
+        <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z"> </path>
+      </defs>
+      <g class="parallax">
+        <use xlink:href="#gentle-wave" x="48" y="0" fill="rgba(34,58,183,0.7)"></use>
+        <use xlink:href="#gentle-wave" x="48" y="3" fill="rgba(24,58,183,0.5)"></use>
+        <use xlink:href="#gentle-wave" x="48" y="5" fill="rgba(14,58,203,0.3)"></use>
+        <use xlink:href="#gentle-wave" x="48" y="7" fill="rgba(4,58,203)"></use>
+      </g>
+    </svg>
+  </div>
+
+  <div class="py-4 font-weight-light text-gray-300 wave-bg-color">
+    <!--bg-gray-800-->
+    <div class="container">
+      <div class="align-items-center row">
+        <div class="text-center text-md-left col-md-6">
+          <p class="text-sm mb-md-0"><%= t('footer.copyright_notice') %></p>
+        </div>
+        <div class="col-md-6">
+          <ul class="list-inline mb-0 mt-2 mt-md-0 text-center text-md-right">
+            <li class="list-inline-item">
+              <!--<img src="/content/svg/visa.svg" alt="..." class="w-2rem">-->
+            </li>
+            <li class="list-inline-item">
+              <!--<img src="/content/svg/mastercard.svg" alt="..." class="w-2rem">-->
+            </li>
+            <li class="list-inline-item">
+              <!--<img src="/content/svg/paypal.svg" alt="..." class="w-2rem">-->
+            </li>
+            <li class="list-inline-item">
+              <!--<img src="/content/svg/western-union.svg" alt="..." class="w-2rem">-->
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>

@@ -1,0 +1,15 @@
+<!--locals={month_tag_list: @kite_spot.month_tag_list} %> -->
+
+
+
+<% all_months.each do |month| %>
+  <% if month_tag_list.include? month %>
+    <p class="active p-3 font-weight-normal badge badge-secondary badge-pill">
+      <b><%= month %></b>
+    </p>
+  <% else %>
+    <p class="p-3 text-muted font-weight-normal badge badge-light badge-pill">
+    <b><%= month %></b>
+    </p>
+  <% end %>
+<% end %>

@@ -1,0 +1,38 @@
+#Defaults - https://github.com/rubocop-hq/rubocop/blob/master/config/default.yml
+
+require:
+  - rubocop-rails
+  - rubocop-performance
+  - rubocop-rspec
+
+AllCops:
+  NewCops: enable
+  Exclude:
+    - 'vendor/**/*'
+    - 'db/**/*'
+    - 'config/**/*'
+    - 'script/**/*'
+    - 'bin/*'
+    - 'tmp/**/*'
+    - 'node_modules/**/*'
+    - 'Guardfile'
+    - '.git/**/*'
+    - !ruby/regexp /old_and_unused\.rb$/
+
+Documentation:
+  Exclude:
+    - 'app/controllers/*'
+
+Metrics/BlockLength:
+  Exclude:
+    - 'spec/**/*'
+
+
+# rubocop-performance
+Performance/Size:
+  Exclude:
+    #- lib/example.rb
+
+Rails/FindBy:
+  Exclude:
+    #- lib/example.rb

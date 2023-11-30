@@ -1,0 +1,31 @@
+<section class="py-5 px-lg-5 container">
+
+  <div class="d-flex justify-content-between align-items-center flex-column flex-md-row mb-4">
+    <div class="mr-3">
+      <p class="mb-3 mb-md-0">
+        Showing <strong><%= @kite_spots.count %></strong>&nbsp;results
+      </p>
+    </div>
+    <!--<div>-->
+      <!--<label class="form-label mr-2 pb-1">Sort by</label>-->
+      <!--<div class="dropdown bootstrap-select align-bottom">-->
+        <!--TODO - SELECT-->
+      <!--</div>-->
+    <!--</div>-->
+  </div>
+
+  <div class="row">
+    <% @kite_spots.each do |kite_spot| %>
+      <div class="mb-5 hover-animate col-sm-6 col-lg-4">
+        <%= render 'partials/components/kite_spot_card', locals={model: kite_spot} %>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="col-12">
+    <div class="paginate-pad">
+      <%= paginate @kite_spots %>
+    </div>
+  </div>
+
+</section>
