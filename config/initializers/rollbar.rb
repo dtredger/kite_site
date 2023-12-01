@@ -1,4 +1,8 @@
 Rollbar.configure do |config|
+
+  # Disable rollbar globally for now
+  config.enabled = false
+
   # Without configuration, Rollbar is enabled in all environments.
   # To disable in specific environments, set config.enabled=false.
 
