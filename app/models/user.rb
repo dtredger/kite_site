@@ -44,6 +44,7 @@ class User < ApplicationRecord
   include DistanceCalculable
 
   has_one :location_map, as: :record, dependent: :destroy
+  # TODO: block identical favourites
   acts_as_favoritor
 
   validates :email, uniqueness: true

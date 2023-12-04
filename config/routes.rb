@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
 
-  mount EasyFeedback::Engine, at: 'ez'
+  # mount EasyFeedback::Engine, at: 'ez'
+  
   authenticate :user, -> (user) { user.admin? } do
     mount PgHero::Engine,       at: 'pghero'
   end

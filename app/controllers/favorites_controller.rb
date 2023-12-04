@@ -11,6 +11,9 @@ class FavoritesController < ApplicationController
     return unless model
 
     if favorite_params[:status] == 'add'
+      existing_favorites = current_user.favorites.where(favoritable_type: model_class)
+      # TODO: handle all this in model
+      # return if existing_favorites.map(&:favoritable_id).include?(favorite_params[:id])
       current_user.favorite(model)
     else
       current_user.unfavorite(model)

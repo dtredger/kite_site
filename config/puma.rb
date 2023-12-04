@@ -40,7 +40,7 @@ pidfile ENV.fetch('PIDFILE') { 'tmp/pids/puma.pid' }
 # in nginx.conf.erb -> Heroku dynos have at least 4 cores.
 # worker_processes <%= ENV['NGINX_WORKERS'] || 4 %>;
 #
-workers ENV.fetch('WEB_CONCURRENCY') { 1 }
+workers ENV.fetch('WEB_CONCURRENCY') { 0 }
 
 # Use the `preload_app!` method when specifying a `workers` number.
 # This directive tells Puma to first boot the application and load code

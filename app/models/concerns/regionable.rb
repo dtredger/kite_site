@@ -35,7 +35,7 @@ module Regionable
     asia: I18n.t('regions.blurbs.asia'),
     africa: I18n.t('regions.blurbs.africa'),
     'north-america': I18n.t('regions.blurbs.north_america'),
-    oceania: I18n.t('regions.blurbs.anza_pacific'),
+    oceania: I18n.t('regions.blurbs.oceania'),
     'middle-east': I18n.t('regions.blurbs.middle_east')
   }.freeze
 
