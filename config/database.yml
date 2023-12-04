@@ -18,4 +18,4 @@ test:
 production:
   <<: *default
   database: koyebdb
-  url: <%= Rails.application.credentials.database[:url]=%>
+  url: <%= Rails.application.credentials.database[:url] %>
