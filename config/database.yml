@@ -17,6 +17,5 @@ test:
 
 production:
   <<: *default
-  database: kite_site_production
-  username: <%= Rails.application.credentials.database[:db_name] %>
-  password: <%= Rails.application.credentials.database[:db_password] %>
+  database: koyebdb
+  url: <%= Rails.application.credentials.database[:url]=%>

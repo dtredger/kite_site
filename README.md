@@ -22,9 +22,11 @@ To create seed data, there is a CSV called `Sailing Sheet - Kite Spots` in lib/a
 Once the Country and KiteSpot models are created, there are two rake tasks that can populate them with background descriptions and stock images:
 
 > manage_descriptions:scrape_wiki
+
 This adds a paragraph about the given country from wikipedia
 
 > manage_images:load_from_unsplash
+
 This loads 3 images for the given Country/KiteSpot from Unsplash (requires Unsplash API key)
 
 
