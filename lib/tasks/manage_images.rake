@@ -16,8 +16,8 @@ namespace :manage_images do
     end
 
     # SET which collection with photos to attach images to
-    collection = KiteSpot.all
-    # collection = Country.all
+    # collection = KiteSpot.all
+    collection = Country.all
     successes = []
     skips = []
     fails = []
@@ -54,7 +54,7 @@ namespace :manage_images do
           image_url = img_div.urls['regular']
 
           file_name = "#{model.slug}-#{img_count}-b.jpg"
-          file_path = File.join(Rails.root, '/tmp/storage', file_name)
+          file_path = File.join(Rails.root, '/storage', file_name)
 
           File.open(file_path, 'wb') do |f|
             f.write(open(image_url).read)
