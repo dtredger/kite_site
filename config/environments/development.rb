@@ -31,11 +31,7 @@ Rails.application.configure do
   end
 
   # Store uploaded files on the local file system (see config/storage.yml for options).
-<<<<<<< HEAD
-  config.active_storage.service = :local #mirror  #:digital_ocean
-=======
   config.active_storage.service = :local  #:digital_ocean  :local #
->>>>>>> feature/update-ruby
   config.active_storage.resolve_model_to_route = :rails_storage_proxy
 
   # Don't care if the mailer can't send.
