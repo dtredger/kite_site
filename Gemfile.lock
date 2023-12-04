@@ -1,11 +1,3 @@
-GIT
-  remote: git@github.com:herregroen/administrate-field-tag.git
-  revision: 1573537e816b39db978ec09bb8965cb9dce8cc9c
-  specs:
-    administrate-field-tag (0.0.1)
-      administrate
-      rails
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -467,7 +459,6 @@ DEPENDENCIES
   acts_as_favoritor
   administrate
   administrate-field-active_storage
-  administrate-field-tag!
   annotate
   awesome_print
   aws-sdk-s3

@@ -32,7 +32,7 @@ gem 'friendly_id'
 # Use Active Storage variant
 gem 'administrate'
 gem 'administrate-field-active_storage'
-gem 'administrate-field-tag', git: 'git@github.com:herregroen/administrate-field-tag.git'
+# gem 'administrate-field-tag', git: 'git@github.com:herregroen/administrate-field-tag.git'
 gem 'image_processing'
 gem 'kaminari'
 gem 'leaflet-rails'
