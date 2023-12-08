@@ -11,8 +11,7 @@ namespace :manage_descriptions do
     no_descr = %w[Iberaquera Tucus Puclaro Levkada Foddini Western_Oz Ponto_de_Oura
                   Noordwijk_ann_Zee Guincho Pirlanta Mui_Ne_Bay El_Yaque Cap_Chevalier]
 
-    # collection = Country.all
-    collection = KiteSpot.all
+    collection = Country.all + KiteSpot.all
     fails = []
 
     collection.all.each do |model|
@@ -20,7 +19,7 @@ namespace :manage_descriptions do
       page_url = "https://en.wikipedia.org/wiki/#{model_name}"
 
       begin
-        noko_page = Nokogiri::HTML(open(page_url))
+        noko_page = Nokogiri::HTML(URI.open(page_url))
         paras = noko_page.css('.mw-parser-output').css('p')
 
         # take first 3 (para 0 is style only)
