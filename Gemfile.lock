@@ -188,6 +188,8 @@ GEM
       railties (>= 4.2.0)
       thor (>= 0.14, < 2.0)
     json (2.7.0)
+    jsonapi-serializer (2.2.0)
+      activesupport (>= 4.2)
     jwt (2.7.1)
     kaminari (1.2.2)
       activesupport (>= 4.1.0)
@@ -476,6 +478,7 @@ DEPENDENCIES
   guard-rspec
   guard-rubocop
   image_processing
+  jsonapi-serializer
   kaminari
   leaflet-rails
   listen (~> 3.2)

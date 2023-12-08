@@ -1,6 +1,6 @@
 require "administrate/base_dashboard"
 
-class ActsAsTaggableOn::TagDashboard < Administrate::BaseDashboard
+class TagDashboard < Administrate::BaseDashboard
   # ATTRIBUTE_TYPES
   # a hash that describes the type of each of the model's fields.
   #
