@@ -57,7 +57,7 @@ namespace :manage_images do
           file_path = File.join(Rails.root, '/storage', file_name)
 
           File.open(file_path, 'wb') do |f|
-            f.write(open(image_url).read)
+            f.write(URI.open(image_url).read)
           end
 
           model.photos.attach(io: File.open(file_path),
