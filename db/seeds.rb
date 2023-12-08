@@ -49,15 +49,6 @@ csv_rows.each do |row|
 		spot_description = row['notes']
 	end
 
-
-	months = %w(Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec)
-	month_conditions_str = '000000000000'
-	months.each_with_index do |month, ix|
-		unless row[month].nil?
-			month_conditions_str[ix] = '1'
-		end
-	end
-
 	unless row['Location'].blank?
 		spot_name = row['Location']
 	else
@@ -68,6 +59,13 @@ csv_rows.each do |row|
 	                                       description: spot_description,
                                          latitude: row['Latitude'],
                                          longitude: row['Longitude'])
+
+	months = %w(Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec)
+	months.each_with_index do |month, ix|
+		unless row[month].nil?
+			spot.month_tag_list.add(month)
+		end
+	end
 
 	map = spot.create_location_map(name: "#{spot.name}, #{country_model.name}",
 	                         latitude: row['Latitude'],
@@ -82,13 +80,13 @@ end
 
 
 
-# use tags for months going forward
-KiteSpot.all.each do |kite_spot|
-	kite_spot.monthly_conditions.each do |month|
-			kite_spot.month_tag_list.add(month)
-	end
-	kite_spot.save
-end
+# # use tags for months going forward
+# KiteSpot.all.each do |kite_spot|
+# 	kite_spot.monthly_conditions.each do |month|
+# 			kite_spot.month_tag_list.add(month)
+# 	end
+# 	kite_spot.save
+# end
 
 
 
@@ -99,7 +97,10 @@ csv_text = File.read(csv_path_and_name)
 csv_rows = CSV.parse(csv_text, headers: true)
 csv_rows.each do |row|
 	country = Country.find_by(name: row['name'])
-	if country.location_map.nil?
+
+	next unless country
+
+	if country&.location_map.nil?
 		country.create_location_map(name: row['name'],
 		                            latitude: row['latitude'],
 		                            longitude: row['longitude'])

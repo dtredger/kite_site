@@ -17,7 +17,7 @@ namespace :manage_images do
 
     # SET which collection with photos to attach images to
     # collection = KiteSpot.all
-    collection = Country.all
+    collection = Country.first(10) + KiteSpot.first(10)
     successes = []
     skips = []
     fails = []

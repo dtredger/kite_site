@@ -48,6 +48,8 @@ gem 'strong_migrations'
 
 gem 'aws-sdk-s3', require: false
 
+gem 'unsplash' # for images
+
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.2', require: false
 
@@ -87,7 +89,6 @@ group :development do
   # TODO - causes recursion error in rails 6.1?
   # gem 'meta_request'
   # TODO - install & run mailcatcher to read mails (not part of bundle)
-  gem 'unsplash' # for images
 end
 
 group :test do
