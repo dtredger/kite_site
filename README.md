@@ -1,17 +1,23 @@
 #TBA Kite Site
 
+![]("public/readme_imgs/homepage.jpg")
+
 This is a kiteboarding directory rails app. It lists countries and kite-spots, and lets a user sign up and favourite them.
 Currently it has some basic searching, and the ability to calculate distance from the user.
+
+There is an admin dashboard (using administrate) that allows basic actions on those models.
+
+There is dummy descriptions (scraped from wikipedia) with a rake task. There are also (normally) images (from an unsplash rake task), but not currently enabled (since I ran out of digitalocean credits)
 
 Uses:
 
 * Rails 6.1
-* Render platform
-* DigitalOcean Spaces for storage
-* ActiveStorage for files
+* Koyeb for app hosting + Postgres
+* [formerly] DigitalOcean Spaces for file storage [not active]
 * Unsplash API for placeholder images
 * Wikipedia-scraped placeholder descriptions
 * Rspec/selenium for model/system specs
+
 
 
 ---

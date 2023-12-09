@@ -6,6 +6,8 @@ require 'open-uri'
 require 'json'
 require 'csv'
 
+STORAGE_PATH = '/public/model_images'
+
 namespace :manage_images do
   desc 'manage images, load, remove, or rename'
 
@@ -23,6 +25,13 @@ namespace :manage_images do
     fails = []
 
     def skip_model(model, min_width = 500, photos_count = 3)
+      # Check downloaded photos
+      img_count = 1 # prioritize models with no photos at all
+      file_name = "#{model.slug}-#{img_count}.jpg"
+      file_path = File.join(Rails.root, STORAGE_PATH, file_name)
+      return true if File.file?(file_path)
+
+      # Check Attached Photos
       big_photos_count = model.photos.count do |p|
         return true if p.blob.metadata[:width].nil?
 
@@ -53,8 +62,8 @@ namespace :manage_images do
         image_divs.each do |img_div|
           image_url = img_div.urls['regular']
 
-          file_name = "#{model.slug}-#{img_count}-b.jpg"
-          file_path = File.join(Rails.root, '/storage', file_name)
+          file_name = "#{model.slug}-#{img_count}.jpg"
+          file_path = File.join(Rails.root, STORAGE_PATH, file_name)
 
           File.open(file_path, 'wb') do |f|
             f.write(URI.open(image_url).read)
@@ -139,46 +148,39 @@ namespace :manage_images do
   end
 
   task attach_local_images: :environment do
-    # file_name = "#{model.slug}-#{img_count}-b.jpg"
-    # file_path = File.join(Rails.root, '/tmp/storage', file_name)
-    #
-    # if File.file?(file_path)
-    #   model.photos.attach(io: File.open(file_path),
-    #                       filename: file_name,
-    #                       content_type: 'application/jpg')
-    #
-    #   puts "attached #{file_name} to #{model.name}, image #{img_count} of #{max_img_count}"
-    #   successes.push(model.name)
-    #   puts "success count #{successes.uniq.count}"
-    #   img_count += 1
-    #
-    #   file_name = "#{model.slug}-#{img_count}-b.jpg"
-    #   file_path = File.join(Rails.root, '/tmp/storage', file_name)
-    #
-    #   if File.file?(file_path)
-    #     model.photos.attach(io: File.open(file_path),
-    #                         filename: file_name,
-    #                         content_type: 'application/jpg')
-    #
-    #     puts "attached #{file_name} to #{model.name}, image #{img_count} of #{max_img_count}"
-    #     successes.push(model.name)
-    #     puts "success count #{successes.uniq.count}"
-    #     img_count += 1
-    #
-    #     file_name = "#{model.slug}-#{img_count}-b.jpg"
-    #     file_path = File.join(Rails.root, '/tmp/storage', file_name)
-    #
-    #     if File.file?(file_path)
-    #       model.photos.attach(io: File.open(file_path),
-    #                           filename: file_name,
-    #                           content_type: 'application/jpg')
-    #
-    #       puts "attached #{file_name} to #{model.name}, image #{img_count} of #{max_img_count}"
-    #       successes.push(model.name)
-    #       puts "success count #{successes.uniq.count}"
-    #       img_count += 1
-    #     end
-    #   end
-    # end
+    collection = Country.all + KiteSpot.all
+    successes = []
+    skips = []
+    fails = []
+
+    def attach_image(model, file_name, file_path)
+      model.photos.attach(io: File.open(file_path),
+                          filename: file_name,
+                          content_type: 'application/jpg')
+    end
+
+    collection.each do |model|
+      max_img_count = 3
+
+      if model.photos.count >= max_img_count
+        skips.push(model.name)
+        puts "skipping #{model.name}"
+        next
+      end
+
+      max_img_count.times do |count|
+        file_name = "#{model.slug}-#{count}.jpg"
+        file_path = File.join(Rails.root, '/public/model_images', file_name)
+        next unless File.file?(file_path)
+
+        attach_image(model, file_name, file_path)
+
+        puts "attached #{file_name} to #{model.name}, image #{count} of #{max_img_count}"
+        successes.push(model.name)
+        puts "success count #{successes.uniq.count}"
+      end
+    end
+
+    puts "#{successes.count} successes: #{successes}"
   end
 end
